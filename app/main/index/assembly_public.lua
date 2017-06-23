@@ -250,7 +250,7 @@ ui.container {
                   content = function()
                     execute.view {
                       module = "issue",
-                      view = "_list_ext2_bs",
+                      view = "_list_ext",
                       params = {
                         state = state,
                         orderby = orderby,
@@ -308,7 +308,7 @@ ui.container {
                   content = function()
                     execute.view {
                       module = "issue",
-                      view = "_list_ext2_bs",
+                      view = "_list_ext",
                       params = {
                         state = state,
                         orderby = orderby,
