@@ -24,7 +24,7 @@ ui.title(function()
             ui.link {
               attr = { class = "btn btn-primary btn-large large_btn btn-back" },
               module = "index",
-              view = "homepage_bs",
+              view = "assembly_public",
               content = _ "Back to previous page",
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
             }
@@ -127,7 +127,7 @@ ui.container {
                 ui.link {
                   attr = { class = btn1 },
                   module = "unit",
-                  view = "show_ext_bs",
+                  view = "show_ext",
                   params = { create = create },
                   content = function()
                     ui.heading { level = 3, content = _ "SHOW ALL AREAS" }
@@ -141,7 +141,7 @@ ui.container {
                 ui.link {
                   attr = { class = btn2 },
                   module = "unit",
-                  view = "show_ext_bs",
+                  view = "show_ext",
                   params = { filter = "my_areas", create = create },
                   content = function()
                     ui.heading { level = 3, content = _ "SHOW ONLY PARTECIPATED AREAS" }
@@ -159,7 +159,7 @@ ui.container {
               content = function()
                 execute.view {
                   module = "area",
-                  view = "_list_ext_bs",
+                  view = "_list",
                   params = { areas_selector = areas_selector, member = app.session.member, create = create }
                 }
               end

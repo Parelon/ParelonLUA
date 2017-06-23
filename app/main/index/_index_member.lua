@@ -111,7 +111,7 @@ ui.container {
         ui.link {
           attr = { class = "btn btn-primary btn-large large_btn fixclick" },
           module = "index",
-          view = "homepage_bs",
+          view = "assembly_public",
           content = function()
             ui.heading { level = 3, content = _ "PUBLIC ASSEMBLY" }
           end
@@ -125,7 +125,7 @@ ui.container {
         ui.link {
           attr = { class = "btn btn-primary btn-large large_btn fixclick" },
           module = "index",
-          view = "homepage_private_bs",
+          view = "assembly_private",
           content = function()
             ui.heading { level = 3, content = _ "INTERNAL ASSEMBLY" }
           end

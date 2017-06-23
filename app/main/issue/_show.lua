@@ -55,21 +55,21 @@ ui.container {
             end
           }
           ui.container {
-          attr = { class = "col-md-10 col-md-offset-1 col-sm-12 col-xs-12 text-center label label-warning h1 label-info spaceline spaceline-bottom" },
-          content = function()
-            ui.link {
-              text = _("#{issue_title}", {
-                  issue_title = issue.title,
-                  issue_id = issue.id
-                }),
-              module = "issue",
-              view = "show_ext_bs",
-              id = issue.id
-            }
-          end
-        }
+            attr = { class = "col-md-10 col-md-offset-1 col-sm-12 col-xs-12 text-center label label-warning h1 label-info spaceline spaceline-bottom" },
+            content = function()
+              ui.link {
+                text = _("#{issue_title}", {
+                    issue_title = issue.title,
+                    issue_id = issue.id
+                  }),
+                module = "issue",
+                view = "show_ext",
+                id = issue.id
+              }
+            end
+          }
         end
-        
+
         ui.container {
           attr = { class = "col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 text-center" },
           content = function()
@@ -142,7 +142,7 @@ ui.container {
                   issue_id = issue.id
                 }),
               module = "issue",
-              view = "show_ext_bs",
+              view = "show_ext",
               id = issue.id
             }
           end
@@ -198,27 +198,16 @@ ui.container {
                 }
               }
             }
-
-
           end
         end
 
         if not for_member or for_member.id == app.session.member_id then
-
           if app.session.member_id then
-
             if issue.member_info.own_participation then
               if issue.closed then
-
-
-
                 links[#links + 1] = {attr = { class = "col-md-5 col-md-offset-1 label label-success spaceline",style = "margin-right: 10px;" },content = _ "You were interested" } 
-
-
               else
-
                 links[#links + 1] = { attr = { class = "col-md-5 col-md-offset-1 label label-success spaceline", style = "margin-right: 10px;" },content = _ "You are interested" }
-
               end
             end
             if not issue.closed and not issue.fully_frozen then
@@ -357,32 +346,6 @@ ui.container {
             }
           end
         end
-
-        --[[] ui.container {
-						   attr = { class = "row" },
-						   content = function()
-
-						       local initiatives_selector = issue:get_reference_selector("initiatives")
-						       local highlight_string = param.get("highlight_string")
-						       if highlight_string then
-						           initiatives_selector:add_field({ '"highlight"("initiative"."name", ?)', highlight_string }, "name_highlighted")
-						       end
-						       execute.view {
-						           module = "initiative",
-						           view = "_list",
-						           params = {
-						               issue = issue,
-						               initiatives_selector = initiatives_selector,
-						               highlight_initiative = for_initiative,
-						               highlight_string = highlight_string,
-						               no_sort = true,
-						               limit = (for_listing or for_initiative) and 5 or nil,
-						               for_member = for_member
-						           }
-						       }
-						   end
-					  } ]]
-
       end
     }
   end

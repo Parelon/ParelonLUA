@@ -1,5 +1,5 @@
 slot.set_layout("custom")
-trace.debug("requested redirect")
+
 local issue_id = param.get_id()
 if issue_id == 0 then
   local tmp = param.get("issue_id", atom.integer)
@@ -21,7 +21,7 @@ local init_ord = param.get("init_ord") or "supporters"
 if issue.area.unit.public == false then
   request.redirect {
     module = "issue_private",
-    view = "show_ext_bs",
+    view = "show_ext",
     id = param.get_id(),
     params = param.get_all_cgi()
   }
@@ -36,15 +36,15 @@ local return_view, return_module
 local return_btn_txt = _ "Back to previous page"
 if view == "homepage" then
   return_module = "index"
-  return_view = "homepage_bs"
+  return_view = "assembly_public"
   return_btn_txt = _ "Back to homepage"
 elseif view == "area" then
   return_module = "area"
-  return_view = "show_ext_bs"
+  return_view = "show_ext"
   return_btn_txt = _ "Back to issue listing"
 elseif view == "area_private" then
   return_module = "area_private"
-  return_view = "show_ext_bs"
+  return_view = "show_ext"
   return_btn_txt = _ "Back to issue listing"
 end
 
@@ -56,8 +56,7 @@ if not app.html_title.title then
   app.html_title.title = _("Issue ##{id}", { id = issue.id })
 end
 
-local url = request.get_absolute_baseurl() .. "issue/show_ext_bs/" .. tostring(issue.id) .. ".html"
-trace.debug("url: " .. url)
+local url = request.get_absolute_baseurl() .. "issue/show_ext/" .. tostring(issue.id) .. ".html"
 
 ui.title(function()
     ui.container {
@@ -71,7 +70,7 @@ ui.title(function()
                 attr = { class = "btn btn-primary fixclick btn-back h2" },
                 module = "area",
                 id = issue.area.id,
-                view = "show_ext_bs",
+                view = "show_ext",
                 params = param.get_all_cgi(),
                 image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
                 content = return_btn_txt
@@ -113,17 +112,16 @@ ui.title(function()
     ui.container {
       attr = {class = "row spaceline"},
       content = function()
-        ui.container { 
+        --[[ ui.container { 
           attr = { id = "social_box",  class = "col-md-4 col-xs-12 col-sm-12 text-center spaceline" }, 
           content = function() 
             slot.put('<div data-url="' .. url .. '" class="addthis_sharing_toolbox"></div>')
           end 
-        }
+        }]]
 
         ui.container {
           attr = { class = "col-md-8 col-sm-12  col-xs-12" },
           content = function()
-
             ui.heading { level = 6, attr = { class = "" }, content = _ "Issue link (copy the link and share to the web):" }
             slot.put("<input id='issue_url_box' type='text' value=" .. url .. ">")
           end
@@ -735,7 +733,7 @@ ui.container {
 
                                     execute.view {
                                       module = "initiative",
-                                      view = "_list_ext2_bs",
+                                      view = "_list_ext",
                                       id = issue.id,
                                       params = {
                                         --                issue = issue,

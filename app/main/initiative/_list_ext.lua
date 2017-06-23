@@ -93,7 +93,7 @@ end
 for i, initiative in ipairs(initiatives:exec()) do
     execute.view {
         module = "initiative",
-        view = "_list_element_ext2_bs",
+        view = "_list_element_ext",
         params = {
             for_details = for_details,
             initiative = initiative
