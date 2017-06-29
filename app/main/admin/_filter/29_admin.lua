@@ -1,12 +1,13 @@
-if app.session.member == nil or app.session.member.admin == false then
-  error('Access denied: you are not an admin.')
-  request.redirect{
-    module = "index",  -- module name
-    view   = "login",    -- view name
+if not app.session.member.admin then
+  slot.put_into('error', 'Access denied: you are not an admin.')
+  execute.view{
+    module = "index",
+    view   = "login",
     params = {
       redirect_module = request.get_module(),
       redirect_view = request.get_view(),
-      redirect_id = param.get_id()
+      redirect_id = param.get_id_cgi(),
+      redirect_params = param.get_all_cgi()
     }
   }
 else

@@ -1,3 +1,6 @@
+if not app.session.member_id then
+    return
+end
 
 local member = param.get("member", "table") or app.session.member
 
@@ -211,14 +214,14 @@ if info.own_participation or info.first_trustee_id then
                 area_id = area_id,
                 issue_id = issue_id
             },
-            attr = { class = "delegation_info pull-right" },
+            attr = { class = "delegation_info" },
             content = function()
                 print_delegation_info()
             end
         }
     else
         ui.container {
-            attr = { class = "delegation_info pull-right" },
+            attr = { class = "delegation_info" },
             content = function()
                 print_delegation_info()
             end

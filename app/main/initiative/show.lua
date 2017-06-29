@@ -5,6 +5,6 @@ local unit = Unit:by_id(area.unit_id)
 
 execute.view {
     module = "initiative",
-    view = "_show",
+    view = "_show_bs",
     params = { initiative = initiative }
 }

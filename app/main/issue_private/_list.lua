@@ -1,75 +1,79 @@
-local issues_selector = param.get("selector", "table")
+slot.set_layout("custom")
+local issues_selector = param.get("issues_selector", "table")
 local member = param.get("for_member", "table") or app.session.member
-local state = param.get("state")
-local orderby = param.get("orderby")
-local desc = param.get("desc", atom.boolean)
-local interest = param.get("interest")
-local scope = param.get("scope")
-local view = param.get("view")
-local list = param.get("list")
-local for_details = param.get("for_details", atom.boolean)
-local ftl_btns = param.get("ftl_btns", atom.boolean)
+local for_member = param.get("for_member", "table")
+local for_state = param.get("for_state")
+local for_unit = param.get("for_unit", atom.boolean)
+local for_area = param.get("for_area", atom.boolean)
 
 
-if list == "proposals" then
-    issues_selector:join("initiative", nil, "initiative.issue_id = issue.id")
-    issues_selector:join("current_draft", nil, { "current_draft.initiative_id = initiative.id AND current_draft.author_id = ?", app.session.member.id })
+if for_state == "open" then
     issues_selector:add_where("issue.closed ISNULL")
+elseif for_state == "closed" then
+    issues_selector:add_where("issue.closed NOTNULL")
 end
 
-issues_selector:join("area", nil, "area.id = issue.area_id")
-issues_selector:join("unit", nil, "unit.id = area.unit_id AND NOT unit.public")
+ui.add_partial_param_names {
+    "filter",
+    "filter_open",
+    "filter_voting",
+    "filter_interest",
+    "issue_list"
+}
 
-ui.paginate {
-    per_page = tonumber(param.get("per_page") or 5),
-    selector = issues_selector,
-    content = function()
-        local issues = issues_selector:exec()
-        issues:load_everything_for_member_id(member and member.id or nil)
+local filters = execute.load_chunk {
+    module = "issue_private",
+    chunk = "_filters.lua",
+    params = {
+        member = member,
+        for_member = for_member,
+        state = for_state,
+        for_unit = for_unit,
+        for_area = for_area
+    }
+}
 
-        if #issues == 0 then
+filters.content = function()
+    ui.paginate {
+        per_page = tonumber(param.get("per_page") or 25),
+        selector = issues_selector,
+        content = function()
+            local highlight_string = param.get("highlight_string", "string")
+            local issues = issues_selector:exec()
+            issues:load_everything_for_member_id(member and member.id or nil)
+
             ui.container {
                 attr = { class = "row" },
                 content = function()
-                    ui.container {
-                        attr = { class = "col-md-12 text-center" },
-                        content = function()
-                            if list == "voted" then
-                                ui.heading { level = 4, content = _ "You didn't vote any issue yet." }
-                            elseif list == "proposals" then
-                                ui.heading { level = 4, content = _ "You didn't create any issue yet." }
-                            else
-                                ui.heading { level = 4, content = _ "There are no issues that match the selection criteria." }
-                            end
-                        end
-                    }
+            ui.container {
+                attr = { class = "col-md-12 well" },
+                content = function() 
+
+                    for i, issue in ipairs(issues) do
+
+                        execute.view {
+                            module = "issue_private",
+                            view = "_show",
+                            params = {
+                                issue = issue,
+                                for_listing = true,
+                                for_member = for_member
+                            }
+                        }
+                    end
                 end
             }
         end
+     }
+     end
+    }
+end
 
-        ui.container {
-            attr = { class = "" },
-            content = function()
-                for i, issue in ipairs(issues) do
-                    execute.view {
-                        module = "issue_private",
-                        view = "_show_ext2_bs",
-                        params = {
-                            issue = issue,
-                            --        for_listing = true,
-                            for_member = member,
-                            state = state,
-                            orderby = orderby,
-                            desc = desc,
-                            interest = interest,
-                            scope = scope,
-                            view = view,
-                            list = list,
-                            ftl_btns = ftl_btns
-                        }
-                    }
-                end
-            end
-        }
-    end
-}
+filters.opened = true
+filters.selector = issues_selector
+
+if param.get("no_filter", atom.boolean) then
+    filters.content()
+else
+    ui.filters(filters)
+end

@@ -8,18 +8,23 @@ if app.session.member_id then
 end
 
 ui.container {
-    attr = { class = "unit_head" },
+    attr = { class = "row" },
     content = function()
+
         execute.view { module = "delegation", view = "_info", params = { unit = unit, member = member } }
+    end
+}
+ui.container {
+   attr = { class = "row" },
+   content = function()
         ui.container {
-            attr = { class = "title" },
+            attr = { class = "col-md-6 col-md-offset-3 col-xs-12 label label-warning text-center h1" },
             content = function()
                 if not config.single_unit_id then
                     ui.link {
                         module = "unit",
                         view = "show",
                         id = unit.id,
-                        attr = { class = "unit_name" },
                         content = unit.name
                     }
                 else
@@ -27,34 +32,61 @@ ui.container {
                         module = "unit",
                         view = "show",
                         id = unit.id,
-                        attr = { class = "unit_name" },
                         content = config.instance_name .. " &middot; " .. _ "LiquidFeedback"
                     }
                 end
-            end
+           end
         }
-
-        if show_content then
-            ui.container {
-                attr = { class = "content" },
-                content = function()
-                    if member and member:has_voting_right_for_unit_id(unit.id) then
-                        if app.session.member_id == member.id then
-                            ui.tag { content = _ "You have voting privileges for this unit" }
-                            slot.put(" &middot; ")
-                            if unit.delegation_info.first_trustee_id == nil then
-                                ui.link { text = _ "Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id } }
-                            else
-                                ui.link { text = _ "Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id } }
-                            end
-                        else
-                            ui.tag { content = _ "Member has voting privileges for this unit" }
-                        end
-                    end
+	end
+}
+if show_content then
+ui.container {
+    attr = { class = "content row" },
+    content = function()
+        if member and member:has_voting_right_for_unit_id(unit.id) then
+            if app.session.member_id == member.id then
+							ui.container {
+								 attr = { class = "col-md-4 col-md-offset-1 label label-success text-center spaceline spaceline-bottom" },
+								 content = function()                            
+										ui.tag { 
+										content = _ "You have voting privileges for this unit" }	
+										end
+								  }	
+                slot.put("")
+                if unit.delegation_info.first_trustee_id == nil then
+                    ui.container {
+								 attr = { class = "col-md-4 col-md-offset-1 text-center" },
+								 content = function()
+										ui.link { 
+											attr = { class = "btn btn-primary large_btn margin_line text-center spaceline  spaceline-bottom" },												
+											text = _ "Delegate unit", 
+											module = "delegation", 
+											view = "show", 
+											params = { unit_id = unit.id } }
+										end
+								  }
+                else
+                    ui.container {
+								 attr = { class = "col-md-4 col-md-offset-1 text-center" },
+								 content = function()
+		                       ui.link {
+											attr = { class = "btn btn-primary large_btn margin_line text-center spaceline  spaceline-bottom" }, 
+											text = _ "Change unit delegation", 
+											module = "delegation", view = "show", 
+											params = { unit_id = unit.id } }
+										end
+								  }
                 end
-            }
-        else
-            slot.put("<br />")
+            else
+                ui.tag { 
+						attr = { class = "btn btn-primary large_btn margin_line text-center spaceline-bottom" },
+						content = _ "Member has voting privileges for this unit" }
+							
+            end
         end
     end
 }
+else
+slot.put("<hr/>")
+end
+

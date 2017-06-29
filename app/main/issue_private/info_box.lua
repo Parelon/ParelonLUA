@@ -1,3 +1,4 @@
+slot.set_layout("custom")
 local issue = param.get("issue", "table")
 
 if issue.state == "admission" then
@@ -43,6 +44,7 @@ end
     content = function()
 			ui.tag {
 				 content = function()
+
 				  slot.put(event_name or "")
 				 end
 			}

@@ -1,3 +1,4 @@
+slot.set_layout("custom")
 local area = Area:by_id(param.get_id())
 
 
@@ -10,12 +11,7 @@ slot.select("head", function()
     execute.view { module = "area_private", view = "_head", params = { area = area, show_content = true, member = app.session.member } }
 end)
 
-ui.container {
-    attr = { class = "vertical" },
-    content = function()
-        ui.field.text { value = area.description }
-    end
-}
+
 
 local open_issues_selector = area:get_reference_selector("issues"):add_where("issue.closed ISNULL"):add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
 

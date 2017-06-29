@@ -1,3 +1,5 @@
+slot.set_layout("custom")
+
 local tabs = {
     module = "index",
     view = "show_tab"

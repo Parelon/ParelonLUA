@@ -1,21 +1,25 @@
-local member = app.session.member
-
 execute.view {
   module = "index",
   view = "_notifications"
 }
 
+local member = app.session.member;
+
+execute.view {
+  module = "index",
+  view = "_positions"
+}
+
 ui.container {
-  attr = { class = "row-fluid" },
+  attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "span12 well text-center" },
+      attr = { class = "row slot_head" },
       content = function()
         ui.container {
-          attr = { class = "row-fluid" },
+          attr = { class = "col-md-5 col-md-offset-1 col-xs-12 col-sm-12 well-inside paper text-center" },
           content = function()
             ui.container {
-              attr = { class = "span5 offset1 spaceline" },
               content = function()
                 ui.heading {
                   level = 1,
@@ -27,49 +31,41 @@ ui.container {
             }
           end
         }
-      end
-    }
-  end
-}
-
-ui.container {
-  attr = { class = "offset5 span4 text-right spaceline " },
-  content = function()
-    ui.heading { level = 3, content = "La prima volta? clicca qui:" }
-  end
-}
-
-ui.container {
-  attr = { class = "span1 text-left spaceline" },
-  content = function()
-    ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
-  end
-}
-ui.container {
-  attr = { class = "span1 text-left " },
-  content = function()
-    ui.field.popover {
-      attr = {
-        dataplacement = "left",
-        datahtml = "true";
-        datatitle = _ "Box di aiuto per la pagina",
-        datacontent = _ "Se sei su queste pagine per la prima volta, BENVENUTO! Per poter comprendere e navigare nei contenuti di Parelon, in ogni box troverai l'icona di aiuto, che ti supporterà con suggerimenti e tutorial, anche video. In questa prima pagina trovi due pulsanti principali, Assemblea Pubblica e Assemblea Interna.".."<a href='https://www.parelon.com/it/caratterisitche/tutorial.html'>Tutorial</a>",
-        class = "text-center"
-      },
-      content = function()
-        ui.image { static = "png/tutor.png" }
-      end
-    }
-  end
-}
-
-ui.container {
-  attr = { class = "row-fluid spaceline" },
-  content = function()
-    ui.container {
-      attr = { class = "span10 offset1 text-center" },
-      content = function()
-        ui.heading { level = 2, attr = { class = "uppercase" }, content = _ "Choose the assembly you want to participate:" }
+        ui.container {
+          attr = { class = "col-md-6 spaceline hidden-xs hidden-sm" },
+          content = function()
+            ui.container {
+              attr = { class = "col-md-8 text-right spaceline" },
+              content = function()
+                ui.heading { level = 2, content = "La prima volta? clicca qui:"}
+              end
+            }
+            ui.container {
+              attr = { class = "col-md-2 text-left" },
+              content = function()
+                ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
+              end
+            }
+            ui.container {
+              attr = { class = "col-md-2 text-center " },
+              content = function()
+                ui.field.popover {
+                  attr = {
+                    dataplacement = "left",
+                    datahtml = "true";
+                    datatitle = _ "Box di aiuto per la pagina",
+                    datacontent = _ "<p class='spaceline-bottom'>Se sei su queste pagine per la prima volta, BENVENUTO! Per poter comprendere e navigare nei contenuti di Parelon, in ogni box troverai l'icona di aiuto, che ti supporterà con suggerimenti e tutorial, anche video. In questo breve tutorial, i primi passi su Parelon.</p><br>".."<iframe width='560' height='315' src='https://www.youtube.com/embed/videoseries?list=PLLVi3WpqQgKQY0SARzvwvhNr46NkuIDWm' frameborder='0' allowfullscreen></iframe>".." Se vuoi vedere tutti i tutorial sia testuali che video vai qui:<br><a class ='btn btn-primary large_btn fixclick spaceline spaceline-bottom'  href='https://www.parelon.com/?project=primo-accesso&lang=it' target='_blank'><h3>Vai ai Tutorial</h3></a>",
+                    class = "text-center"
+                  },
+                  content = function()
+                    ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
+--								    ui.heading{level=3 , content= _"What you want to do?"}
+                  end
+                }
+              end
+            }
+          end
+        }
       end
     }
   end
@@ -77,10 +73,10 @@ ui.container {
 
 -- inizio icone
 ui.container {
-  attr = { class = "row-fluid" },
+  attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "span6 text-center" },
+      attr = { class = "col-md-6 col-lg-6 text-center hidden-xs hidden-sm" },
       content = function()
         ui.image {
           attr = { class = "img_assembly_small" },
@@ -89,7 +85,7 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "span6 text-center" },
+      attr = { class = "col-md-6 col-lg-6 text-center hidden-xs hidden-sm" },
       content = function()
         ui.image {
           attr = { class = "img_assembly_small" },
@@ -99,40 +95,59 @@ ui.container {
     }
   end
 }
---  fine icone
-
---  Bottoni
 ui.container {
-  attr = { class = "row-fluid text-center" },
+  attr = { class = "row text-center" },
   content = function()
     ui.container {
-      attr = { class = "span6" },
+      attr = { class = "hidden-md hidden-lg col-sm-2 col-xs-2 spaceline" },
+      content = function()
+        ui.image {
+          attr = { class = "icon-medium" },
+          static = "parlamento_icon_small.png"
+        }
+      end
+    }
+    ui.container {
+      attr = { class = "col-md-6 col-lg-6 col-sm-10 col-xs-10 spaceline" },
       content = function()
         ui.link {
-          attr = { class = "btn btn-primary btn-large large_btn fixclick" },
+          attr = { class = "btn btn-primary btn-large fixclick" },
           module = "index",
           view = "assembly_public",
           content = function()
-            ui.heading { level = 3, content = _ "PUBLIC ASSEMBLY" }
+            ui.heading { level = 3, content = _ "Assemblea Pubblica" }
           end
         }
       end
-    }
-
+    }				
     ui.container {
-      attr = { class = "span6" },
+      attr = { class = "hidden-md hidden-lg col-sm-2 col-xs-2 spaceline" },
+      content = function()
+        ui.image {
+          attr = { class = "icon-medium" },
+          static = "icon_green.png"
+        }
+      end
+    }
+    ui.container {
+      attr = { class = "col-md-6 col-lg-6 col-sm-10 col-xs-10 spaceline" },
       content = function()
         ui.link {
-          attr = { class = "btn btn-primary btn-large large_btn fixclick" },
+          attr = { class = "btn btn-primary btn-large fixclick" },
           module = "index",
           view = "assembly_private",
           content = function()
-            ui.heading { level = 3, content = _ "INTERNAL ASSEMBLY" }
+            ui.heading { level = 3, content = _ "Tavoli di lavoro" }
           end
         }
       end
     }
   end
 }
+--  fine icone Bottoni
+
 -- cruscotto di stato
-execute.view { module = "index", view = "_dashboard" }
+execute.view {
+  module = "index",
+  view = "_dashboard"
+}

@@ -32,7 +32,7 @@ if param.get("delete") then
     if opinion then
         opinion:destroy()
     end
-    slot.put_into("notice", _"Your rating has been deleted")
+    --slot.put_into("notice", _"Your rating has been deleted")
     return
 end
 
@@ -61,4 +61,4 @@ end
 
 opinion:save()
 
-slot.put_into("notice", _"Your rating has been updated")
+--slot.put_into("notice", _"Your rating has been updated")

@@ -100,65 +100,70 @@ local next_params = {
 local progresso = _ "FASE <strong>9</strong> di 10"
 
 ui.title(function()
-    ui.container {
-        attr = { class = "row-fluid" },
-        content = function()
-            ui.container {
-                attr = { class = "span10 offset1 text-center" },
-                content = function()
-                    ui.heading { level = 1, attr = { class = "uppercase" }, content = _ "Create new issue" }
-                    ui.heading {
-                        level = 2,
-                        attr = { class = "spaceline" },
-                        content = function()
-                            slot.put(_ "Unit" .. ": " .. "<strong>" .. unit_name .. "</strong>")
-                        end
-                    }
-                    ui.heading {
-                        level = 2,
-                        content = function()
-                            slot.put(_ "Area" .. ": " .. "<strong>" .. area_name .. "</strong>")
-                        end
-                    }
-                end
-            }
-            ui.container {
-                attr = { class = "span1 text-center " },
-                content = function()
-                    ui.field.popover {
-                        attr = {
-                            dataplacement = "left",
-                            datahtml = "true";
-                            datatitle = _ "Insert the text for your initiative to solve the problem",
-                            datacontent = _ "Draft note",
-                            datahtml = "true",
-                            class = "text-center"
-                        },
-                        content = function()
-                            ui.container {
-                                attr = { class = "row-fluid" },
-                                content = function()
-                                    ui.image { static = "png/tutor.png" }
-                                --								    ui.heading{level=3 , content= _"What you want to do?"}
-                                end
-                            }
-                        end
-                    }
-                end
-            }
-        end
-    }
-    ui.container {
-        attr = { class = "row-fluid" },
-        content = function()
-            ui.container {
-                attr = { class = "span12" },
-                content = function()
-                    ui.image { static = "png/step_6_f9.png" }
-                end
-            }
-        end
-    }
+
+  ui.container {
+      attr = { class = "row" },
+      content = function()
+                                  -- Pulsante "Indietro"
+	        ui.container {
+	            attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center" },
+	            content = function()
+	                ui.tag {
+	                    tag = "a",
+	                    attr = { id = "btnPreviuos", class = "btn btn-primary large_btn fixclick", onClick = "getElementById(\"page_bs9_back\").submit();" },
+	                    content = function()
+	                        ui.heading {
+	                            level = 3,
+	                            content = function()
+	                                ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
+	                                slot.put(_ "Back Phase")
+	                            end
+	                        }
+	                    end
+	                }
+	            end
+	        }
+          ui.container {
+              attr = { class = "col-md-6 well-inside paper col-sm-4 col-xs-12 text-center" },
+              content = function()
+                  ui.heading { level = 1, attr = { class = "uppercase label label-danger" }, content = _ "Modifica Proposta" }
+                  ui.heading {
+                      level = 2,
+                      attr = { class = "spaceline" },
+                      content = function()
+                          slot.put(_ "Unit" .. ": " .. "<strong>" .. unit_name .. "</strong>")
+                      end
+                  }
+                  ui.heading {
+                      level = 2,
+                      content = function()
+                          slot.put(_ "Area" .. ": " .. "<strong>" .. area_name .. "</strong>")
+                      end
+                  }
+              end
+          }
+                    --pulsante Save
+          ui.container {
+              attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center" },
+              content = function()
+                  ui.tag {
+                      tag = "a",
+                      attr = { id = "btnSaveIssue", class = "btn btn-primary large_btn fixclick", style = "cursor:pointer;", onclick = "getElementById(\"page_bs9\").submit()" },
+                      content = function()
+                          ui.heading {
+                              level = 3,
+                              content = function()
+                                  ui.image {static = "png/save.png" }
+                                  slot.put(_ "Salva e Pubblica")
+                              end
+                          }
+                      end
+                  }
+              end
+          }
+      end
+  }
+
 end)
 
 if draft_id ~= 0 then
@@ -204,22 +209,22 @@ ui.form {
     params = next_params,
     content = function()
         ui.container {
-            attr = { class = "row-fluid" },
+            attr = { class = "row" },
             content = function()
                 ui.container {
-                    attr = { class = "span12 well" },
+                    attr = { class = "col-md-12 well" },
                     content = function()
                         ui.container {
-                            attr = { class = "row-fluid" },
+                            attr = { class = "row" },
                             content = function()
                                 ui.container {
-                                    attr = { class = "span12" },
+                                    attr = { class = "col-md-12" },
                                     content = function()
                                         ui.container {
-                                            attr = { class = "row-fluid" },
+                                            attr = { class = "row" },
                                             content = function()
                                                 ui.container {
-                                                    attr = { class = "span12 text-center spaceline" },
+                                                    attr = { class = "col-md-12 text-center spaceline" },
                                                     content = function()
                                                         ui.heading {
                                                             level = 3,
@@ -235,26 +240,26 @@ ui.form {
                                             end
                                         }
                                         ui.container {
-                                            attr = { class = "row-fluid spaceline text-center" },
+                                            attr = { class = "row spaceline text-center" },
                                             content = function()
                                                 ui.container {
-                                                    attr = { class = "span12 well-inside paper" },
+                                                    attr = { class = "col-md-12 well-inside paper" },
                                                     content = function()
                                                         ui.container {
-                                                            attr = { class = "row-fluid spaceline text-center" },
+                                                            attr = { class = "row spaceline text-center" },
                                                             content = function()
                                                                 ui.heading {
-                                                                    attr = { class = "span12 text-center" },
+                                                                    attr = { class = "col-md-12 text-center" },
                                                                     level = 1,
                                                                     content = _ "Draft text"
                                                                 }
                                                             end
                                                         }
                                                         ui.container {
-                                                            attr = { class = "row-fluid spaceline text-center" },
+                                                            attr = { class = "row spaceline text-center" },
                                                             content = function()
                                                                 ui.container {
-                                                                    attr = { class = "span10 offset1" },
+                                                                    attr = { class = "col-md-10 col-md-offset-1" },
                                                                     content = function()
                                                                         ui.tag {
                                                                             tag = "textarea",
@@ -265,49 +270,6 @@ ui.form {
                                                                 }
                                                             end
                                                         }
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
-                            end
-                        }
-                        ui.container {
-                            attr = { class = "row-fluid spaceline" },
-                            content = function()
-                            -- Pulsante "Indietro"
-                                ui.container {
-                                    attr = { class = "span3 offset1 text-center" },
-                                    content = function()
-                                        ui.tag {
-                                            tag = "a",
-                                            attr = { id = "btnPreviuos", class = "btn btn-primary large_btn fixclick", onClick = "getElementById(\"page_bs9_back\").submit();" },
-                                            content = function()
-                                                ui.heading {
-                                                    level = 3,
-                                                    content = function()
-                                                        ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
-                                                        slot.put(_ "Back Phase")
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
-                                -- Pulsante "Avanti"
-                                ui.container {
-                                    attr = { class = "span3 offset4 text-center" },
-                                    content = function()
-                                        ui.tag {
-                                            tag = "a",
-                                            attr = { id = "btnNext", class = "btn btn-primary large_btn", onClick = "getElementById(\"page_bs9\").submit();" },
-                                            content = function()
-                                                ui.heading {
-                                                    level = 3,
-                                                    content = function()
-                                                        slot.put(_ "Next Phase")
-                                                        ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
                                                     end
                                                 }
                                             end

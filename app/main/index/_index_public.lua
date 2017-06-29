@@ -39,7 +39,7 @@ ui.container {
                 ui.heading {
                   level = 5,
                   content = function()
-                    ui.tag { attr = { class = "pull-right" }, tag = "small", content = "Versione 0.5" }
+                    ui.tag { attr = { class = "pull-right" }, tag = "small", content = "Versione 1.0" }
                   end
                 }
               end

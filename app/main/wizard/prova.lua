@@ -1,1 +1,0 @@
-execute.view { module = "wizard", view = "_head" }

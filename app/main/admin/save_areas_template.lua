@@ -1,91 +1,93 @@
+slot.set_layout("custom")
+
 local _template = Template:get_all_templates()
 
 local _listTemplate = {
-    { id = 0, name = _ "< new >" }
+  { id = 0, name = _ "< new >" }
 }
 
 for i, template in ipairs(_template) do
-    _listTemplate[#_listTemplate + 1] = { id = template.id, name = template.name, description = template.description }
+  _listTemplate[#_listTemplate + 1] = { id = template.id, name = template.name, description = template.description }
 end
 
 ui.title(function()
     ui.container {
-        attr = { class = "row-fluid text-left" },
-        content = function()
-            ui.container {
-                attr = { class = "span3" },
-                content = function()
-                    ui.link {
-                        attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
-                        module = "admin",
-                        view = 'area_list',
-                        id = param.get("unit_id"),
-                        params = { unit_name = param.get("name"), unit_id = param.get("unit_id") },
-                        image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-                        content = _ "Back to previous page"
-                    }
-                end
+      attr = { class = "row text-left" },
+      content = function()
+        ui.container {
+          attr = { class = "col-md-3" },
+          content = function()
+            ui.link {
+              attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
+              module = "admin",
+              view = 'area_list',
+              id = param.get("unit_id"),
+              params = { unit_name = param.get("name"), unit_id = param.get("unit_id") },
+              image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
+              content = _ "Back to previous page"
             }
-            ui.tag {
-                tag = "strong",
-                attr = { class = "span9 text-center" },
-                content = _("Unit '#{name}'", { name = param.get("unit_name") })
-            }
-        end
+          end
+        }
+        ui.tag {
+          tag = "strong",
+          attr = { class = "col-md-9 text-center" },
+          content = _("Unit '#{name}'", { name = param.get("unit_name") })
+        }
+      end
     }
-end)
+  end)
 
 ui.form {
-    attr = { class = "vertical" },
-    module = 'admin',
-    action = 'save_template',
-    routing = {
-        ok = {
-            mode = 'redirect',
-            module = 'admin',
-            view = 'area_list',
-            id = param.get("unit_id"),
-            params = { unit_name = param.get("name"), unit_id = param.get("unit_id") }
-        },
-        error = {
-            mode = '',
-            module = 'admin',
-            view = 'area_list',
-        }
+  attr = { class = "vertical" },
+  module = 'admin',
+  action = 'save_template',
+  routing = {
+    ok = {
+      mode = 'redirect',
+      module = 'admin',
+      view = 'area_list',
+      id = param.get("unit_id"),
+      params = { unit_name = param.get("name"), unit_id = param.get("unit_id") }
     },
-    content = function()
+    error = {
+      mode = '',
+      module = 'admin',
+      view = 'area_list',
+    }
+  },
+  content = function()
 
 
-        ui.field.select {
-            attr = { id = "template_type_field_save", onchange = "nameSaveTemplateChange(event)" },
-            label = _ 'Template Type',
-            name = 'templateTypeSave',
-            foreign_records = _listTemplate,
-            foreign_id = "id",
-            foreign_name = "name",
-            value = ""
-        }
+    ui.field.select {
+      attr = { id = "template_type_field_save", onchange = "nameSaveTemplateChange(event)" },
+      label = _ 'Template Type',
+      name = 'templateTypeSave',
+      foreign_records = _listTemplate,
+      foreign_id = "id",
+      foreign_name = "name",
+      value = ""
+    }
 
-        ui.field.text {
-            attr = { id = "template_name_field_save" },
-            label = _ 'Template Name',
-            html_name = 'templateNameSave',
-            value = ''
-        }
+    ui.field.text {
+      attr = { id = "template_name_field_save" },
+      label = _ 'Template Name',
+      html_name = 'templateNameSave',
+      value = ''
+    }
 
-        ui.field.text {
-            attr = { id = "template_description_field_save", style = 'height:300px;' },
-            label = _ 'Template Description',
-            html_name = 'templateDescriptionSave',
-            multiline = true,
-            value = ""
-        }
+    ui.field.text {
+      attr = { id = "template_description_field_save", style = 'height:300px;' },
+      label = _ 'Template Description',
+      html_name = 'templateDescriptionSave',
+      multiline = true,
+      value = ""
+    }
 
-        slot.put('<input type="hidden"  name="unit_id" value="' .. param.get("unit_id") .. '">')
-        slot.put('<input type="hidden"  name="areas" value="' .. param.get("areas") .. '">')
+    slot.put('<input type="hidden"  name="unit_id" value="' .. param.get("unit_id") .. '">')
+    slot.put('<input type="hidden"  name="areas" value="' .. param.get("areas") .. '">')
 
-        ui.submit { text = _ "Save" }
-    end
+    ui.submit { text = _ "Save" }
+  end
 }
 
 -- javascript context
@@ -94,7 +96,7 @@ slot.put("<script>")
 
 slot.put("var _arrayNameTemplate=new Array();")
 for i, template in ipairs(_listTemplate) do
-    slot.put("_arrayNameTemplate.push(" .. encode.json(_listTemplate[i]) .. ");")
+  slot.put("_arrayNameTemplate.push(" .. encode.json(_listTemplate[i]) .. ");")
 end
 
 slot.put("</script>")

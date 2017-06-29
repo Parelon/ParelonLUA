@@ -1,4 +1,4 @@
-lot.set_layout("custom")
+slot.set_layout("custom")
 
 local issue_id = param.get("issue_id", atom.integer) or 0
 local area_id = param.get("area_id", atom.integer)
@@ -18,7 +18,9 @@ local technical_areas = param.get("technical_areas", atom.string) or ""
 local proposer1 = param.get("proposer1", atom.boolean) or false
 local proposer2 = param.get("proposer2", atom.boolean) or false
 local proposer3 = param.get("proposer3", atom.boolean) or false
-local resource = param.get("resource", atom.string) or ""
+local resource = param.get("resource", atom.string)
+local sociallink = param.get("sociallink", atom.string)
+local archivecloud = param.get("archivecloud", atom.string)
 
 -- trace di controllo sui valori dei parametri
 trace.debug("issue_id: " .. tostring(issue_id))
@@ -41,6 +43,7 @@ trace.debug("proposer2: " .. tostring(proposer2))
 trace.debug("proposer3: " .. tostring(proposer3))
 trace.debug("resource: " .. (resource and resource or "none"))
 
+
 local area_policies = AllowedPolicy:get_policy_by_area_id(area_id)
 local policies = {}
 
@@ -50,18 +53,39 @@ end
 
 ui.title(function()
     ui.container {
-        attr = { class = "row-fluid" },
+        attr = { class = "row" },
         content = function()
+           ui.container {
+               attr = { class = "col-md-3 col-sm-12 col-xs-12 text-center" },
+               content = function()
+                   ui.link {
+                       attr = { id = "btnPreviuos", class = "btn btn-primary btn-back spaceline spaceline-bottom fixclick" },
+                       module = "unit",
+                       view = "show_ext_bs",
+                       params = { unit_id = unit_id, create = true, filter = "my_areas" },
+                       id = app.session.member.unit_id,
+                       content = function()
+                           ui.heading {
+                               level = 3,
+                               content = function()
+                                   ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
+                                   slot.put(_ "Back Phase")
+                               end
+                           }
+                       end
+                   }
+               end
+           }
             ui.container {
-                attr = { class = "span12" },
+                attr = { class = "col-md-6 well-inside paper col-sm-12 col.xs.12" },
                 content = function()
                     ui.container {
-                        attr = { class = "row-fluid" },
+                        attr = { class = "row" },
                         content = function()
                             ui.container {
-                                attr = { class = "span10 offset1 text-center" },
+                                attr = { class = "col-md-12 text-center" },
                                 content = function()
-                                    ui.heading { level = 1, attr = { class = "uppercase" }, content = _ "Create new issue" }
+                                    ui.heading { level = 1, attr = { class = "uppercase label label-warning" }, content = _ "STEP 1: Imposta tempi di discussione" }
                                     ui.heading {
                                         level = 2,
                                         attr = { class = "spaceline" },
@@ -77,40 +101,30 @@ ui.title(function()
                                     }
                                 end
                             }
-                            ui.container {
-                                attr = { class = "span1 text-center " },
-                                content = function()
-                                    ui.field.popover {
-                                        attr = {
-                                            dataplacement = "left",
-                                            datahtml = "true";
-                                            datatitle = _ "Box di aiuto per la pagina",
-                                            datacontent = _ "Sei nell'area Creazione Questioni e Proposte per risolverle.<br />La barra di avanzamento ti indica esattamente dove e cosa stai facendo, divisa in 3 step:<ol><li>Il tempo</li><li>La Questione sollevata</li><li>La Proposta per dare risoluzione alla Questione</li></ol>",
-                                            datahtml = "true",
-                                            class = "text-center"
-                                        },
-                                        content = function()
-                                            ui.container {
-                                                attr = { class = "row-fluid" },
-                                                content = function()
-                                                    ui.image { static = "png/tutor.png" }
-                                                --								    ui.heading{level=3 , content= _"What you want to do?"}
-                                                end
-                                            }
-                                        end
-                                    }
-                                end
-                            }
+
                         end
                     }
-                    ui.container {
-                        attr = { class = "row-fluid" },
-                        content = function()
-                            ui.image { attr = { class = "span12" }, static = "png/step_1_f1.png" }
-                        end
-                    }
+
                 end
             }
+              ui.container {
+                  attr = { class = "col-md-3 col-sm-12 col-xs-12 text-center" },
+                  content = function()
+                      ui.tag {
+                          tag = "a",
+                          attr = { id = "btnNext", class = "btn btn-primary btn-back spaceline spaceline-bottom", onClick = "getElementById(\"page_bs1\").submit();" },
+                          content = function()
+                              ui.heading {
+                                  level = 3,
+                                  content = function()
+                                      slot.put(_ "Next Phase")
+                                      ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
+                                  end
+                              }
+                          end
+                      }
+                  end
+              }
         end
     }
 end)
@@ -139,42 +153,38 @@ ui.form {
         proposer1 = proposer1,
         proposer2 = proposer2,
         proposer3 = proposer3,
-        resource = resource
+        resource = resource,
+	archivecloud = archivecloud,
+	sociallink = sociallink
     },
     content = function()
         ui.container {
-            attr = { class = "row-fluid" },
+            attr = { class = "row" },
             content = function()
                 ui.container {
-                    attr = { class = "span12 well" },
+                    attr = { class = "col-md-12 well" },
                     content = function()
                         ui.container {
-                            attr = { class = "row-fluid" },
+                            attr = { class = "row" },
                             content = function()
                                 ui.container {
-                                    attr = { class = "span12" },
+                                    attr = { class = "col-md-12" },
                                     content = function()
                                         ui.container {
-                                            attr = { class = "row-fluid" },
+                                            attr = { class = "row" },
                                             content = function()
                                                 ui.container {
-                                                    attr = { class = "span12 text-center spaceline" },
+                                                    attr = { class = "col-md-12 text-center spaceline" },
                                                     content = function()
-                                                        ui.heading {
-                                                            level = 3,
-                                                            attr = { class = "label label-warning" },
-                                                            content = function()
-                                                                slot.put(_ "FASE <strong>1</strong> di 10")
-                                                            end
-                                                        }
-                                                        ui.heading { level = 4, attr = { class = "uppercase" }, content = _ "How much time does your proposal need to be examined?" }
+                                                        
                                                     end
                                                 }
                                                 ui.container {
-                                                    attr = { class = "row-fluid" },
+                                                    attr = { class = "row" },
                                                     content = function()
+                                                   
                                                         ui.container {
-                                                            attr = { class = "span12 spaceline well-inside paper text-center" },
+                                                            attr = { class = "col-md-12 spaceline well-inside paper text-center" },
                                                             content = function()
                                                             --valore selezionato
                                                                 ui.field.hidden {
@@ -182,10 +192,10 @@ ui.form {
                                                                     attr = { id = "policy_id" },
                                                                     value = param.get("policy_id", atom.integer) or 0
                                                                 }
-
+																					 ui.heading { level = 2, attr = { class = "uppercase text-center" }, content = _ "How much time does your proposal need to be examined?" }
                                                                 --radio-button group
                                                                 ui.container {
-                                                                    attr = { class = "row-fluid" },
+                                                                    attr = { class = "row" },
                                                                     content = function()
                                                                         ui.field.parelon_group_radio {
                                                                             id = "policy_id",
@@ -207,51 +217,7 @@ ui.form {
                                 }
                             end
                         }
-                        ui.container {
-                            attr = { class = "row-fluid spaceline" },
-                            content = function()
-                                ui.container {
-                                    attr = { class = "span3 offset1 text-center" },
-                                    content = function()
-                                        ui.link {
-                                            attr = { id = "btnPreviuos", class = "btn btn-primary large_btn fixclick" },
-                                            module = "unit",
-                                            view = "show_ext_bs",
-                                            params = { unit_id = unit_id, create = true, filter = "my_areas" },
-                                            id = app.session.member.unit_id,
-                                            content = function()
-                                                ui.heading {
-                                                    level = 3,
-                                                    content = function()
-                                                        ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
-                                                        slot.put(_ "Back Phase")
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
 
-                                ui.container {
-                                    attr = { class = "span3 offset4 text-center" },
-                                    content = function()
-                                        ui.tag {
-                                            tag = "a",
-                                            attr = { id = "btnNext", class = "btn btn-primary large_btn", onClick = "getElementById(\"page_bs1\").submit();" },
-                                            content = function()
-                                                ui.heading {
-                                                    level = 3,
-                                                    content = function()
-                                                        slot.put(_ "Next Phase")
-                                                        ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
-                            end
-                        }
                     end
                 }
             end

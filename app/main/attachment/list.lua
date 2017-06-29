@@ -1,3 +1,4 @@
+slot.set_layout("custom")
 local issue_id = param.get_id()
 local resourcesarch = ResourceIssue:by_issue_id_and_type(issue_id, "archive_url")
 local resourcesopen = ResourceIssue:by_issue_id_and_type(issue_id, "open_data")

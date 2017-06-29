@@ -1,3 +1,4 @@
+slot.set_layout("custom")
 local unit_id = config.single_unit_id or param.get_id()
 
 local unit = Unit:by_id(unit_id)
@@ -5,6 +6,16 @@ local unit = Unit:by_id(unit_id)
 slot.select("head", function()
     execute.view { module = "unit", view = "_head", params = { unit = unit, show_content = true, member = app.session.member } }
 end)
+
+if config.single_unit_id and not app.session.member_id and config.motd_public then
+    local help_text = config.motd_public
+    ui.container {
+        attr = { class = "wiki motd" },
+        content = function()
+            slot.put(format.wiki_text(help_text))
+        end
+    }
+end
 
 local areas_selector = Area:build_selector { active = true, unit_id = unit_id }
 areas_selector:add_order_by("member_weight DESC")

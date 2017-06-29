@@ -1,5 +1,6 @@
 ui.title(_ "Developer settings")
 
+
 local setting_key = "liquidfeedback_frontend_developer_features"
 local setting = Setting:by_pk(app.session.member.id, setting_key)
 

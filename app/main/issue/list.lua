@@ -1,3 +1,5 @@
+slot.set_layout("custom")
+
 local issues_selector = Issue:new_selector()
 
 execute.view {
@@ -5,3 +7,4 @@ execute.view {
     view = "_list",
     params = { issues_selector = issues_selector }
 }
+

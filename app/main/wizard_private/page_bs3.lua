@@ -1,5 +1,6 @@
 slot.set_layout("custom")
 
+local initiative = Initiative:by_id(param.get_id())
 local issue_id = param.get("issue_id", atom.integer) or 0
 local area_id = param.get("area_id", atom.integer)
 local unit_id = param.get("unit_id", atom.integer)
@@ -19,6 +20,8 @@ local proposer1 = param.get("proposer1", atom.boolean) or false
 local proposer2 = param.get("proposer2", atom.boolean) or false
 local proposer3 = param.get("proposer3", atom.boolean) or false
 local resource = param.get("resource", atom.string) or ""
+local sociallink = param.get("sociallink", atom.strin) or ""
+local archivecloud = param.get("archivecloud", atom.string) or ""
 
 -- trace di controllo sui valori dei parametri
 trace.debug("issue_id: " .. tostring(issue_id))
@@ -40,21 +43,34 @@ trace.debug("proposer1: " .. tostring(proposer1))
 trace.debug("proposer2: " .. tostring(proposer2))
 trace.debug("proposer3: " .. tostring(proposer3))
 trace.debug("resource: " .. (resource and resource or "none"))
-
+trace.debug("sociallink: " .. (sociallink and sociallink or "none"))
+trace.debug("archivecloud: " .. (archivecloud and archivecloud or "none"))
 ui.title(function()
-    ui.container {
-        attr = { class = "row-fluid" },
-        content = function()
-            ui.container {
-                attr = { class = "span12" },
-                content = function()
-                    ui.container {
-                        attr = { class = "row-fluid" },
-                        content = function()
-                            ui.container {
-                                attr = { class = "span10 offset1 text-center" },
+ ui.container {
+      attr = { class = "row" },
+      content = function()
+             ui.container {
+               attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
+               content = function()
+                   ui.tag {
+                       tag = "a",
+                       attr = { id = "btnPreviuos", class = "btn btn-primary btn-back fixclick", onClick = "getElementById(\"page_bs3_back\").submit();" },
+                       content = function()
+                           ui.heading {
+                               level = 3,
+                               content = function()
+                                   ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
+                                   slot.put(_ "Back Phase")
+                               end
+                           }
+                       end
+                   }
+               end
+           }
+          ui.container {
+              attr = { class = "col-md-6 well-inside paper col-sm-4 col-xs-12 text-center" },
                                 content = function()
-                                    ui.heading { level = 1, attr = { class = "uppercase" }, content = _ "Create new issue" }
+                                    ui.heading { level = 1, attr = { class = "uppercase label label-success" }, content = _ "STEP 3: Proponi una soluzione" }
                                     ui.heading {
                                         level = 2,
                                         attr = { class = "spaceline" },
@@ -70,51 +86,33 @@ ui.title(function()
                                     }
                                 end
                             }
-                            ui.container {
-                                attr = { class = "span1 text-center " },
-                                content = function()
-                                    ui.field.popover {
-                                        attr = {
-                                            dataplacement = "left",
-                                            datahtml = "true";
-                                            datatitle = _ "Description to the problem you want to solve",
-                                            datacontent = _ "Description note",
-                                            datahtml = "true",
-                                            class = "text-center"
-                                        },
-                                        content = function()
-                                            ui.container {
-                                                attr = { class = "row-fluid" },
-                                                content = function()
-                                                    ui.image { static = "png/tutor.png" }
-                                                end
-                                            }
-                                        end
-                                    }
-                                end
-                            }
+           ui.container {
+               attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
+               content = function()
+                   ui.tag {
+                       tag = "a",
+                       attr = { id = "btnNext", class = "btn btn-primary btn-back fixclick", onClick = "getElementById(\"page_bs3\").submit();" },
+                       content = function()
+                           ui.heading {
+                               level = 3,
+                               content = function()
+                                   slot.put(_ "Next Phase")
+                                   ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
+                               end
+                           }
+                       end
+                   }
+               end
+           }
                         end
                     }
-                    ui.container {
-                        attr = { class = "row-fluid" },
-                        content = function()
-                            ui.image {
-                                attr = { class = "span12" },
-                                static = "png/step_2_f3.png"
-                            }
-                        end
-                    }
-                end
-            }
-        end
-    }
 end)
 
 ui.form {
     method = "post",
     attr = { id = 'page_bs3' },
     module = 'wizard_private',
-    view = 'page_bs4',
+    view = 'page_bs12',
     params = {
         issue_id = issue_id,
         area_id = area_id,
@@ -134,159 +132,352 @@ ui.form {
         proposer1 = proposer1,
         proposer2 = proposer2,
         proposer3 = proposer3,
-        resource = resource
-    },
+        resource = resource,
+	sociallink = sociallink,
+	archivecloud = archivecloud
+    },         
     content = function()
-        ui.container {
-            attr = { class = "row-fluid" },
-            content = function()
-                ui.container {
-                    attr = { class = "span12 well" },
-                    content = function()
-                        ui.container {
-                            attr = { class = "row-fluid" },
-                            content = function()
-                                ui.container {
-                                    attr = { class = "span12" },
-                                    content = function()
-                                        ui.container {
-                                            attr = { class = "row-fluid" },
-                                            content = function()
-                                                ui.container {
-                                                    attr = { class = "span6 offset3 text-center spaceline" },
-                                                    content = function()
-                                                        ui.heading {
-                                                            level = 3,
-                                                            attr = { class = "label label-warning" },
-                                                            content = function()
-                                                                slot.put(_ "FASE <strong>3</strong> di 10")
-                                                            end
-                                                        }
-                                                    end
-                                                }
-                                            end
-                                        }
-                                        ui.container {
-                                            attr = { class = "row-fluid" },
-                                            content = function()
-                                                ui.container {
-                                                    attr = { class = "span6 offset3 text-center" },
-                                                    content = function()
-                                                        ui.heading { level = 4, attr = { class = "uppercase" }, content = _ "Give a short description to the problem you want to solve" }
-                                                    end
-                                                }
-                                            end
-                                        }
-
-                                        ui.container {
-                                            attr = { class = "row-fluid spaceline" },
-                                            content = function()
-                                                ui.container {
-                                                    attr = { class = "span12 well-inside paper" },
-                                                    content = function()
-                                                        ui.container {
-                                                            attr = { class = "row-fluid" },
-                                                            content = function()
-                                                                ui.container {
-                                                                    attr = { class = "span12 text-center spaceline spaceline-bottom" },
-                                                                    content = function()
-                                                                        ui.heading {
-                                                                            level = 1,
-                                                                            content = _ "Issue Brief Description"
+			ui.container {
+				attr = { class = "row" },
+				content = function()
+					ui.container {
+						attr = { class = "col-md-12 well" },
+						content = function()
+							ui.container {
+								attr = { class = "row" },
+								content = function()
+									ui.container {
+										attr = { class = "col-md-12 well-inside paper"},
+										content = function()
+											ui.container {
+												attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "true" },
+												content = function()
+													ui.container {
+														attr = { class = "panel panel-default"},
+														content = function()	  
+															ui.container {
+																attr = { class = "label label-accordion", role="tab", id="headingFive"},
+																content = function()						                     
+																ui.heading { 
+																	level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#initiative_title", ariaexpanded="true", ariacontrols="initiative_title"},  
+																	}
+																	ui.image { static = "png/arrow-down-icon.png" }				                                   
+																	ui.link {content = _ " TITOLO PROPOSTA"}
+															end
+															}
+														ui.container {
+																attr = { id="initiative_title", class="panel-collapse collapse in",  role="tabpanel", arialabelledby="headingFive"},
+																content = function()
+																ui.container {
+																		attr = { class="panel-body"},
+																		content = function()
+			                                        -- Descrizione del problema
+				                                        ui.container {
+				                                            attr = { class = "row" },
+				                                            content = function()
+				                                                ui.container {
+				                                                    attr = { class = "col-md-12" },
+				                                                    content = function()
+                                                                        ui.field.text {
+                                                                            attr = { id = "initiative_title", style = " font-size: 25px;" },
+                                                                            name = "initiative_title",
+                                                                            value = initiative_title
                                                                         }
-                                                                    end
-                                                                }
-                                                            end
-                                                        }
-                                                        ui.container {
-                                                            attr = { class = "row-fluid" },
-                                                            content = function()
-                                                                ui.container {
-                                                                    attr = { class = "span10 offset1 text-center spaceline-bottom" },
-                                                                    content = function()
-                                                                        ui.tag {
-                                                                            tag = "textarea",
-                                                                            attr = {
-                                                                                id = "issue_brief_description",
-                                                                                name = "issue_brief_description",
-                                                                                style = "height:4em;resize: none",
-                                                                            },
-                                                                            content = issue_brief_description
-                                                                        }
-                                                                    end
-                                                                }
-                                                            end
-                                                        }
-                                                        ui.container {
-                                                            attr = { class = "row-fluid" },
-                                                            content = function()
+				                                                    end
+				                                                }
+				                                            end
+				                                        }
+																	end
+																}   
+															end
+															}					                    
+													end
+													}
+											end 
+											}
+									end
+									}
+							end
+							}
+					end
+					}
+				end
+			} 		         
+			ui.container {
+				attr = { class = "row" },
+				content = function()
+					ui.container {
+						attr = { class = "col-md-12 well" },
+						content = function()
+							ui.container {
+								attr = { class = "row" },
+								content = function()
+									ui.container {
+										attr = { class = "col-md-12 well-inside paper"},
+										content = function()
+											ui.container {
+												attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "true" },
+												content = function()
+													ui.container {
+														attr = { class = "panel panel-default"},
+														content = function()	  
+															ui.container {
+																attr = { class = "label label-accordion", role="tab", id="headingSix"},
+																content = function()						                     
+																ui.heading { 
+																	level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#initiative_brief_description", ariaexpanded="true", ariacontrols="initiative_brief_description"},  
+																	}	
+																	ui.image { static = "png/arrow-down-icon.png" }			                                   
+																	ui.link {content = _ " BREVE DESCRIZIONE"}
+															end
+															}
+														ui.container {
+																attr = { id="initiative_brief_description", class="panel-collapse collapse",  role="tabpanel", arialabelledby="headingSix"},
+																content = function()
+																ui.container {
+																		attr = { class="panel-body"},
+																		content = function()
+			                                        -- Descrizione del problema
+			                                        ui.container {
+			                                            attr = { class = "row" },
+			                                            content = function()
+																				ui.container {
+																					attr = { class = "col-md-12 text-left" },
+																					content = function()
+																					ui.tag { tag = "p", content = "Descrivete in un abstract max 300 parole, i punti di forza, le criticità ed i benefici della vostra proposta." }
+																					end
+																				}	
+			                                                ui.container {
+			                                                    attr = { class = "col-md-12 init_brief" },
+			                                                    content = function()
+			                                                        ui.tag {
+			                                                            tag = "textarea",
+			                                                            attr = { id = "initiative_brief_description", name = "initiative_brief_description", style = "height:250px;width:100%;resize:yes;" },
+			                                                            content = initiative_brief_description or ""
+			                                                        }
+			                                                    end
+			                                                }
+			                                            end
+			                                        }
+																	end
+																}   
+															end
+															}					                    
+													end
+													}
+											end 
+											}
+									end
+									}
+							end
+							}
+					end
+					}
+				end
+			}
+			ui.container {
+				attr = { class = "row" },
+				content = function()
+					ui.container {
+						attr = { class = "col-md-12 well" },
+						content = function()
+							ui.container {
+								attr = { class = "row" },
+								content = function()
+									ui.container {
+										attr = { class = "col-md-12 well-inside paper"},
+										content = function()
+											ui.container {
+												attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "true" },
+												content = function()
+													ui.container {
+														attr = { class = "panel panel-default"},
+														content = function()	  
+															ui.container {
+																attr = { class = "label label-accordion", role="tab", id="headingSeven"},
+																content = function()						                     
+																ui.heading { 
+																	level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#draft", ariaexpanded="true", ariacontrols="draft"},  
+																	}
+																	ui.image { static = "png/arrow-down-icon.png" }				                                   
+																	ui.link {content = _ " TESTO DELLA PROPOSTA"}
+															end
+															}
+														ui.container {
+																attr = { id="draft", class="panel-collapse collapse",  role="tabpanel", arialabelledby="headingSeven"},
+																content = function()
+																ui.container {
+																		attr = { class="panel-body"},
+																		content = function()
+						                                        ui.container {
+						                                            attr = { class = "row" },
+						                                            content = function()
+																							ui.container {
+																								attr = { class = "col-md-10 text-left" },
+																								content = function()
+																								ui.tag { tag = "p", content = "Gli articoli i commi ed i riferimenti normativi della Tua proposta di soluzione al problema o questione sollevata" }
+																								end
+																							}	
+																							ui.container {
+																								attr = { class = "col-md-2 text-right" },
+																								content = function()
+																									 ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
+													                                     slot.put(_ "Esporta")	
+																								end
+																							}	
+						                                                ui.container {
+						                                                    attr = { class = "col-md-12 issue_desc" },
+						                                                    content = function()
+						                                                        ui.tag {
+						                                                            tag = "textarea",
+						                                                            attr = { id = "draft", name = "draft", style = "height:250px;width:100%;resize:yes;" },
+						                                                            content = draft or ""
+						                                                        }
+						                                                    end
+						                                                }
+						                                            end
+						                                        }
+																	end
+																}   
+															end
+															}					                    
+													end
+													}
+											end 
+											}
+									end
+									}
+							end
+							}
+					end
+					}
+				end
+			}
+			ui.container {
+				attr = { class = "row" },
+				content = function()
+					ui.container {
+						attr = { class = "col-md-12 well" },
+						content = function()
+							ui.container {
+								attr = { class = "row" },
+								content = function()
+									ui.container {
+										attr = { class = "col-md-12 well-inside paper"},
+										content = function()
+											ui.container {
+												attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "true" },
+												content = function()
+													ui.container {
+														attr = { class = "panel panel-default"},
+														content = function()	  
+															ui.container {
+																attr = { class = "label label-accordion", role="tab", id="headingHeight"},
+																content = function()						                     
+																ui.heading { 
+																	level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#resource", ariaexpanded="true", ariacontrols="title"},  
+																	}
+																	ui.image { static = "png/arrow-down-icon.png" }					                                   
+																	ui.link {content = _ " DOCUMENTAZIONE ALLEGATA E MEDIA"}
+															end
+															}
+														ui.container {
+																attr = { id="resource", class="panel-collapse collapse",  role="tabpanel", arialabelledby="headingHeight"},
+																content = function()
+																ui.container {
+																	attr = { class="panel-body"},
+																	content = function()
+																	ui.container {
+																		attr = { class = "row " },
+																		content = function()
+																			 ui.heading { level = 4, attr = { class = "col-md-12" }, content = "Se lo hai fatto, puoi inserire il link di un video youtube relativo alla tua proposta" }
+                                                          ui.field.text {
+                                                              attr = { id = "resource", class = "col-md-5" },
+                                                              name = "resource",
+                                                              value = resource
+                                                          }	
+                                                          ui.heading { level = 4, attr = { class = "col-md-12" }, content = "Inserire il link ad una cartella cloud pubblica o a documenti" }
+                                                          ui.field.text {
+                                                              attr = { id = "archivecloud", class = "col-md-5" },
+                                                              name = "archivecloud",
+                                                              value = archivecloud
+                                                          }	
+                                                          ui.heading { level = 4, attr = { class = "col-md-12" }, content = "Inserire il link ad una pagina social, forum, meetup o blog di discussione" }
+                                                          ui.field.text {
+                                                              attr = { id = "sociallink", class = "col-md-5" },
+                                                              name = "sociallink",
+                                                              value = sociallink
+                                                          }	
+                                                             end
+                                                          }																				
+																		end
+																		}
+																	end
+																}   
+															end
+															}					                    
+													end
+													}
+											end 
+											}
+									end
+									}
+							end
+							}
+					end
+					}
+				end
+			}
+			ui.container {
+				attr = { class = "row" },
+				content = function()
+					ui.container {
+						attr = { class = "col-md-12 well" },
+						content = function()
+			             ui.container {
+			                 attr = { class = "row" },
+			                 content = function()
+										ui.container {
+											attr = { class = "col-md-12 text-left well-inside paper" },
+											content = function()
+												ui.container {
+							                 attr = { class = "row" },
+							                 content = function()
+											     ui.heading {
+				                          attr = { class = "label label-accordion" },
+				                          level = 3,
+				                          content = _ "COMPETENZE TECNICHE"
+				                           }
+							               end
+						                  }
+				                  		 ui.container {
+													attr = { class = "col-md-12 text-left" },
+													content = function()
+													ui.tag { tag = "p", content = "Suggerisci competenze in materia tecnica, sociale, finanziaria, impatto ambientale e pianificazione delle risorse, per es: Psicologo, Commercialista, economista, muratore. " }
+													end
+												}	 
+			                                          
+				                     ui.container {
+				                         attr = { class = "col-md-12" },
+				                         content = function()
+			                              ui.tag {
+			                                  tag = "input",
+			                                  id = "technical_areas",
+			                                  attr = { id = "technical_areas", name = "technical_areas", class = "tagsinput", style = "resize:none;" }
+			                              }
+				                     end
+				                     }
+				                     
+				                  end
+										}   
+									end
+									} 
+			             end
+			             }		                    
+					end
+					}	
 
-                                                                ui.container {
-                                                                    attr = { class = "span8 offset1" },
-                                                                    content = function()
-                                                                        ui.tag { tag = "small", attr = { class = "uppercase" }, content = _ "Maxiumum number of characters is 140 (#{chars} left)" }
-                                                                    end
-                                                                }
-                                                            end
-                                                        }
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
-                            end
-                        }
-                        -- Pulsante "Indietro"
-                        ui.container {
-                            attr = { class = "row-fluid spaceline" },
-                            content = function()
-                                ui.container {
-                                    attr = { class = "span3 offset1 text-center" },
-                                    content = function()
-                                        ui.tag {
-                                            tag = "a",
-                                            attr = { id = "btnPreviuos", class = "btn btn-primary large_btn fixclick", onClick = "getElementById(\"page_bs3_back\").submit();" },
-                                            content = function()
-                                                ui.heading {
-                                                    level = 3,
-                                                    content = function()
-                                                        ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
-                                                        slot.put(_ "Back Phase")
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
-                                -- Pulsante "Avanti"
-                                ui.container {
-                                    attr = { class = "span3 offset4 text-center" },
-                                    content = function()
-                                        ui.tag {
-                                            tag = "a",
-                                            attr = { id = "btnNext", class = "btn btn-primary large_btn", onClick = "getElementById(\"page_bs3\").submit();" },
-                                            content = function()
-                                                ui.heading {
-                                                    level = 3,
-                                                    content = function()
-                                                        slot.put(_ "Next Phase")
-                                                        ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
-                                                    end
-                                                }
-                                            end
-                                        }
-                                    end
-                                }
-                            end
-                        }
-                    end
-                }
-            end
-        }
-    end
-}
-
+		
 --	ROUTING BACK
 
 ui.form {
@@ -313,6 +504,11 @@ ui.form {
         proposer1 = proposer1,
         proposer2 = proposer2,
         proposer3 = proposer3,
-        resource = resource
+        resource = resource,
+	sociallink = sociallink,
+	archivecloud = archivecloud
     }
 }
+ui.script { static = "js/jquery.tagsinput.js" }
+ui.script { script = "$('#issue_keywords').tagsInput({'height':'1%','width':'96%','defaultText':'" .. _ "Add a keyword" .. "','maxChars' : 20});" }
+ui.script { script = "$('#technical_areas').tagsInput({'height':'1%','width':'96%','defaultText':'" .. _ "Add a keyword" .. "','maxChars' : 20});" }

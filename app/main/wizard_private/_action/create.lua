@@ -19,6 +19,8 @@ local proposer2 = param.get("proposer2", atom.boolean) or false
 local proposer3 = param.get("proposer3", atom.boolean) or false
 local formatting_engine = param.get("formatting_engine")
 local resource = param.get("resource")
+local sociallink = param.get("sociallink", atom.string)
+local archivecloud = param.get("archivecloud", atom.string)
 
 trace.debug("issue_id: " .. tostring(issue_id))
 trace.debug("area_id: " .. tostring(area_id))
@@ -36,6 +38,9 @@ trace.debug("technical_areas: " .. tostring(technical_areas))
 trace.debug("proposer1: " .. tostring(proposer1))
 trace.debug("proposer2: " .. tostring(proposer2))
 trace.debug("proposer3: " .. tostring(proposer3))
+trace.debug("sociallink: " .. (sociallink and sociallink or "none"))
+trace.debug("archivecloud: " .. (archivecloud and archivecloud or "none"))
+trace.debug("resource: " .. (resource and resource or "none"))
 
 if area_id then
     area = Area:by_id(area_id)
@@ -236,20 +241,20 @@ if proposer3 then
 end
 
 param.update(initiative, "discussion_url")
-initiative:save()
+initiative = initiative:save()
 
 local draft = Draft:new()
 draft.initiative_id = initiative.id
 draft.formatting_engine = formatting_engine
 draft.content = draft_text
 draft.author_id = app.session.member.id
-draft:save()
+draft = draft:save()
 
 local initiator = Initiator:new()
 initiator.initiative_id = initiative.id
 initiator.member_id = app.session.member.id
 initiator.accepted = true
-initiator:save()
+initiator = initiator:save()
 
 if not is_polling then
     local supporter = Supporter:new()
@@ -303,13 +308,31 @@ end
 -- end of keywords
 
 -- video presentation
-if resource then
+if resource ~= nil and resource ~= nil then
     local video = Resource:new()
     video.url = resource
     video.initiative_id = initiative.id
     video.type = "video"
     video.title = "video presentation of initiative p" .. tostring(initiative.id)
     video:save()
+end
+
+if archivecloud ~= nil and archivecloud ~= "" then
+	local archive = Resource:new()
+	archive.url = archivecloud
+	archive.initiative_id = initiative.id
+	archive.type = "archive_url"
+	archive.title = "Archive"
+	archive:save()
+end
+	
+if sociallink ~= nil and sociallink ~= "" then
+        local social = Resource:new()
+        social.url = sociallink
+        social.initiative_id = initiative.id
+        social.type = "social_url"
+        social.title = "Archive"               
+        social:save()
 end
 
 slot.put_into("notice", _ "Initiative successfully created")

@@ -1,5 +1,6 @@
 ui.title(_ "Policies")
 
+util.help("policy.list", _ "Policies")
 local policies = Policy:new_selector():add_where("active"):add_order_by("index"):exec()
 
 ui.list {

@@ -8,6 +8,8 @@ if record == nil then
     exit()
 end
 
+slot.set_layout(nil, 'image/jpeg')
+
 if record then
     slot.put_into("data", record.data)
 end

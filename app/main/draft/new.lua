@@ -1,11 +1,13 @@
 local initiative = Initiative:by_id(param.get("initiative_id"))
 
+slot.set_layout("custom")
+
 ui.title(function()
     ui.container {
-        attr = { class = "row-fluid" },
+        attr = { class = "row" },
         content = function()
             ui.container {
-                attr = { class = "span3 text-left" },
+                attr = { class = "col-md-3 text-left" },
                 content = function()
                     ui.link {
                         attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
@@ -19,7 +21,7 @@ ui.title(function()
             }
             ui.tag {
                 tag = "strong",
-                attr = { class = "span9 text-center spaceline3" },
+                attr = { class = "col-md-9 text-center spaceline3" },
                 content = _ "Edit draft"
             }
         end

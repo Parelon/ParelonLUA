@@ -1,27 +1,27 @@
 ui.container {
-  attr = { class = "row-fluid" },
+  attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "span12 well spaceline3" },
+      attr = { class = "col-md-12 well spaceline3" },
       content = function()
         ui.container {
-          attr = { class = "row-fluid" },
+          attr = { class = "row" },
           content = function()
             ui.heading {
-              attr = { class = "span10 offset1 text-center" },
+              attr = { class = "col-md-10 col-md-offset-1 text-center" },
               level = 3,
               content = _ "The summary of the status of all the issues in you are interested in is this:"
             }
           end
         }
         ui.container {
-          attr = { class = "row-fluid" },
+          attr = { class = "row" },
           content = function()
             ui.container {
-              attr = { class = "span12 well-inside paper" },
+              attr = { class = "col-md-12 well-inside paper text-center" },
               content = function()
                 ui.container {
-                  attr = { class = "row-fluid" },
+                  attr = { class = "row" },
                   content = function()
                     local issues_new_count = 0.0
                     local issues_discussion_count = 0.0
@@ -40,111 +40,34 @@ ui.container {
                     end
 
                     ui.container {
-                      attr = { class = "row-fluid" },
+                      attr = { class = "col-md-4 col-sm-6 col-xs-12" },
                       content = function()
                         ui.container {
-                          attr = { class = "span4" },
+                          attr = { class = "row spaceline-bottom" },
                           content = function()
                             ui.container {
-                              attr = { class = "row-fluid spaceline-bottom" },
+                              attr = { class = "col-md-2 col-sm-4 col-xs-12 col-md-offset-1 spaceline" },
                               content = function()
-                                ui.container {
-                                  attr = { class = "span2 offset1 spaceline" },
-                                  content = function()
-                                    ui.image {
-                                      static = "png/new-proposal.png"
-                                    }
-                                  end
-                                }
-                                ui.link {
-                                  module = "issue",
-                                  view = "list",
-                                  params = {
-                                    filter_unit = "my_areas",
-                                    tab = "open",
-                                    filter_interest = "area",
-                                    filter = "new"
-                                  },
-                                  attr = { class = "span9 text-center spaceline" },
-                                  content = function()
-                                    ui.heading {
-                                      level = 4,
-                                      attr = { class = "btn btn-primary large_btn" },
-                                      content = _("#{count} new", { count = issues_new_count })
-                                    }
-                                  end
+                                ui.image {attr = { class = "icon-medium" },
+                                  static = "png/new-proposal.png"
                                 }
                               end
                             }
-                          end
-                        }
-                        ui.container {
-                          attr = { class = "span4" },
-                          content = function()
-                            ui.container {
-                              attr = { class = "row-fluid spaceline-bottom" },
+                            ui.link {
+                              module = "issue",
+                              view = "list",
+                              params = {
+                                filter_unit = "my_areas",
+                                tab = "open",
+                                filter_interest = "area",
+                                filter = "new"
+                              },
+                              attr = { class = "col-md-9 col-sm-8 col-xs-12 text-center spaceline" },
                               content = function()
-                                ui.container {
-                                  attr = { class = "span2 offset1 spaceline" },
-                                  content = function()
-                                    ui.image {
-                                      static = "png/discussion.png"
-                                    }
-                                  end
-                                }
-                                ui.link {
-                                  module = "issue",
-                                  view = "list",
-                                  params = {
-                                    filter_unit = "my_areas",
-                                    tab = "open",
-                                    filter_interest = "area",
-                                    filter = "accepted"
-                                  },
-                                  attr = { class = "span9 text-center spaceline" },
-                                  content = function()
-                                    ui.heading {
-                                      level = 4,
-                                      attr = { class = "btn btn-primary large_btn" },
-                                      content = _("#{count} in discussion", { count = issues_discussion_count })
-                                    }
-                                  end
-                                }
-                              end
-                            }
-                          end
-                        }
-                        ui.container {
-                          attr = { class = "span4" },
-                          content = function()
-                            ui.container {
-                              attr = { class = "row-fluid spaceline-bottom" },
-                              content = function()
-                                ui.container {
-                                  attr = { class = "span2 offset1 spaceline" },
-                                  content = function()
-                                    ui.image {
-                                      static = "png/verification.png"
-                                    }
-                                  end
-                                }
-                                ui.link {
-                                  module = "issue",
-                                  view = "list",
-                                  params = {
-                                    filter_unit = "my_areas",
-                                    tab = "open",
-                                    filter_interest = "area",
-                                    filter = "half_frozen"
-                                  },
-                                  attr = { class = "span9 text-center spaceline" },
-                                  content = function()
-                                    ui.heading {
-                                      level = 4,
-                                      attr = { class = "btn btn-primary large_btn" },
-                                      content = _("#{count} in verification", { count = issues_frozen_count })
-                                    }
-                                  end
+                                ui.heading {
+                                  level = 4,
+                                  attr = { class = "btn btn-primary large_btn_console" },
+                                  content = _("#{count} new", { count = issues_new_count })
                                 }
                               end
                             }
@@ -153,111 +76,35 @@ ui.container {
                       end
                     }
                     ui.container {
-                      attr = { class = "row-fluid" },
+                      attr = { class = "col-md-4 col-sm-6 col-xs-12" },
                       content = function()
                         ui.container {
-                          attr = { class = "span4" },
+                          attr = { class = "row spaceline-bottom" },
                           content = function()
                             ui.container {
-                              attr = { class = "row-fluid spaceline-bottom" },
+                              attr = { class = "col-md-2 col-sm-4 col-xs-12 col-md-offset-1 spaceline" },
                               content = function()
-                                ui.container {
-                                  attr = { class = "span2 offset1 spaceline" },
-                                  content = function()
-                                    ui.image {
-                                      static = "png/voting.png"
-                                    }
-                                  end
-                                }
-                                ui.link {
-                                  module = "issue",
-                                  view = "list",
-                                  params = {
-                                    filter_unit = "my_areas",
-                                    tab = "open",
-                                    filter_interest = "area",
-                                    filter = "frozen"
-                                  },
-                                  attr = { class = "span9 text-center spaceline" },
-                                  content = function()
-                                    ui.heading {
-                                      level = 4,
-                                      attr = { class = "btn btn-primary large_btn" },
-                                      content = _("#{count} in voting", { count = issues_voting_count })
-                                    }
-                                  end
+                                ui.image {
+                                  attr = { class = "icon-medium" },
+                                  static = "png/discussion.png"
                                 }
                               end
                             }
-                          end
-                        }
-                        ui.container {
-                          attr = { class = "span4" },
-                          content = function()
-                            ui.container {
-                              attr = { class = "row-fluid spaceline-bottom" },
+                            ui.link {
+                              module = "issue",
+                              view = "list",
+                              params = {
+                                filter_unit = "my_areas",
+                                tab = "open",
+                                filter_interest = "area",
+                                filter = "accepted"
+                              },
+                              attr = { class = "col-md-9 col-sm-8 col-xs-12 text-center spaceline" },
                               content = function()
-                                ui.container {
-                                  attr = { class = "span2 offset1 spaceline" },
-                                  content = function()
-                                    ui.image {
-                                      static = "png/finished.png"
-                                    }
-                                  end
-                                }
-                                ui.link {
-                                  module = "issue",
-                                  view = "list",
-                                  params = {
-                                    filter_unit = "my_areas",
-                                    tab = "open",
-                                    filter_interest = "area",
-                                    filter = "finished"
-                                  },
-                                  attr = { class = "span9 text-center spaceline" },
-                                  content = function()
-                                    ui.heading {
-                                      level = 4,
-                                      attr = { class = "btn btn-primary large_btn" },
-                                      content = _("#{count} finished", { count = issues_finished_count })
-                                    }
-                                  end
-                                }
-                              end
-                            }
-                          end
-                        }
-                        ui.container {
-                          attr = { class = "span4" },
-                          content = function()
-                            ui.container {
-                              attr = { class = "row-fluid spaceline-bottom" },
-                              content = function()
-                                ui.container {
-                                  attr = { class = "span2 offset1 spaceline" },
-                                  content = function()
-                                    ui.image {
-                                      static = "png/delete.png"
-                                    }
-                                  end
-                                }
-                                ui.link {
-                                  module = "issue",
-                                  view = "list",
-                                  params = {
-                                    filter_unit = "my_areas",
-                                    tab = "open",
-                                    filter_interest = "area",
-                                    filter = "canceled"
-                                  },
-                                  attr = { class = "span9 text-center spaceline" },
-                                  content = function()
-                                    ui.heading {
-                                      level = 4,
-                                      attr = { class = "btn btn-primary large_btn" },
-                                      content = _("#{count} canceled", { count = issues_canceled_count })
-                                    }
-                                  end
+                                ui.heading {
+                                  level = 4,
+                                  attr = { class = "btn btn-primary large_btn_console" },
+                                  content = _("#{count} in discussion", { count = issues_discussion_count })
                                 }
                               end
                             }
@@ -265,6 +112,156 @@ ui.container {
                         }
                       end
                     }
+                    ui.container {
+                      attr = { class = "col-md-4 col-sm-6 col-xs-12" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "row spaceline-bottom" },
+                          content = function()
+                            ui.container {
+                              attr = { class = "col-md-2 col-sm-4 col-xs-12 col-md-offset-1 spaceline" },
+                              content = function()
+                                ui.image {
+                                  attr = { class = "icon-medium" },
+                                  static = "png/verification.png"
+                                }
+                              end
+                            }
+                            ui.link {
+                              module = "issue",
+                              view = "list",
+                              params = {
+                                filter_unit = "my_areas",
+                                tab = "open",
+                                filter_interest = "area",
+                                filter = "half_frozen"
+                              },
+                              attr = { class = "col-md-9 col-sm-8 col-xs-12 text-center spaceline" },
+                              content = function()
+                                ui.heading {
+                                  level = 4,
+                                  attr = { class = "btn btn-primary large_btn_console" },
+                                  content = _("#{count} in verification", { count = issues_frozen_count })
+                                }
+                              end
+                            }
+                          end
+                        }
+                      end
+                    }
+
+                    ui.container {
+                      attr = { class = "col-md-4 col-sm-6 col-xs-12" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "row spaceline-bottom" },
+                          content = function()
+                            ui.container {
+                              attr = { class = "col-md-2 col-sm-4 col-xs-12 col-md-offset-1 spaceline" },
+                              content = function()
+                                ui.image {
+                                  attr = { class = "icon-medium" },
+                                  static = "png/voting.png"
+                                }
+                              end
+                            }
+                            ui.link {
+                              module = "issue",
+                              view = "list",
+                              params = {
+                                filter_unit = "my_areas",
+                                tab = "open",
+                                filter_interest = "area",
+                                filter = "frozen"
+                              },
+                              attr = { class = "col-md-9 col-sm-8 col-xs-12 text-center spaceline" },
+                              content = function()
+                                ui.heading {
+                                  level = 4,
+                                  attr = { class = "btn btn-primary large_btn_console" },
+                                  content = _("#{count} in voting", { count = issues_voting_count })
+                                }
+                              end
+                            }
+                          end
+                        }
+                      end
+                    }
+                    ui.container {
+                      attr = { class = "col-md-4 col-sm-6 col-xs-12" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "row spaceline-bottom" },
+                          content = function()
+                            ui.container {
+                              attr = { class = "col-md-2 col-sm-4 col-xs-12 col-md-offset-1 spaceline" },
+                              content = function()
+                                ui.image {
+                                  attr = { class = "icon-medium" },
+                                  static = "png/finished.png"
+                                }
+                              end
+                            }
+                            ui.link {
+                              module = "issue",
+                              view = "list",
+                              params = {
+                                filter_unit = "my_areas",
+                                tab = "open",
+                                filter_interest = "area",
+                                filter = "finished"
+                              },
+                              attr = { class = "col-md-9 col-sm-8 col-xs-12 text-center spaceline" },
+                              content = function()
+                                ui.heading {
+                                  level = 4,
+                                  attr = { class = "btn btn-primary large_btn_console" },
+                                  content = _("#{count} finished", { count = issues_finished_count })
+                                }
+                              end
+                            }
+                          end
+                        }
+                      end
+                    }
+                    ui.container {
+                      attr = { class = "col-md-4 col-sm-6 col-xs-12" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "row spaceline-bottom" },
+                          content = function()
+                            ui.container {
+                              attr = { class = "col-md-2 col-sm-4 col-xs-12 col-md-offset-1 spaceline" },
+                              content = function()
+                                ui.image {
+                                  attr = { class = "icon-medium" },
+                                  static = "png/delete.png"
+                                }
+                              end
+                            }
+                            ui.link {
+                              module = "issue",
+                              view = "list",
+                              params = {
+                                filter_unit = "my_areas",
+                                tab = "open",
+                                filter_interest = "area",
+                                filter = "canceled"
+                              },
+                              attr = { class = "col-md-9 col-sm-8 col-xs-12 text-center spaceline" },
+                              content = function()
+                                ui.heading {
+                                  level = 4,
+                                  attr = { class = "btn btn-primary large_btn_console" },
+                                  content = _("#{count} canceled", { count = issues_canceled_count })
+                                }
+                              end
+                            }
+                          end
+                        }
+                      end
+                    }
+
                   end
                 }
               end

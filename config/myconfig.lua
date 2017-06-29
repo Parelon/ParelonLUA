@@ -9,16 +9,16 @@ config.instance_name = "Parlamento Elettronico Online"
 
 -- Information about service provider (HTML)
 -- ------------------------------------------------------------------------
-config.app_service_provider = ""
+config.app_service_provider = "Miao"
 
 config.gui_preset = {
   default = {
     name = "default",
-    start_page = "_index_default"
+    start_page = "index"
   },
   custom = {
     name = "custom",
-    start_page = "_welcome_bs"
+    start_page = "index"
   }
 }
 
@@ -38,7 +38,7 @@ config.use_terms_checkboxes = {
 
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "/lf"
+config.absolute_base_url = "http://localhost/parelon"
 
 
 -- Connection information for the LiquidFeedback database
@@ -221,6 +221,8 @@ config.enable_debug_trace = true
 
 -- Require Two-Factors Authentication for login
 config.require_2factor = false
+
+config.use_positions = false
 
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)

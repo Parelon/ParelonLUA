@@ -1,3 +1,5 @@
+slot.set_layout("custom")
+
 local suggestion = Suggestion:by_id(param.get_id())
 
 -- redirect to initiative if suggestion does not exist anymore
@@ -23,10 +25,10 @@ app.html_title.subtitle = _("Suggestion ##{id}", { id = suggestion.id })
 
 ui.title(function()
     ui.container {
-        attr = { class = "row-fluid" },
+        attr = { class = "row" },
         content = function()
             ui.container {
-                attr = { class = "span3 text-left" },
+                attr = { class = "col-md-3 text-left" },
                 content = function()
                     ui.link {
                         attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
@@ -34,14 +36,14 @@ ui.title(function()
                         view = "show",
                         id = suggestion.initiative.id,
                         params = { tab = "suggestions" },
-                        image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
+                        image = { attr = { class = "icon-medium" }, static = "svg/arrow-left.svg" },
                         content = _ "Back to previous page"
                     }
                 end
             }
 
             ui.container {
-                attr = { class = "span8 spaceline2 text-center label label-warning" },
+                attr = { class = "col-md-6 spaceline2 text-center label label-warning" },
                 content = function()
                     ui.heading {
                         level = 1,
@@ -51,7 +53,7 @@ ui.title(function()
                 end
             }
             ui.container {
-                attr = { class = "span1 text-center spaceline" },
+                attr = { class = "col-md-2 hidden-xs text-center spaceline" },
                 content = function()
                     ui.field.popover {
                         attr = {
@@ -63,7 +65,7 @@ ui.title(function()
                             class = "text-center"
                         },
                         content = function()
-                            ui.image { static = "png/tutor.png" }
+                            ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
                         end
                     }
                 end

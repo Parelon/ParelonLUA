@@ -1,3 +1,4 @@
+slot.set_layout("custom")
 local initiative_id = param.get_id()
 local resourcesarch = Resource:by_initiative_id_and_type(initiative_id, "archive_url")
 local resourcesopen = Resource:by_initiative_id_and_type(initiative_id, "open_data")
