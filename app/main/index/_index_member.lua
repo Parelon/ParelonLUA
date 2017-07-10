@@ -59,7 +59,6 @@ ui.container {
                   },
                   content = function()
                     ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
---								    ui.heading{level=3 , content= _"What you want to do?"}
                   end
                 }
               end
@@ -112,8 +111,8 @@ ui.container {
       content = function()
         ui.link {
           attr = { class = "btn btn-primary btn-large fixclick" },
-          module = "index",
-          view = "assembly_public",
+          module = "assembly",
+          view = "index",
           content = function()
             ui.heading { level = 3, content = _ "Assemblea Pubblica" }
           end
@@ -134,8 +133,8 @@ ui.container {
       content = function()
         ui.link {
           attr = { class = "btn btn-primary btn-large fixclick" },
-          module = "index",
-          view = "assembly_private",
+          module = "assembly_private",
+          view = "index",
           content = function()
             ui.heading { level = 3, content = _ "Tavoli di lavoro" }
           end

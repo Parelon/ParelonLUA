@@ -18,6 +18,10 @@ function ResourceIssue:by_issue_id_and_type(issue_id, resource_type)
     return self:new_selector():add_where { "issue_id = ? AND type = ?", issue_id, resource_type }:exec()
 end
 
+function Resource:get_video_by_issue_id(issue_id)
+  return self:new_selector():add_where { "issue_id = ? AND type LIKE 'video'", initiative_id }:optional_object_mode():exec()
+end
+
 function ResourceIssue:count(issue_id)
     return self:new_selector():add_where{ "issue_id = ?", issue_id }:count()
 end

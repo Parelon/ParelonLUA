@@ -65,7 +65,6 @@ ui.title(function()
                                 attr = { class = "row" },
                                 content = function()
                                     ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
-                                --								    ui.heading{level=3 , content= _"What you want to do?"}
                                 end
                             }
                         end
@@ -75,33 +74,6 @@ ui.title(function()
         end
     }
 end)
-
---if app.session.member_id and not second_initiative.initiative.revoked then
---    local supporter = Supporter:new_selector():add_where { "member_id = ?", app.session.member_id }:count()
---    if supporter then
---        ui.container {
---            attr = { class = "draft_updated_info" },
---            content = function()
---                slot.put(_ "The draft of this initiative has been updated!")
---                slot.put(" ")
---                ui.link {
---                    text = _ "Refresh support to current draft",
---                    module = "initiative",
---                    action = "add_support",
---                    id = second_initiative.initiative.id,
---                    routing = {
---                        default = {
---                            mode = "redirect",
---                            module = "initiative",
---                            view = "show",
---                            id = second_initiative.initiative.id
---                        }
---                    }
---                }
---            end
---        }
---    end
---end
 
 local first_initiative_content = string.gsub(string.gsub(first_initiative.content, "\n", " ###ENTER###\n"), " ", "\n")
 local second_initiative_content = string.gsub(string.gsub(second_initiative.content, "\n", " ###ENTER###\n"), " ", "\n")

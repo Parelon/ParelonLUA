@@ -221,8 +221,12 @@ config.enable_debug_trace = true
 
 -- Require Two-Factors Authentication for login
 config.require_2factor = false
+-- config.2factor.enable = true
+-- config.2factor.address = ""
 
 config.use_positions = false
+
+config.service = { }
 
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)

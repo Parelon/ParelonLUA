@@ -73,7 +73,6 @@ end
 
 request.set_absolute_baseurl(config.absolute_base_url)
 
-
 -- TODO abstraction
 -- get record by id
 function mondelefant.class_prototype:by_id(id)

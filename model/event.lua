@@ -115,10 +115,6 @@ function Event.object:send_notification()
           body = body .. _("#{name}\n\n", { name = suggestion.name })
         end
 	
---[[	ui.script{ "js/post_event_fb.js" }
-	ui.script{ "post_update('Aggiornamento da Parelon','Aggiornamento da Parelon','https://test.parelon.com/lf/static/logo.png','Prova descrizione','https://test.parelon.com','Prova caption'"}
-]]
-
         local success = net.send_mail{
           envelope_from = config.mail_envelope_from,
           from          = config.mail_from,
@@ -170,15 +166,13 @@ function Event:send_next_notification()
 end
 
 function Event:send_notifications_loop()
-
   while true do
     local did_work = Event:send_next_notification()
     if not did_work then
       print "Sleeping 1 second"
       os.execute("sleep 1")
     end
-  end
-  
+  end  
 end
 
 function Event:send_notifications_once()

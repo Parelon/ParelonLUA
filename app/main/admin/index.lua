@@ -1,29 +1,12 @@
 slot.set_layout("custom")
 
 ui.title(function()
-    ui.container {
-      attr = { class = "row" },
-      content = function()
-        ui.container {
-          attr = { class = "col-md-3 text-left" },
-          content = function()
-            ui.link {
-              attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
-              module = "index",
-              view = "index",
-              image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
-            }
-          end
-        }
-        ui.tag {
-          tag = "strong",
-          attr = { class = "col-md-9 text-center" },
-          content = _ "Admin menu"
-        }
-      end
+    execute.view {
+      module = "admin",
+      view = "_title"
     }
-  end)
+  end
+)
 
 ui.tag {
   tag = "ul",

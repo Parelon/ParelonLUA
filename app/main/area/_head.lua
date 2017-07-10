@@ -1,5 +1,6 @@
 local area = param.get("area", "table")
 local member = param.get("member", "table")
+local create = param.get("create", boolean) or false
 
 local show_content = param.get("show_content", atom.boolean)
 
@@ -8,50 +9,43 @@ if app.session.member_id then
 end
 
 if not param.get("hide_unit", atom.boolean) then
-  execute.view { module = "unit", view = "_head", params = { unit = area.unit, member = member } }
+  execute.view{ module = "unit", view = "_head", params = { unit = area.unit, member = member } }
 end
 
+execute.view{ module = "delegation", view = "_info_bs", params = { area = area, member = member } }
+
 ui.container {
-  attr = { class = "row spaceline" },
+  attr = { class = "col-md-9 spaceline label label-warning" },
   content = function()
-    ui.container {
-      attr = { class = "label label-warning spaceline col-md-8 col-md-offset-2 h1" },
+    ui.link {
+      module = "area",
+      view = "show",
+      params = { create = create },
+      id = area.id,
       content = function()
-        -- area name
-        ui.link {
-          module = "area",
-          view = "show",
-          id = area.id,
-          content = area.name
-        }
+        ui.tag { tag = "h2", content = area.name }
       end
     }
   end
 }
-if show_content then
 
+if show_content then
   ui.container {
-    attr = { class = "row spaceline" },
-    content = function() 
+    attr = { class = "col-md-9 spaceline spaceline-bottom" },
+    content = function()
       -- actions (members with appropriate voting right only)
       if member then
-
         -- membership
         local membership = Membership:by_pk(area.id, member.id)
-
         if membership then
-
           if app.session.member_id == member.id then
-            ui.container {
-              attr = { class = "row" },
-              content = function() end}
-            ui.tag { attr = { class = "label label-success margin_line spaceline" }, content = _ "You are participating in this area" }
-
+            ui.tag { attr = { class = "label label-success spaceline-bottom" }, content = _ "You are participating in this area" }
+            slot.put(" ")
             ui.tag {
               content = function()
                 slot.put("")
                 ui.link {
-                  attr = { class = "label label-inverse margin_line spaceline" },
+                  attr = { class = "label label-inverse spaceline-bottom" },
                   text = _ "Withdraw",
                   module = "membership",
                   action = "update",
@@ -75,7 +69,7 @@ if show_content then
 
         elseif app.session.member_id == member.id and member:has_voting_right_for_unit_id(area.unit_id) then
           ui.link {
-            attr = { class = "btn btn-primary large_btn margin_line text-center spaceline" },
+            attr = { class = "btn btn-primary btn_large margin_line text-center spaceline spaceline-bottom" },
             text = _ "Participate in this area",
             module = "membership",
             action = "update",
@@ -97,34 +91,38 @@ if show_content then
           slot.put("")
           if area.delegation_info.own_delegation_scope ~= "area" then
             ui.link {
-              attr = { class = "btn btn-primary large_btn margin_line text-center spaceline" }, 
-              text = _ "Delegate area", 
-              module = "delegation", 
-              view = "show", 
-              params = { area_id = area.id } }
+              text = _"Delegate area",
+              module = "delegation",
+              view = "show",
+              params = { area_id = area.id },
+              attr = { class = "btn btn-primary btn_large margin_line text-center" }
+            }
           else
             ui.link {
-              attr = { class = "btn btn-primary large_btn margin_line text-center spaceline" }, 
-              text = _ "Change area delegation",
-              module = "delegation", 
-              view = "show", 
-              params = { area_id = area.id } }
+              text = _"Change area delegation",
+              module = "delegation",
+              view = "show",
+              params = { area_id = area.id },
+              attr = { class = "btn btn-primary btn_large margin_line text-center" }
+            }
           end
-          slot.put("")
 
-          ui.link {
-            attr = { class = "btn btn-primary large_btn margin_line text-center spaceline" },
-            content = function()
-              slot.put(_ "Create new issue")
-            end,
-            module = "initiative",
-            view = "new",
-            params = { area_id = area.id }
-          }
-        end                     
+          if create then
+            ui.link {
+              attr = { class = "btn btn-primary btn_large margin_line text-center" },
+              content = function()
+                slot.put(_ "Create new issue")
+              end,
+              module = "wizard",
+              view = "page_bs1",
+              params = { area_id = area.id }
+            }
+          end
+        end
       end
     end
   }
+
 else
-  slot.put("<hr />")
+  slot.put("<br />")
 end

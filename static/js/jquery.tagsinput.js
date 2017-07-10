@@ -38,14 +38,12 @@
             currentWidth = input.width(),
             isValidWidthChange = (newWidth < currentWidth && newWidth >= minWidth)
                 || (newWidth > minWidth && newWidth < maxWidth);
-
         // Animate width
         if (isValidWidthChange) {
             input.width(newWidth);
         }
-
-
     };
+    
     $.fn.resetAutosize = function (options) {
         // alert(JSON.stringify(options));
         var minWidth = $(this).data('minwidth') || options.minInputWidth || $(this).width(),
@@ -182,14 +180,14 @@
             defaultText: 'add a tag',
             minChars: 0,
             width: '300px',
-            height: '100px',
+            height: '100%',
             autocomplete: {selectFirst: false },
             'hide': true,
             'delimiter': ',',
             'unique': true,
             removeWithBackspace: true,
             placeholderColor: '#666666',
-            autosize: true,
+            autosize: false,
             comfortZone: 20,
             inputPadding: 6 * 2
         }, options);

@@ -1,3 +1,4 @@
+error("disabled")
 local issue = param.get("issue", "table")
 local initiatives_selector = param.get("initiatives_selector", "table")
 

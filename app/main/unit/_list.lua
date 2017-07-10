@@ -13,7 +13,7 @@ ui.container {
                         for i = 1, unit.depth - 1 do
                             slot.put("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
                         end
-                        ui.link { text = unit.name, module = "unit", view = "show", id = unit.id }
+                        ui.link { text = unit.name, module = "unit", view = "list_areas", id = unit.id }
                     end
                 }
             }

@@ -1,3 +1,4 @@
+error("disabled")
 local issue = param.get("issue", "table")
 local for_details = param.get("for_details", "boolean") or false
 local initiatives_selector = param.get("initiatives_selector", "table")
@@ -55,7 +56,7 @@ end
 for i, initiative in ipairs(initiatives) do
     execute.view {
         module = "initiative",
-        view = "_list_element_ext2_bs",
+        view = "_list_summary_element",
         params = {
             for_details = for_details,
             initiative = initiative,

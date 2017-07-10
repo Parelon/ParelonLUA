@@ -1,3 +1,4 @@
+error("disabled")
 local initiative = param.get("initiative", "table")
 local selected = param.get("selected", atom.boolean)
 local for_details = param.get("for_details", "boolean") or false

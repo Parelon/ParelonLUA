@@ -22,8 +22,8 @@ tabs[#tabs + 1] = {
     name = "areas",
     label = _ "Units and areas",
     icon = { static = "icons/16/package.png" },
-    module = "index",
-    view = "_member_home",
+    module = "area",
+    view = "_list",
     params = { areas_selector = areas_selector, member = member, for_member = true },
 }
 

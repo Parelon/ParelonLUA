@@ -1,3 +1,4 @@
+error("disabled")
 local initiative = param.get("initiative", "table")
 local selected = param.get("selected", atom.boolean)
 local for_member = param.get("for_member", "table") or app.session.member

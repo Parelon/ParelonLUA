@@ -94,7 +94,7 @@ ui.container {
                 end
                 execute.view {
                   module = "initiative",
-                  view = "_list_ext_bs",
+                  view = "_list_summary",
                   params = {
                     issue = issue,
                     initiatives_selector = initiatives_selector,

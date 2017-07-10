@@ -1,3 +1,5 @@
+error("disabled")
+
 local for_details = param.get("for_details", "boolean") or false
 local init_ord = param.get("init_ord") or "event"
 local list = param.get("list")

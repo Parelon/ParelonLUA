@@ -1,6 +1,7 @@
+error("who are you?!")
 local issue = param.get("issue", "table")
 local initiative_limit = param.get("initiative_limit", atom.integer)
-local for_member = param.get("for_member", "table")
+local for_member = param.get("for_member", "table") or app.session.member
 local for_listing = param.get("for_listing", atom.boolean)
 local for_initiative = param.get("for_initiative", "table")
 local for_initiative_id = for_initiative and for_initiative.id or nil

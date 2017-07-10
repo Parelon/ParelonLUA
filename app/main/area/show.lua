@@ -1,80 +1,147 @@
-slot.set_layout("custom")
-local area = Area:by_id(param.get_id())
+-- TODO: rename in show.lua
 
+slot.set_layout("custom")
+
+local create = param.get("create", atom.boolean) or false
+local area = Area:by_id(param.get_id())
+local state = param.get("state") or "any"
+local scope = param.get("scope") or "all_units"
+local orderby = param.get("orderby") or "creation_date"
+local desc = param.get("desc", atom.boolean) or false
+local interest = param.get("interest") or "any"
+local member = app.session.member
+--local ftl_btns = param.get("ftl_btns", atom.boolean) or false
 
 app.html_title.title = area.name
 app.html_title.subtitle = _("Area")
 
-util.help("area.show")
+ui.title(function()
+    execute.view {
+      module = "area",
+      view = "_show_title",
+      params = { area = area }
+    }
+  end
+)
 
-slot.select("head", function()
-    execute.view { module = "area", view = "_head", params = { area = area, show_content = true, member = app.session.member } }
-end)
-
-local open_issues_selector = area:get_reference_selector("issues"):add_where("issue.closed ISNULL"):add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
-
-local closed_issues_selector = area:get_reference_selector("issues"):add_where("issue.closed NOTNULL"):add_order_by("issue.closed DESC")
-
-local members_selector = area:get_reference_selector("members"):add_where("member.active")
-local delegations_selector = area:get_reference_selector("delegations"):join("member", "truster", "truster.id = delegation.truster_id AND truster.active"):join("member", "trustee", "trustee.id = delegation.trustee_id AND trustee.active")
-
-local tabs = {
-    module = "area",
-    view = "show_tab",
-    static_params = { area_id = area.id },
+execute.view {
+  module = "area",
+  view = "_show_state_filters",
+  params = { area = area, create = create, state = state }
 }
 
-tabs[#tabs + 1] = {
-    name = "timeline",
-    label = _ "Latest events",
-    module = "event",
-    view = "_list",
-    params = { for_area = area }
+
+local selector = area:get_reference_selector("issues")
+
+execute.chunk {
+  module = "issue",
+  chunk = "_filters_ext",
+  params = {
+    state = state,
+    orderby = orderby,
+    desc = desc,
+    interest = interest,
+    selector = selector
+  }
 }
 
-tabs[#tabs + 1] = {
-    name = "open",
-    label = _ "Open issues",
-    module = "issue",
-    view = "_list",
-    params = {
-        for_state = "open",
-        issues_selector = open_issues_selector,
-        for_area = true
-    }
-}
-tabs[#tabs + 1] = {
-    name = "closed",
-    label = _ "Closed issues",
-    module = "issue",
-    view = "_list",
-    params = {
-        for_state = "closed",
-        issues_selector = closed_issues_selector,
-        for_area = true
-    }
-}
+-- Category, used for routing
+local category
 
-if app.session:has_access("all_pseudonymous") then
-    tabs[#tabs + 1] =
-    {
-        name = "members",
-        label = _ "Participants" .. " (" .. tostring(members_selector:count()) .. ")",
-        icon = { static = "icons/16/group.png" },
-        module = "member",
-        view = "_list",
-        params = { members_selector = members_selector }
-    }
+-- This holds issue-oriented description text for shown issues
+local issues_desc
 
-    tabs[#tabs + 1] =
-    {
-        name = "delegations",
-        label = _ "Delegations" .. " (" .. tostring(delegations_selector:count()) .. ")",
-        icon = { static = "icons/16/table_go.png" },
-        module = "delegation",
-        view = "_list",
-        params = { delegations_selector = delegations_selector }
-    }
+if state == "admission" then
+  issues_desc = Issue:get_state_name_for_state('admission')
+elseif state == "development" then
+  issues_desc = _ "Development"
+elseif state == "discussion" then
+  issues_desc = Issue:get_state_name_for_state('discussion')
+elseif state == "voting" then
+  issues_desc = Issue:get_state_name_for_state('voting')
+elseif state == "verification" then
+  issues_desc = Issue:get_state_name_for_state('verification')
+elseif state == "committee" then
+  issues_desc = _"Committee"
+elseif state == "closed" then
+  issues_desc = _ "Closed"
+elseif state == "canceled" then
+  issues_desc = _ "Canceled"
+elseif state == "finished" then
+  issues_desc = _ "Finished"
+elseif state == "finished_with_winner" then
+  issues_desc = _ "Finished (with winner)"
+elseif state == "finished_without_winner" then
+  issues_desc = _ "Finished (without winner)"
+elseif state == "open" then
+  issues_desc = _ "Open"
+elseif state == "any" then
+  issues_desc = _ "Any"
+else
+  issues_desc = _ "Unknown"
 end
 
-ui.tabs(tabs)
+--[[if state == "development" or state == "verification" or state == "discussion" or state == "voting" or state == "committee" then
+  btns = {
+    default_state = 'development',
+    state = { { "discussion", "verification", "voting", "committee" } },
+    default_interest = 'any',
+    interest = { { "any", "not_interested", "interested", "initiated" }, { "supported", "potentially_supported", "voted" } }
+  }
+elseif state == "closed" or state == "canceled" or state == "finished" then
+  btns = {
+    default_state = 'closed',
+    default_interest = 'any',
+    interest = { { "any", "not_interested", "interested", "initiated" }, { "supported", "potentially_supported", "voted" } }
+  }
+elseif state == "admission" then
+  btns = {
+    default_state = 'admission',
+    default_interest = 'any',
+    interest = { { "any", "not_interested", "interested", "initiated" }, { "supported", "potentially_supported", "voted" } }
+  }
+end]]
+
+if state == "development" then
+  execute.chunk {
+    module = "issue",
+    chunk = "_filters_btn2_bs",
+    id = area.id,
+    params = {
+      state = state,
+      orderby = orderby,
+      desc = desc,
+      interest = interest,
+      btns = btns,
+      ftl_btns = ftl_btns
+    }
+  }
+end
+
+execute.view {
+  module = "area",
+  view = "_show_order_filters",
+  params = { area = area, state = state, orderby = orderby, desc = desc }
+}
+
+
+ui.container {
+  attr = { id = "issues_box", class = "row spaceline" },
+  content = function()
+    execute.view {
+      module = "issue",
+      view = "_list",
+      params = {
+        state = state,
+        orderby = orderby,
+        desc = desc,
+        interest = interest,
+        scope = scope,
+        ftl_btns = ftl_btns,
+        issues_selector = selector,
+        view = "area",
+        member = member
+      }
+    }
+  end
+}
