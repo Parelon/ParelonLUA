@@ -1,18 +1,21 @@
-
-ocal list = param.get("list")
+local list = param.get("list")
 
 -- Filtering interest
 if list == 'voted' or list == 'proposals' then
   local selector = Issue:new_selector()
   
-  if list == "voted" then
+if list == "voted" then
     selector:add_where({ "EXISTS(SELECT 1 FROM direct_voter WHERE direct_voter.issue_id = issue.id AND direct_voter.member_id = ?) OR (issue.closed NOTNULL AND EXISTS(SELECT 1 FROM delegating_voter WHERE delegating_voter.issue_id = issue.id AND delegating_voter.member_id = ?)) ", app.session.member_id, app.session.member_id })
     selector:join("direct_voter", nil, { "direct_voter.issue_id = issue.id AND direct_voter.member_id = ?", app.session.member_id })
   else
     selector:join("initiative", nil, "initiative.issue_id = issue.id")
     selector:join("current_draft", nil, { "current_draft.initiative_id = initiative.id AND current_draft.author_id = ?", app.session.member.id })
+    
     selector:add_where("issue.closed ISNULL")
   end
+  
+  selector:join("area", nil, "area.id = issue.area_id")
+  selector:join("unit", nil, "area.unit_id = unit.id AND NOT unit.public")
   
   selector:add_group_by("issue.id")
 

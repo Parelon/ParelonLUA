@@ -2,7 +2,7 @@ local filter = param.get("filter", atom.string)
 local create = param.get("create", atom.boolean) or false
 local id = param.get_id() or 0
 
-local units = app.session.member:get_reference_selector("units"):exec()
+local units = app.session.member:get_reference_selector("units"):add_where("unit.public"):exec()
 
 ui.container {
   attr = { class = "row" },

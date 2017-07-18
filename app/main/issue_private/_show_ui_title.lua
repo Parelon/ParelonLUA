@@ -1,6 +1,6 @@
 local issue = param.get("issue", "table")
 
-local url = request.get_absolute_baseurl() .. "issue/show/" .. tostring(issue.id) .. ".html"
+local url = request.get_absolute_baseurl() .. "issue_private/show/" .. tostring(issue.id) .. ".html"
 local titleWidth = "7"
 local return_view = "show"
 local return_module = "area_private"
@@ -13,10 +13,6 @@ if view == "homepage" then
   return_module = "index"
   return_view = "index"
   return_btn_txt = _ "Back to homepage"
-elseif view == "area" then
-  return_module = "area"
-  return_view = "show"
-  return_btn_txt = _ "Back to issue listing"
 elseif view == "area_private" then
   return_module = "area_private"
   return_view = "show"

@@ -35,7 +35,9 @@ if app.session.member then
   local issues_to_vote_count = selector:count()
   if issues_to_vote_count > 0 then
     notification_links[#notification_links+1] = {
-      module = "index", view = "show_tab",
+      module = "index",
+      view = "show_tab",
+      attr = { class = "btn btn-primary text-center" },
       params = {
         tab = "open", filter = "frozen", filter_interest = "issue", filter_delegation = "direct", filter_voting = "not_voted"
       },
@@ -49,7 +51,7 @@ if app.session.member then
     notification_links[#notification_links + 1] = {
       attr = { class = "btn btn-primary text-center" },
       module = "index",
-      view = "initiator_invites",
+      view = "_initiator_invites",
       text = _("You are invited to #{count} initiative(s)", { count = initiator_invites_count })
     }
   end
@@ -60,15 +62,15 @@ if app.session.member then
     notification_links[#notification_links + 1] = {
       attr = { class = "btn btn-primary text-center" },
       module = "index",
-      view = "updated_drafts",
+      view = "_updated_drafts",
       text = _("New drafts for #{count} initiative(s) you are supporting", { count = updated_drafts_count })
     }
   end
 
   if #notification_links > 0 then
-    ui.container {
-      attr = { class = "notifications spaceline-bottom" },
-      content = function()
+--    ui.container {
+--      attr = { class = "notifications" },
+--      content = function()
         ui.tag {
           tag = "ul",
           attr = { class = "notifications" },
@@ -83,7 +85,7 @@ if app.session.member then
             end
           end
         }
-      end
-    }
+--      end
+--    }
   end
 end

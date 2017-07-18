@@ -1,4 +1,4 @@
-if app.session.member == nil then
+if not app.session.member then
   slot.put_into('error', _'You need to log in.')
   request.redirect{
     module = "index",

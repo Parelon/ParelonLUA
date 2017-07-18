@@ -13,6 +13,9 @@ if list == 'voted' or list == 'proposals' then
     selector:add_where("issue.closed ISNULL")
   end
   
+  selector:join("area", nil, "area.id = issue.area_id")
+  selector:join("unit", nil, "area.unit_id = unit.id AND unit.public")
+  
   selector:add_group_by("issue.id")
 
   selector:limit(25)
