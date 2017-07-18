@@ -181,7 +181,3 @@ function Event:send_notifications_once()
         did_work = Event:send_next_notification()
     until not did_work
 end
-
-function Event:test()
-	execute.view { module = "index", view = "post_update_fb" }
-end

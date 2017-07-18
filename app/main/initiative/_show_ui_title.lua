@@ -19,7 +19,7 @@ if app.session.member_id ~= nil then
     return_id = issue.area_id
   elseif view == "area_private" then
     return_module = "area_private"
-    return_view = "show_ext_bs"
+    return_view = "show"
     return_btn_txt = _ "Back to issue listing"
     return_id = issue.area_id
   end
@@ -44,7 +44,7 @@ ui.container {
     }
 
     ui.container {
-      attr = { class = "col-md-7 col-md-offset-1  col-sm-7 col-xs-12 spaceline" },
+      attr = { class = "col-md-7 col-md-offset-1 col-sm-6 col-xs-12 spaceline" },
       content = function()
         ui.container {
           attr = { class = "label label-warning" },
@@ -86,7 +86,6 @@ ui.container {
     ui.container {
       attr = { class = "col-md-6 col-md-offset-1 col-xs-12 col-sm-12" },
       content = function()
-
         ui.heading { level = 6, attr = { class = "" }, content = _ "Issue link (copy the link and share to the web):" }
         slot.put("<input id='issue_url_box' type='text' value=" .. url .. ">")
       end

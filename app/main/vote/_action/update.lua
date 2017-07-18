@@ -121,7 +121,7 @@ if not move_down and not move_up then
         slot.put_into("notice", "Vote casted.")
         request.redirect {
             module = "issue",
-            view = "show_ext_bs",
+            view = "show",
             id = issue.id
         }
     end

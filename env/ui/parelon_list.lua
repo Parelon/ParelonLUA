@@ -85,7 +85,7 @@ function ui.parelon_list(args)
                     if header_existent then
                         ui.tag {
                             tag = head_tag,
-                            attr = { class = "ui_list_head row-fluid" },
+                            attr = { class = "ui_list_head row" },
                             content = function()
                                 local function header_content()
                                     for idx, column in ipairs(columns) do
@@ -117,9 +117,9 @@ function ui.parelon_list(args)
                             for record_idx, record in ipairs(records) do
                                 local row_class
                                 if record_idx % 2 == 0 then
-                                    row_class = "ui_list_row ui_list_even row-fluid"
+                                    row_class = "ui_list_row ui_list_even row"
                                 else
-                                    row_class = "ui_list_row ui_list_odd row-fluid"
+                                    row_class = "ui_list_row ui_list_odd row"
                                 end
                                 ui.tag {
                                     tag = row_tag,

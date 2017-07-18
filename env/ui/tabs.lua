@@ -16,7 +16,7 @@ function ui.tabs(tabs)
                                 attr = { class = "row" },
                                 content = function()
                                     ui.container {
-                                        attr = { class = "col-md-11" },
+                                        attr = { class = "span11" },
                                         content = function()
                                             for i, tab in ipairs(tabs) do
                                                 local params = param.get_all_cgi()

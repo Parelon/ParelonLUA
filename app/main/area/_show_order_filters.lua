@@ -50,7 +50,7 @@ ui.container {
               ui.link {
                 attr = { class = "col-md-3 text-center btn btn-primary h3 filter_btn fixclick" .. btna },
                 module = "area",
-                view = "show_ext_bs",
+                view = "show",
                 id = area.id,
                 params = { create = create, state = state, orderby = "supporters", interest = interest, desc = desc },
                 content = 
@@ -62,7 +62,7 @@ ui.container {
             ui.link {
               attr = { class = "col-md-3 text-center btn btn-primary filter_btn fixclick" .. btnb },
               module = "area",
-              view = "show_ext_bs",
+              view = "show",
               id = area.id,
               params = { state = state, orderby = "creation_date", interest = interest, desc = desc, ftl_btns = ftl_btns },
               content = function()
@@ -72,7 +72,7 @@ ui.container {
             ui.link {
               attr = { class = "col-md-3 text-center btn btn-primary filter_btn fixclick" .. btnc },
               module = "area",
-              view = "show_ext_bs",
+              view = "show",
               id = area.id,
               params = { create = create, state = state, orderby = "supporters", interest = interest, desc = desc },
               content = function()
@@ -84,7 +84,7 @@ ui.container {
               attr = { class = "spaceline spaceline-bottom col-md-offset-1 col-md-2 text-center btn btn-primary filter_btn_filter fixclick" .. btnd },
               text = inv_txt,
               module = "area",
-              view = "show_ext_bs",
+              view = "show",
               id = area.id,
               params = { create = create, state = state, orderby = "supporters", interest = interest, desc = desc },
             }

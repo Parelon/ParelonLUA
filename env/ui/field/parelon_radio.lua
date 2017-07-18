@@ -38,6 +38,7 @@ function ui.field.parelon_radio(args)
         attr.checked = nil
     end
     ui.container {
+    	 attr = { class = "col-md-8 col-md-offset-2 text-left" },
         label_attr = args.label_attr,
         content = function()
             ui.tag { tag = "input", attr = attr }

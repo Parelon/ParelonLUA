@@ -54,7 +54,7 @@ ui.form {
   method = "post",
   attr = { id = 'page3' },
   module = 'wizard',
-  view = 'page12',
+  view = 'page_summary',
   params = {
     issue_id = issue_id,
     area_id = area.id,

@@ -28,7 +28,7 @@ ui.title(
 
 execute.view { module = "unit", view = "_list_areas_partnership_filters", id = id, params = { filter = filter, create = create } }
 
-execute.view { module = "unit", view = "_list_areas_unit_filters", id = id, params = { create = create, filters = filters, unit_selector = unit_selector } }
+execute.view { module = "unit", view = "_list_areas_unit_filters", id = id, params = { create = create, filter = filter, unit_selector = unit_selector } }
         
  ui.container {
   attr = { class = "row" },

@@ -47,7 +47,7 @@ ui.container {
                         ui.link {
                           attr = { class = classNew },
                           module = "area",
-                          view = "show_ext_bs",
+                          view = "show",
                           params = { create = create, state = "admission", orderby = orderby, interest = interest, desc = desc },
                           id = area.id,
                           content = function()
@@ -63,7 +63,7 @@ ui.container {
                         ui.link {
                           attr = { class = classDiscussion },
                           module = "area",
-                          view = "show_ext_bs",
+                          view = "show",
                           params = { create = create, state = "development", orderby = orderby, interest = interest, desc = desc },
                           id = area.id,
                           content = function()
@@ -79,7 +79,7 @@ ui.container {
                         ui.link {
                           attr = { class = classClosed },
                           module = "area",
-                          view = "show_ext_bs",
+                          view = "show",
                           params = { create = create, state = "closed", orderby = orderby, interest = interest, desc = desc },
                           id = area.id,
                           content = function()

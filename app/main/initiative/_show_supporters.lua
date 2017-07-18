@@ -37,16 +37,6 @@ if members_selector:count() > 0 then
       end
     }
   end
-
-  execute.view {
-    module = "member",
-    view = "_list",
-    params = {
-      initiative = initiative,
-      members_selector = members_selector,
-      paginator_name = "supporters"
-    }
-  }
 else
   if issue.fully_frozen then
     ui.container {
@@ -82,3 +72,18 @@ else
     }
   end
 end
+
+ui.container {
+  attr = { class = "row well" },
+  content = function()
+    execute.view {
+      module = "member",
+      view = "_list",
+      params = {
+        initiative = initiative,
+        members_selector = members_selector,
+        paginator_name = "supporters"
+      }
+    }
+  end
+}

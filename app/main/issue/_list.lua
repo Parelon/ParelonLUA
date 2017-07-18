@@ -21,7 +21,7 @@ ui.add_partial_param_names {
   "issue_list"
 }
 
---[[local filters = execute.load_chunk {
+local filters = execute.load_chunk {
   module = "issue",
   chunk = "_filters.lua",
   params = {
@@ -32,7 +32,7 @@ ui.add_partial_param_names {
   }
 }
 
-filters.content = function()]]
+filters.content = function()
   ui.paginate {
     per_page = tonumber(param.get("per_page") or 25),
     selector = issues_selector,
@@ -62,7 +62,7 @@ filters.content = function()]]
       }
     end
   }
---[[end
+end
 
 filters.opened = true
 filters.selector = issues_selector
@@ -71,4 +71,4 @@ if param.get("no_filter", atom.boolean) then
   filters.content()
 else
   ui.filters(filters)
-end]]
+end

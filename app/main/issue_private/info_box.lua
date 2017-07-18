@@ -44,11 +44,9 @@ end
     content = function()
 			ui.tag {
 				 content = function()
-
 				  slot.put(event_name or "")
 				 end
 			}
-
     end
 }
 ui.tag {

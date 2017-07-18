@@ -86,13 +86,6 @@ ui.container {
       params = { issue = initiative.issue }
 
     }
-    if app.session.member_id then
-      execute.view {
-        module = "initiative",
-        view = "_show_actions",
-        params = { initiative = initiative, issue = issue, initiator = initiator }
-      }
-    end
 
     execute.view {
       module = "initiative",
@@ -102,7 +95,7 @@ ui.container {
 
     execute.view {
       module = "initiative",
-      view = "_show_attachments",
+      view = "_show_resources",
       params = { initiative = initiative, initiator = initiator }
     }
 
@@ -112,6 +105,14 @@ ui.container {
       params = { initiative = initiative }
     }
 
+    if app.session.member_id then
+      execute.view {
+        module = "initiative",
+        view = "_show_actions",
+        params = { initiative = initiative, issue = issue, initiator = initiator }
+      }
+    end
+
     if app.session:has_access("authors_pseudonymous") then
       execute.view {
         module = "initiative",
@@ -119,6 +120,12 @@ ui.container {
         params = { initiative = initiative, initiators = initiators }
       }
     end
+
+    execute.view {
+      module = "initiative",
+      view = "_show_keywords",
+      params = { initiative = initiative }
+    }
 
     execute.view {
       module = "initiative",
@@ -151,7 +158,7 @@ ui.container {
         params = { issue = issue }
       }
     end
-    
+
     execute.view {
       module = "initiative",
       view = "_details",

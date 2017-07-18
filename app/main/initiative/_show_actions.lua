@@ -43,7 +43,7 @@ if not issue.closed and not initiative.revoked then
   }
 
   if issue.state ~= "voting" then
-
+    
     ui.container {
       attr = { class = "row text-center well-inside" },
       content = function()
@@ -53,17 +53,16 @@ if not issue.closed and not initiative.revoked then
             ui.container {
               attr = { class = "row text-center" },
               content = function()
-
                 ui.heading {
-                  level = 3,
+                  level = 1,
                   attr = { class = "col-md-3 spaceline spaceline-bottom" },
                   content = _"Actions: "
                 }
                 ui.container {
-                  attr = { class = "vertical col-md-9" },
+                  attr = { class = "vertical col-md-9 text-right" },
                   content = function()
                     ui.container {
-                      attr = { class = "spaceline spaceline-bottom" },
+                      attr = { class = "spaceline-bottom" },
                       content = function()
                         execute.view {
                           module = "supporter",
@@ -73,13 +72,13 @@ if not issue.closed and not initiative.revoked then
                       end
                     }
                     ui.container {
-                      attr = { class = "row spaceline spaceline-bottom" },
+                      attr = { class = "row spaceline" },
                       content = function()
                         ui.container {
                           attr = { class = "col-md-12" },
                           content = function()
                             ui.link {
-                              attr = { target="_blank", class = "btn btn-primary btn_size_fix fixclick" },
+                              attr = { target="_blank", class = "btn btn-primary btn_size_fix fixclick text-center" },
                               module = "suggestion",
                               view = "new",
                               params = { initiative_id = initiative.id },
@@ -99,20 +98,20 @@ if not issue.closed and not initiative.revoked then
     }
 
     ui.container {
-      attr = { class = "row spaceline spaceline-bottom well-inside" },
+      attr = { class = "row spaceline spaceline-bottom well" },
       content = function()
         ui.container {
           attr = { class = "col-md-5" },
           content = function()
             ui.heading {
-              level = 3,
+              level = 1,
               attr = { class = "spaceline spaceline-bottom" },
               content = _ "As initiator you can also do: "
             }
           end
         }
         ui.container {
-          attr = { class = "col-md-7" },
+          attr = { class = "col-md-7 text-right" },
           content = function()
             if initiator and initiator.accepted and not initiative.issue.fully_frozen and not initiative.issue.closed and not initiative.revoked then
               ui.link {
@@ -272,4 +271,3 @@ if not issue.closed and not initiative.revoked then
     end
   end
 end
-

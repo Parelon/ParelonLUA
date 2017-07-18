@@ -69,6 +69,15 @@ ui.form {
     }
     ui.field.text { label = _ "Name", name = "name" }
     ui.field.text { label = _ "Description", name = "description", multiline = true }
+
+--    ui.container {
+--      attr = { class = "row" },
+--      content = function()
+--        ui.field.image { field_name = "unit_avatar", label = _ "Unit avatar" }
+--        slot.put_into("data", unit.unit_avatar)
+--      end
+--    }
+    
     ui.field.boolean { label = _ "Active?", name = "active" }
     ui.field.boolean { label = _ "Public?", name = "public" }
 

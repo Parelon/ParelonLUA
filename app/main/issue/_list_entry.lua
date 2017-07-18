@@ -35,44 +35,48 @@ end
 local svgz = ""
 --local svgz = "z"
 ui.container {
-  attr = { class = "col-md-12 well-blue" },
+  attr = { class = "col-md-12 well" },
   content = function()
     ui.container {
       attr = { class = "row" },
       content = function()
         ui.container {
-          attr = { class = "col-md-12 text-center" },
+          attr = { class = "col-md-12 label label-warning text-center" },
           content = function()
-            ui.link {
-              content = function()
-                ui.heading { attr = { class = "label label-warning" },level = 1, content = "Questione o Problema N° " .. issue.id .. " - " .. (issue.title or _ "No title for this issue") }
-              end
-            } 
+            ui.heading {level = 3, content = "Questione o Problema N° " .. issue.id .. " : " }
+            ui.heading {level = 1, content = (issue.title and issue.title or _ "No title for this issue") }
           end
         }
       end
-    }    
+    }
+    ui.container {
+      attr = { class = "row spaceline spaceline-bottom" },
+      content = function()
+        local image = issue.state
+        if issue.state == "finished_without_winner" or issue.state == "finished_with_winner" then
+          image = "finished"
+        elseif issue.state == "canceled_no_initiative_admitted" then
+          image = "delete"
+        end
+        ui.image { attr = { class = "col-md-1 col-md-offset-1 icon-medium label-notice" }, static = "png/" .. image ..".png" }
+
+        ui.heading {
+          attr = { class = "col-md-10 text-center", style = "font-style: italic" },
+          level = 5,
+          content = function()
+            if issue.brief_description == "" then
+              slot.put(_ "Issue without abstract")
+            else
+              slot.put(issue.brief_description)
+            end
+          end          
+        }
+      end
+    }
+
     ui.container {
       attr = { class = "row" },
       content = function()
-        ui.container {
-          attr = { class = "row spaceline hidden-xs hidden-sm" },
-          content = function()
-            ui.container {
-              attr = { class = "col-md-7" },
-              content = function()
-                ui.heading { level = 3, attr = { class = "label label-warning-tbox" }, content = "Breve descrizione" }
-              end
-            }
-
-            ui.container {
-              attr = { class = "row" },
-              content = function()
-                ui.tag { tag = "p", attr = { class = "col-md-12 well-inside paper" }, content = issue.brief_description or _ "No description available" }
-              end
-            }
-          end
-        }		
         ui.container {
           attr = { class = "col-md-12" },
           content = function()
@@ -82,7 +86,7 @@ ui.container {
           end
         }
         ui.container {
-          attr = { class = "row" },
+          attr = { class = "row spaceline-bottom" },
           content = function()
             ui.container {
               attr = { class = "col-md-12 well-inside paper" },
@@ -95,8 +99,8 @@ ui.container {
                 execute.view {
                   module = "initiative",
                   view = "_list_summary",
+                  id = issue.id,
                   params = {
-                    issue = issue,
                     initiatives_selector = initiatives_selector,
                     highlight_initiative = for_initiative,
                     highlight_string = highlight_string,
@@ -104,7 +108,8 @@ ui.container {
                     limit = (for_listing or for_initiative) and 5 or nil,
                     hide_more_initiatives = false,
                     limit = 10,
-                    for_member = for_member
+                    for_member = for_member,
+                    for_details = false -- must be FALSE
                   }
                 }
               end
@@ -112,7 +117,7 @@ ui.container {
           end
         }
         ui.container {
-          attr = { class = "row" },
+          attr = { class = "row spaceline-bottom" },
           content = function()
             ui.link {
               attr = { id = "issue_see_det_" .. issue.id, class = "col-md-12 text-center" },
@@ -130,7 +135,7 @@ ui.container {
                 ftl_btns = ftl_btns
               },
               content = function()
-                ui.heading { level = 3, attr = { class = "btn btn-primary large_btn" }, content = _ "SEE DETAILS" }
+                ui.heading { level = 3, attr = { class = "btn btn-primary large_btn" }, content = _ "Read" }
               end
             }
           end

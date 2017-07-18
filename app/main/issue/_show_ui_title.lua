@@ -1,10 +1,14 @@
 local issue = param.get("issue", "table")
 
-local url = request.get_absolute_baseurl() .. "issue/show_ext_bs/" .. tostring(issue.id) .. ".html"
-
+local url = request.get_absolute_baseurl() .. "issue/show/" .. tostring(issue.id) .. ".html"
+local titleWidth = "7"
 local return_view = "show"
 local return_module = "area"
 local return_btn_txt = _ "Back to previous page"
+if not app.session.member then
+  titleWidth = "11"
+end
+
 if view == "homepage" then
   return_module = "index"
   return_view = "index"
@@ -15,17 +19,17 @@ elseif view == "area" then
   return_btn_txt = _ "Back to issue listing"
 elseif view == "area_private" then
   return_module = "area_private"
-  return_view = "show_ext_bs"
+  return_view = "show"
   return_btn_txt = _ "Back to issue listing"
 end
 
 ui.container {
   attr = { class = "row" },
   content = function()
-    ui.container {
-      attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center" },
-      content = function()
-        if app.session.member then
+    if app.session.member then
+      ui.container {
+        attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center" },
+        content = function()
           ui.link {
             attr = { class = "btn btn-primary fixclick btn-back h2" },
             module = return_module,
@@ -36,10 +40,10 @@ ui.container {
             content = return_btn_txt
           }
         end
-      end
-    }
+      }
+    end
     ui.container {
-      attr = { class = "col-md-8 col-sm-8 col-xs-12 text-center label label-warning spaceline"},
+      attr = { class = "col-md-" .. titleWidth .. " col-sm-8 col-xs-12 text-center label label-warning spaceline"},
       content = function()
         ui.container {
           content = function()

@@ -9,7 +9,7 @@ end
 
 local class = ""
 if for_details then
-  class = "well-inside paper"
+--  class = "well-inside paper"
 end
 
 local function round(num, idp)
@@ -25,7 +25,24 @@ ui.container {
         ui.container {
           attr = { class = "row" },
           content = function()
-            local span = 2
+
+            ui.container {
+              attr = { class = "col-md-1 col-xs-1 col-sm-1" },
+              content = function()
+                if initiative.revoked then
+                  ui.container {
+                    attr = { class = "vertical" },
+                    content = function()
+                      ui.image { attr = { class = "icon-small" }, static = "png/delete.png" }
+                      slot.put(_ "Revoked by authors")
+                    end
+                  }
+                elseif initiative.issue.fully_frozen and initiative.issue.closed or initiative.admitted == false then
+                  ui.field.rank { attr = { class = "rank" }, value = initiative.rank, eligible = initiative.eligible }
+                end
+              end
+            }
+
             if for_details and app.session.member then
               -- Get member checked events for initiative
               local checked_events = Event:new_selector():join("checked_event", nil, "checked_event.event_id = event.id"):add_where { "checked_event.member_id = ?", for_member.id }:exec()
@@ -48,50 +65,67 @@ ui.container {
               local unchecked_events = Event:new_selector():add_where { "event.initiative_id = ? AND event.occurrence > ? AND event.id NOT IN (" .. chkids .. ")", initiative.id, app.session.member.activated }:exec()
 
               ui.container {
-                attr = { class = "col-md-3 col-xs-12 col-sm-6 text-center" },
+                attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" },
                 content = function()
-                  ui.link {
-                    attr = { class = "btn btn-primary btn_read_initiative" },
-                    module = "initiative",
-                    id = initiative.id,
-                    view = "show",
+                  ui.container {
+                    attr = { class = "row" },
                     content = function()
-                      if #unchecked_events > 0 then
-                        ui.container {
-                          attr = { class = "event_star_out_box" },
-                          content = function()
+                      local class
+                      if initiative.revoked then
+                        class = "revoked"
+                      end
+                      ui.heading {
+                        level = 1,
+                        attr = { class = class },
+                        content = function()
+                          if #unchecked_events > 0 then
                             ui.container {
-                              attr = { class = "event_star_in_box" },
+                              attr = { class = "event_star_out_box", style = "position: absolute; z-index: 1" },
                               content = function()
-                                if #unchecked_events == 1 and unchecked_events[1].event == "initiative_created_in_new_issue" then
-                                  ui.container {
-                                    attr = { class = "event_star_txt_box" },
-                                    content = function()
-                                      ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = "Nuovo" }
+                                ui.container {
+                                  attr = { class = "event_star_in_box" },
+                                  content = function()
+                                    if #unchecked_events == 1 and unchecked_events[1].event == "initiative_created_in_new_issue" then
+                                      ui.container {
+                                        attr = { class = "event_star_txt_box" },
+                                        content = function()
+                                          ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = _"New" }
+                                        end
+                                      }
+                                      ui.image { attr = { class = "event_star" }, static = "svg/event_star_green.svg" }
+                                    else
+                                      ui.container {
+                                        attr = { class = "event_star_txt_box" },
+                                        content = function()
+                                          ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = #unchecked_events .. " " .. _ "Events" }
+                                        end
+                                      }
+                                      ui.image {
+                                        attr = { class = "event_star", style = "z-index: 2" },
+                                        static = "svg/event_star_red.svg"
+                                      }
                                     end
-                                  }
-                                  ui.image { attr = { class = "event_star" }, static = "svg/event_star_green.svg" }
-                                else
-                                  ui.container {
-                                    attr = { class = "event_star_txt_box" },
-                                    content = function()
-                                      ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = #unchecked_events .. " Eventi" }
-                                    end
-                                  }
-                                  ui.image { attr = { class = "event_star" }, static = "svg/event_star_red.svg" }
-                                end
+                                  end
+                                }
                               end
                             }
                           end
-                        }
-                      end
-                      ui.heading {
-                        level = 3,
-                        attr = { class = "" },
-                        content = function()
-                          slot.put(_ "Read Initiative I" .. initiative.id)
+                          local name = (initiative.title or _"Initiative without title")
+                          local class = ""
+                          if initiative.name_highlighted then
+                            name = encode.highlight(initiative.name_highlighted)
+                          else
+                            name = encode.html(initiative.shortened_name)
+                          end
+                          slot.put(name)
                         end
                       }
+                    end
+                  }
+                  ui.container {
+                    attr = { class = "row" },
+                    content = function()
+                      ui.heading { level = 5, attr = { class = "col-md-12", style = "font-style: italic;" }, content = (initiative.brief_description or _"Initiative without abstract") }
                     end
                   }
                 end
@@ -99,11 +133,51 @@ ui.container {
               -- Check events
               execute.action { module = "event", action = "check", params = { unchecked_events = unchecked_events, member_id = for_member.id } }
             else
-              span = 4
+              ui.container {
+                attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" },
+                content = function()
+                  ui.container {
+                    attr = { class = "row" },
+                    content = function()
+                      local class
+                      if initiative.revoked then
+                        class = "revoked"
+                      end
+                      ui.heading {
+                        level = 1,
+                        attr = { class = class },
+                        content = function()                         
+                          local name = (initiative.title or _"Initiative without title")
+                          local class = ""
+                          if initiative.name_highlighted then
+                            name = encode.highlight(initiative.name_highlighted)
+                          else
+                            name = encode.html(initiative.shortened_name)
+                          end
+                          slot.put(name)
+                        end
+                      }
+                    end
+                  }
+                  ui.container {
+                    attr = { class = "row" },
+                    content = function()
+                      ui.heading { level = 5, attr = { class = "col-md-12", style = "font-style: italic;" }, content = function()
+                          if initiative.brief_description == "" then
+                            slot.put(_"Initiative without abstract")
+                          else
+                            slot.put(initiative.brief_description)
+                          end
+                        end
+                      }
+                    end
+                  }
+                end
+              }
             end
 
             ui.container {
-              attr = { class = "col-xs-12 col-sm-6 col-md-offset-1 col-md-" .. span .. "" },
+              attr = { class = "col-xs-12 col-sm-6 col-md-3" },
               content = function()
                 if initiative.issue.fully_frozen and initiative.issue.closed then
                   if initiative.negative_votes and initiative.positive_votes then
@@ -185,59 +259,23 @@ ui.container {
                       pot_supp_txt = _ "Potential supporters"
                     end
 
-                    ui.heading { level = 6, attr = { class = "votes_count_txt" }, content = a .. " " .. supp_txt }
-                    ui.heading { level = 6, attr = { class = "votes_count_txt" }, content = "(" .. b .. " " .. pot_supp_txt .. ")" }
+                    ui.heading { level = 6, attr = { class = "votes_count_txt", style ="font-size: small;" }, content = a .. " " .. supp_txt }
+                    ui.heading { level = 6, attr = { class = "votes_count_txt", style ="font-size: small;" }, content = "(" .. b .. " " .. pot_supp_txt .. ")" }
                   end
                 end
               end
             }
 
             ui.container {
-              attr = { class = "col-md-4 col-sm-offset-1 col-xs-11 col-sm-10 spaceline" },
+              attr = { class = "col-md-2 text-center" },
               content = function()
---                ui.link {
---                  content = function()
-                    local name
-                    if initiative.name_highlighted then
-                      name = encode.highlight(initiative.name_highlighted)
-                    else
-                      name = encode.html(initiative.shortened_name)
-                    end
-                    ui.heading {
-                      level = 3,
-                      content = function()
-                        local class = ""
-                        if initiative.revoked then
-                          class = "revoked"
-                        end
-                        if for_details then
-                          ui.tag { tag = "strong", attr = { class = class }, content = name }
-                        else
-                          ui.tag { tag = "strong", attr = { class = class }, content = "p" .. initiative.id .. ": " .. name }
-                        end
-                      end
-                    }
---                  end,
---                  module = "initiative",
---                  view = "show",
---                  id = initiative.id
---                }
-              end
-            }
-            ui.container {
-              attr = { class = "col-md-1 col-xs-1 col-sm-1" },
-              content = function()
-                if initiative.revoked then
-                  ui.container {
-                    attr = { class = "vertical" },
-                    content = function()
-                      ui.image { attr = { class = "icon-small" }, static = "png/delete.png" }
-                      slot.put(_ "Revoked by authors")
-                    end
-                  }
-                elseif initiative.issue.fully_frozen and initiative.issue.closed or initiative.admitted == false then
-                  ui.field.rank { attr = { class = "rank" }, value = initiative.rank, eligible = initiative.eligible }
-                end
+                ui.link {
+                  attr = { class = "btn btn-primary btn-mini" },
+                  module = "initiative",
+                  view = "show",
+                  id = initiative.id,
+                  content = _ "Read"
+                }
               end
             }
           end

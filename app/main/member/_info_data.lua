@@ -1,21 +1,20 @@
 local member = Member:by_id(param.get_id())
-if app.session:has_access("all_pseudonymous") then
-  ui.container {
-    attr = { class = "col-md-2 text-center" },
-    content = function()
-      execute.view {
-        module = "member_image",
-        view = "_show",
-        params = {
-          member = member,
-          image_type = "photo",
-          show_dummy = true,
-          class = "img-responsive"
-        }
+
+ui.container {
+  attr = { class = "col-md-2 text-center" },
+  content = function()
+    execute.view {
+      module = "member_image",
+      view = "_show",
+      params = {
+        member = member,
+        image_type = "photo",
+        show_dummy = true,
+        class = "img-responsive"
       }
-    end
-  }
-end
+    }
+  end
+}
 ui.container {
   attr = { class = "col-md-4 col-md-offset-1" },
   content = function()
@@ -79,8 +78,8 @@ ui.container {
         ui.anchor {
           attr = {
             href = "#",
-            class = "btn btn-primary large-btn spaceline3 disabled"--,
-            --onclick = "document.getElementById(\"false_identity\").submit();"
+            class = "btn btn-primary large-btn spaceline3",
+            onclick = "document.getElementById(\"false_identity\").submit();"
           },
           content = function()
             ui.heading { level = 3, attr = { class = "" }, content = _ "Report false identity" }

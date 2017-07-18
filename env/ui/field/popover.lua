@@ -3,7 +3,7 @@ function ui.field.popover(args)
         attr = args.attr.div_attr or nil,
         content = function()
             attr = table.new()
-            attr["datatoggle"] = "popover"
+            attr["data-toggle"] = "popover"
 
             if args.attr.datacontent then
                 attr["data-content"] = args.attr.datacontent

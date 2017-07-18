@@ -199,19 +199,10 @@ end
 
 -- * all_units
 -- * my_units
--- * citizens   ? ma che vuol dire?
--- * electeds   ? ma che vuol dire?
--- * others     ? ma che vuol dire?
 
 if scope == "my_units" then
     selector:join("area", nil, "area.id = issue.area_id")
     selector:join("privilege", nil, { "privilege.unit_id = area.unit_id AND privilege.member_id = ? AND privilege.voting_right", member.id })
-    --elseif scope == "electeds" then
-    --  selector:join("area", nil, {"area.id = issue.area_id AND area.unit_id = ?",config.gui_preset["custom"].units["eletti"].unit_id})
-    --elseif scope == "citizens" then
-    --  selector:join("area", nil, {"area.id = issue.area_id AND area.unit_id = ?",config.gui_preset["custom"].units["cittadini"].unit_id})
-    --elseif scope == "others" then
-    --  selector:join("area", nil, {"area.id = issue.area_id AND area.unit_id = ?",config.gui_preset["custom"].units["altri_gruppi"].unit_id})
 end
 
 -- Checking orderby

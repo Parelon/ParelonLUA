@@ -338,8 +338,8 @@ end
 slot.put_into("notice", _ "Initiative successfully created")
 
 request.redirect {
-    module = "issue_private",
-    view = "show_ext_bs",
+    module = "issue",
+    view = "show",
     params = { view = "homepage" },
     id = issue.id
 }

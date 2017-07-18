@@ -36,46 +36,18 @@ else
     end
   }
 end
-if members_selector:count() > 0 then
-  execute.view {
-    module = "member",
-    view = "_list",
-    params = {
-      initiative = initiative,
-      members_selector = members_selector,
-      paginator_name = "potential_supporters"
-    }
-  }
-else
-  if issue.fully_frozen then
-    ui.container {
-      attr = { class = "row well-inside paper" },
-      content = function()
-        ui.container {
-          attr = { class = "col-md-12" },
-          content = function()
-            ui.heading {
-              level = 4,
-              content = _ "No potential supporters (before begin of voting)"
-            }
-          end
-        }
-      end
-    }
-  else
-    ui.container {
-      attr = { class = "row well-inside paper" },
-      content = function()
-        ui.container {
-          attr = { class = "col-md-12" },
-          content = function()
-            ui.heading {
-              level = 4,
-              content = _ "No potential supporters"
-            }
-          end
-        }
-      end
+
+ui.container {
+  attr = { class = "row well" },
+  content = function()
+    execute.view {
+      module = "member",
+      view = "_list",
+      params = {
+        initiative = initiative,
+        members_selector = members_selector,
+        paginator_name = "potential_supporters"
+      }
     }
   end
-end
+}

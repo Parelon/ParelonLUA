@@ -17,16 +17,6 @@ ui.container {
     ui.container {
       attr = { class = "col-md-12 well" },
       content = function()
---        ui.container {
---          attr = { class = "row" },
---          content = function()
---            ui.tag {
---              tag = "h3",
---              attr = { class = "col-md-12 text-center" },
---              content = _ "THEMATIC AREAS"
---            }
---          end
---        }
         ui.container {
           attr = { class = "row text-center" },
           content = function()
@@ -37,7 +27,6 @@ ui.container {
                   attr = { class = btn1 },
                   module = "unit",
                   view = "list_areas",
-                  id = id,
                   params = { create = create },
                   content = function()
                     ui.heading { level = 3, content = _ "SHOW ALL AREAS" }
@@ -52,10 +41,9 @@ ui.container {
                   attr = { class = btn2 },
                   module = "unit",
                   view = "list_areas",
-                  id = id,
                   params = { filter = "my_areas", create = create },
                   content = function()
-                    ui.heading { level = 3, content = _ "SHOW ONLY PARTECIPATED AREAS" }
+                    ui.heading { level = 3, content = _ "MY FAVOURITE AREAS" }
                   end
                 }
               end

@@ -33,7 +33,6 @@ else
 end
 
 -- local class = 
-
 ui.container {
     attr = { class = "phases_in_box " },
     content = function()
@@ -57,7 +56,6 @@ ui.container {
         }
     end
 }
-
 ui.script { static = "js/jquery.sizes.js" }
 ui.script { static = "js/jquery.scalebar.js" }
 ui.script { script = "jQuery('.phasesbar_autoresize').scalebar(); " }

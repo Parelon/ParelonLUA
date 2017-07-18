@@ -10,55 +10,59 @@ execute.view {
   view = "_positions"
 }
 
-ui.container {
-  attr = { class = "row" },
-  content = function()
+ui.title(
+  function()
     ui.container {
-      attr = { class = "row slot_head" },
+      attr = { class = "row" },
       content = function()
         ui.container {
-          attr = { class = "col-md-5 col-md-offset-1 col-xs-12 col-sm-12 well-inside paper text-center" },
+          attr = { class = "row" },
           content = function()
             ui.container {
+              attr = { class = "col-md-5 col-md-offset-1 col-xs-12 col-sm-12 well-inside paper text-center" },
               content = function()
-                ui.heading {
-                  level = 1,
+                ui.container {
                   content = function()
-                    slot.put(_("Welcome <strong>#{realname}</strong>.", { realname = (member.realname ~= "" and member.realname or member.login) }))
+                    ui.heading {
+                      level = 1,
+                      content = function()
+                        slot.put(_("Welcome <strong>#{realname}</strong>.", { realname = (member.realname ~= "" and member.realname or member.login) }))
+                      end
+                    }
                   end
                 }
               end
             }
-          end
-        }
-        ui.container {
-          attr = { class = "col-md-6 spaceline hidden-xs hidden-sm" },
-          content = function()
             ui.container {
-              attr = { class = "col-md-8 text-right spaceline" },
+              attr = { class = "col-md-6 spaceline hidden-xs hidden-sm" },
               content = function()
-                ui.heading { level = 2, content = "La prima volta? clicca qui:"}
-              end
-            }
-            ui.container {
-              attr = { class = "col-md-2 text-left" },
-              content = function()
-                ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
-              end
-            }
-            ui.container {
-              attr = { class = "col-md-2 text-center " },
-              content = function()
-                ui.field.popover {
-                  attr = {
-                    dataplacement = "left",
-                    datahtml = "true";
-                    datatitle = _ "Box di aiuto per la pagina",
-                    datacontent = _ "<p class='spaceline-bottom'>Se sei su queste pagine per la prima volta, BENVENUTO! Per poter comprendere e navigare nei contenuti di Parelon, in ogni box troverai l'icona di aiuto, che ti supporterà con suggerimenti e tutorial, anche video. In questo breve tutorial, i primi passi su Parelon.</p><br>".."<iframe width='560' height='315' src='https://www.youtube.com/embed/videoseries?list=PLLVi3WpqQgKQY0SARzvwvhNr46NkuIDWm' frameborder='0' allowfullscreen></iframe>".." Se vuoi vedere tutti i tutorial sia testuali che video vai qui:<br><a class ='btn btn-primary large_btn fixclick spaceline spaceline-bottom'  href='https://www.parelon.com/?project=primo-accesso&lang=it' target='_blank'><h3>Vai ai Tutorial</h3></a>",
-                    class = "text-center"
-                  },
+                ui.container {
+                  attr = { class = "col-md-8 text-right spaceline" },
                   content = function()
-                    ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
+                    ui.heading { level = 2, content = "La prima volta? clicca qui:"}
+                  end
+                }
+                ui.container {
+                  attr = { class = "col-md-2 text-left" },
+                  content = function()
+                    ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
+                  end
+                }
+                ui.container {
+                  attr = { class = "col-md-2 text-center " },
+                  content = function()
+                    ui.field.popover {
+                      attr = {
+                        dataplacement = "left",
+                        datahtml = "true";
+                        datatitle = _ "Box di aiuto per la pagina",
+                        datacontent = _ "<p class='spaceline-bottom'>Se sei su queste pagine per la prima volta, BENVENUTO! Per poter comprendere e navigare nei contenuti di Parelon, in ogni box troverai l'icona di aiuto, che ti supporterà con suggerimenti e tutorial, anche video. In questo breve tutorial, i primi passi su Parelon.</p><br>".."<iframe width='560' height='315' src='https://www.youtube.com/embed/videoseries?list=PLLVi3WpqQgKQY0SARzvwvhNr46NkuIDWm' frameborder='0' allowfullscreen></iframe>".." Se vuoi vedere tutti i tutorial sia testuali che video vai qui:<br><a class ='btn btn-primary large_btn fixclick spaceline spaceline-bottom'  href='https://www.parelon.com/?project=primo-accesso&lang=it' target='_blank'><h3>Vai ai Tutorial</h3></a>",
+                        class = "text-center"
+                      },
+                      content = function()
+                        ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
+                      end
+                    }
                   end
                 }
               end
@@ -67,9 +71,31 @@ ui.container {
         }
       end
     }
+    ui.container {
+      attr = { class = "row spaceline" },
+      content = function()
+        ui.heading {
+          level = 2,
+          attr = { class = "col-md-8 text-right spaceline" },
+          content = function()
+            slot.put(_ "You are an auditor. This means that you can manage members in the Auditor Panel")
+          end
+        }
+        ui.container {
+          attr = { class = "col-md-3 col-md-offset-1" },
+          content = function()
+            ui.link {
+              module = "auditor",
+              view = "index",
+              attr = { class = "btn btn btn-primary btn-large" },
+              content = _ "Auditor Panel"
+            }
+          end
+        }
+      end
+    }
   end
-}
-
+)
 -- inizio icone
 ui.container {
   attr = { class = "row" },

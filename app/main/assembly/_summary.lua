@@ -55,18 +55,21 @@ if list == 'voted' or list == 'proposals' then
                   ui.container {
                     attr = { class = "row" },
                     content = function()
-                      local issues = selector:exec()
-                      if #issues > 0 then
-                        for i, issue in ipairs(issues) do
+--                      local issues = selector:exec()
+--                      if #issues > 0 then
+--                        for i, issue in ipairs(issues) do
                           execute.view {
-                            module = "assembly",
-                            view = "_issue_box",
-                            params = { issue = issue }
+                            module = "issue",
+                            view = "_list",
+                            params = {
+                              issues_selector = selector,
+                              no_filter = true
+                            }
                           }                      
-                        end
-                      else
-                        ui.heading{ level = 4, content = "Nothing to show" }
-                      end
+--                        end
+--                      else
+--                        ui.heading{ level = 4, content = "Nothing to show" }
+--                      end
                     end
                   }
                 end

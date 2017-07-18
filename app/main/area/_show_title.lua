@@ -8,8 +8,9 @@ ui.container {
       content = function()
         ui.link {
           attr = { class = "btn btn-primary text-center fixclick btn-back" },
-          module = "assembly",
-          view = "index",
+          module = "unit",
+          view = "list_areas",
+          id = area.unit.id,
           image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
           content = _ "Back to previous page"
         }

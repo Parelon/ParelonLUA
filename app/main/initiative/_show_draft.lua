@@ -89,8 +89,8 @@ ui.container {
                 ui.link {
                   attr = { class = "col-md-offset-7 btn btn-primary col-md-2 text-center" },
                   content = _ "Edit draft",
-                  module = "wizard",
-                  view = "page_bs9",
+                  module = "draft",
+                  view = "new",
                   mode = "put",
                   params = {
                     draft_id = initiative.current_draft.id,

@@ -27,41 +27,40 @@ local routing = {
 if not initiative.issue.fully_frozen and not initiative.issue.closed then
   if supporter then
     ui.container {
-      attr = { class = "row spaceline spaceline-bottom" },
+      attr = { class = "row spaceline text-right" },
       content = function()
         if not supporter:has_critical_opinion() then
           ui.container {
-            attr = { class = "col-md-8" },
+            attr = { class = "col-md-9" },
             content = function()
               ui.image {
                 attr = { style = "height: 70px" },
                 static = "png/thumb_up.png"
               }
               if initiative.issue.closed then
-                slot.put(_ "You were supporter")
+                slot.put("&nbsp;&nbsp;&nbsp;", _ "You were supporter", "&nbsp;&nbsp;&nbsp;")
               else
-                slot.put(_ "You are supporter")
+                slot.put("&nbsp;&nbsp;&nbsp;", _ "You are supporter", "&nbsp;&nbsp;&nbsp;")
               end
             end
           }
         else
           ui.container {
-            attr = { class = "col-md-8 potential_supporter" },
+            attr = { class = "col-md-9 potential_supporter" },
             content = function()
               ui.image {
                 static = "thumb_up.png"
               }
               if initiative.issue.closed then
-                slot.put(_ "You were potential supporter")
+                slot.put("&nbsp;&nbsp;&nbsp;",_ "You were potential supporter", "&nbsp;&nbsp;&nbsp;")
               else
-                slot.put(_ "You are potential supporter")
+                slot.put("&nbsp;&nbsp;&nbsp;",_ "You are potential supporter", "&nbsp;&nbsp;&nbsp;")
               end
             end
           }
         end
-        --slot.put(" (")
         ui.link {
-          attr = { class = "col-md-3 label label-inverse fixclick spaceline" },
+          attr = { class = "col-md-3 label label-inverse fixclick text-center" },
           text = _ "Withdraw",
           module = "initiative",
           action = "remove_support",
@@ -77,12 +76,12 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
       attr = { class = "row spaceline spaceline-bottom" },
       content = function()
         ui.container {
-          attr = { class = "col-md-12 text-center" },
+          attr = { class = "col-md-12" },
           content = function()
             local params = param.get_all_cgi()
             params.dyn = nil
             ui.link {
-              attr = { class = "btn btn-primary btn_size_fix fixclick h3" },
+              attr = { class = "btn btn-primary btn_size_fix fixclick h3 text-center" },
               text = _ "Support this initiative",
               module = "initiative",
               action = "add_support",
@@ -90,7 +89,6 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
               routing = routing,
               partial = partial
             }
-            slot.put(" ")
           end
         }
       end
@@ -107,12 +105,9 @@ if not initiative.issue.closed then
         attr = { class = "col-md-12" },
         content = function()
           if ignored_initiative then
-            ui.tag {
-              content = _ "You don't want updates"
-            }
-            --    slot.put(" (")
+            slot.put("&nbsp;&nbsp;&nbsp;", _ "You don't want updates", "&nbsp;&nbsp;&nbsp;")
             ui.link {
-              attr = { class = "btn btn-primary btn_size_fix fixclick h3" },
+              attr = { class = "text-center btn btn-primary btn_size_fix fixclick h3" },
               text = _ "Receive updates",
               module = "initiative",
               action = "update_ignore",
@@ -128,10 +123,9 @@ if not initiative.issue.closed then
                 }
               }
             }
-            --    slot.put(")")
           else
             ui.link {
-              attr = { class = "btn btn-primary btn_size_fix fixclick h3" },
+              attr = { class = "text-center btn btn-primary btn_size_fix fixclick h3" },
               text = _ "Mute updates",
               module = "initiative",
               action = "update_ignore",

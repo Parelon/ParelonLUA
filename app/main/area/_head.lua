@@ -1,6 +1,6 @@
 local area = param.get("area", "table")
 local member = param.get("member", "table")
-local create = param.get("create", boolean) or false
+local create = param.get("create", atom.boolean) or false
 
 local show_content = param.get("show_content", atom.boolean)
 
@@ -38,7 +38,7 @@ if show_content then
         -- membership
         local membership = Membership:by_pk(area.id, member.id)
         if membership then
-          if app.session.member_id == member.id then
+          if app.session.member_id == member.id and not create then
             ui.tag { attr = { class = "label label-success spaceline-bottom" }, content = _ "You are participating in this area" }
             slot.put(" ")
             ui.tag {
@@ -67,7 +67,7 @@ if show_content then
             ui.tag { content = _ "Member is participating in this area" }
           end
 
-        elseif app.session.member_id == member.id and member:has_voting_right_for_unit_id(area.unit_id) then
+        elseif app.session.member_id == member.id and member:has_voting_right_for_unit_id(area.unit_id) and not create then
           ui.link {
             attr = { class = "btn btn-primary btn_large margin_line text-center spaceline spaceline-bottom" },
             text = _ "Participate in this area",
@@ -86,7 +86,7 @@ if show_content then
           }
         end
 
-        if app.session.member_id == member.id and app.session.member:has_voting_right_for_unit_id(area.unit_id) then
+        if app.session.member_id == member.id and app.session.member:has_voting_right_for_unit_id(area.unit_id) and not create then
 
           slot.put("")
           if area.delegation_info.own_delegation_scope ~= "area" then
@@ -114,7 +114,7 @@ if show_content then
                 slot.put(_ "Create new issue")
               end,
               module = "wizard",
-              view = "page_bs1",
+              view = "page1",
               params = { area_id = area.id }
             }
           end

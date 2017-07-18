@@ -12,7 +12,7 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "row" },
+      attr = { class = "row well" },
       content = function()
         execute.view {
           module = "member",
