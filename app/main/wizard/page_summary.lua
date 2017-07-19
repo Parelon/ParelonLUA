@@ -13,33 +13,9 @@ local initiative_title = param.get("initiative_title", atom.string) or ""
 local initiative_brief_description = param.get("initiative_brief_description", atom.string) or ""
 local draft = param.get("draft", atom.string) or ""
 local technical_areas = param.get("technical_areas", atom.string)
-local proposer1 = param.get("proposer1", atom.boolean) or true
-local proposer2 = param.get("proposer2", atom.boolean) or true
-local proposer3 = param.get("proposer3", atom.boolean) or true
 local resource = param.get("resource", atom.string)
 local sociallink = param.get("sociallink", atom.string)
 local archivecloud = param.get("archivecloud", atom.string)
-
--- trace di controllo sui valori dei parametri
-trace.debug("issue_id: " .. tostring(issue_id))
-trace.debug("draft_id: " .. tostring(draft_id))
-trace.debug("area_id: " .. tostring(area.id))
-trace.debug("policy_id: " .. tostring(policy_id))
-trace.debug("issue_title: " .. issue_title)
-trace.debug("issue_brief_description: " .. issue_brief_description)
-trace.debug("issue_keywords: " .. (issue_keywords and issue_keywords or ""))
-trace.debug("problem_description: " .. problem_description)
-trace.debug("aim_description: " .. aim_description)
-trace.debug("initiative_title: " .. initiative_title)
-trace.debug("initiative_brief_description: " .. initiative_brief_description)
-trace.debug("draft: " .. draft)
-trace.debug("technical_areas: " .. (technical_areas and technical_areas or ""))
-trace.debug("proposer1: " .. tostring(proposer1))
-trace.debug("proposer2: " .. tostring(proposer2))
-trace.debug("proposer3: " .. tostring(proposer3))
-trace.debug("resource: " .. (resource and resource or "none"))
-trace.debug("sociallink: " .. (sociallink and sociallink or "none"))
-trace.debug("archivecloud: " .. (archivecloud and archivecloud or "none"))
 
 local action = "create"
 local action_params = {
@@ -55,9 +31,6 @@ local action_params = {
   initiative_brief_description = initiative_brief_description,
   draft = draft,
   technical_areas = technical_areas,
-  proposer1 = proposer1,
-  proposer2 = proposer2,
-  proposer3 = proposer3,
   formatting_engine = "rocketwiki",
   resource = resource,
   sociallink = sociallink,
@@ -78,9 +51,6 @@ local back_params = {
   initiative_brief_description = initiative_brief_description,
   draft = draft,
   technical_areas = technical_areas,
-  proposer1 = proposer1,
-  proposer2 = proposer2,
-  proposer3 = proposer3,
   resource = resource,
   archivecloud = archivecloud,
   sociallink = sociallink
@@ -110,9 +80,6 @@ if draft_id ~= 0 then
     content = draft,
     draft = draft,
     technical_areas = technical_areas,
-    proposer1 = proposer1,
-    proposer2 = proposer2,
-    proposer3 = proposer3,
     formatting_engine = "rocketwiki",
     resource = resource,
     sociallink = sociallink,
@@ -133,9 +100,6 @@ if draft_id ~= 0 then
     initiative_brief_description = initiative_brief_description,
     draft = draft,
     technical_areas = technical_areas,
-    proposer1 = proposer1,
-    proposer2 = proposer2,
-    proposer3 = proposer3,
     resource = resource,
     sociallink = sociallink,
     archivecloud = archivecloud
@@ -175,53 +139,61 @@ ui.form {
       params = { area = area, policy_id = policy_id, disable = disable }
     }
 
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_issue_title",
-      params = { issue_title = issue_title }
+    ui.container {
+      attr = { class = "well-blue" },
+      content = function()
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_issue_title",
+          params = { issue_title = issue_title }
+        }
+
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_issue_abstract",
+          params = { issue_brief_description = issue_brief_description }
+        }
+
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_issue_description",
+          params = { problem_description = problem_description }
+        }
+
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_issue_aim",
+          params = { aim_description = aim_description }
+        }
+
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_issue_keywords",
+          params = { issue_keywords = issue_keywords }
+        }
+      end
     }
 
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_issue_abstract",
-      params = { issue_brief_description = issue_brief_description }
-    }
+    ui.container {
+      attr = { class = "well" },
+      content = function()
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_initiative_title",
+          params = { initiative_title = initiative_title }
+        }
 
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_issue_description",
-      params = { problem_description = problem_description }
-    }
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_initiative_abstract",
+          params = { initiative_brief_description = initiative_brief_description }
+        }
 
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_issue_aim",
-      params = { aim_description = aim_description }
-    }
-
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_issue_keywords",
-      params = { issue_keywords = issue_keywords }
-    }
-
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_initiative_title",
-      params = { initiative_title = initiative_title }
-    }
-
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_initiative_abstract",
-      params = { initiative_brief_description = initiative_brief_description }
-    }
-
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_initiative_draft",
-      params = { draft = draft }
-    }
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_initiative_draft",
+          params = { draft = draft }
+        }
 
 --    execute.view {
 --      module = "wizard",
@@ -233,10 +205,12 @@ ui.form {
 --      }
 --    }
 
-    execute.view {
-      module = "wizard",
-      view = "_page_summary_technical_keywords",
-      params = { technical_areas = technical_areas }
+        execute.view {
+          module = "wizard",
+          view = "_page_summary_technical_keywords",
+          params = { technical_areas = technical_areas }
+        }
+      end
     }
 
     -- Pulsanti
@@ -370,4 +344,4 @@ ui.form {
 
 ui.script { static = "js/jquery.tagsinput.js" }
 ui.script { script = "$('#issue_keywords').tagsInput({'height':'0%','width':'96%','defaultText':'" .. _ "Add a keyword" .. "','maxChars' : 20});" }
-ui.script { script = "$('#technical_areas').tagsInput({'height':'0%','width':'96%','defaultText':'" .. _ "Add a keyword" .. "','maxChars' : 20});" }
+ui.script { script = "$('#initiative_keywords').tagsInput({'height':'0%','width':'96%','defaultText':'" .. _ "Add a keyword" .. "','maxChars' : 20});" }

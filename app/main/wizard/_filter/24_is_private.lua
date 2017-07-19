@@ -1,7 +1,7 @@
 local id = param.get("area_id", atom.integer)
 if id then
   local area = Area:by_id(id)
-  if not unit.public then
+  if not area.unit.public then
     request.redirect {
       module = "wizard_private",
       view = request.get_view(),

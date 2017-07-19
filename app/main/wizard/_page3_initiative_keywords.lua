@@ -1,71 +1,123 @@
-local technical_areas = param.get("technical_areas", atom.string)
-
 ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 well" },
+      attr = { class = "col-md-12" },
       content = function()
         ui.container {
-          attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "false" },
-          content = function()
+          attr = { class = "panel panel-default"},
+          content = function()	  
             ui.container {
-              attr = { class = "panel panel-default"},
-              content = function()	  
+              attr = {
+                class = "row",
+                role = "tab",
+                id = "headingInitiativeKeywords"
+              },
+              content = function()
                 ui.container {
-                  attr = { class = "label label-accordion", role="tab", id="headingFive"},
-                  content = function()						                     
-                    ui.heading { 
-                      level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#technical_areas-panel", ariaexpanded="true", ariacontrols="technical_areas-panel"},  
-                    }	
-                    ui.image { static = "png/arrow-down-icon.png" }
-                    ui.link {content = _ "PAROLE CHIAVE"}
-                  end
-                }
-                ui.container {
-                  attr = { id="technical_areas-panel", class="panel-collapse collapse", role ="tabpanel", arialabelledby="headingFive"},
+                  attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class="panel-body"},
+                      attr = { class = "col-md-2 text-center" },
                       content = function()
-                        -- Descrizione del problema
-                        ui.container {
-                          attr = { class = "row" },
+                        ui.tag {
+                          tag = "a",
+                          attr = {
+                            class = "btn btn-primary btn-large",
+                            target = "_blank",
+                            onclick = "collapseAll(); $('#initiative_draft').collapse('show');"
+                          },
+                          content = _"Back"
+                        }
+                      end
+                    }
+                    ui.container {
+                      attr = { class = "col-md-8 text-center" },
+                      content = function()
+                        ui.heading { 
+                          level = 3,
+                          attr = {
+                            datatoggle = "collapse",
+                            class = "label label-accordion panel-title btn",
+                            href = "#initiative_keywords",
+                            ariaexpanded = "true",
+                            ariacontrols = "initiative_keywords",
+                            onclick = "collapseAll(); $('#initiative_keywords').collapse('show')"
+                          },
                           content = function()
-                            ui.container {
-                              attr = { class = "col-md-12 text-left" },
-                              content = function()
-                                ui.tag { tag = "p", content = _"Suggerisci competenze in materia tecnica, sociale, finanziaria, impatto ambientale e pianificazione delle risorse, per es: Psicologo, Commercialista, economista, muratore. " }
-                              end
-                            }
-                            ui.container {
-                              attr = { class = "col-md-12" },
-                              content = function()
-                                ui.tag {
-                                  tag = "textarea",
-                                  attr = {
-                                    id = "technical_areas",
-                                    name = "technical_areas",
-                                    class = "tagsinput",
-                                    style = "resize:none;",
-                                    placeholder = _ "Add a keyword"
-                                  },
-                                  content = technical_areas or ""
-                                }
-                              end
+                            ui.image { static = "png/arrow-down-icon.png" }
+                            slot.put(_ "Keywords")
+                          end
+                        }
+                      end
+                    }
+
+--                    ui.container {
+--                      attr = { class = "col-md-2 text-center" },
+--                      content = function()
+--                        ui.tag {
+--                          tag = "a",
+--                          attr = {
+--                            class = "btn btn-primary btn-large",
+--                            target = "_blank",
+--                            onclick = "collapseAll(); $('#initiative_keywords').collapse('show');"
+--                          },
+--                          content = _"Next"
+--                        }
+--                      end
+--                    }
+                  end
+                }
+              end
+            }
+
+            ui.container {
+              attr = {
+                id = "initiative_keywords",
+                class = "panel-collapse collapse",
+                role = "tabpanel",
+                arialabelledby = "headingInitiativeKeywords"
+              },
+              content = function()
+                ui.container {
+                  attr = { class="panel-body"},
+                  content = function()
+                    -- Descrizione del problema
+                    ui.container {
+                      attr = { class = "row" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "col-md-12 text-left" },
+                          content = function()
+                            ui.tag { tag = "p", content = _"Suggerisci competenze in materia tecnica, sociale, finanziaria, impatto ambientale e pianificazione delle risorse, per es: Psicologo, Commercialista, economista, muratore. " }
+                          end
+                        }
+                        ui.container {
+                          attr = { class = "col-md-12" },
+                          content = function()
+                            ui.tag {
+                              tag = "textarea",
+                              attr = {
+                                id = "technical_areas",
+                                name = "technical_areas",
+                                class = "tagsinput",
+                                style = "resize:none;",
+                                placeholder = _ "Add a keyword"
+                              },
+                              content = param.get("technical_areas", atom.string) or ""
                             }
                           end
                         }
                       end
-                    }   
+                    }
                   end
-                }					                    
+                }   
               end
-            }
-          end 
+            }					                    
+          end
         }
-      end
-    }   
+      end 
+    }
   end
 }
 

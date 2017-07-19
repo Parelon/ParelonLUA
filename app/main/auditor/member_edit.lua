@@ -1,6 +1,6 @@
 slot.set_layout("custom")
-local id = param.get_id()
-local member = Member:by_id(id)
+local id = param.get_id() or 0
+local member = Member:by_id(id) or nil
 
 ui.container {
   attr = { class = "row" },

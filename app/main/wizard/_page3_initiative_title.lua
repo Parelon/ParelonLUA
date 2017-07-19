@@ -1,53 +1,92 @@
-local initiative_title = param.get("initiative_title")
-
 ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 well" },
+      attr = { class = "col-md-12" },
       content = function()
+
         ui.container {
-          attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "true" },
-          content = function()
+          attr = { class = "panel panel-default"},
+          content = function()	  
+
             ui.container {
-              attr = { class = "panel panel-default"},
-              content = function()	  
+              attr = {
+                class = "row",
+                role = "tab",
+                id = "headingInitiativeTitle"
+              },
+              content = function()
                 ui.container {
-                  attr = { class = "label label-accordion", role="tab", id="headingOne"},
-                  content = function()						                     
-                    ui.heading { 
-                      level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#initiative_title", ariaexpanded="true", ariacontrols="initiative_title"},  
-                    }
-                    ui.image { static = "png/arrow-down-icon.png" }
-                    ui.link {content = _ "TITOLO PROPOSTA"}
-                  end
-                }
-                ui.container {
-                  attr = { id="initiative_title", class="panel-collapse collapse in",  role="tabpanel", arialabelledby="headingOne"},
+                  attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class="panel-body"},
+                      attr = { class = "col-md-8 col-md-offset-2 text-center" },
                       content = function()
-                        -- Descrizione del problema
-                        ui.container {
-                          attr = { class = "row" },
+                        ui.heading { 
+                          level = 3,
+                          attr = {
+                            datatoggle = "collapse",
+                            class = "label label-accordion panel-title btn",
+                            href = "#initiative_title",
+                            ariaexpanded = "true",
+                            ariacontrols = "initiative_title",
+                            onclick = "collapseAll(); $('#initiative_title').collapse('show')"
+                          },
                           content = function()
-                            ui.container {
-                              attr = { class = "col-md-12" },
-                              content = function()
-                                ui.field.text {
-                                  attr = { id = "initiative_title", style = " font-size: 25px;" },
-                                  name = "initiative_title",
-                                  value = initiative_title or ""
-                                }
-                              end
+                            ui.image { static = "png/arrow-down-icon.png" }
+                            slot.put(_ "Title")
+                          end
+                        }
+                      end
+                    }
+
+                    ui.container {
+                      attr = { class = "col-md-2 text-center" },
+                      content = function()
+                        ui.tag {
+                          tag = "a",
+                          attr = {
+                            class = "btn btn-primary btn-large",
+                            target = "_blank",
+                            onclick = "collapseAll(); $('#initiative_abstract').collapse('show');"
+                          },
+                          content = _"Next"
+                        }
+                      end
+                    }
+                  end
+                }
+              end
+            }
+
+            ui.container {
+              attr = {
+                id = "initiative_title",
+                class = "panel-collapse collapse in",
+                role = "tabpanel",
+                arialabelledby = "headingInitiativeTitle"
+              },
+              content = function()
+                ui.container {
+                  attr = { class="panel-body"},
+                  content = function()
+                    -- Descrizione del problema
+                    ui.container {
+                      attr = { class = "row" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "col-md-12" },
+                          content = function()
+                            ui.field.text {
+                              name = "initiative_title",
+                              value = param.get("initiative_title", atom.string) or ""
                             }
                           end
                         }
                       end
-                    }   
+                    }
                   end
-                }
+                }   
               end
             }
           end

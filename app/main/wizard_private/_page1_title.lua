@@ -8,7 +8,7 @@ ui.container {
       content = function()
         ui.link {
           attr = { id = "btnPreviuos", class = "btn btn-primary btn-back spaceline spaceline-bottom fixclick" },
-          module = "unit_private",
+          module = "unit",
           view = "list_areas",
           params = { create = true, filter = "my_areas" },
           id = area.unit.id,
@@ -25,7 +25,7 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 well-inside paper col-sm-12 col.xs.12" },
+      attr = { class = "col-md-6 col-sm-12 col-xs-12" },
       content = function()
         ui.container {
           attr = { class = "row" },

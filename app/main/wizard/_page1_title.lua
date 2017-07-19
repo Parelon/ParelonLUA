@@ -25,7 +25,7 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 well-inside paper col-sm-12 col.xs.12" },
+      attr = { class = "col-md-6 col-sm-12 col-xs-12" },
       content = function()
         ui.container {
           attr = { class = "row" },

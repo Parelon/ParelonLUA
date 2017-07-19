@@ -6,7 +6,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 well" },
+      attr = { class = "col-md-12" },
       content = function()
         ui.container {
           attr = { class = "row" },

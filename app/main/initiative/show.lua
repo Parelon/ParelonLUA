@@ -1,13 +1,3 @@
---local initiative = Initiative:by_id(param.get_id())
---local issue = initiative.issue
---local area = issue.area
---local unit = area.unit
-
---execute.view {
---    module = "initiative",
---    view = "_show_bs"
---}
-
 slot.set_layout("custom")
 
 local initiative = Initiative:by_id(param.get_id())

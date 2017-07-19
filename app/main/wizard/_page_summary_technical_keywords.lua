@@ -4,7 +4,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 well" },
+      attr = { class = "col-md-12" },
       content = function()
         ui.container {
           attr = { class = "row" },
@@ -29,7 +29,7 @@ ui.container {
                     ui.tag {
                       tag = "textarea",
                       attr = {
-                        id = "technical_areas",
+                        id = "initiative_keywords",
                         name = "technical_areas",
                         class = "tagsinput",
                         style = "resize:none;"

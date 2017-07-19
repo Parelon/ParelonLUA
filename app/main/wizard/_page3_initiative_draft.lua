@@ -1,70 +1,121 @@
-local draft = param.get("draft")
-
 ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 well"},
+      attr = { class = "col-md-12"},
       content = function()
         ui.container {
-          attr = { class = "panel-group", id = "accordion", role = "tablist", ariamultiselectable = "true" },
-          content = function()
+          attr = { class = "panel panel-default"},
+          content = function()	  
+
             ui.container {
-              attr = { class = "panel panel-default"},
-              content = function()	  
+              attr = {
+                class = "row",
+                role = "tab",
+                id = "headingInitiativeDraft"
+              },
+              content = function()
                 ui.container {
-                  attr = { class = "label label-accordion", role="tab", id="headingThree"},
-                  content = function()						                     
-                    ui.heading { 
-                      level = 3, attr = { datatoggle="collapse", class = "panel-title", href="#draft", ariaexpanded="true", ariacontrols="draft"},  
-                    }
-                    ui.image { static = "png/arrow-down-icon.png" }
-                    ui.link {content = _ " TESTO DELLA PROPOSTA"}
-                  end
-                }
-                ui.container {
-                  attr = { id="draft", class="panel-collapse collapse",  role="tabpanel", arialabelledby="headingThree"},
+                  attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class="panel-body"},
+                      attr = { class = "col-md-2 text-center" },
+                      content = function()
+                        ui.tag {
+                          tag = "a",
+                          attr = {
+                            class = "btn btn-primary btn-large",
+                            target = "_blank",
+                            onclick = "collapseAll(); $('#initiative_abstract').collapse('show');"
+                          },
+                          content = _"Back"
+                        }
+                      end
+                    }
+                    ui.container {
+                      attr = { class = "col-md-8 text-center" },
+                      content = function()
+                        ui.heading { 
+                          level = 3,
+                          attr = {
+                            datatoggle = "collapse",
+                            class = "label label-accordion panel-title btn",
+                            href = "#initiative_draft",
+                            ariaexpanded = "true",
+                            ariacontrols = "initiative_draft",
+                            onclick = "collapseAll(); $('#initiative_draft').collapse('show')"
+                          },
+                          content = function()
+                            ui.image { static = "png/arrow-down-icon.png" }
+                            slot.put(_ "Draft")
+                          end
+                        }
+                      end
+                    }
+
+                    ui.container {
+                      attr = { class = "col-md-2 text-center" },
+                      content = function()
+                        ui.tag {
+                          tag = "a",
+                          attr = {
+                            class = "btn btn-primary btn-large",
+                            target = "_blank",
+                            onclick = "collapseAll(); $('#initiative_keywords').collapse('show');"
+                          },
+                          content = _"Next"
+                        }
+                      end
+                    }
+                  end
+                }
+              end
+            }
+
+            ui.container {
+              attr = {
+                id = "initiative_draft",
+                class = "panel-collapse collapse",
+                role = "tabpanel",
+                arialabelledby = "headingInitiativeDraft"
+              },
+              content = function()
+                ui.container {
+                  attr = { class="panel-body"},
+                  content = function()
+                    ui.container {
+                      attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "row" },
+                          attr = { class = "col-md-10 text-left" },
                           content = function()
-                            ui.container {
-                              attr = { class = "col-md-10 text-left" },
-                              content = function()
-                                ui.tag { tag = "p", content = "Gli articoli i commi ed i riferimenti normativi della Tua proposta di soluzione al problema o questione sollevata" }
-                              end
-                            }	
---                            ui.container {
---                              attr = { class = "col-md-2 text-right" },
---                              content = function()
---                                ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
---                                slot.put(_ "Esporta")	
---                              end
---                            }	
-                            ui.container {
-                              attr = { class = "col-md-12 issue_desc" },
-                              content = function()
-                                ui.tag {
-                                  tag = "textarea",
-                                  attr = { id = "draft", name = "draft", style = "height:250px; resize:none;" },
-                                  content = draft or ""
-                                }
-                              end
+                            ui.tag { tag = "p", content = "Gli articoli i commi ed i riferimenti normativi della Tua proposta di soluzione al problema o questione sollevata" }
+                          end
+                        }
+
+                        ui.container {
+                          attr = { class = "col-md-12 issue_desc" },
+                          content = function()
+                            ui.tag {
+                              tag = "textarea",
+                              attr = {
+                                name = "draft",
+                                rows = "10",
+                                style = "resize:none;"
+                                },
+                              content = param.get("draft", atom.string) or ""
                             }
                           end
                         }
                       end
-                    }   
+                    }
                   end
-                }					                    
+                }   
               end
-            }
-          end 
+            }					                    
+          end
         }
-      end
+      end 
     }
   end
 }

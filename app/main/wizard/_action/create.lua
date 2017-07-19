@@ -22,26 +22,6 @@ local resource = param.get("resource")
 local sociallink = param.get("sociallink", atom.string)
 local archivecloud = param.get("archivecloud", atom.string)
 
-trace.debug("issue_id: " .. tostring(issue_id))
-trace.debug("area_id: " .. tostring(area_id))
-trace.debug("unit_id: " .. tostring(unit_id))
-trace.debug("policy_id: " .. tostring(policy_id))
-trace.debug("issue_title: " .. issue_title)
-trace.debug("issue_brief_description: " .. issue_brief_description)
-trace.debug("issue_keywords: " .. issue_keywords)
-trace.debug("problem_description: " .. problem_description)
-trace.debug("aim_description: " .. aim_description)
-trace.debug("initiative_title: " .. initiative_title)
-trace.debug("initiative_brief_description: " .. initiative_brief_description)
-trace.debug("draft: " .. draft_text)
-trace.debug("technical_areas: " .. tostring(technical_areas))
-trace.debug("proposer1: " .. tostring(proposer1))
-trace.debug("proposer2: " .. tostring(proposer2))
-trace.debug("proposer3: " .. tostring(proposer3))
-trace.debug("sociallink: " .. (sociallink and sociallink or "none"))
-trace.debug("archivecloud: " .. (archivecloud and archivecloud or "none"))
-trace.debug("resource: " .. (resource and resource or "none"))
-
 if area_id then
   area = Area:by_id(area_id)
   if not area.active then
@@ -128,7 +108,7 @@ if not issue then
   if policy.polling then
     issue.accepted = 'now'
     issue.state = 'discussion'
-    initiative.polling = true
+--    initiative.polling = true
 
     if policy.free_timeable then
       local free_timing_string = util.trim(param.get("free_timing"))
@@ -171,24 +151,30 @@ if not issue then
   end
 
   -- issue keywords
-  for i, k in ipairs(param.get("issue_keywords"):split(",")) do
-    local keyword = Keyword:new_selector():add_where { "name LIKE ? AND NOT technical_keyword", k }:join("issue_keyword", nil, { "keyword.id = issue_keyword.keyword_id AND issue_keyword.issue_id = ?", issue_id }):add_group_by("keyword.id"):add_order_by("keyword.id"):optional_object_mode():exec()
+  trace.debug(issue_keywords)
+  for i, text in ipairs(param.get("issue_keywords", atom.string):split(",")) do
+    local keyword = Keyword:new_selector()
+    :add_where { "name LIKE ? AND NOT technical_keyword", text}
+    :join("issue_keyword", nil, { "keyword.id = issue_keyword.keyword_id AND issue_keyword.issue_id = ?", issue.id })
+    :add_group_by("keyword.id")
+    :add_order_by("keyword.id")
+    :optional_object_mode()
+    :exec()
 
     if not keyword then
       keyword = Keyword:new()
-      keyword.name = k
+      keyword.name = text
       keyword.technical_keyword = false
       keyword:save()
       local issue_keyword = IssueKeyword:new()
-      issue_keyword.issue_id = issue_id
+      issue_keyword.issue_id = issue.id
       issue_keyword.keyword_id = keyword.id
       issue_keyword:save()
     elseif keyword then
-      local issue_keyword = IssueKeyword:by_pk(issue_id, keyword.id)
+      local issue_keyword = IssueKeyword:by_pk(issue.id, keyword.id)
       if not issue_keyword then
-        trace.debug("creo nuova issue_keyword")
         local issue_keyword = IssueKeyword:new()
-        issue_keyword.issue_id = issue_id
+        issue_keyword.issue_id = issue.id
         issue_keyword.keyword_id = keyword.id
         issue_keyword = issue_keyword:save()
       end
@@ -206,106 +192,110 @@ if not issue then
   end
 end
 
-if initiative_brief_description ~= "" and initiative_title ~= "" and draft_text ~= "" then
-  local initiative = Initiative:new()
+local initiative = Initiative:new()
 
-  if param.get("polling", atom.boolean) and app.session.member:has_polling_right_for_unit_id(area.unit_id) then
-    initiative.polling = true
-  end
+if param.get("polling", atom.boolean) and app.session.member:has_polling_right_for_unit_id(area.unit_id) then
+  initiative.polling = true
+end
 
-  initiative.issue_id = issue.id
-  initiative.name = name
-  initiative.title = initiative_title
-  initiative.brief_description = initiative_brief_description
-  initiative.competence_fields = technical_areas
+initiative.issue_id = issue.id
+initiative.name = name
+initiative.title = initiative_title
+initiative.brief_description = initiative_brief_description
+initiative.competence_fields = technical_areas
 
-  param.update(initiative, "discussion_url")
-  initiative = initiative:save()
+param.update(initiative, "discussion_url")
+initiative = initiative:save()
 
-  local draft = Draft:new()
-  draft.initiative_id = initiative.id
-  draft.formatting_engine = formatting_engine
-  draft.content = draft_text
-  draft.author_id = app.session.member.id
-  draft = draft:save()
+local draft = Draft:new()
+draft.initiative_id = initiative.id
+draft.formatting_engine = formatting_engine
+draft.content = draft_text
+draft.author_id = app.session.member.id
+draft = draft:save()
 
-  local initiator = Initiator:new()
-  initiator.initiative_id = initiative.id
-  initiator.member_id = app.session.member.id
-  initiator.accepted = true
-  initiator = initiator:save()
+local initiator = Initiator:new()
+initiator.initiative_id = initiative.id
+initiator.member_id = app.session.member.id
+initiator.accepted = true
+initiator = initiator:save()
 
-  if not is_polling then
-    local supporter = Supporter:new()
-    supporter.initiative_id = initiative.id
-    supporter.member_id = app.session.member.id
-    supporter.draft_id = draft.id
-    supporter:save()
-  end
+if not is_polling then
+  local supporter = Supporter:new()
+  supporter.initiative_id = initiative.id
+  supporter.member_id = app.session.member.id
+  supporter.draft_id = draft.id
+  supporter:save()
+end
 
 -- Keyword registration
-  function string:split(sep)
-    local sep, fields = sep or ":", {}
-    local pattern = string.format("([^%s]+)", sep)
-    self:gsub(pattern, function(c) fields[#fields + 1] = c end)
-    return fields
-  end
+--function string:split(sep)
+--  local sep, fields = sep or ":", {}
+--  local pattern = string.format("([^%s]+)", sep)
+--  self:gsub(pattern, function(c) fields[#fields + 1] = c end)
+--  return fields
+--end
 
 -- initiative keywords
-  for i, k in ipairs(param.get("technical_areas"):split(",")) do
-    local keyword = Keyword:new_selector():add_where { "name LIKE ? AND technical_keyword", k }:join("issue_keyword", nil, { "keyword.id = issue_keyword.keyword_id AND issue_keyword.issue_id = ?", issue_id }):add_group_by("keyword.id"):add_order_by("keyword.id"):optional_object_mode():exec()
+for i, text in ipairs(param.get("technical_areas"):split(",")) do
+  local keyword = Keyword:new_selector()
+  :add_where { "name LIKE ? AND technical_keyword", text }
+  :join("issue_keyword", nil, { "keyword.id = issue_keyword.keyword_id AND issue_keyword.issue_id = ?", issue.id })
+  :add_group_by("keyword.id")
+  :add_order_by("keyword.id")
+  :optional_object_mode()
+  :exec()
 
-    if not keyword then
-      keyword = Keyword:new()
-      keyword.name = k
-      keyword.technical_keyword = true
-      keyword:save()
+  if not keyword then
+    keyword = Keyword:new()
+    keyword.name = text
+    keyword.technical_keyword = true
+    keyword:save()
+    local issue_keyword = IssueKeyword:new()
+    issue_keyword.issue_id = issue.id
+    issue_keyword.keyword_id = keyword.id
+    issue_keyword:save()
+  elseif keyword then
+    local issue_keyword = IssueKeyword:by_pk(issue.id, keyword.id)
+    if not issue_keyword then
+      trace.debug("creo nuova issue_keyword")
       local issue_keyword = IssueKeyword:new()
-      issue_keyword.issue_id = issue_id
+      issue_keyword.issue_id = issue.id
       issue_keyword.keyword_id = keyword.id
-      issue_keyword:save()
-    elseif keyword then
-      local issue_keyword = IssueKeyword:by_pk(issue_id, keyword.id)
-      if not issue_keyword then
-        trace.debug("creo nuova issue_keyword")
-        local issue_keyword = IssueKeyword:new()
-        issue_keyword.issue_id = issue_id
-        issue_keyword.keyword_id = keyword.id
-        issue_keyword = issue_keyword:save()
-      end
-    else
-      slot.put_into("error", _ "Failed to save keywords for issue")
+      issue_keyword = issue_keyword:save()
     end
+  else
+    slot.put_into("error", _ "Failed to save keywords for issue")
   end
+end
 -- end of keywords
 
 -- video presentation
-  if resource ~= nil and resource ~= nil then
-    local video = Resource:new()
-    video.url = resource
-    video.initiative_id = initiative.id
-    video.type = "video"
-    video.title = "video presentation of initiative p" .. tostring(initiative.id)
-    video:save()
-  end
+if resource ~= nil and resource ~= nil then
+  local video = Resource:new()
+  video.url = resource
+  video.initiative_id = initiative.id
+  video.type = "video"
+  video.title = "video presentation of initiative p" .. tostring(initiative.id)
+  video:save()
+end
 
-  if archivecloud ~= nil and archivecloud ~= "" then
-    local archive = Resource:new()
-    archive.url = archivecloud
-    archive.initiative_id = initiative.id
-    archive.type = "archive_url"
-    archive.title = "Archive"
-    archive:save()
-  end
+if archivecloud ~= nil and archivecloud ~= "" then
+  local archive = Resource:new()
+  archive.url = archivecloud
+  archive.initiative_id = initiative.id
+  archive.type = "archive_url"
+  archive.title = "Archive"
+  archive:save()
+end
 
-  if sociallink ~= nil and sociallink ~= "" then
-    local social = Resource:new()
-    social.url = sociallink
-    social.initiative_id = initiative.id
-    social.type = "social_url"
-    social.title = "Archive"               
-    social:save()
-  end
+if sociallink ~= nil and sociallink ~= "" then
+  local social = Resource:new()
+  social.url = sociallink
+  social.initiative_id = initiative.id
+  social.type = "social_url"
+  social.title = "Archive"               
+  social:save()
 end
 
 slot.put_into("notice", _ "Initiative successfully created")

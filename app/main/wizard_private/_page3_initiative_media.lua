@@ -1,7 +1,3 @@
-local resource = param.get("resource")
-local sociallink = param.get("sociallink")
-local archivecloud = param.get("archivecloud")
-
 ui.container {
   attr = { class = "row" },
   content = function()
@@ -37,19 +33,19 @@ ui.container {
                             ui.field.text {
                               attr = { id = "resource", class = "col-md-5" },
                               name = "resource",
-                              value = resource or ""
+                              value = param.get("resource", atom.string) or ""
                             }	
                             ui.heading { level = 4, attr = { class = "col-md-12" }, content = "Inserire il link ad una cartella cloud pubblica o a documenti" }
                             ui.field.text {
                               attr = { id = "archivecloud", class = "col-md-5" },
                               name = "archivecloud",
-                              value = archivecloud or ""
+                              value = param.get("archivecloud", atom.string) or ""
                             }	
                             ui.heading { level = 4, attr = { class = "col-md-12" }, content = "Inserire il link ad una pagina social, forum, meetup o blog di discussione" }
                             ui.field.text {
                               attr = { id = "sociallink", class = "col-md-5" },
                               name = "sociallink",
-                              value = sociallink or ""
+                              value = param.get("sociallink", atom.string) or ""
                             }	
                           end
                         }
