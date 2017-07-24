@@ -43,79 +43,25 @@ if not issue.closed and not initiative.revoked then
   }
 
   if issue.state ~= "voting" then
-    
-    ui.container {
-      attr = { class = "row text-center well-inside" },
-      content = function()
-        ui.container {
-          attr = { class = "col-md-12" },
-          content = function()
-            ui.container {
-              attr = { class = "row text-center" },
-              content = function()
-                ui.heading {
-                  level = 1,
-                  attr = { class = "col-md-3 spaceline spaceline-bottom" },
-                  content = _"Actions: "
-                }
-                ui.container {
-                  attr = { class = "vertical col-md-9 text-right" },
-                  content = function()
-                    ui.container {
-                      attr = { class = "spaceline-bottom" },
-                      content = function()
-                        execute.view {
-                          module = "supporter",
-                          view = "_show_box",
-                          params = { initiative = initiative }
-                        }
-                      end
-                    }
-                    ui.container {
-                      attr = { class = "row spaceline" },
-                      content = function()
-                        ui.container {
-                          attr = { class = "col-md-12" },
-                          content = function()
-                            ui.link {
-                              attr = { target="_blank", class = "btn btn-primary btn_size_fix fixclick text-center" },
-                              module = "suggestion",
-                              view = "new",
-                              params = { initiative_id = initiative.id },
-                              text = _ "New suggestion"
-                            }
-                          end
-                        }
-                      end
-                    }
-                  end
-                }
-              end
-            }
-          end
-        }
-      end
-    }
-
     ui.container {
       attr = { class = "row spaceline spaceline-bottom well" },
       content = function()
         ui.container {
-          attr = { class = "col-md-5" },
+          attr = { class = "col-md-4" },
           content = function()
             ui.heading {
-              level = 1,
+              level = 3,
               attr = { class = "spaceline spaceline-bottom" },
               content = _ "As initiator you can also do: "
             }
           end
         }
         ui.container {
-          attr = { class = "col-md-7 text-right" },
+          attr = { class = "col-md-8 text-right" },
           content = function()
             if initiator and initiator.accepted and not initiative.issue.fully_frozen and not initiative.issue.closed and not initiative.revoked then
               ui.link {
-                attr = { class = "action btn btn-primary btn_xlarge h3 text-center" },
+                attr = { class = "action btn btn-primary large_btn" },
                 content = function()
                   slot.put(_ "Invite initiator")
                 end,
@@ -126,7 +72,7 @@ if not issue.closed and not initiative.revoked then
               if #initiators > 1 then
                 slot.put(" ")
                 ui.link {
-                  attr = { class = "btn btn-primary btn_xlarge h3 text-center" },
+                  attr = { class = "btn btn-primary large_btn" },
                   content = function()
                     slot.put(_ "Remove initiator")
                   end,
@@ -140,7 +86,7 @@ if not issue.closed and not initiative.revoked then
             if initiator and initiator.accepted == false then
               slot.put(" ")
               ui.link {
-                attr = { class = "btn btn-primary btn_xlarge h3 text-center" },
+                attr = { class = "btn btn-primary large_btn" },
                 text = _ "Cancel refuse of invitation",
                 module = "initiative",
                 action = "remove_initiator",
@@ -165,7 +111,7 @@ if not issue.closed and not initiative.revoked then
                   slot.put(" ")
                   ui.link {
                     attr = {
-                      class = "btn btn-primary btn_xlarge h3 text-center",
+                      class = "btn btn-primary large-btn",
                       target = "_blank",
                       title = _ "Discussion with initiators"
                     },
@@ -181,7 +127,7 @@ if not issue.closed and not initiative.revoked then
             if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
               slot.put(" ")
               ui.link {
-                attr = { class = "btn btn-primary btn_xlarge h3 text-center" },
+                attr = { class = "btn btn-primary large_btn" },
                 text = _ "change discussion URL",
                 module = "initiative",
                 view = "edit",
@@ -189,12 +135,12 @@ if not issue.closed and not initiative.revoked then
               }
               slot.put(" ")
               ui.link {
-                attr = { class = "btn btn-primary btn_xlarge h3 text-center" },
+                attr = { class = "btn btn-primary large_btn" },
                 content = _ "Revoke initiative",
                 module = "initiative",
                 view = "revoke",
                 id = initiative.id,
-                image = { attr = { class = "col-md-3 thumb" }, static = "png/cross.png" },
+                image = { attr = { class = "col-md-3 thumb img-responsive" }, static = "png/cross.png" },
                 content = _ "Revoke initiative"
               }
             end
@@ -216,54 +162,55 @@ if not issue.closed and not initiative.revoked then
           ui.container {
             attr = { class = "col-md-12 well-inside paper" },
             content = function()
-              ui.container {
-                attr = { class = "row" },
-                content = function()
-                  ui.container {
-                    attr = { class = "col-md-7 col-sm-12 col-xs-12 spaceline label label-danger" },
-                    content = function()
-                      ui.heading { level = 2, content = "La proposta è passata alla fase di votazione: clicca sul pulsante per votare o cambiare il tuo voto" }
-                    end
-                  }
-                  ui.container {
-                    attr = { class = "col-md-1 hidden-sm hidden-xs spaceline3" },
-                    content = function()
-                      ui.image { static = "svg/arrow-right.svg", attr = { class = "icon-maxi" }}
-                    end
-                  }
-                  ui.container {
-                    attr = { class = "col-md-4 col-sm-12 col-xs-12 " },
-                    content = function()
-                      ui.container {
-                        attr = { class = "row" },
-                        content = function()
-                          ui.container {
-                            attr = { class = "col-md-12 text-center" },
-                            content = function()
-                              ui.image { static = "png/voting.png"}
-                            end
-                          }				
-                          ui.container {
-                            attr = { class = "col-md-12 text-center" },
-                            content = function()
-                              ui.link {
-                                attr = { id = "issue_see_det_" .. issue.id },
-                                module = "vote",
-                                view = "list",
-                                id = issue.id,
-                                params = { issue_id = issue.id },
-                                content = function()                                                                    
-                                  ui.heading { level = 2, attr = { class = "spaceline btn btn-large btn-primary" }, content = _ "Vote now" }
-                                end
-                              }
-                            end
-                          }
-                        end
-                      }
-                    end
-                  }
-                end
-              }   
+        ui.container {
+          attr = { class = "row" },
+          content = function()
+            ui.container {
+              attr = { class = "col-md-6 col-sm-12 col-xs-12 spaceline " },
+              content = function()
+                ui.heading { level = 2, content = "La proposta è passata alla fase di votazione: clicca sul pulsante per votare o cambiare il tuo voto" }
+              end
+            }
+            ui.container {
+              attr = { class =  "col-md-2 hidden-sm hidden-xs spaceline" },
+              content = function()
+                ui.image { attr = { class = "icon-big" },static = "svg/arrow-right.svg" }
+              end
+            }
+
+            ui.container {
+              attr = { class = "col-md-4 col-sm-12 col-xs-12 spaceline" },
+              content = function()
+                ui.container {
+                  attr = { class = "row" },
+                  content = function()
+                    ui.container {
+                      attr = { class = "col-md-4 text-center" },
+                      content = function()
+                        ui.image { attr = { class = "icon-medium " },static = "png/voting.png"}
+                      end
+                    }				
+                    ui.container {
+                      attr = { class = "col-md-8 text-center" },
+                      content = function()
+                        ui.link {
+                          attr = { id = "issue_see_det_" .. issue.id },
+                          module = "vote",
+                          view = "list",
+                          id = issue.id,
+                          params = { issue_id = issue.id },
+                          content = function()                                                                    
+                            ui.heading { level = 2, attr = { class = "spaceline btn btn-large btn-primary" }, content = _ "Vote now" }
+                          end
+                        }
+                      end
+                    }
+                  end
+                }
+              end
+            }
+          end
+        } 
             end
           }
         end

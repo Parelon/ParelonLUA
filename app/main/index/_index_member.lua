@@ -12,40 +12,34 @@ execute.view {
 
 ui.title(
   function()
-    ui.container {
-      attr = { class = "row" },
-      content = function()
         ui.container {
           attr = { class = "row" },
           content = function()
             ui.container {
-              attr = { class = "col-md-5 col-md-offset-1 col-xs-12 col-sm-12 well-inside paper text-center" },
+              attr = { class = "col-md-5 col-md-offset-1 col-xs-12 col-sm-12 well-inside text-center" },
               content = function()
-                ui.container {
-                  content = function()
                     ui.heading {
+                      attr = { class = "spaceline spaceline-bottom" },
                       level = 1,
                       content = function()
                         slot.put(_("Welcome <strong>#{realname}</strong>.", { realname = (member.realname ~= "" and member.realname or member.login) }))
                       end
                     }
-                  end
-                }
               end
             }
             ui.container {
               attr = { class = "col-md-6 spaceline hidden-xs hidden-sm" },
               content = function()
                 ui.container {
-                  attr = { class = "col-md-8 text-right spaceline" },
+                  attr = { class = "col-md-7 text-right spaceline" },
                   content = function()
-                    ui.heading { level = 2, content = "La prima volta? clicca qui:"}
+                    ui.heading { level = 3, content = _"The first time? click here:"}
                   end
                 }
                 ui.container {
-                  attr = { class = "col-md-2 text-left" },
+                  attr = { class = "col-md-3 text-left" },
                   content = function()
-                    ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
+                    ui.image { attr = { class = "arrow_big" }, static = "svg/arrow-right.svg" }
                   end
                 }
                 ui.container {
@@ -69,8 +63,6 @@ ui.title(
             }
           end
         }
-      end
-    }
     ui.container {
       attr = { class = "row spaceline" },
       content = function()
@@ -87,7 +79,7 @@ ui.title(
             ui.link {
               module = "auditor",
               view = "index",
-              attr = { class = "btn btn btn-primary btn-large" },
+              attr = { class = "btn btn btn-primary xlarge_btn" },
               content = _ "Auditor Panel"
             }
           end
@@ -114,7 +106,7 @@ ui.container {
       content = function()
         ui.image {
           attr = { class = "img_assembly_small" },
-          static = "parlamento_icon_small.png"
+          static = "work_table.png"
         }
       end
     }

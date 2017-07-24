@@ -12,16 +12,13 @@ else
 end
 
 ui.container {
-  attr = { class = "row" },
+  attr = { class = "well" },
   content = function()
-    ui.container {
-      attr = { class = "col-md-12 well" },
-      content = function()
         ui.container {
           attr = { class = "row text-center" },
           content = function()
             ui.container {
-              attr = { class = "col-md-6" },
+              attr = { class = "col-md-6 col-sm-6 col-xs-12" },
               content = function()                
                 ui.link {
                   attr = { class = btn1 },
@@ -35,7 +32,7 @@ ui.container {
               end
             }
             ui.container {
-              attr = { class = "col-md-6" },
+              attr = { class = "col-md-6 col-md-6 col-sm-6 col-xs-12" },
               content = function()
                 ui.link {
                   attr = { class = btn2 },
@@ -50,7 +47,5 @@ ui.container {
             }
           end
         }
-      end
-    }
   end
 }

@@ -28,7 +28,7 @@
                 $this.css('-ms-transform', 'scale(' + ratioX + ', ' + ratioY + ')');
                 $this.css('left', left);
                 $this.css('top', top);
-                $this.closest('.row-fluid').margin({top: phases_bar_height * (ratio - 1)  })
+                $this.closest('.row').margin({top: phases_bar_height * (ratio - 1)  })
 
             };
 

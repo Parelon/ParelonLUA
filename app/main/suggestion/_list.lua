@@ -45,13 +45,10 @@ ui.container {
 }
 
 ui.container {
-    attr = { class = "row" },
+    attr = { class = "well-inside" },
     content = function()
-        ui.container {
-            attr = { class = "col-md-12 well-inside paper" },
-            content = function()
                 ui.container {
-                    attr = { class = "row spaceline" },
+                    attr = { class = "row" },
                     content = function()
                         ui.paginate {
                             selector = suggestions_selector,
@@ -66,7 +63,7 @@ ui.container {
                                     end
                                 else
                                     ui.list {
-                                        attr = { class = "table stripped" },
+                                        attr = { class = "table" },
                                         records = suggestions,
                                         columns = {
                                             {
@@ -91,7 +88,7 @@ ui.container {
                                             {
                                                 content = function(record)
                                                     ui.link {
-                                                        attr = { class = "label label-info" },
+                                                        attr = { class = "label label-amend text-left spaceline margin-right" },
                                                         text = record.name,
                                                         module = "suggestion",
                                                         view = "show",
@@ -110,13 +107,13 @@ ui.container {
                                                             ["1"] = _ "should",
                                                             ["2"] = _ "must"
                                                         }
-                                                        slot.put(" &middot; ")
-                                                        ui.tag { content = degrees[tostring(opinion.degree)] }
-                                                        slot.put(" &middot; ")
+                                                        slot.put(" ")
+                                                        ui.tag { attr = { class = "label text-center" },content = degrees[tostring(opinion.degree)] }
+                                                        slot.put(" ")
                                                         if opinion.fulfilled then
-                                                            ui.tag { content = _ "implemented" }
+                                                            ui.tag { attr = { class = "label text-center" },content = _ "implemented" }
                                                         else
-                                                            ui.tag { content = _ "not implemented" }
+                                                            ui.tag { attr = { class = "label text-center" },content = _ "not implemented" }
                                                         end
                                                     end
                                                 end
@@ -141,7 +138,7 @@ ui.container {
                                 attr = { class = "col-md-6 col-md-offset-3 text-center spaceline-bottom" },
                                 content = function()
                                     ui.link {
-                                        attr = { class = "btn btn-primary btn_size_fix fixclick" },
+                                        attr = { class = "btn btn-primary btn-large fixclick" },
                                         module = "suggestion",
                                         view = "new",
                                         params = { initiative_id = initiative.id },
@@ -152,7 +149,5 @@ ui.container {
                         end
                     }
                 end
-            end
-        }
     end
 }

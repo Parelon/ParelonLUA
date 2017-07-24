@@ -15,7 +15,7 @@ ui.container {
               attr = { class = "col-md-3 text-center" },
               content = function()
                 ui.link {
-                  attr = { class = "btn btn-primary btn-large fixclick" },
+                  attr = { class = "btn btn-primary btn-back fixclick" },
                   module = "auditor",
                   view = "index",
                   content = function()
@@ -32,12 +32,12 @@ ui.container {
               end
             }
             ui.container {
-              attr = { class = "col-md-9 text-center" },
+              attr = { class = "col-md-9 text-center spaceline well-inside" },
               content = function()
-                ui.heading { level = 1, attr = { class = "uppercase" }, content = _ "Auditor Panel" .. " ID:" .. app.session.member_id }
+                ui.heading { level = 1, attr = { class = "uppercase spaceline" }, content = _ "Auditor Panel" .. " ID:" .. app.session.member_id }
                 ui.heading {
                   level = 3,
-                  attr = { class = "" },
+                  attr = { class = "spaceline-bottom" },
                   content = function()
                     if id ~= 0 then
                       slot.put(_("Edit member: #{firstname} #{lastname}", { firstname = member.firstname, lastname = member.lastname }))
@@ -71,7 +71,7 @@ else
 end
 
 ui.form {
-  attr = { class = "vertical" },
+  attr = { class = "vertical well" },
   module = "auditor",
   action = "member_update",
   record = member,

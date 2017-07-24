@@ -7,10 +7,10 @@ ui.title(function()
         attr = { class = "row" },
         content = function()
             ui.container {
-                attr = { class = "col-md-3 text-left" },
+                attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center" },
                 content = function()
                     ui.link {
-                        attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
+                        attr = { class = "btn btn-primary fixclick btn-back" },
                         module = "initiative",
                         view = "show",
                         params = { initiative_id = initiative_id },
@@ -21,17 +21,17 @@ ui.title(function()
             }
 
             ui.container {
-                attr = { class = "col-md-8 spaceline2 text-center label label-warning" },
+                attr = { class = "col-md-8 col-sm-7 col-xs-12 spaceline text-center well-inside " },
                 content = function()
                     ui.heading {
                         level = 1,
-                        attr = { class = "fittext1 uppercase" },
+                        attr = { class = "fittext1 uppercase spaceline spaceline-bottom" },
                         content = _ "Add new suggestion"
                     }
                 end
             }
             ui.container {
-                attr = { class = "col-md-1 text-center spaceline" },
+                attr = { class = "col-md-1 col-sm-1 hidden-xs text-center spaceline" },
                 content = function()
                     ui.field.popover {
                         attr = {
@@ -65,7 +65,7 @@ ui.form {
             params = { tab = "suggestions" }
         }
     },
-    attr = { class = "vertical" },
+    attr = { class = "well" },
     content = function()
         local supported = Supporter:by_pk(initiative_id, app.session.member.id) and true or false
         if not supported then
@@ -85,7 +85,7 @@ ui.form {
             foreign_name = "name"
         }
         ui.field.text { label = _ "Title (80 chars max)", name = "name" }
-        ui.field.select {
+        ui.field.select { 
             label = _ "Wiki engine",
             name = "formatting_engine",
             foreign_records = {
@@ -100,12 +100,12 @@ ui.form {
         ui.tag {
             tag = "div",
             content = function()
-                ui.tag {
-                    tag = "label",
-                    attr = { class = "label" },
-                    content = function() slot.put("&nbsp;") end,
-                }
-                ui.tag {
+--                ui.tag {
+--                    tag = "label",
+--                    attr = { class = "label" },
+--                    content = function() slot.put("&nbsp;") end,
+--                }
+                ui.tag {attr = { class = "label label-info spaceline spaceline-bottom " },
                     content = function()
                         ui.link {
                             text = _ "Syntax help",
@@ -138,7 +138,7 @@ ui.form {
             tag = "input",
             attr = {
                 type = "submit",
-                class = "col-md-offset-4 btn btn-primary btn-large large_btn",
+                class = "col-md-offset-4 btn btn-primary large-btn",
                 value = _ "Commit suggestion"
             }
         }

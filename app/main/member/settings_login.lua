@@ -18,11 +18,11 @@ ui.title(function()
             }
 
             ui.container {
-                attr = { class = "col-md-8 spaceline2 text-center label label-warning" },
+                attr = { class = "col-md-8 spaceline text-center well-inside" },
                 content = function()
                     ui.heading {
                         level = 1,
-                        attr = { class = "fittext1 uppercase" },
+                        attr = { class = "fittext1 uppercase spaceline spaceline-bottom" },
                         content = _ "Change your login"
                     }
                 end
@@ -50,7 +50,7 @@ ui.title(function()
 end)
 
 ui.form {
-    attr = { class = "vertical" },
+    attr = { class = "vertical well text-center" },
     module = "member",
     action = "update_login",
     routing = {
@@ -66,7 +66,7 @@ ui.form {
             tag = "input",
             attr = {
                 type = "submit",
-                class = "col-md-offset-4 btn btn-primary btn-large large_btn",
+                class = "btn btn-primary btn-large",
                 value = _ "Change login"
             }
         }

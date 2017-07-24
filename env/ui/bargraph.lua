@@ -33,7 +33,7 @@ function ui.bargraph(args)
                         if dlength > 0 then
                             ui.container {
                                 attr = {
-                                    style = "width: " .. tostring(dlength_abs) .. "px; background-color: " .. bar.color .. ";",
+                                    style = "width: " .. tostring(dlength_abs) .. "px; height:10px; background-color: " .. bar.color .. ";",
                                 },
                                 content = function() slot.put("&nbsp;") end
                             }
@@ -41,7 +41,7 @@ function ui.bargraph(args)
                         ui.container {
                             attr = {
                                 class = "quorum",
-                                style = "width: 1px; background-color: " .. (args.quorum_color or "blue") .. ";",
+                                style = "width: 1px; height:10px; background-color: " .. (args.quorum_color or "blue") .. ";",
                             },
                             content = function() slot.put("") end
                         }
@@ -57,7 +57,7 @@ function ui.bargraph(args)
                     length = length + value_abs
                     ui.container {
                         attr = {
-                            style = "width: " .. tostring(value_abs) .. "px; background-color: " .. bar.color .. ";",
+                            style = "width: " .. tostring(value_abs) .. "px; height:10px; background-color: " .. bar.color .. ";",
                         },
                         content = function() slot.put("&nbsp;") end
                     }

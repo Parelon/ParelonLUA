@@ -27,7 +27,9 @@ ui.title(function()
         end
     }
 end)
-
+    ui.container {
+        attr = { class = "well" },
+        content = function()
 ui.form {
     record = initiative.current_draft,
     attr = { class = "vertical" },
@@ -113,7 +115,9 @@ ui.form {
             value = param.get("content")
         }
 
-        ui.submit { name = "preview", text = _ "Preview" }
-        ui.submit { text = _ "Save" }
+        ui.submit { attr = { class = "btn btn-primary" }, name = "preview", text = _ "Preview" }
+        ui.submit { attr = { class = "btn btn-primary" }, text = _ "Save" }
     end
+}
+end
 }

@@ -6,9 +6,9 @@ local state = param.get("state", atom.string)
 local orderby = param.get("orderby", atom.string)
 local desc = param.get("desc", atom.boolean)
 
-local classNew = "btn btn-primary large_btn btn_size_fix_h fixclick"
-local classDiscussion = "btn btn-primary large_btn btn_size_fix_h fixclick"
-local classClosed = "btn btn-primary large_btn btn_size_fix_h fixclick"
+local classNew = "btn btn-primary btn-large fixclick"
+local classDiscussion = "btn btn-primary btn-large fixclick"
+local classClosed = "btn btn-primary btn-large fixclick"
 
 if state == "admission" then
   classNew = classNew .. " active"
@@ -22,21 +22,18 @@ ui.container {
   attr = { class = "row well" },
   content = function()
     ui.container {
-      attr = { class = "col-md-2 spaceline" },
+      attr = { class = "col-md-12 spaceline text-center" },
       content = function()
         ui.heading { level = 2, content = _ "I want to read:" }
       end
     }
     
     ui.container {
-      attr = { class = "col-md-10" },
+      attr = { class = "col-md-12 spaceline" },
       content = function()
         ui.container {
-          attr = { class = "row well-inside" },
+          attr = { class = "well-inside" },
           content = function()
-            ui.container {
-              attr = { class = "col-md-12 spaceline" },
-              content = function()
                 ui.container {
                   attr = { class = "row spaceline text-center" },
                   content = function()
@@ -95,8 +92,6 @@ ui.container {
                   content = function()
                   end
                 }
-              end
-            }
           end
         }
       end

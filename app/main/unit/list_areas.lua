@@ -30,28 +30,13 @@ execute.view { module = "unit", view = "_list_areas_partnership_filters", id = i
 
 execute.view { module = "unit", view = "_list_areas_unit_filters", id = id, params = { create = create, filter = filter, unit_selector = unit_selector } }
         
- ui.container {
-  attr = { class = "row" },
-  content = function()
     ui.container {
-      attr = { class = "col-md-12 well" },
+      attr = { class = "well" },
       content = function()       
-        ui.container {
-          attr = { class = "row" },
-          content = function()
-            ui.container {
-              attr = { class = "col-md-12" },
-              content = function()
                 execute.view {
                   module = "area",
                   view = "_list",
                   params = { areas_selector = areas_selector, member = app.session.member, create = create }
                 }
-              end
-            }
-          end
-        }
       end
     }
-  end
-}

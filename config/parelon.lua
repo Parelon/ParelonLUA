@@ -48,7 +48,7 @@ config.secure_database = {
     dbname = 'parelon',
     host = 'localhost',
     port = '5432',
-    user = 'www-data'
+    user = 'postgres'
 }
 
 

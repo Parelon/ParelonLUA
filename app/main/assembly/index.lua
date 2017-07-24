@@ -17,7 +17,7 @@ ui.container {
   attr = { class = "row text-center" },
   content = function()
     ui.container {
-      attr = { class = "col-lg-6 col-md-6 col-sm-12 col-xs-12 spaceline spaceline-bottom" },
+      attr = { class = "col-lg-6 col-md-12 col-sm-12 col-xs-12 spaceline spaceline-bottom" },
       content = function()
         execute.view {
           module = "assembly",
@@ -27,7 +27,7 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-lg-6 col-md-6 col-sm-12 col-xs-12 spaceline spaceline-bottom" },
+      attr = { class = "col-lg-6 col-md-12 col-sm-12 col-xs-12 spaceline spaceline-bottom" },
       content = function()
         execute.view {
           module = "assembly",

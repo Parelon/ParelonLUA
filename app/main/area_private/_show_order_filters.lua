@@ -16,7 +16,7 @@ ui.container {
   attr = { class = "row well" },
   content = function()
     ui.container {
-      attr = { class = "col-md-2" },
+      attr = { class = "col-md-12" },
       content = function()
         ui.heading {
           level = 2,
@@ -26,10 +26,10 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-10 well-inside " },
+      attr = { class = "col-md-12 well-inside" },
       content = function()
         ui.container {
-          attr = { class = "row" },
+          attr = { class = "row spaceline spaceline-bottom text-center" },
           content = function()
 --            ui.container {
 --              attr = { class = "col-md-12" },
@@ -46,9 +46,11 @@ ui.container {
             if desc then
               btnd = " active"
             end
-            
+    ui.container {
+      attr = { class = "col-lg-3 col-md-6 col-sm-6 col-xs-12" },
+      content = function()
               ui.link {
-                attr = { class = "col-md-3 text-center btn btn-primary h3 filter_btn fixclick" .. btna },
+                attr = { class = "text-center btn btn-primary h3 filter_btn fixclick" .. btna },
                 module = "area_private",
                 view = "show",
                 id = area.id,
@@ -58,9 +60,14 @@ ui.container {
                   ui.heading { level = 3, content = _ "ORDER BY NUMBER OF SUPPORTERS" }
                 end
               }
+      end
+    }
+    ui.container {
+      attr = { class = "col-lg-3 col-md-6 col-sm-6 col-xs-12" },
+      content = function()          
            -- end
             ui.link {
-              attr = { class = "col-md-3 text-center btn btn-primary filter_btn fixclick" .. btnb },
+              attr = { class = "text-center btn btn-primary filter_btn fixclick" .. btnb },
               module = "area_private",
               view = "show",
               id = area.id,
@@ -69,8 +76,13 @@ ui.container {
                 ui.heading { level = 3, content = _ "ORDER BY DATE OF CREATION" }
               end
             }
+        end
+    }
+    ui.container {
+      attr = { class = "col-lg-3 col-md-6 col-sm-6 col-xs-12" },
+      content = function()          
             ui.link {
-              attr = { class = "col-md-3 text-center btn btn-primary filter_btn fixclick" .. btnc },
+              attr = { class = "text-center btn btn-primary filter_btn fixclick" .. btnc },
               module = "area_private",
               view = "show",
               id = area.id,
@@ -79,15 +91,21 @@ ui.container {
                 ui.heading { level = 3, content = _ "ORDER BY LAST EVENT DATE" }
               end
             }
-
+      end
+    }
+    ui.container {
+      attr = { class = "col-lg-3 col-md-6 col-sm-6 col-xs-12" },
+      content = function()
             ui.link {
-              attr = { class = "spaceline spaceline-bottom col-md-offset-1 col-md-2 text-center btn btn-primary filter_btn_filter fixclick" .. btnd },
+              attr = { class = "text-center btn btn-primary filter_btn fixclick" .. btnd },
               text = inv_txt,
               module = "area_private",
               view = "show",
               id = area.id,
               params = { create = create, state = state, orderby = "supporters", interest = interest, desc = desc },
             }
+      end
+    }           
           end
         }
       end

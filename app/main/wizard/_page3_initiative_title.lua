@@ -20,7 +20,7 @@ ui.container {
                   attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class = "col-md-8 col-md-offset-2 text-center" },
+                      attr = { class = "col-md-8  col-sm-6 col-sm-offset-3 col-md-offset-2" },
                       content = function()
                         ui.heading { 
                           level = 3,
@@ -33,20 +33,36 @@ ui.container {
                             onclick = "collapseAll(); $('#initiative_title').collapse('show')"
                           },
                           content = function()
-                            ui.image { static = "png/arrow-down-icon.png" }
-                            slot.put(_ "Title")
+                              ui.container {
+                                attr = { class = "row" },
+                                content = function()
+                                  ui.container {
+                                    attr = { class = "col-md-10 col-xs-7" },
+                                    content = function() 
+                                      ui.image { static = "png/arrow-down-icon.png" }
+                                      slot.put(_ "title")
+                                     end
+                                  }
+                                  ui.container {
+                                    attr = { class = "col-md-2 col-sm-3 col-xs-5" },
+                                    content = function() 
+                                      ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
+                                    end
+                                  }
+                                end
+                              }
                           end
                         }
                       end
                     }
 
                     ui.container {
-                      attr = { class = "col-md-2 text-center" },
+                      attr = { class = " col-md-2 text-center hidden-xs" },
                       content = function()
                         ui.tag {
                           tag = "a",
                           attr = {
-                            class = "btn btn-primary btn-large",
+                            class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_abstract').collapse('show');"
                           },

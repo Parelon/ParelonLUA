@@ -5,10 +5,10 @@ ui.title(function()
         attr = { class = "row" },
         content = function()
             ui.container {
-                attr = { class = "col-md-3 text-left" },
+                attr = { class = "col-md-3 col-sm-4 col-xs-12 text-left" },
                 content = function()
                     ui.link {
-                        attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
+                        attr = { class = "btn btn-primary fixclick btn-back" },
                         module = "index",
                         view = "index",
                         image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
@@ -18,17 +18,17 @@ ui.title(function()
             }
 
             ui.container {
-                attr = { class = "col-md-8 spaceline2 text-center label label-warning" },
+                attr = { class = "col-md-8 col-sm-7 col-xs-12 text-center well-inside spaceline" },
                 content = function()
                     ui.heading {
                         level = 1,
-                        attr = { class = "fittext1 uppercase" },
+                        attr = { class = "fittext1 uppercase spaceline spaceline-bottom" },
                         content = _ "Settings"
                     }
                 end
             }
             ui.container {
-                attr = { class = "col-md-1 text-center spaceline" },
+                attr = { class = "col-md-1 col-sm-1 hidden-xs text-center spaceline" },
                 content = function()
                     ui.field.popover {
                         attr = {
@@ -69,14 +69,14 @@ if config.download_dir then
 end
 
 ui.list {
-    attr = { class = "menu_list text-center" },
+    attr = { class = "text-center well" },
     style = "div",
     records = pages,
     columns = {
         {
             content = function(page)
                 ui.link {
-                    attr = { class = "btn btn-primary btn-large large_btn fixclick spaceline spaceline-bottom text-center" },
+                    attr = { class = "btn btn-primary x-large-btn fixclick spaceline spaceline-bottom text-center" },
                     module = page.module or "member",
                     view = page.view,
                     text = page.text

@@ -40,26 +40,16 @@ filters.content = function()
       local highlight_string = param.get("highlight_string", "string")
       local issues = issues_selector:exec()
       issues:load_everything_for_member_id(for_member and for_member.id or nil)
-      ui.container {
-        attr = { class = "row" },
-        content = function()
-          ui.container {
-            attr = { class = "col-md-12 well" },
-            content = function()
-              for i, issue in ipairs(issues) do
-                execute.view {
-                  module = "issue_private",
-                  view = "_list_entry",
-                  params = {
-                    issue = issue,
-                    for_member = for_member
-                  }
-                }
-              end
-            end
-          }
+          for i, issue in ipairs(issues) do
+            execute.view {
+              module = "issue_private",
+              view = "_list_entry",
+              params = {
+                issue = issue,
+                for_member = for_member
+              }
+            }
         end
-      }
     end
   }
 end

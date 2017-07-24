@@ -16,7 +16,7 @@ ui.container {
   attr = { class = "row well" },
   content = function() 
     ui.container {
-      attr = { class = "col-md-12 col-md-offset-0 text-center col-xs-12 col-sm-12 paper" },
+      attr = { class = "text-center spaceline spaceline-bottom" },
       content = function()
         if #issue.initiatives == 1 then
           content = _ "initiative"
@@ -39,12 +39,6 @@ ui.container {
     ui.container {
       attr = { class = "row spaceline" },
       content = function()
-        ui.container {
-          attr = { class = "col-md-12" },
-          content = function()
-            ui.container {
-              attr = { class = "row spaceline spaceline-bottom text-center" },
-              content = function()
                 local btna, btnb = "", ""
                 if init_ord == "supporters" then btna = " active"
                 end
@@ -72,18 +66,14 @@ ui.container {
                     ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick" }, content = _ "ORDER BY LAST EVENT DATE" }
                   end
                 }
-              end
-            }
-          end
-        }
       end
     }
 
     ui.container {
-      attr = { class = "row" },
+      attr = { class = "row spaceline" },
       content = function()
         ui.container {
-          attr = { class = "col-md-12 initiative_list_box" },
+          attr = { class = "well-inside" },
           content = function()
             execute.view {
               module = "initiative",
@@ -104,7 +94,7 @@ ui.container {
       content = function()
         if app.session.member then
           ui.link {
-            attr = { class = "col-md-3 btn btn-primary btn-large large_btn fixclick text-center" },
+            attr = { class = "col-md-3 btn btn-primary  fixclick text-center" },
             module = "wizard_private",
             params = {
               issue_id = issue.id,
@@ -127,7 +117,7 @@ ui.container {
                   ui.container {
                     attr = { class = "col-md-2 col-xs-2 col-sm-2" },
                     content = function()
-                      ui.image { attr = { class = "pen_paper icon-medium" }, static = "svg/pen_paper.svg" }
+                      ui.image { attr = { class = "pen_paper icon-large" }, static = "svg/pen_paper.svg" }
                     end
                   }
                   slot.put("&nbsp;")

@@ -35,22 +35,22 @@ end
 local svgz = ""
 --local svgz = "z"
 ui.container {
-  attr = { class = "col-md-12 well" },
+  attr = { class = "well-blue" },
   content = function()
     ui.container {
-      attr = { class = "row" },
+      attr = { class = "row text-center" },
       content = function()
         ui.container {
-          attr = { class = "col-md-12 label label-warning text-center" },
+          attr = { class = "col-md-10 col-md-offset-1 label label-warning" },
           content = function()
             ui.heading {level = 3, content = "Questione o Problema N° " .. issue.id .. " : " }
-            ui.heading {level = 1, content = (issue.title and issue.title or _ "No title for this issue") }
+            ui.heading {level = 2, content = (issue.title and issue.title or _ "No title for this issue") }
           end
         }
       end
     }
     ui.container {
-      attr = { class = "row spaceline spaceline-bottom" },
+      attr = { class = "row well-inside spaceline spaceline-bottom" },
       content = function()
         local image = issue.state
         if issue.state == "finished_without_winner" or issue.state == "finished_with_winner" then
@@ -58,10 +58,17 @@ ui.container {
         elseif issue.state == "canceled_no_initiative_admitted" then
           image = "delete"
         end
-        ui.image { attr = { class = "col-md-1 col-md-offset-1 icon-medium label-notice" }, static = "png/" .. image ..".png" }
-
+      ui.container {
+      attr = { class = "col-md-2 col-sm-3 col-xs-4" },
+      content = function()
+        ui.image { attr = { class = "icon-big label-notice spaceline spaceline-bottom" }, static = "png/" .. image ..".png" }
+      end
+    }
+      ui.container {
+      attr = { class = "col-md-10 col-sm-9 col-xs-8 spaceline" },
+      content = function()    
         ui.heading {
-          attr = { class = "col-md-10 text-center", style = "font-style: italic" },
+          attr = { class = "text-justify", style = "font-style: italic" },
           level = 5,
           content = function()
             if issue.brief_description == "" then
@@ -71,6 +78,8 @@ ui.container {
             end
           end          
         }
+      end
+    }
       end
     }
 

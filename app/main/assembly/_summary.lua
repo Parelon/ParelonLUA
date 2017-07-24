@@ -28,7 +28,7 @@ if list == 'voted' or list == 'proposals' then
         attr = { class = "panel panel-default"},
         content = function()	  
           ui.container {
-            attr = { class = "btn btn-primary full_btn ", role="tab", id=headingID},
+            attr = { class = "label label-accordion panel-title btn margin-right", role="tab", id=headingID},
             content = function()						                     
               ui.heading { 
                 level = 3, attr = { datatoggle = "collapse", class = "panel-title", href = "#issue_" .. list, ariaexpanded = "true", ariacontrols = "issue_" .. list},  
@@ -55,9 +55,9 @@ if list == 'voted' or list == 'proposals' then
               ui.container {
                 attr = { class="panel-body"},
                 content = function()
-                  ui.container {
-                    attr = { class = "row" },
-                    content = function()
+--                  ui.container {
+--                    attr = { class = "row" },
+--                    content = function()
 --                      local issues = selector:exec()
 --                      if #issues > 0 then
 --                        for i, issue in ipairs(issues) do
@@ -73,8 +73,8 @@ if list == 'voted' or list == 'proposals' then
 --                      else
 --                        ui.heading{ level = 4, content = "Nothing to show" }
 --                      end
-                    end
-                  }
+--                    end
+--                  }
                 end
               }   
             end

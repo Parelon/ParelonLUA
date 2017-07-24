@@ -13,6 +13,10 @@ if view == "homepage" then
   return_module = "index"
   return_view = "index"
   return_btn_txt = _ "Back to homepage"
+elseif view == "area" then
+  return_module = "area"
+  return_view = "show"
+  return_btn_txt = _ "Back to issue listing"
 elseif view == "area_private" then
   return_module = "area_private"
   return_view = "show"
@@ -27,7 +31,7 @@ ui.container {
         attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center" },
         content = function()
           ui.link {
-            attr = { class = "btn btn-primary fixclick btn-back h2" },
+            attr = { class = "btn btn-primary fixclick btn-back" },
             module = return_module,
             id = issue.area.id,
             view = return_view,
@@ -39,11 +43,11 @@ ui.container {
       }
     end
     ui.container {
-      attr = { class = "col-md-" .. titleWidth .. " col-sm-8 col-xs-12 text-center label label-warning spaceline"},
+      attr = { class = "col-md-" .. titleWidth .. " col-sm-8 col-xs-12 text-center well-inside spaceline"},
       content = function()
         ui.container {
           content = function()
-            ui.heading { level = 1, attr = { class = "fittext1 uppercase " }, content = _ "Details for issue Q" .. issue.id }
+            ui.heading { attr = { class = "spaceline spaceline-bottom fittext1 uppercase "},level = 1,  content = _ "Details for issue Q" .. issue.id }
           end
         }
       end

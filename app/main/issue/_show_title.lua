@@ -5,7 +5,7 @@ ui.container {
   content = function()
     ui.tag {
       tag = "strong",
-      attr = { class = "col-md-8 col-md-offset-2 label label-warning text-center" },
+      attr = { class = "label label-warning text-center" },
       content = function()
         ui.heading {
           level = 1,

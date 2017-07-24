@@ -59,56 +59,31 @@ ui.form {
     sociallink = sociallink
   },
   content = function()
-    ui.container {
-      attr = { class = "row" },
-      content = function()
         ui.container {
-          attr = { class = "col-md-12 well" },
+          attr = { class = "well" },
           content = function()
-            ui.container {
-              attr = { class = "row" },
-              content = function()
-                ui.container {
-                  attr = { class = "col-md-12" },
-                  content = function()
                     ui.container {
-                      attr = { class = "row" },
+                      attr = { class = "row well-inside" },
                       content = function()
-                        ui.container {
-                          attr = { class = "col-md-12 spaceline well-inside paper text-center" },
-                          content = function()
                             --valore selezionato
                             ui.field.hidden {
                               html_name = "policy_id",
                               attr = { id = "policy_id" },
                               value = param.get("policy_id", atom.integer) or 0
                             }
-                            ui.heading { level = 2, attr = { class = "uppercase text-center" }, content = _ "How much time does your proposal need to be examined?" }
+                            ui.heading { level = 2, attr = { class = "uppercase text-center spaceline" }, content = _ "How much time does your proposal need to be examined?" }
                             --radio-button group
-                            ui.container {
-                              attr = { class = "row" },
-                              content = function()
                                 ui.field.parelon_group_radio {
                                   id = "policy_id",
                                   out_id = "policy_id",
                                   elements = policies,
                                   selected = policy_id,
-                                  attr = { class = "parelon-checkbox spaceline2" },
-                                  label_attr = { class = "parelon-label spaceline2" }
+                                  attr = { class = "parelon-checkbox spaceline" },
+                                  label_attr = { class = "parelon-label spaceline" }
                                 }
-                              end
-                            }
-                          end
-                        }
-                      end
-                    }
-                  end
-                }
               end
             }
           end
         }
-      end
-    }
   end
 }

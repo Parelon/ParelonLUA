@@ -157,7 +157,7 @@ filters.content = function()
                   module = "unit",
                   view = "show",
                   id = event.issue.area.unit_id,
-                  attr = { class = "unit_link" },
+                  attr = { class = "label label-success" },
                   text = event.issue.area.unit.name
                 }
                 slot.put(" ")
@@ -165,7 +165,7 @@ filters.content = function()
                   module = "area",
                   view = "show",
                   id = event.issue.area_id,
-                  attr = { class = "area_link" },
+                  attr = { class = "label label-warning" },
                   text = event.issue.area.name
                 }
               end

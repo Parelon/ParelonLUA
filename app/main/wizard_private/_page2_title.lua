@@ -4,7 +4,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
+      attr = { class = "col-md-3 col-sm-4 col-xs-12 spaceline text-center" },
       content = function()
         ui.tag {
           tag = "a",
@@ -13,7 +13,7 @@ ui.container {
             ui.heading {
               level = 3,
               content = function()
-                ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
+                ui.image { attr = { class = "arrow_medium text-right" }, static = "svg/arrow-left.svg" }
                 slot.put(_ "Back Phase")
               end
             }
@@ -22,9 +22,12 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 well-inside paper col-sm-4 col-xs-12 text-center" },
+      attr = { class = "col-md-6 col-sm-4 col-xs-12 text-center" },
       content = function()
         ui.heading { level = 1, attr = { class = "uppercase label label-danger" }, content = _ "STEP 2: Segnala il problema o questione " }
+    ui.container {
+      attr = { class = "well-inside" },
+      content = function()
         ui.heading {
           level = 2,
           attr = { class = "spaceline" },
@@ -33,6 +36,7 @@ ui.container {
           end
         }
         ui.heading {
+          attr = { class = "spaceline-bottom" },
           level = 2,
           content = function()
             slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
@@ -40,6 +44,9 @@ ui.container {
         }
       end
     }
+      end
+    }    
+
     ui.container {
       attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
       content = function()

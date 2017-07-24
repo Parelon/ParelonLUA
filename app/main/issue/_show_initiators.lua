@@ -11,12 +11,6 @@ ui.container {
     }
   end
 }
-ui.container {
-  attr = { class = "row" },
-  content = function()
-    ui.container {
-      attr = { class = "col-md-12 well" },
-      content = function()
         ui.container {
           attr = { class = "row" },
           content = function()
@@ -28,7 +22,3 @@ ui.container {
             }
           end
         }
-      end
-    }
-  end
-}

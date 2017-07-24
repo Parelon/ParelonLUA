@@ -1,7 +1,7 @@
 local issue = param.get("issue", "table")
 
         ui.container {
-            attr = { class = "col-md-5" },
+            attr = { class = "col-md-5 spaceline" },
             content = function()
                 ui.heading {
                     level = 3,
@@ -11,7 +11,6 @@ local issue = param.get("issue", "table")
                         ui.tag { tag = "strong", content = issue.area.unit.name }
                     end
                 }
-                slot.put("<br>")
                 ui.heading {
                     level = 3,
                     content = function()
@@ -20,7 +19,6 @@ local issue = param.get("issue", "table")
                         ui.tag { tag = "strong", content = issue.area.name }
                     end
                 }
-                slot.put("<br>")
                 ui.heading {
                     level = 3,
                     content = function()
@@ -29,7 +27,6 @@ local issue = param.get("issue", "table")
                         ui.tag { tag = "strong", content = issue.policy.name }
                     end
                 }
-                slot.put("<br>")
                 ui.heading {
                     level = 3,
                     content = function()
