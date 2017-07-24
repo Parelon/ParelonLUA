@@ -3,7 +3,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-3 spaceline" },
+      attr = { class = "col-md-3 col-sm-4 col-xs-12" },
       content = function()
         ui.link {
           attr = { class = "btn btn-primary btn-back text-center" },
@@ -15,25 +15,20 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6" },
+      attr = { class = "col-md-6 col-sm-7 col-xs-12" },
       content = function()
         ui.container {
-          attr = { class = "row" },
+          attr = { class = "well-inside text-center" },
           content = function()
-            ui.container {
-              attr = { class = "col-md-12 text-center well-inside paper" },
-              content = function()
-                ui.heading { level = 1, content = _("#{realname}", { realname = member.realname and member.realname or member.login }) }
-                ui.heading { level = 2, content = _ "CHOOSE THE THEMATIC AREA" }
-              end
-            }
+                ui.heading { attr = { class = "spaceline" }, level = 1, content = _("#{realname}", { realname = member.realname and member.realname or member.login }) }
+                ui.heading { attr = { class = "spaceline-bottom" }, level = 2, content = _ "CHOOSE THE THEMATIC AREA" }
           end
         }
       end
     }
 
     ui.container {
-      attr = { class = "col-md-3  spaceline text-right hidden-xs" },
+      attr = { class = "col-md-3 col-sm-1 spaceline text-right hidden-xs" },
       content = function()
         ui.field.popover {
           attr = {

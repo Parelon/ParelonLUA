@@ -4,10 +4,10 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-3 col-sm-12 col-xs-12 text-center" },
+      attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
       content = function()
         ui.link {
-          attr = { id = "btnPreviuos", class = "btn btn-primary btn-back spaceline spaceline-bottom fixclick" },
+          attr = { id = "btnPreviuos", class = "btn btn-primary btn-back fixclick" },
           module = "unit",
           view = "list_areas",
           params = { create = true, filter = "my_areas" },
@@ -25,7 +25,7 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 col-sm-12 col-xs-12" },
+      attr = { class = "col-md-6 col-sm-4 col-xs-12" },
       content = function()
         ui.container {
           attr = { class = "row" },
@@ -34,17 +34,23 @@ ui.container {
               attr = { class = "col-md-12 text-center" },
               content = function()
                 ui.heading { level = 1, attr = { class = "uppercase label label-warning" }, content = _ "STEP 1: Imposta tempi di discussione" }
-                ui.heading {
-                  level = 2,
-                  attr = { class = "spaceline" },
+                ui.container {
+                  attr = { class = "col-md-12 text-center well-inside" },
                   content = function()
-                    slot.put(_ "Unit" .. ": " .. "<strong>" .. area.unit.name .. "</strong>")
-                  end
-                }
-                ui.heading {
-                  level = 2,
-                  content = function()
-                    slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
+                    ui.heading {
+                      level = 2,
+                      attr = { class = "spaceline" },
+                      content = function()
+                        slot.put(_ "Unit" .. ": " .. "<strong>" .. area.unit.name .. "</strong>")
+                      end
+                    }
+                    ui.heading {
+                      attr = { class = "spaceline-bottom" },
+                      level = 2,
+                      content = function()
+                        slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
+                      end
+                    }
                   end
                 }
               end
@@ -54,11 +60,11 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-3 col-sm-12 col-xs-12 text-center" },
+      attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
       content = function()
         ui.tag {
           tag = "a",
-          attr = { id = "btnNext", class = "btn btn-primary btn-back spaceline spaceline-bottom", onClick = "getElementById(\"page1\").submit();" },
+          attr = { id = "btnNext", class = "btn btn-primary btn-back", onClick = "getElementById(\"page1\").submit();" },
           content = function()
             ui.heading {
               level = 3,

@@ -13,7 +13,7 @@ if app.session.member and not issue.closed then
     end
   }                                            
   ui.container {
-    attr = { class = "row well-inside paper" },
+    attr = { class = "row well-inside" },
     content = function()
 --      ui.container {
 --        attr = { class = " col-md-12 well-inside paper" },
@@ -21,12 +21,12 @@ if app.session.member and not issue.closed then
       if not issue.closed and not issue.fully_frozen and issue.state ~= "voting" then
         if issue.member_info.own_participation then
           ui.container {
-            attr = { class = "col-md-5 spaceline" },
+            attr = { class = "col-md-5 spaceline spaceline spaceline-bottom" },
             content = function()
               ui.image { attr = { style = "height: 50px" }, static = "png/thumb_up.png" }
               slot.put("&nbsp;&nbsp;&nbsp;", _ "You are interested in this issue", "&nbsp;&nbsp;&nbsp;")
               ui.link {
-                attr = { class = "label label-danger" },
+                attr = { class = "label label-danger text-center " },
                 in_brackets = true,
                 text = _ "Withdraw",
                 module = "interest",
@@ -74,7 +74,7 @@ if app.session.member and not issue.closed then
 
         ui.heading {
           level = 2,
-          attr = { class = "col-md-6 col-md-offset-1" },
+          attr = { class = "col-md-7 spaceline spaceline-bottom" },
           content = function() 
             slot.put( _ "<i>Interessarsi</i> alla questione non vuol dire <i>votare sì</i>: vuol dire solo ritenere che il problema sollevato <strong><i>merita</i></strong> di essere discusso.")
           end
@@ -108,32 +108,32 @@ if app.session.member and not issue.closed then
           attr = { class = "row" },
           content = function()
             ui.container {
-              attr = { class = "col-md-7 col-sm-12 col-xs-12 spaceline label label-danger" },
+              attr = { class = "col-md-6 col-sm-12 col-xs-12 spaceline " },
               content = function()
                 ui.heading { level = 2, content = "La proposta è passata alla fase di votazione: clicca sul pulsante per votare o cambiare il tuo voto" }
               end
             }
             ui.container {
-              attr = { class =  "col-md-1 hidden-sm hidden-xs  spaceline3" },
+              attr = { class =  "col-md-2 hidden-sm hidden-xs spaceline" },
               content = function()
-                ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
+                ui.image { attr = { class = "icon-big" },static = "svg/arrow-right.svg" }
               end
             }
 
             ui.container {
-              attr = { class = "col-md-4 col-sm-12 col-xs-12 " },
+              attr = { class = "col-md-4 col-sm-12 col-xs-12 spaceline" },
               content = function()
                 ui.container {
                   attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class = "col-md-12 text-center" },
+                      attr = { class = "col-md-4 text-center" },
                       content = function()
-                        ui.image { static = "png/voting.png"}
+                        ui.image { attr = { class = "icon-medium " },static = "png/voting.png"}
                       end
                     }				
                     ui.container {
-                      attr = { class = "col-md-12 text-center" },
+                      attr = { class = "col-md-8 text-center" },
                       content = function()
                         ui.link {
                           attr = { id = "issue_see_det_" .. issue.id },

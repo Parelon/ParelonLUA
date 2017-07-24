@@ -7,12 +7,12 @@ ui.container {
       attr = { class = "row text-center" },
       content = function()
         ui.container {
-          attr = { class = "col-md-8 col-md-offset-2 label label-warning" },
+          attr = { class = "label label-warning" },
           content = function()
             ui.heading {
               level = 1,
               content = function()
-                ui.tag { content = _ "In risposta a:" }
+                ui.tag { content = _ "In risposta alla questione sollevata:" }
               end
             }
             ui.tag {

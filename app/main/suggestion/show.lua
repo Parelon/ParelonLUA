@@ -28,26 +28,33 @@ ui.title(function()
         attr = { class = "row" },
         content = function()
             ui.container {
-                attr = { class = "col-md-3 text-left" },
+                attr = { class = "col-md-3 text-center" },
                 content = function()
-                    ui.link {
-                        attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
-                        module = "initiative",
-                        view = "show",
-                        id = suggestion.initiative.id,
-                        params = { tab = "suggestions" },
-                        image = { attr = { class = "icon-medium" }, static = "svg/arrow-left.svg" },
-                        content = _ "Back to previous page"
-                    }
+                  ui.link {
+                    attr = { id = "btnPreviuos", class = "btn btn-primary btn-back fixclick" },
+                    module = "initiative",
+                    view = "show",
+                    id = suggestion.initiative.id,
+                    params = { tab = "suggestions" },
+                    content = function()
+                      ui.heading {
+                        level = 3,
+                        content = function()
+                          ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
+                          slot.put(_ "Back Phase")
+                        end
+                      }
+                    end
+                  }
                 end
             }
 
             ui.container {
-                attr = { class = "col-md-6 spaceline2 text-center label label-warning" },
+                attr = { class = "col-md-6 spaceline text-center well-inside" },
                 content = function()
                     ui.heading {
                         level = 1,
-                        attr = { class = "fittext1 uppercase" },
+                        attr = { class = "fittext1 uppercase spaceline spaceline-bottom" },
                         content = _ "Suggestion for initiative: '#{name}'":gsub("#{name}", suggestion.initiative.name)
                     }
                 end

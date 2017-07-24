@@ -21,22 +21,28 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 well-inside paper col-sm-4 col-xs-12 text-center" },
+      attr = { class = "col-md-6 col-sm-4 col-xs-12 text-center" },
       content = function()
         ui.heading { level = 1, attr = { class = "uppercase label label-success" }, content = _ "STEP 3: Proponi una soluzione" }
-        ui.heading {
-          level = 2,
-          attr = { class = "spaceline" },
-          content = function()
-            slot.put(_ "Unit" .. ": " .. "<strong>" .. area.unit.name .. "</strong>")
-          end
-        }
-        ui.heading {
-          level = 2,
-          content = function()
-            slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
-          end
-        }
+          ui.container {
+            attr = { class = "well-inside" },
+            content = function()        
+                ui.heading {
+                  level = 2,
+                  attr = { class = "spaceline" },
+                  content = function()
+                    slot.put(_ "Unit" .. ": " .. "<strong>" .. area.unit.name .. "</strong>")
+                  end
+                }
+                ui.heading {
+                  attr = { class = "spaceline-bottom" },
+                  level = 2,
+                  content = function()
+                    slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
+                  end
+                }
+            end
+          }
       end
     }
     ui.container {

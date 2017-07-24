@@ -4,7 +4,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-3 text-left" },
+      attr = { class = "col-md-3 col-sm-4 col-xs-12 text-left" },
       content = function()
         -- implementare "indietro"
         ui.tag {
@@ -26,13 +26,13 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 text-center label label-warning spaceline" },
+      attr = { class = "col-md-6  col-sm-7 col-xs-12 text-center spaceline label label-success" },
       content = function()
         ui.heading { level = 3, content = _ "WIZARD HEADER END" }
       end
     }
     ui.container {
-      attr = { class = "col-md-3 spaceline text-right " },
+      attr = { class = "col-md-1 col-sm-1 spaceline text-right hidden-xs" },
       content = function()
         ui.field.popover {
           attr = {
@@ -61,7 +61,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 text-center paper" },
+      attr = { class = "col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12  text-center well-inside" },
       content = function()
         ui.heading {
           level = 2,
@@ -72,6 +72,7 @@ ui.container {
         }
         ui.heading {
           level = 2,
+          attr = { class = "spaceline-bottom" },
           content = function()
             slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
           end

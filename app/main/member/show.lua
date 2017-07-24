@@ -77,7 +77,7 @@ ui.title(function()
       attr = { class = "row spaceline text-center" },
       content = function()
         ui.link {
-          attr = { class = "btn btn-primary large_btn fixclick margin_line spaceline" },
+          attr = { class = "btn btn-primary large-btn fixclick margin_line spaceline" },
           content = _ "Show member history",
           module = "member",
           view = "history",
@@ -85,13 +85,13 @@ ui.title(function()
         }
         if not member.active then
           ui.tag {
-            attr = { class = "btn btn-primary  large_btn interest deactivated_member_info margin_line spaceline" },
+            attr = { class = "btn btn-primary  large-btn interest deactivated_member_info margin_line spaceline" },
             content = _ "This member is inactive"
           }
         end
         if member.locked then
           ui.tag {
-            attr = { class = "btn btn-primary  large_btn interest deactivated_member_info margin_line spaceline" },
+            attr = { class = "btn btn-primary  large-btn interest deactivated_member_info margin_line spaceline" },
             content = _ "This member is locked"
           }
         end
@@ -100,7 +100,7 @@ ui.title(function()
           local contact = Contact:by_pk(app.session.member.id, member.id)
           if contact then
             ui.link {
-              attr = { class = "btn btn-primary  large_btnfixclick margin_line spaceline" },
+              attr = { class = "btn btn-primary large-btn fixclick margin_line spaceline" },
               text = _ "Remove from contacts",
               module = "contact",
               action = "remove_member",
@@ -117,7 +117,7 @@ ui.title(function()
             }
           elseif member.activated then
             ui.link {
-              attr = { class = "btn btn-primary  large_btn fixclick margin_line spaceline" },
+              attr = { class = "btn btn-primary  large-btn fixclick margin_line spaceline" },
               text = _ "Add to my contacts",
               module = "contact",
               action = "add_member",
@@ -140,7 +140,7 @@ ui.title(function()
               content = _ "You have ignored this member"
             }
             ui.link {
-              attr = { class = "col-md-3 btn btn-primary  large_btn fixclick margin_line spaceline" },
+              attr = { class = "col-md-3 btn btn-primary large-btn fixclick margin_line spaceline" },
               text = _ "Stop ignoring member",
               module = "member",
               action = "update_ignore_member",
@@ -158,7 +158,7 @@ ui.title(function()
             }
           elseif member.activated then
             ui.link {
-              attr = { class = "interest btn btn-primary  large_btn fixclick margin_line spaceline" },
+              attr = { class = "interest btn btn-primary large-btn fixclick margin_line spaceline" },
               text = _ "Ignore member",
               module = "member",
               action = "update_ignore_member",
@@ -177,13 +177,13 @@ ui.title(function()
         end
         if member.id == app.session.member_id then
           ui.link {
-            attr = { class = "btn btn-primary  large_btn fixclick margin_line spaceline" },
+            attr = { class = "btn btn-primary large-btn fixclick margin_line spaceline" },
             content = _ "Edit profile",
             module = "member",
             view = "edit"
           }
           ui.link {
-            attr = { class = "btn btn-primary  large_btn fixclick margin_line spaceline" },
+            attr = { class = "btn btn-primary large-btn fixclick margin_line spaceline" },
             content = _ "Upload avatar/photo",
             module = "member",
             view = "edit_images"

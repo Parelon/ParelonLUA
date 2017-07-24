@@ -16,7 +16,7 @@ ui.container {
   end
 }
 ui.container {
-  attr = { class = "col-md-4 col-md-offset-1" },
+  attr = { class = "col-md-4 col-md-offset-1 spaceline" },
   content = function()
     ui.form {
       method = "post",

@@ -8,7 +8,7 @@ ui.title(function()
                 attr = { class = "col-md-3 text-left" },
                 content = function()
                     ui.link {
-                        attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
+                        attr = { class = "btn btn-primary ìixclick btn-back" },
                         module = "member",
                         view = "settings",
                         image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
@@ -18,11 +18,11 @@ ui.title(function()
             }
 
             ui.container {
-                attr = { class = "col-md-8 spaceline2 text-center label label-warning" },
+                attr = { class = "col-md-8 spaceline text-center well-inside" },
                 content = function()
                     ui.heading {
                         level = 1,
-                        attr = { class = "fittext1 uppercase" },
+                        attr = { class = "fittext1 uppercase spaceline spaceline-bottom" },
                         content = _ "Notification settings"
                     }
                 end
@@ -50,7 +50,7 @@ ui.title(function()
 end)
 
 ui.form {
-    attr = { class = "vertical" },
+    attr = { class = "vertical well" },
     module = "member",
     action = "update_notify_level",
     routing = {
@@ -176,7 +176,7 @@ ui.form {
             tag = "input",
             attr = {
                 type = "submit",
-                class = "col-md-offset-4 btn btn-primary btn-large large_btn",
+                class = "btn btn-primary btn-xlarge",
                 value = _ "Change notification settings"
             }
         }

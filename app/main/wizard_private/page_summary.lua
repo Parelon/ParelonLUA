@@ -218,112 +218,59 @@ ui.form {
       attr = { class = "row" },
       content = function()
         ui.container {
-          attr = { class = "col-md-3 text-center", style = "width:100%;" },
+          attr = { class = "col-md-4 col-sm-4 text-center" },
           content = function()
+          --pulsante anteprima
             ui.container {
-              attr = { id = "pulsanti", style = "position: relative;" },
+            attr = { id = "btnAnteprima", class = "btn btn-primary large_btn fixclick", disabled = "true", style = "opacity:0.5;" },
+              module = "wizard_private",
+              view = "anteprima",
               content = function()
-                ui.container {
-                  attr = { class = "row" },
+                  ui.heading {
+                  level = 3,                                
                   content = function()
-                    ui.container {
-                      attr = { class = "row" },
-                      content = function()
-                        ui.container {
-                          attr = { class = "col-md-4 text-center" },
-                          content = function()
-                            --pulsante anteprima
-                            ui.container {
-                              attr = { id = "btnAnteprima", class = "btn btn-primary large_btn fixclick", disabled = "true", style = "opacity:0.5;" },
-                              module = "wizard_private",
-                              view = "anteprima",
-                              content = function()
-                                ui.heading {
-                                  level = 3,
-                                  attr = { class = "fittext_btn_wiz" },
-                                  content = function()
-                                    ui.container {
-                                      attr = { class = "row" },
-                                      content = function()
-                                        ui.container {
-                                          attr = { class = "col-md-12" },
-                                          content = function()
-                                            slot.put(_ "Show preview")
-                                          end
-                                        }
-                                      end
-                                    }
-                                  end
-                                }
-                              end
-                            }
-                          end
-                        }
-                        --pulsante "Save preview"
-                        ui.container {
-                          attr = { class = "col-md-4 text-center" },
-                          content = function()
-                            ui.container {
-                              attr = { id = "btnSalvaPreview", class = "btn btn-primary large_btn fixclick", disabled = "true", style = "opacity:0.5;" },
-                              module = "wizard_private",
-                              view = "_save_preview",
-                              content = function()
-                                ui.heading {
-                                  level = 3,
-                                  attr = { class = "fittext_btn_wiz" },
-                                  content = function()
-                                    ui.container {
-                                      attr = { class = "row" },
-                                      content = function()
-                                        ui.container {
-                                          attr = { class = "col-md-12" },
-                                          content = function()
-                                            slot.put(_ "Save preview")
-                                          end
-                                        }
-                                      end
-                                    }
-                                  end
-                                }
-                              end
-                            }
-                          end
-                        }
-                        --pulsante Save
-                        ui.container {
-                          attr = { class = "col-md-4 text-center" },
-                          content = function()
-                            ui.tag {
-                              tag = "a",
-                              attr = { id = "btnSaveIssue", class = "btn btn-primary large_btn fixclick", style = "cursor:pointer;", onclick = "getElementById('page_summary').submit()" },
-                              content = function()
-                                ui.heading {
-                                  level = 3,
-                                  attr = { class = "fittext_btn_wiz" },
-                                  content = function()
-                                    ui.container {
-                                      attr = { class = "row" },
-                                      content = function()
-                                        ui.container {
-                                          attr = { class = "col-md-12" },
-                                          content = function()
-                                            slot.put(_ "Save issue")
-                                          end
-                                        }
-                                      end
-                                    }
-                                  end
-                                }
-                              end
-                            }
-                          end
-                        }
-                      end
-                    }
+                  slot.put(_ "Show preview")
                   end
-                }
+                  }
               end
             }
+          end
+        }
+                        --pulsante "Save preview"
+        ui.container {
+            attr = { class = "col-md-4 col-sm-4 text-center" },
+            content = function()
+              ui.container {
+                attr = { id = "btnSalvaPreview", class = "btn btn-primary large_btn fixclick", disabled = "true", style = "opacity:0.5;" },
+                module = "wizard_private",
+                view = "_save_preview",
+                content = function()
+                  ui.heading {
+                    level = 3,
+                    content = function()
+                    slot.put(_ "Save preview")
+                    end
+                  }
+                end
+              }
+            end
+          }
+          --pulsante Save
+          ui.container {
+            attr = { class = "col-md-4 col-sm-4 text-center" },
+            content = function()
+              ui.tag {
+                tag = "a",
+                  attr = { id = "btnSaveIssue", class = "btn btn-primary large_btn fixclick", style = "cursor:pointer;", onclick = "getElementById('page_summary').submit()" },
+                  content = function()
+                    ui.heading {
+                      evel = 3,
+                      content = function()
+                      slot.put(_ "Save issue")
+                    end
+                  }
+                end
+              }
           end
         }
       end

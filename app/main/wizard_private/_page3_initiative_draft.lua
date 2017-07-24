@@ -19,12 +19,12 @@ ui.container {
                   attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class = "col-md-2 text-center" },
+                      attr = { class = "col-md-2 col-sm-3 text-center hidden-xs" },
                       content = function()
                         ui.tag {
                           tag = "a",
                           attr = {
-                            class = "btn btn-primary btn-large",
+                            class = "btn btn-primary btn-wizard hidden-xs",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_abstract').collapse('show');"
                           },
@@ -33,7 +33,7 @@ ui.container {
                       end
                     }
                     ui.container {
-                      attr = { class = "col-md-8 text-center" },
+                      attr = { class = "col-md-8 col-sm-6 text-center" },
                       content = function()
                         ui.heading { 
                           level = 3,
@@ -46,8 +46,24 @@ ui.container {
                             onclick = "collapseAll(); $('#initiative_draft').collapse('show')"
                           },
                           content = function()
-                            ui.image { static = "png/arrow-down-icon.png" }
-                            slot.put(_ "Draft")
+                              ui.container {
+                                attr = { class = "row" },
+                                content = function()
+                                  ui.container {
+                                    attr = { class = "col-md-10 col-sm-9 col-xs-7" },
+                                    content = function() 
+                                      ui.image { static = "png/arrow-down-icon.png" }
+                                      slot.put(_ "Draft")
+                                     end
+                                  }
+                                  ui.container {
+                                    attr = { class = "col-md-2 col-sm-3 text-right col-xs-5" },
+                                    content = function() 
+                                      ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
+                                    end
+                                  }
+                                end
+                              }
                           end
                         }
                       end
@@ -59,7 +75,7 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
-                            class = "btn btn-primary btn-large",
+                            class = "btn btn-primary btn-wizard hidden-xs",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_keywords').collapse('show');"
                           },

@@ -21,12 +21,12 @@ ui.container {
                   attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class = "col-md-2 text-center" },
+                      attr = { class = "col-md-2 col-sm-3  text-center hidden-xs" },
                       content = function()
                         ui.tag {
                           tag = "a",
                           attr = {
-                            class = "btn btn-primary btn-large",
+                            class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#issue_aim').collapse('show');"
                           },
@@ -35,7 +35,7 @@ ui.container {
                       end
                     }
                     ui.container {
-                      attr = { class = "col-md-8 text-center" },
+                      attr = { class = "col-md-8  col-sm-6  text-center" },
                       content = function()
                         ui.heading { 
                           level = 3,

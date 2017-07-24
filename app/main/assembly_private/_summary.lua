@@ -10,7 +10,6 @@ if list == "voted" then
   else
     selector:join("initiative", nil, "initiative.issue_id = issue.id")
     selector:join("current_draft", nil, { "current_draft.initiative_id = initiative.id AND current_draft.author_id = ?", app.session.member.id })
-    
     selector:add_where("issue.closed ISNULL")
   end
   
@@ -29,7 +28,7 @@ if list == "voted" then
         attr = { class = "panel panel-default"},
         content = function()	  
           ui.container {
-            attr = { class = "btn btn-primary full_btn ", role="tab", id=headingID},
+            attr = { class = "label label-accordion panel-title btn margin-right", role="tab", id=headingID},
             content = function()						                     
               ui.heading { 
                 level = 3, attr = { datatoggle = "collapse", class = "panel-title", href = "#issue_" .. list, ariaexpanded = "true", ariacontrols = "issue_" .. list},  
@@ -56,9 +55,9 @@ if list == "voted" then
               ui.container {
                 attr = { class="panel-body"},
                 content = function()
-                  ui.container {
-                    attr = { class = "row" },
-                    content = function()
+--                  ui.container {
+--                    attr = { class = "row" },
+--                    content = function()
 --                      local issues = selector:exec()
 --                      if #issues > 0 then
 --                        for i, issue in ipairs(issues) do
@@ -74,8 +73,8 @@ if list == "voted" then
 --                      else
 --                        ui.heading{ level = 4, content = "Nothing to show" }
 --                      end
-                    end
-                  }
+--                    end
+--                  }
                 end
               }   
             end

@@ -14,16 +14,16 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "spaceline col-md-6 well-inside paper text-center col-xs-12 col-sm-8" },
+      attr = { class = "spaceline spaceline-bottom col-md-6 well-inside paper text-center col-xs-12 col-sm-8" },
       content = function()
-        ui.heading {
+        ui.heading {attr = { class = "spaceline" },
           level = 1,
           content = function()
             slot.put(_("Welcome <strong>#{realname}.</strong>", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }))
           end
         }
 
-        ui.heading { level = 6, content = _("Ti trovi ora nell' Assemblea pubblica", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }) }
+        ui.heading {level = 6, content = _("Ti trovi ora nell' Assemblea pubblica", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }) }
       end
     }
     --[[ mobile button-back ]]

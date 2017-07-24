@@ -2,7 +2,7 @@ local initiative = param.get("initiative", "table")
 local initiator = param.get("initiator", "table")
 
 local title_class = ""
-local title_size = "col-md-11"
+local title_size = "col-md-10"
 
 if initiator and initiator.accepted == nil and not initiative.issue.half_frozen and not initiative.issue.closed then
   ui.container{
@@ -81,10 +81,10 @@ ui.container {
     end                                   
 
     ui.container {
-      attr = { class = title_size .. " spaceline spaceline-bottom" },
+      attr = { class = title_size .. " row spaceline spaceline-bottom" },
       content = function()
         ui.container {
-          attr = { class = "label label-warning-tbox text-center spaceline spaceline-bottom" .. title_class },
+          attr = { class = "label label-warning text-center" .. title_class },
           content = function()
             ui.heading {
               level = 1,

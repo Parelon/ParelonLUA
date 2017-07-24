@@ -18,12 +18,12 @@ ui.container {
                   attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class = "col-md-2 text-center" },
+                      attr = { class = "col-md-2 col-sm-3 text-center hidden-xs" },
                       content = function()
                         ui.tag {
                           tag = "a",
                           attr = {
-                            class = "btn btn-primary btn-large",
+                            class = "btn btn-primary btn-wizard hidden-xs",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_draft').collapse('show');"
                           },
@@ -32,7 +32,7 @@ ui.container {
                       end
                     }
                     ui.container {
-                      attr = { class = "col-md-8 text-center" },
+                      attr = { class = "col-md-8 col-xs-6" },
                       content = function()
                         ui.heading { 
                           level = 3,
@@ -87,7 +87,7 @@ ui.container {
                       attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "col-md-12 text-left" },
+                          attr = { class = "col-md-10" },
                           content = function()
                             ui.tag { tag = "p", content = _"Suggerisci competenze in materia tecnica, sociale, finanziaria, impatto ambientale e pianificazione delle risorse, per es: Psicologo, Commercialista, economista, muratore. " }
                           end

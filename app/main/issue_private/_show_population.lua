@@ -5,7 +5,7 @@ if app.session:has_access("all_pseudonymous") then
   ui.container { attr = { class = "label label-warning-tbox spaceline" }, content = _ "Interested members" }
   local interested_members_selector = issue:get_reference_selector("interested_members_snapshot"):join("issue", nil, "issue.id = direct_interest_snapshot.issue_id"):add_field("direct_interest_snapshot.weight"):add_where("direct_interest_snapshot.event = issue.latest_snapshot_event")
   ui.container {
-    attr = { class = "row well" },
+    attr = { class = "row" },
     content = function()
       execute.view {
         module = "member",
@@ -31,7 +31,7 @@ if app.session:has_access("all_pseudonymous") then
   }
   local population_members_selector = issue:get_reference_selector("population_members_snapshot"):join("issue", nil, "issue.id = direct_population_snapshot.issue_id"):add_field("direct_population_snapshot.weight"):add_where("direct_population_snapshot.event = issue.latest_snapshot_event")
   ui.container {
-    attr = { class = "row well" },
+    attr = { class = "row" },
     content = function()
       execute.view {
         module = "member",

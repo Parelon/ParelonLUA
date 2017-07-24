@@ -15,7 +15,7 @@ end
 execute.view{ module = "delegation", view = "_info_bs", params = { area = area, member = member } }
 
 ui.container {
-  attr = { class = "col-md-9 spaceline label label-warning" },
+  attr = { class = "row spaceline label label-warning text-center" },
   content = function()
     ui.link {
       module = "area",
@@ -31,7 +31,7 @@ ui.container {
 
 if show_content then
   ui.container {
-    attr = { class = "col-md-9 spaceline spaceline-bottom" },
+    attr = { class = "row spaceline" },
     content = function()
       -- actions (members with appropriate voting right only)
       if member then

@@ -100,7 +100,7 @@ ui.container {
     attr = { class = "row" },
     content = function()
         ui.container {
-            attr = { class = "col-md-12" },
+            attr = { class = "col-md-12 well" },
             content = function()
                 ui.tabs(tabs)
             end

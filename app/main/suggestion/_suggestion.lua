@@ -3,7 +3,6 @@ ui.container {
     attr = { class = "row" },
     content = function()
           ui.form {
-              attr = { class = "text-center" },
               record = suggestion,
               readonly = true,
               content = function()
@@ -30,7 +29,7 @@ ui.container {
                               end
                           }
                           ui.container {
-                              attr = { class = "col-md-1 col-md-offset-1 text-right " },
+                              attr = { class = "col-md-1 text-right " },
                               content = function()
                                   ui.field.popover {
                                       attr = {
@@ -56,45 +55,50 @@ ui.container {
                       end
                   }
                   ui.container {
-                      attr = { class = "row spaceline spaceline-bottom text-left" },
+                      attr = { class = "well" },
                       content = function()
-                          ui.heading{attr = { class = "label label-warning-tbox" },level=3 , content= _"Suggestion"}
                           ui.container {
-                              attr = { class = "col-md-12 well-inside paper" },
+                              attr = { class = "row spaceline spaceline-bottom text-left" },
                               content = function()
-                                  slot.put(suggestion:get_content("html"))
+                                  ui.heading{attr = { class = "label label-warning-tbox" },level=3 , content= _"Suggestion"}
+                                  ui.container {
+                                      attr = { class = "col-md-12 well-inside paper" },
+                                      content = function()
+                                          slot.put(suggestion:get_content("html"))
+                                      end
+                                  }
                               end
                           }
-                      end
-                  }
-                  ui.container {
-                      attr = { class = "row spaceline spaceline-bottom text-left" },
-                      content = function()
-                          ui.heading{attr = { class = "label label-warning-tbox" },level=3 , content= _"Versione originale"}                      
                           ui.container {
-                              attr = { class = "col-md-12 well-inside paper" },
+                              attr = { class = "row spaceline spaceline-bottom text-left" },
                               content = function()
-                                  slot.put(suggestion:get_content("html"))
-                                  
-                                  
-                        ui.tag { tag = "p", attr = { class = "initiative_brief_description initiative_list_box" }, content = initiative_brief_description or _ "No description available" }                                  
-                                  
-                                  
+                                  ui.heading{attr = { class = "label label-warning-tbox" },level=3 , content= _"Versione originale"}                      
+                                  ui.container {
+                                      attr = { class = "col-md-12 well-inside paper" },
+                                      content = function()
+                                          slot.put(suggestion:get_content("html"))
+                                          
+                                          
+                                ui.tag { tag = "p", attr = { class = "initiative_brief_description initiative_list_box" }, content = initiative_brief_description or _ "No description available" }                                  
+                                          
+                                          
+                                      end
+                                  }
                               end
+                          }                  
+                          execute.view {
+                              module = "suggestion",
+                              view = "_list_element",
+                              params = {
+                                  suggestions_selector = Suggestion:new_selector():add_where { "id = ?", suggestion.id },
+                                  initiative = suggestion.initiative,
+                                  show_name = false,
+                                  show_filter = false
+                              }
                           }
                       end
-                  }                  
-              end
+                    }
+                end
           }
-          execute.view {
-              module = "suggestion",
-              view = "_list_element",
-              params = {
-                  suggestions_selector = Suggestion:new_selector():add_where { "id = ?", suggestion.id },
-                  initiative = suggestion.initiative,
-                  show_name = false,
-                  show_filter = false
-              }
-          }
-    end
-}
+      end
+  }

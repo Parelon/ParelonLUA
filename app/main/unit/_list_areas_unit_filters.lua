@@ -5,21 +5,18 @@ local id = param.get_id() or 0
 local units = app.session.member:get_reference_selector("units"):add_where("unit.public"):exec()
 
 ui.container {
-  attr = { class = "row" },
+  attr = { class = "well" },
   content = function()
-    ui.container {
-      attr = { class = "col-md-12 well" },
-      content = function()
         ui.container {
           attr = { class = "row" },
           content = function()
             ui.heading {
               level = 3,
-              attr = { class = "col-md-2 spaceline" },
+              attr = { class = "col-md-2 col-sm-2 col-xs-12 spaceline" },
               content = _"I want to see areas in: "
             }
 
-            local class = "col-md-3 btn btn-primary btn-large text-center"
+            local class = "col-md-3 col-sm-2 col-xs-12 btn btn-primary btn-large text-center spaceline"
 
             if id == 0 then
               ui.link {
@@ -62,7 +59,5 @@ ui.container {
             end
           end
         }
-      end
-    }
   end
 }

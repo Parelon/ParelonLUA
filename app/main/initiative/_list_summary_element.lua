@@ -9,7 +9,6 @@ end
 
 local class = ""
 if for_details then
---  class = "well-inside paper"
 end
 
 local function round(num, idp)
@@ -20,7 +19,7 @@ ui.container {
   attr = { class = "row spaceline" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 " .. class },
+      attr = { class = "col-md-12 " },
       content = function()
         ui.container {
           attr = { class = "row" },
@@ -65,7 +64,7 @@ ui.container {
               local unchecked_events = Event:new_selector():add_where { "event.initiative_id = ? AND event.occurrence > ? AND event.id NOT IN (" .. chkids .. ")", initiative.id, app.session.member.activated }:exec()
 
               ui.container {
-                attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" },
+                attr = { class = "col-md-6 col-xs-12 col-sm-6" },
                 content = function()
                   ui.container {
                     attr = { class = "row" },
@@ -124,11 +123,18 @@ ui.container {
                   }
                   ui.container {
                     attr = { class = "row" },
-                    content = function()
-                      ui.heading { level = 5, attr = { class = "col-md-12", style = "font-style: italic;" }, content = (initiative.brief_description or _"Initiative without abstract") }
+                        content = function()
+                          ui.heading { level = 5, attr = { style = "font-style: italic;text-align:justify; margin-right:25px;" }, content = function()
+                          if initiative.brief_description == "" then
+                          slot.put(_"Initiative without abstract")
+                           else
+                            slot.put(initiative.brief_description)
+                          end
+                        end
+                      }
                     end
                   }
-                end
+                 end
               }
               -- Check events
               execute.action { module = "event", action = "check", params = { unchecked_events = unchecked_events, member_id = for_member.id } }
@@ -144,7 +150,7 @@ ui.container {
                         class = "revoked"
                       end
                       ui.heading {
-                        level = 1,
+                        level = 3,
                         attr = { class = class },
                         content = function()                         
                           local name = (initiative.title or _"Initiative without title")
@@ -159,25 +165,12 @@ ui.container {
                       }
                     end
                   }
-                  ui.container {
-                    attr = { class = "row" },
-                    content = function()
-                      ui.heading { level = 5, attr = { class = "col-md-12", style = "font-style: italic;" }, content = function()
-                          if initiative.brief_description == "" then
-                            slot.put(_"Initiative without abstract")
-                          else
-                            slot.put(initiative.brief_description)
-                          end
-                        end
-                      }
-                    end
-                  }
                 end
               }
             end
 
             ui.container {
-              attr = { class = "col-xs-12 col-sm-6 col-md-3" },
+              attr = { class = "col-xs-12 col-sm-6 col-md-3 spaceline" },
               content = function()
                 if initiative.issue.fully_frozen and initiative.issue.closed then
                   if initiative.negative_votes and initiative.positive_votes then
@@ -278,6 +271,7 @@ ui.container {
                 }
               end
             }
+
           end
         }
       end

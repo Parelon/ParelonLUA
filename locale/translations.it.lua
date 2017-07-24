@@ -26,6 +26,8 @@ return {
     ["Issue link (copy the link and share to the web):"] = "Link alla questione (copia il link e condividilo sul web):";
     ["Copy"] = "Copia";
     ["City"] = "Citta'";
+    ["As initiator you can also do: "] = "Sei il relatore della proposta e puoi anche:";
+    ["Mute updates"] = "Ignora";
     ["Residence"] = "Residenza";
     ["Domicile"] = "Domicilio";
     ["Personal data"] = "Dati personali";
@@ -47,8 +49,10 @@ return {
     ["ID card number"] = "Numero documento";
     ["Actions"] = "Azioni";
     ["State"] = "Stato";
+    ["Raises a problem or issue that concerns this topic, and proposes a solution."] = "Solleva una problema o una questione che riguarda questo tema, e proponi una soluzione.";
     ["Auditor login"] = "Login certificatore";
     ["Auditor Panel"] = "Pannello Certificatore";
+    ["You are an auditor. This means that you can manage members in the Auditor Panel"] = "Sei un certificatore, puoi inserire nuovi utenti ed inviare il codice di invito.";
     ["There are no users certified by you"] = "Non si sono utenti certificati da te";
     ["Your certified users"] = "I tuoi utenti certificati";
     ["Auditor?"] = "Certificatore?";
@@ -75,7 +79,9 @@ return {
     ["YOUR VOTE IS"] = "IL TUO VOTO E'";
     ["YES"] = "SI";
     ["NO"] = "NO";
+    ["I want to read:"] = "Voglio leggere le proposte:";
     ["Read"] = "Leggi";
+    ["Order by:"] = "Ordina le proposte per:";
     ["Citizens units"] = "Unita' dei cittadini";
     ["Elected units"] = "Unita' degli eletti";
     ["Other political groups units"] = "Unita' degli altri gruppi politici";
@@ -93,7 +99,7 @@ return {
     ["Back to issue listing"] = "Indietro";
     ["Back to homepage"] = "Homepage";
     ["#{realname}, you are now in the Regione Lazio Assembly"] = "#{realname}, Ti Trovi Nell'Assemblea Pubblica";
-    ["INITIATIVES LOOKING FOR SUPPORTERS"] = "NUOVE PROPOSTE";
+    ["INITIATIVES LOOKING FOR SUPPORTERS"] = "Nuove";
     ["INITIATIVES NOW IN DISCUSSION"] = "IN DISCUSSIONE";
     ["COMPLETED OR RETIRED INITIATIVES"] = "COMPLETATE O RITIRATE";
     ["CHOOSE THE INITIATIVE TO EXAMINE:"] = "SCEGLI LA PROPOSTA DA ESAMINARE:";
@@ -592,6 +598,7 @@ return {
     ["New suggestion"] = "EMENDA";
     ["Newest"] = "Ultimo";
     ["Next Phase"] = "AVANTI";
+    ["Next"] = "Prosegui";
     ["No"] = false;
     ["No admission needed"] = false;
     ["No changes to your images were made"] = "Nessun cambiamento alle proprie immagini";
@@ -771,6 +778,11 @@ return {
     ["Show help text"] = "Mostra testo di aiuto";
     ["Show inactive units"] = "Visualizza unità disattivate";
     ["Show members"] = "Visualizza iscritti";
+    ["List my members"] = "Iscritti da me";
+    ["List all members"] = "Tutti gli Iscritti";
+    ["List auditors"] = "Certificatori";
+    ["List admins"] = "Amminstratori";
+    ["The first time? click here:"] = "La prima volta? vedi il tutorial";
     ["Show member history"] = "Cronologia utente";
     ["Show older events"] = "Mostra eventi meno recenti";
     ["Show only events which match... (or associtated)"] = "Mostra solo eventi che corrispondono... (o associati)";
@@ -879,6 +891,9 @@ return {
     ["Unit: '#{name}'"] = "Unità: '#{name}'";
     ["Units"] = "Unità territoriali";
     ["Units and areas"] = "Unità ed aree";
+    ["MY FAVOURITE AREAS"] = "Le mie aree";
+    ["All my units"] = "Tutte le mie unità";
+    ["I want to see areas in: "] = "Filtra per unità";
     ["Unknown author"] = "Autore sconosciuto";
     ["Update voting comment"] = "Aggiorna commento al voto";
     ["Updated drafts"] = "Bozze aggiornate";
@@ -999,7 +1014,7 @@ return {
     ["area"] = "Area";
     ["at least #{count} approvals"] = "almeno #{count} approvazioni";
     ["at least #{count} approvals or abstentions"] = "almeno #{count} approvazioni o astensioni";
-    ["change discussion URL"] = "Cambia URL di discussione";
+    ["change discussion URL"] = "URL di discussione";
     ["day"] = "giorno";
     ["day [interval time left]"] = "giorno";
     ["day [interval]"] = "giorno";
@@ -1012,6 +1027,8 @@ return {
     ["disabled"] = "disabilitato";
     ["email"] = "eMail";
     ["SEE DETAILS"] = "VEDI DETTAGLI";
+    ["List of issues with updates you might want to read "] = "Elenco delle questioni sollevate con gli aggiornamenti:";
+    ["Propose your solution"] = "Crea una proposta alternativa";
     ["global"] = "globale";
     ["i#{id}: #{name}"] = "i#{id}: #{name}";
     ["implemented"] = "implementato";
@@ -1032,6 +1049,7 @@ return {
     ["neutral"] = "neutrale";
     ["no reverse beat path to status quo (including ties)"] = false;
     ["none"] = "nessuno";
+    ["Change Resources url"] = "Inserisci nuova risorsa";
     ["not implemented"] = "non implementato";
     ["not yet"] = "non ancora";
     ["possibly instable result caused by multistage majority"] = false;

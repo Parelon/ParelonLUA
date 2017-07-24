@@ -47,9 +47,9 @@ ui.container {
       attr = { class = "col-md-7 col-md-offset-1 col-sm-6 col-xs-12 spaceline" },
       content = function()
         ui.container {
-          attr = { class = "label label-warning" },
+          attr = { class = "well-inside" },
           content = function()
-            ui.heading { level = 1, attr = { class = "fittext1 uppercase" }, content = _ "Details for initiative I" .. initiative.id }
+            ui.heading { level = 1, attr = { class = "fittext1 uppercase spaceline spaceline-bottom" }, content = _ "Details for initiative I" .. initiative.id }
           end
         }
       end
