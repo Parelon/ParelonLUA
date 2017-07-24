@@ -38,7 +38,7 @@ config.use_terms_checkboxes = {
 
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "http://localhost/parelon"
+config.absolute_base_url = "/parelon"
 
 
 -- Connection information for the LiquidFeedback database
