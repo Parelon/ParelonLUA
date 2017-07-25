@@ -23,7 +23,7 @@ ui.container {
           end
         }
 
-        ui.heading {level = 6, content = _("Ti trovi ora nell' Assemblea privata", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }) }
+        ui.heading {level = 6, content = _("Ti trovi ora nell' Assemblea pubblica", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }) }
       end
     }
     --[[ mobile button-back ]]

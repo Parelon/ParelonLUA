@@ -14,10 +14,10 @@ if view == "homepage" then
   return_view = "index"
   return_btn_txt = _ "Back to homepage"
 elseif view == "area" then
-  return_module = "area"
+  return_module = "area_private"
   return_view = "show"
   return_btn_txt = _ "Back to issue listing"
-elseif view == "area_private" then
+elseif view == "area" then
   return_module = "area_private"
   return_view = "show"
   return_btn_txt = _ "Back to issue listing"

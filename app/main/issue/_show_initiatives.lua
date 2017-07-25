@@ -39,33 +39,33 @@ ui.container {
     ui.container {
       attr = { class = "row spaceline" },
       content = function()
-                local btna, btnb = "", ""
-                if init_ord == "supporters" then btna = " active"
-                end
-                if init_ord == "event" then btnb = " active"
-                end
+        local btna, btnb = "", ""
+        if init_ord == "supporters" then btna = " active"
+        end
+        if init_ord == "event" then btnb = " active"
+        end
 
-                ui.link {
-                  attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" .. btna },
-                  module = "issue",
-                  id = issue.id,
-                  view = "show",
-                  params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "supporters" },
-                  content = function()
-                    ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick " }, content = _ "ORDER BY NUMBER OF SUPPORTERS" }
-                  end
-                }
+        ui.link {
+          attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" .. btna },
+          module = "issue",
+          id = issue.id,
+          view = "show",
+          params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "supporters" },
+          content = function()
+            ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick " }, content = _ "ORDER BY NUMBER OF SUPPORTERS" }
+          end
+        }
 
-                ui.link {
-                  attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" .. btnb },
-                  module = "issue",
-                  id = issue.id,
-                  view = "show",
-                  params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "event" },
-                  content = function()
-                    ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick" }, content = _ "ORDER BY LAST EVENT DATE" }
-                  end
-                }
+        ui.link {
+          attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" .. btnb },
+          module = "issue",
+          id = issue.id,
+          view = "show",
+          params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "event" },
+          content = function()
+            ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick" }, content = _ "ORDER BY LAST EVENT DATE" }
+          end
+        }
       end
     }
 
@@ -133,7 +133,7 @@ ui.container {
             attr = { class = "col-md-3 btn btn-primary btn-large large_btn fixclick text-center" },
             module = "initiative",
             view = "compare",
-            params = { issue_id = param.get_id() },
+            params = { issue_id = issue.id },
             content = function()
               ui.container {
                 attr = { class = "row", style = "display: flex" },

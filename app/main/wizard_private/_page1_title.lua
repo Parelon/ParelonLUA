@@ -8,7 +8,7 @@ ui.container {
       content = function()
         ui.link {
           attr = { id = "btnPreviuos", class = "btn btn-primary btn-back fixclick" },
-          module = "unit",
+          module = "unit_private",
           view = "list_areas",
           params = { create = true, filter = "my_areas" },
           id = area.unit.id,
@@ -64,7 +64,7 @@ ui.container {
       content = function()
         ui.tag {
           tag = "a",
-          attr = { id = "btnNext", class = "btn btn-primary btn-back", onClick = "getElementById(\"page1\").submit();" },
+          attr = { id = "btnNext", class = "btn btn-primary btn-back spaceline", onClick = "getElementById(\"page1\").submit();" },
           content = function()
             ui.heading {
               level = 3,

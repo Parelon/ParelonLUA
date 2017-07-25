@@ -12,9 +12,30 @@ local initiative_title = param.get("initiative_title", atom.string) or ""
 local initiative_brief_description = param.get("initiative_brief_description", atom.string) or ""
 local draft = param.get("draft", atom.string) or ""
 local technical_areas = param.get("technical_areas", atom.string) or ""
+local proposer1 = param.get("proposer1", atom.boolean) or false
+local proposer2 = param.get("proposer2", atom.boolean) or false
+local proposer3 = param.get("proposer3", atom.boolean) or false
 local resource = param.get("resource", atom.string)
 local sociallink = param.get("sociallink", atom.string)
 local archivecloud = param.get("archivecloud", atom.string)
+
+-- trace di controllo sui valori dei parametri
+trace.debug("issue_id: " .. tostring(issue_id))
+trace.debug("area_id: " .. tostring(area_id))
+trace.debug("policy_id: " .. tostring(policy_id))
+trace.debug("issue_title: " .. issue_title)
+trace.debug("issue_brief_description: " .. issue_brief_description)
+trace.debug("issue_keywords: " .. issue_keywords)
+trace.debug("problem_description: " .. problem_description)
+trace.debug("aim_description: " .. aim_description)
+trace.debug("initiative_title: " .. initiative_title)
+trace.debug("initiative_brief_description: " .. initiative_brief_description)
+trace.debug("draft: " .. draft)
+trace.debug("technical_areas: " .. tostring(technical_areas))
+trace.debug("proposer1: " .. tostring(proposer1))
+trace.debug("proposer2: " .. tostring(proposer2))
+trace.debug("proposer3: " .. tostring(proposer3))
+trace.debug("resource: " .. (resource and resource or "none"))
 
 local area_policies = AllowedPolicy:get_policy_by_area_id(area.id)
 local policies = {}
@@ -59,31 +80,31 @@ ui.form {
     sociallink = sociallink
   },
   content = function()
+    ui.container {
+      attr = { class = "well" },
+      content = function()
         ui.container {
-          attr = { class = "well" },
+          attr = { class = "row well-inside" },
           content = function()
-                    ui.container {
-                      attr = { class = "row well-inside" },
-                      content = function()
-                            --valore selezionato
-                            ui.field.hidden {
-                              html_name = "policy_id",
-                              attr = { id = "policy_id" },
-                              value = param.get("policy_id", atom.integer) or 0
-                            }
-                            ui.heading { level = 2, attr = { class = "uppercase text-center spaceline" }, content = _ "How much time does your proposal need to be examined?" }
-                            --radio-button group
-                                ui.field.parelon_group_radio {
-                                  id = "policy_id",
-                                  out_id = "policy_id",
-                                  elements = policies,
-                                  selected = policy_id,
-                                  attr = { class = "parelon-checkbox spaceline" },
-                                  label_attr = { class = "parelon-label spaceline" }
-                                }
-              end
+            --valore selezionato
+            ui.field.hidden {
+              html_name = "policy_id",
+              attr = { id = "policy_id" },
+              value = param.get("policy_id", atom.integer) or 0
+            }
+            ui.heading { level = 2, attr = { class = "uppercase text-center spaceline" }, content = _ "How much time does your proposal need to be examined?" }
+            --radio-button group
+            ui.field.parelon_group_radio {
+              id = "policy_id",
+              out_id = "policy_id",
+              elements = policies,
+              selected = policy_id,
+              attr = { class = "parelon-checkbox spaceline" },
+              label_attr = { class = "parelon-label spaceline" }
             }
           end
         }
+      end
+    }
   end
 }

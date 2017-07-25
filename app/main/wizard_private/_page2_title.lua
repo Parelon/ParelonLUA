@@ -4,7 +4,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-3 col-sm-4 col-xs-12 spaceline text-center" },
+      attr = { class = "col-md-3 col-sm-4 col-xs-12 text-center spaceline" },
       content = function()
         ui.tag {
           tag = "a",

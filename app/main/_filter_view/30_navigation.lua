@@ -205,11 +205,8 @@ slot.select('navbar', function()
                 }
               end
             }
-
-
-          end
+            end
         }
-
       end
     }
   end)
@@ -238,10 +235,15 @@ slot.select("footer_bs", function()
     end
     slot.put(" &middot; ")
     ui.tag { content = _ "This site is using" }
-    slot.put(" ")
+    slot.put("&nbsp;")
     ui.link {
       text = _ "LiquidFeedback",
       external = "http://www.public-software-group.org/liquid_feedback"
+    }
+    slot.put("&nbsp;")
+    ui.link {
+      text = _ "Parlamento Elettronico Online",
+      external = "http://www.parelon.com"
     }
 
   end)

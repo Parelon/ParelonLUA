@@ -1,4 +1,4 @@
-
+error("disabled")
 local initiative = param.get("initiative", "table")
 
 local show_as_head = param.get("show_as_head", atom.boolean)

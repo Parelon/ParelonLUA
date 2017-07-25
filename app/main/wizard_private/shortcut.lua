@@ -196,7 +196,7 @@ ui.form {
     }
 
 --    execute.view {
---      module = "wizard",
+--      module = "wizard_private",
 --      view = "_page_summary_initiative_media",
 --      params = {
 --        resource = resource,

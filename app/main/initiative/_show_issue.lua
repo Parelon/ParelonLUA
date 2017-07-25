@@ -24,25 +24,8 @@ ui.container {
         }
       end
     }
-
     ui.container {
       attr = { class = "row spaceline" },
-      content = function()
-        ui.container {
-          attr = { class = "col-md-3 label label-info" },
-          content = function()
-            ui.heading {
-              level = 3,
-              attr = { class = "" },
-              content = _ "Brief description"
-            }
-          end
-        }
-      end
-    }
-
-    ui.container {
-      attr = { class = "row" },
       content = function()
         ui.container {
           attr = { class = "col-md-12 well-inside paper" },
@@ -64,7 +47,6 @@ ui.container {
         }
       end
     }
-
     ui.container {
       attr = { class = "row spaceline" },
       content = function()

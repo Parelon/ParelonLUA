@@ -26,11 +26,15 @@ local routing = {
 
 if not initiative.issue.fully_frozen and not initiative.issue.closed then
   if supporter then
+    ui.container {
+      attr = { class = "row spaceline text-right" },
+      content = function()
         if not supporter:has_critical_opinion() then
           ui.container {
-            attr = { class = "col-md-3" },
+            attr = { class = "col-md-9" },
             content = function()
               ui.image {
+                attr = { style = "height: 70px" },
                 static = "png/thumb_up.png"
               }
               if initiative.issue.closed then
@@ -42,7 +46,7 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
           }
         else
           ui.container {
-            attr = { class = "col-md-3" },
+            attr = { class = "col-md-9 potential_supporter" },
             content = function()
               ui.image {
                 static = "thumb_up.png"
@@ -55,11 +59,8 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
             end
           }
         end
-        ui.container {
-          attr = { class = "col-md-3" },
-          content = function()
         ui.link {
-          attr = { class = "label label-inverse fixclick text-center" },
+          attr = { class = "col-md-3 label label-inverse fixclick text-center" },
           text = _ "Withdraw",
           module = "initiative",
           action = "remove_support",
@@ -67,17 +68,20 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
           routing = routing,
           partial = partial
         }
-          end
-        }
+      end
+    }
     --slot.put(") ")
   elseif not initiative.revoked and app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id) then
+    ui.container {
+      attr = { class = "row spaceline spaceline-bottom" },
+      content = function()
         ui.container {
-          attr = { class = "col-md-3" },
+          attr = { class = "col-md-12" },
           content = function()
             local params = param.get_all_cgi()
             params.dyn = nil
             ui.link {
-              attr = { class = "btn btn-primary btn-large fixclick" },
+              attr = { class = "btn btn-primary btn-large btn_size_fix fixclick h3 text-center" },
               text = _ "Support this initiative",
               module = "initiative",
               action = "add_support",
@@ -87,18 +91,23 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
             }
           end
         }
+      end
+    }
   end
 end
 
 if not initiative.issue.closed then
   local ignored_initiative = IgnoredInitiative:by_pk(app.session.member.id, initiative.id)
+  ui.container {
+    attr = { class = "row" },
+    content = function()
       ui.container {
-        attr = { class = "col-md-3" },
+        attr = { class = "col-md-12" },
         content = function()
           if ignored_initiative then
             slot.put("&nbsp;&nbsp;&nbsp;", _ "You don't want updates", "&nbsp;&nbsp;&nbsp;")
             ui.link {
-              attr = { class = "text-center btn btn-primary btn-large fixclick" },
+              attr = { class = "text-center btn btn-primary btn-large btn_size_fix fixclick h3" },
               text = _ "Receive updates",
               module = "initiative",
               action = "update_ignore",
@@ -116,7 +125,7 @@ if not initiative.issue.closed then
             }
           else
             ui.link {
-              attr = { class = "text-center btn btn-primary btn-large fixclick" },
+              attr = { class = "text-center btn btn-primary btn-large btn_size_fix fixclick h3" },
               text = _ "Mute updates",
               module = "initiative",
               action = "update_ignore",
@@ -134,5 +143,6 @@ if not initiative.issue.closed then
           end
         end
       }
+    end
+  }
 end
-

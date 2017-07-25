@@ -38,33 +38,66 @@ ui.container {
                   }
                 elseif initiative.issue.fully_frozen and initiative.issue.closed or initiative.admitted == false then
                   ui.field.rank { attr = { class = "rank" }, value = initiative.rank, eligible = initiative.eligible }
+                elseif app.session.member then
+                  -- Get member checked events for initiative
+                  local checked_events = Event:new_selector():join("checked_event", nil, "checked_event.event_id = event.id"):add_where { "checked_event.member_id = ?", for_member.id }:exec()
+
+                  local checked_events_ids = {}
+                  for i, checked_event in ipairs(checked_events) do
+                    checked_events_ids[#checked_events_ids + 1] = checked_event.id
+                  end
+
+                  local chkids
+                  if #checked_events_ids == 0 then
+                    chkids = 0
+                  else
+                    chkids = table.concat(checked_events_ids, ", ")
+                  end
+                  -- Get member unchecked events for initiative
+                  local unchecked_events = Event:new_selector()
+                  :add_where { "event.initiative_id = ? AND event.occurrence > ? AND event.id NOT IN (" .. chkids .. ")", initiative.id, app.session.member.activated }
+                  :exec()
+                  if #unchecked_events > 0 then
+                    ui.container {
+                      attr = { class = "event_star_out_box", style = "position: absolute; z-index: 1" },
+                      content = function()
+                        ui.container {
+                          attr = { class = "event_star_in_box" },
+                          content = function()
+                            if #unchecked_events == 1 and unchecked_events[1].event == "initiative_created_in_new_issue" then
+                              ui.container {
+                                attr = { class = "event_star_txt_box" },
+                                content = function()
+                                  ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = _"New" }
+                                end
+                              }
+                              ui.image { attr = { class = "event_star" }, static = "svg/event_star_green.svg" }
+                            else
+                              ui.container {
+                                attr = { class = "event_star_txt_box" },
+                                content = function()
+                                  ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = #unchecked_events .. " " .. _ "Events" }
+                                end
+                              }
+                              ui.image {
+                                attr = { class = "event_star", style = "z-index: 2" },
+                                static = "svg/event_star_red.svg"
+                              }
+                            end
+                          end
+                        }
+                      end
+                    }
+                    -- Check events
+                    execute.action { module = "event", action = "check", params = { unchecked_events = unchecked_events, member_id = for_member.id } }
+                  end
                 end
               end
             }
 
             if for_details and app.session.member then
-              -- Get member checked events for initiative
-              local checked_events = Event:new_selector():join("checked_event", nil, "checked_event.event_id = event.id"):add_where { "checked_event.member_id = ?", for_member.id }:exec()
-
-              local checked_events_ids = {}
-              for i, checked_event in ipairs(checked_events) do
-                checked_events_ids[#checked_events_ids + 1] = checked_event.id
-              end
-
-              local chkids
-              if #checked_events_ids == 0 then
-                chkids = 0
-              else
-                chkids = table.concat(checked_events_ids, ", ")
-              end
-
-              trace.debug("checked_events_ids = " .. chkids)
-
-              -- Get member unchecked events for initiative
-              local unchecked_events = Event:new_selector():add_where { "event.initiative_id = ? AND event.occurrence > ? AND event.id NOT IN (" .. chkids .. ")", initiative.id, app.session.member.activated }:exec()
-
               ui.container {
-                attr = { class = "col-md-6 col-xs-12 col-sm-6" },
+                attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" },
                 content = function()
                   ui.container {
                     attr = { class = "row" },
@@ -77,38 +110,6 @@ ui.container {
                         level = 1,
                         attr = { class = class },
                         content = function()
-                          if #unchecked_events > 0 then
-                            ui.container {
-                              attr = { class = "event_star_out_box", style = "position: absolute; z-index: 1" },
-                              content = function()
-                                ui.container {
-                                  attr = { class = "event_star_in_box" },
-                                  content = function()
-                                    if #unchecked_events == 1 and unchecked_events[1].event == "initiative_created_in_new_issue" then
-                                      ui.container {
-                                        attr = { class = "event_star_txt_box" },
-                                        content = function()
-                                          ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = _"New" }
-                                        end
-                                      }
-                                      ui.image { attr = { class = "event_star" }, static = "svg/event_star_green.svg" }
-                                    else
-                                      ui.container {
-                                        attr = { class = "event_star_txt_box" },
-                                        content = function()
-                                          ui.tag { tag = "span", attr = { class = "event_star_txt" }, content = #unchecked_events .. " " .. _ "Events" }
-                                        end
-                                      }
-                                      ui.image {
-                                        attr = { class = "event_star", style = "z-index: 2" },
-                                        static = "svg/event_star_red.svg"
-                                      }
-                                    end
-                                  end
-                                }
-                              end
-                            }
-                          end
                           local name = (initiative.title or _"Initiative without title")
                           local class = ""
                           if initiative.name_highlighted then
@@ -123,21 +124,28 @@ ui.container {
                   }
                   ui.container {
                     attr = { class = "row" },
+                    content = function()
+                      ui.container {
+                        attr = { class = "col-md-12" },
                         content = function()
-                          ui.heading { level = 5, attr = { style = "font-style: italic;text-align:justify; margin-right:25px;" }, content = function()
-                          if initiative.brief_description == "" then
-                          slot.put(_"Initiative without abstract")
-                           else
-                            slot.put(initiative.brief_description)
-                          end
+                          ui.tag 
+                          {
+                            tag="textarea",
+                            attr = {
+                              class = "h5 text-center paper",
+                              disabled = "true",
+                              style = "font-style: italic; width: 96%; border: unset; resize: unset;",
+                              rows = "4",
+                              maxlength = "300"
+                            },
+                            content = (initiative.brief_description or _"Initiative without abstract")
+                          }
                         end
                       }
                     end
                   }
-                 end
+                end
               }
-              -- Check events
-              execute.action { module = "event", action = "check", params = { unchecked_events = unchecked_events, member_id = for_member.id } }
             else
               ui.container {
                 attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" },
@@ -161,6 +169,34 @@ ui.container {
                             name = encode.html(initiative.shortened_name)
                           end
                           slot.put(name)
+                        end
+                      }
+                    end
+                  }
+                  ui.container {
+                    attr = { class = "row" },
+                    content = function()
+                      ui.container {
+                        attr = { class = "col-md-12 col-sm-9 col-xs-8 spaceline" },
+                        content = function()
+                          ui.tag 
+                          {
+                            tag="textarea",
+                            attr = {
+                              class = "h5 text-justify paper",
+                              disabled = "true",
+                              style = "font-style: italic; width: 96%; border: unset; resize: unset;",
+                              rows = "4",
+                              maxlength = "300"
+                            },
+                            content = function()
+                              if initiative.brief_description == "" then
+                                slot.put(_"Initiative without abstract")
+                              else
+                                slot.put(initiative.brief_description)
+                              end
+                            end
+                          }            
                         end
                       }
                     end
@@ -199,7 +235,6 @@ ui.container {
                       end
                     }
                     if for_details then
-
                       ui.heading { level = 6, attr = { class = "votes_count_txt" }, content = a .. " " .. _ "Yes" .. " / " .. c .. " " .. _ "No" }
                     end
                   else
@@ -258,7 +293,6 @@ ui.container {
                 end
               end
             }
-
             ui.container {
               attr = { class = "col-md-2 text-center" },
               content = function()
@@ -271,7 +305,6 @@ ui.container {
                 }
               end
             }
-
           end
         }
       end

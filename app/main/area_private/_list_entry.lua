@@ -5,43 +5,29 @@ local create = param.get("create", atom.boolean) or false
     ui.container {
       attr = { class = "row well-inside text-center" },
       content = function()
---            ui.container {
---              attr = { class = "col-md-6" },
---              content = function()
- --               execute.view { module = "area", view = "_head", params = { area = area, hide_unit = true, show_content = true, member = member, create = create } }
---              end
---            }
             if create then
               if app.session.member.elected then
-          ui.container {
-              attr = { class = "col-md-6 col-md-offset-3" },
+            ui.container {
+             attr = { class = "col-md-8 col-md-offset-2" },
               content = function()
-                ui.link {
-                  module = "wizard_private",
-                  view = "shortcut",
-                  params = { area_id = area.id },
-                  attr = { class = "btn btn-primary unit-btn spaceline" },
-                  image = { attr = { class = "icon-large" }, static = image},
-                  content = function()
-                    -- ui.heading { level = 3, content = _ "AREA " .. area.id }
-                    if area.unit.image then
-                      slot.put(area.unit.image)
-                    else
-                      ui.image { attr = { class = "icon-large" }, static = "png/discussion.png" }
-                    end
-                    ui.heading { level = 2, content = _ "" .. area.unit.name }
-                  end
-                }
+                ui.heading { attr = { class = "spaceline2" }, level = 2, content = _ "Area Tematica: "}
+                execute.view { module = "area", view = "_head", params = { area = area, hide_unit = true, show_content = true, member = member, create = create } }
               end
             }
           else
-            ui.heading { attr = { class = "spaceline" }, level = 2, content = _ "Area Tematica: " .. area.name }
-ui.heading { level = 3, content = _ "Raises a problem or issue that concerns this topic, and proposes a solution."}
             ui.container {
-              attr = { class = "col-md-6 col-md-offset-3" },
-              content = function()              
+             attr = { class = "col-md-8 col-md-offset-2" },
+              content = function()
+                ui.heading { attr = { class = "spaceline2" }, level = 2, content = _ "Unità territoriale o tavolo di lavoro: " .. area.unit.name }
+                ui.heading { attr = { class = "spaceline2" }, level = 2, content = _ "Area Tematica: "}
+                execute.view { module = "area", view = "_head", params = { area = area, hide_unit = true, show_content = true, member = member, create = create } }
+              end
+            }
+            ui.container {
+              attr = { class = "col-md-8 col-md-offset-2 " },
+              content = function() 
                 ui.link {
-                  module = "wizard_private",
+                  module = "wizard",
                   view = "page1",
                   params = { area_id = area.id },
                   attr = { class = "btn btn-primary unit-btn text-center spaceline" },
@@ -52,21 +38,31 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
                     else
                       ui.image { attr = { class = "icon-large" }, static = "png/discussion.png" }
                     end
-                    ui.heading { level = 2, content = _ "" .. area.unit.name }				                                    
+                    ui.heading { level = 4, content = _ "Raises a problem or issue that concerns this topic, and proposes a solution."}
+
                   end
                 }
               end
             }                
               end
-            else
+            else             
+            end
             ui.container {
-              attr = { class = "col-md-6" },
+              attr = { class = "col-md-12 text-center" },
+              content = function() 
+            --          end }
+            --        end }
+ --           ui.tag {attr = { class = "h2 spaceline-bottom" },content = _ "Issues:" }
+            if not create then
+            ui.container {
+              attr = { class = "col-md-2 label spaceline2" },
               content = function()               
+                  ui.heading { attr = { class = "spaceline" }, level = 3, content = _ "Unità territoriali o tavoli di lavoro: "}
                   ui.link {
                     module = "area",
                     view = "show",
                     id = area.id,
-                    attr = { class = "label label-info-u spaceline" },
+                    attr = { class = "spaceline" },
                     --image = {attr = { class = "img-unit" }, static = image},
                     content = function()
                       --  ui.heading { level = 3, content = _ "AREA " .. area.id }
@@ -80,14 +76,19 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
                   }
                 end
               }              
-            end
+              
+              
+
             ui.container {
-              attr = { class = "col-md-12 text-center" },
-              content = function() 
-            --          end }
-            --        end }
- --           ui.tag {attr = { class = "h2 spaceline-bottom" },content = _ "Issues:" }
-            if not create then
+             attr = { class = "col-md-10" },
+              content = function()
+                ui.heading { attr = { class = "spaceline2" }, level = 2, content = _ "Area Tematica: "}
+                execute.view { module = "area", view = "_head", params = { area = area, hide_unit = true, show_content = true, member = member, create = create } }
+              end
+            }
+            ui.container {
+             attr = { class = "col-md-12" },
+              content = function()
               ui.link {
                 attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
                 module = "area",
@@ -98,7 +99,7 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
               }
               ui.link {
                 attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-                module = "area_private",
+                module = "area",
                 view = "show",
                 id = area.id,
                 params = { state = "discussion" },
@@ -106,7 +107,7 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
               }
               ui.link {
                 attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-                module = "area_private",
+                module = "area",
                 view = "show",
                 id = area.id,
                 params = { state = "verification" },
@@ -114,7 +115,7 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
               }
               ui.link {
                 attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-                module = "area_private",
+                module = "area",
                 view = "show",
                 id = area.id,
                 params = { state = "voting" },
@@ -122,7 +123,7 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
               }
               ui.link {
                 attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-                module = "area_private",
+                module = "area",
                 view = "show",
                 id = area.id,
                 params = { state = "finished" },
@@ -130,12 +131,14 @@ ui.heading { level = 3, content = _ "Raises a problem or issue that concerns thi
               }
               ui.link {
                 attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-                module = "area_private",
+                module = "area",
                 view = "show",
                 id = area.id,
                 params = { state = "canceled" },
                 text = _("#{count} canceled", { count = area.issues_canceled_count })
-              } 
+              }
+              end
+            }
           end
         end
       }

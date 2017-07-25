@@ -16,6 +16,23 @@ local resource = param.get("resource", atom.string)
 local sociallink = param.get("sociallink", atom.string)
 local archivecloud = param.get("archivecloud", atom.string)
 
+-- trace di controllo sui valori dei parametri
+trace.debug("issue_id: " .. tostring(issue_id))
+trace.debug("area_id: " .. tostring(area.id))
+trace.debug("policy_id: " .. tostring(policy_id))
+trace.debug("issue_title: " .. issue_title)
+trace.debug("issue_brief_description: " .. issue_brief_description)
+trace.debug("issue_keywords: " .. (issue_keywords and issue_keywords or "none"))
+trace.debug("problem_description: " .. problem_description)
+trace.debug("aim_description: " .. aim_description)
+trace.debug("initiative_title: " .. initiative_title)
+trace.debug("initiative_brief_description: " .. initiative_brief_description)
+trace.debug("draft: " .. draft)
+trace.debug("technical_areas: " .. (technical_areas and technical_areas or "none"))
+trace.debug("resource: " .. (resource and resource or "none"))
+trace.debug("sociallink: " .. (sociallink and sociallink or "none"))
+trace.debug("archivecloud: " .. (archivecloud and sociallink or "none"))
+
 ui.title(
   function()
     execute.view {
@@ -49,45 +66,45 @@ ui.form {
     sociallink = sociallink
   },
   content = function()
-        ui.container {
-          attr = {
-            class = "well-blue panel-group",
-            id = "accordion",
-            role = "tablist",
-            ariamultiselectable = "true"
-            },
-          content = function()
-            execute.view {
-              module = "wizard_private",
-              view = "_page2_issue_title",
-              params = { issue_title = issue_title }
-            }
-
-            execute.view {
-              module = "wizard_private",
-              view = "_page2_issue_abstract",
-              params = { issue_brief_description = issue_brief_description }
-            }
-
-            execute.view {
-              module = "wizard_private",
-              view = "_page2_issue_description",
-              params = { problem_description = problem_description }
-            }
-
-            execute.view {
-              module = "wizard_private",
-              view = "_page2_issue_aim",
-              params = { aim_description = aim_description }
-            }
-
-            execute.view {
-              module = "wizard_private",
-              view = "_page2_issue_keywords",
-              params = { issue_keywords = issue_keywords }
-            }
-          end
+    ui.container {
+      attr = {
+        class = "well-blue panel-group",
+        id = "accordion",
+        role = "tablist",
+        ariamultiselectable = "true"
+      },
+      content = function()
+        execute.view {
+          module = "wizard_private",
+          view = "_page2_issue_title",
+          params = { issue_title = issue_title }
         }
+
+        execute.view {
+          module = "wizard_private",
+          view = "_page2_issue_abstract",
+          params = { issue_brief_description = issue_brief_description }
+        }
+
+        execute.view {
+          module = "wizard_private",
+          view = "_page2_issue_description",
+          params = { problem_description = problem_description }
+        }
+
+        execute.view {
+          module = "wizard_private",
+          view = "_page2_issue_aim",
+          params = { aim_description = aim_description }
+        }
+
+        execute.view {
+          module = "wizard_private",
+          view = "_page2_issue_keywords",
+          params = { issue_keywords = issue_keywords }
+        }
+      end
+    }
     ui.script { type = "text/javascript", script = "function collapseAll() { $('#issue_title').collapse('hide'); $('#issue_abstract').collapse('hide'); $('#issue_description').collapse('hide'); $('#issue_aim').collapse('hide'); $('#issue_keywords').collapse('hide'); }" }
   end
 }

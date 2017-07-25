@@ -58,28 +58,28 @@ ui.container {
         elseif issue.state == "canceled_no_initiative_admitted" then
           image = "delete"
         end
-      ui.container {
-      attr = { class = "col-md-2 col-sm-3 col-xs-4" },
-      content = function()
-        ui.image { attr = { class = "icon-big label-notice spaceline spaceline-bottom" }, static = "png/" .. image ..".png" }
-      end
-    }
-      ui.container {
-      attr = { class = "col-md-10 col-sm-9 col-xs-8 spaceline" },
-      content = function()    
-        ui.heading {
-          attr = { class = "text-justify", style = "font-style: italic" },
-          level = 5,
+        ui.container {
+          attr = { class = "col-md-2 col-sm-3 col-xs-4" },
           content = function()
-            if issue.brief_description == "" then
-              slot.put(_ "Issue without abstract")
-            else
-              slot.put(issue.brief_description)
-            end
-          end          
+            ui.image { attr = { class = "icon-big label-notice spaceline spaceline-bottom" }, static = "png/" .. image ..".png" }
+          end
         }
-      end
-    }
+        ui.container {
+          attr = { class = "col-md-10 col-sm-9 col-xs-8 spaceline" },
+          content = function()    
+            ui.heading {
+              attr = { class = "text-justify", style = "font-style: italic" },
+              level = 5,
+              content = function()
+                if issue.brief_description == "" then
+                  slot.put(_ "Issue without abstract")
+                else
+                  slot.put(issue.brief_description)
+                end
+              end          
+            }
+          end
+        }
       end
     }
 

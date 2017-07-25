@@ -7,7 +7,7 @@ ui.title(function()
       attr = { class = "row" },
       content = function()
         ui.container {
-          attr = { class = "col-md-3 text-left" },
+          attr = { class = "col-md-1 text-left" },
           content = function()
             ui.link {
               attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
@@ -20,7 +20,7 @@ ui.title(function()
           end
         }
         ui.container {
-          attr = { class = "col-md-8 text-center spaceline2 label label-warning fittext1" },
+          attr = { class = "col-md-7 text-center spaceline2 label label-warning fittext1" },
           content = function()
             ui.heading {
               level = 1,
@@ -86,19 +86,19 @@ ui.form {
             end
           end
         },
-        {
-          field_attr = { class = "col-md-1 text-center spaceline spaceline-bottom" },
-          label_attr = { class = "col-md-1 text-center" },
-          content = function(record)
-            ui.link {
-              attr = { class = "action" },
-              text = _ "Show",
-              module = "initiative",
-              view = "show",
-              id = record.id
-            }
-          end
-        },
+--        {
+--          field_attr = { class = "col-md-1 text-center spaceline spaceline-bottom" },
+--          label_attr = { class = "col-md-1 text-center" },
+--          content = function(record)
+--            ui.link {
+--              attr = { class = "action" },
+--              text = _ "Show",
+--              module = "initiative",
+--              view = "show",
+--              id = record.id
+--            }
+--          end
+--        },
         {
           field_attr = { class = "col-md-2 text-center spaceline spaceline-bottom" },
           label_attr = { class = "col-md-2 text-center" },

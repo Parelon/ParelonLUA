@@ -31,7 +31,7 @@ ui.container {
 
 if show_content then
   ui.container {
-    attr = { class = "row spaceline spaceline-bottom" },
+    attr = { class = "row spaceline" },
     content = function()
       -- actions (members with appropriate voting right only)
       if member then
