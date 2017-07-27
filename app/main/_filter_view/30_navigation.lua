@@ -240,7 +240,7 @@ slot.select("footer_bs", function()
       text = _ "LiquidFeedback",
       external = "http://www.public-software-group.org/liquid_feedback"
     }
-    slot.put("&nbsp;")
+    slot.put(" &middot; ")
     ui.link {
       text = _ "Parlamento Elettronico Online",
       external = "http://www.parelon.com"

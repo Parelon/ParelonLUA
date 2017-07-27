@@ -100,7 +100,7 @@ elseif state == "admission" then
     default_interest = 'any',
     interest = { { "any", "not_interested", "interested", "initiated" }, { "supported", "potentially_supported", "voted" } }
   }
-end]]
+end
 
 if state == "development" then
   execute.chunk {
@@ -116,7 +116,7 @@ if state == "development" then
       ftl_btns = ftl_btns
     }
   }
-end
+end]]
 
 execute.view {
   module = "area_private",

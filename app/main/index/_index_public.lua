@@ -12,7 +12,7 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "text-center col-md-8 offset2 well-title" },
+      attr = { class = "col-md-offset-2 col-md-8 well-title" },
       content = function()
         ui.container {
           attr = { class = "row" },
@@ -22,9 +22,7 @@ ui.container {
               content = function()
                 ui.heading {
                   level = 1,
-                  content = function()
-                    slot.put(_ "Comunica Democrazia partecipata")
-                  end
+                  content = "Parlamento Elettronico Online"
                 }
               end
             }
@@ -55,26 +53,38 @@ ui.container {
   attr = { class = "row" },
   content = function()
     ui.container {
-      attr = { class = "col-md-6 col-md-offset-3 well" },
+      attr = { class = "col-md-12" },
+      content = function()
+        slot.put("<hr/>")
+      end
+    }
+  end
+}
+
+ui.container {
+  attr = { class = "row spaceline" },
+  content = function()
+    ui.container {
+      attr = { class = "col-md-6 well" },
       content = function()
         execute.view {  module = 'index', view = 'login', params = { module = 'index', view = 'index', id = param.get_id() } }
       end
     }
-    ui.container {
-      attr = { id = "registration-info", class = "row" },
-      content = function()
 
+    ui.container {
+      attr = { id = "registration-info", class = "col-md-6 text-center" },
+      content = function()
         ui.container {
-          attr = { class = "row text-center" },
+          attr = { class = "row spaceline2" },
           content = function()
             ui.container {
-              attr = { id = "registration", class = "col-md-12" },
+              attr = { class = "col-md-12" },
               content = function()
                 ui.container {
-                  attr = { class = "row text-center" },
+                  attr = { class = "row" },
                   content = function()
                     ui.tag {
-                      attr = { class = "col-md-12 text-center" },
+                      attr = { class = "col-md-12" },
                       content = function()
                         ui.tag { tag = "p", content = _ "Possiedi gia' un codice di invito? Clicca qui:" }
                       end
@@ -82,17 +92,17 @@ ui.container {
                   end
                 }
                 ui.container {
-                  attr = { class = "row text-center" },
+                  attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { id = "registration", class = "col-md-12 spaceline" },
+                      attr = { id = "registration", class = "col-md-12" },
                       content = function()
                         ui.link {
                           attr = { class = "btn btn-primary btn-large fixclick" },
                           module = "index",
                           view = "register",
                           content = function()
-                            ui.heading { level = 3, content = _ "Registrati" }
+                            ui.heading { level = 3, content = "Registrati" }
                           end
                         }
                       end
@@ -103,18 +113,18 @@ ui.container {
             }
           end
         }
-
+        
         ui.container {
-          attr = { class = "row text-center" },
+          attr = { class = "row spaceline2" },
           content = function()
             ui.container {
-              attr = { id = "lost_password", class = "col-md-12" },
+              attr = { class = "col-md-12" },
               content = function()
                 ui.container {
-                  attr = { class = "row text-center" },
+                  attr = { class = "row" },
                   content = function()
                     ui.tag {
-                      attr = { class = "col-md-12 text-center" },
+                      attr = { class = "col-md-12" },
                       content = function()
                         ui.tag { tag = "p", content = _ "Hai smarrito la password? Clicca qui:" }
                       end
@@ -122,7 +132,7 @@ ui.container {
                   end
                 }
                 ui.container {
-                  attr = { class = "row text-center" },
+                  attr = { class = "row" },
                   content = function()
                     ui.container {
                       attr = { id = "lost_password", class = "col-md-12 spaceline-bottom" },

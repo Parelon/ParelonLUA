@@ -100,7 +100,7 @@ elseif state == "admission" then
     default_interest = 'any',
     interest = { { "any", "not_interested", "interested", "initiated" }, { "supported", "potentially_supported", "voted" } }
   }
-end]]
+end
 
 if state == "development" then
   execute.chunk {
@@ -116,14 +116,13 @@ if state == "development" then
       ftl_btns = ftl_btns
     }
   }
-end
+end]]
 
 execute.view {
   module = "area",
   view = "_show_order_filters",
   params = { area = area, state = state, orderby = orderby, desc = desc }
 }
-
 
 ui.container {
   attr = { id = "issues_box", class = "row spaceline" },

@@ -34,7 +34,7 @@ local filters = execute.load_chunk {
 
 filters.content = function()
   ui.paginate {
-    per_page = tonumber(param.get("per_page") or 25),
+    per_page = tonumber(param.get("per_page") or 5),
     selector = issues_selector,
     content = function()
       local highlight_string = param.get("highlight_string", "string")
