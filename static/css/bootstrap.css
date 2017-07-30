@@ -3200,3 +3200,12 @@ to{background-position:0 0;}
   padding: 10px;
 }
 .icon-big{max-width: 70px;}
+.btn-prof {
+  width: 260px;
+  padding: 10px;
+  text-align: center;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}

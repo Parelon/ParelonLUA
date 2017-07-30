@@ -10,56 +10,57 @@ local units = app.session.member
 ui.container {
   attr = { class = "well" },
   content = function()
-    ui.container {
-      attr = { class = "row" },
-      content = function()
-        ui.heading {
-          level = 3,
-          attr = { class = "col-md-2 col-sm-2 col-xs-12 spaceline" },
-          content = _"I want to see areas in: "
+        ui.container {
+          attr = { class = "row" },
+          content = function()
+            ui.heading {
+              level = 3,
+              attr = { class = "col-md-2 col-sm-2 col-xs-12 spaceline" },
+              content = _"I want to see areas in: "
+            }
+
+            local class = "col-md-3 col-sm-2 col-xs-12 btn btn-primary btn-large text-center spaceline"
+
+            if id == 0 then
+              ui.link {
+                attr = { class = class .. " active" },
+                module = "unit_private",
+                view = "list_areas",
+                params = { create = create, filter = filter },
+                content = _ "All my units"
+              }
+            else
+              ui.link {
+                attr = { class = class },
+                module = "unit_private",
+                view = "list_areas",
+                params = { create = create, filter = filter },
+                content = _ "All my units"
+              }
+            end
+
+            for i,unit in ipairs(units) do
+              if unit.id == id then
+                ui.link {
+                  attr = { class = class .. " active" },
+                  module = "unit_private",
+                  view = "list_areas",
+                  id = unit.id,
+                  params = { create = create, filter = filter },
+                  content = unit.name
+                }
+              else
+                ui.link {
+                  attr = { class = class },
+                  module = "unit_private",
+                  view = "list_areas",
+                  id = unit.id,
+                  params = { create = create, filter = filter },
+                  content = unit.name
+                }
+              end            
+            end
+          end
         }
-        local class = "col-md-3 col-sm-2 col-xs-12 btn btn-primary btn-large text-center spaceline"
-
-        if id == 0 then
-          ui.link {
-            attr = { class = class .. " active" },
-            module = "unit_private",
-            view = "list_areas",
-            params = { create = create, filter = filter },
-            content = _ "All my units"
-          }
-        else
-          ui.link {
-            attr = { class = class },
-            module = "unit_private",
-            view = "list_areas",
-            params = { create = create, filter = filter },
-            content = _ "All my units"
-          }
-        end
-
-        for i,unit in ipairs(units) do
-          if unit.id == id then
-            ui.link {
-              attr = { class = class .. " active" },
-              module = "unit_private",
-              view = "list_areas",
-              id = unit.id,
-              params = { create = create, filter = filter },
-              content = unit.name
-            }
-          else
-            ui.link {
-              attr = { class = class },
-              module = "unit_private",
-              view = "list_areas",
-              id = unit.id,
-              params = { create = create, filter = filter },
-              content = unit.name
-            }
-          end            
-        end
-      end
-    }
   end
 }

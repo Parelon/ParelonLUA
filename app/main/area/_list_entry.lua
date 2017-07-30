@@ -13,9 +13,6 @@ ui.container {
       content = function()
         slot.put("<hr/>")
         if not create then      
-          ui.container {
-            attr = { class = "col-md-offset-5 col-md-2" },
-            content = function()
               ui.link {
                 attr = { class = "btn btn-primary btn-large" },
                 module = "area",
@@ -23,8 +20,6 @@ ui.container {
                 id = area.id,
                 content = _"Read all"
               }
-            end
-          }
 --          ui.container {
 --            attr = { class = "col-md-offset-2 col-md-2" },
 --            content = function()
@@ -35,9 +30,6 @@ ui.container {
 --            end
 --          }
         else
-          ui.container {
-            attr = { class = "col-md-offset-5 col-md-2" },
-            content = function()
               ui.link {
                 attr = { class = "btn btn-primary btn-large" },
                 module = "wizard",
@@ -45,8 +37,6 @@ ui.container {
                 params = { area_id = area.id },
                 content = _"Write"
               }
-            end
-          }
         end
       end
     }
