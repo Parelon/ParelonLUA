@@ -5,7 +5,7 @@ Parlamento Elettronico Online
 
 
 
-Progetto Parlamento Elettronico REGIONALE  v0.19
+Progetto Parlamento Elettronico v1.0
 
 
 GRUPPO DISCUSSIONE PUBBLICO: https://www.facebook.com/groups/discussione.parlamento.m5slazio/
@@ -13,8 +13,6 @@ GRUPPO DISCUSSIONE PUBBLICO: https://www.facebook.com/groups/discussione.parlame
 SITO WEB: http://www.parelon.it/
 
 PAGINA UFFICIALE FACEBOOK: https://www.facebook.com/ParlamentoElettronicoOnline
-
-WIKI : https://github.com/Movimento5StelleLazio/ParlamentoElettronicoM5S/wiki
 
 
 
