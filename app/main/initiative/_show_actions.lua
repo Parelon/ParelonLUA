@@ -97,126 +97,128 @@ if not issue.closed and not initiative.revoked then
       end
     }
 
-    ui.container {
-      attr = { class = "row spaceline spaceline-bottom well" },
-      content = function()
-        ui.container {
-          attr = { class = "col-md-4" },
-          content = function()
-            ui.heading {
-              level = 3,
-              attr = { class = "spaceline spaceline-bottom" },
-              content = _ "As initiator you can also do" .. ":"
-            }
-          end
-        }
-        ui.container {
-          attr = { class = "vertical col-md-8 text-right" },
-          content = function()
-            ui.container {
-              attr = { class = "row spaceline spaceline-bottom" },
-              content = function()
-                if initiator and initiator.accepted and not initiative.issue.fully_frozen and not initiative.issue.closed and not initiative.revoked then
-                  ui.link {
-                    attr = { class = "btn btn-primary large_btn" },
-                    content = _ "Invite initiator",
-                    module = "initiative",
-                    view = "add_initiator",
-                    params = { initiative_id = initiative.id }
-                  }
-                  if #initiators > 1 then
-                    slot.put("&nbsp;&nbsp;&nbsp;")
+    if initiator then
+      ui.container {
+        attr = { class = "row spaceline spaceline-bottom well" },
+        content = function()
+          ui.container {
+            attr = { class = "col-md-4" },
+            content = function()
+              ui.heading {
+                level = 3,
+                attr = { class = "spaceline spaceline-bottom" },
+                content = _ "As initiator you can also do" .. ":"
+              }
+            end
+          }
+          ui.container {
+            attr = { class = "vertical col-md-8 text-right" },
+            content = function()
+              ui.container {
+                attr = { class = "row spaceline spaceline-bottom" },
+                content = function()
+                  if initiator and initiator.accepted and not initiative.issue.fully_frozen and not initiative.issue.closed and not initiative.revoked then
                     ui.link {
                       attr = { class = "btn btn-primary large_btn" },
-                      content = _ "Remove initiator",
+                      content = _ "Invite initiator",
                       module = "initiative",
-                      view = "remove_initiator",
+                      view = "add_initiator",
                       params = { initiative_id = initiative.id }
                     }
+                    if #initiators > 1 then
+                      slot.put("&nbsp;&nbsp;&nbsp;")
+                      ui.link {
+                        attr = { class = "btn btn-primary large_btn" },
+                        content = _ "Remove initiator",
+                        module = "initiative",
+                        view = "remove_initiator",
+                        params = { initiative_id = initiative.id }
+                      }
+                    end
                   end
                 end
-              end
-            }
+              }
 
-            if initiator and not initiator.accepted then
-              ui.container {
-                attr = { class = "row spaceline spaceline-bottom" },
-                content = function()
-                  ui.link {
-                    attr = { class = "btn btn-primary large_btn btn-large" },
-                    text = _ "Cancel refuse of invitation",
-                    module = "initiative",
-                    action = "remove_initiator",
-                    params = {
-                      initiative_id = initiative.id,
-                      member_id = app.session.member.id
-                    },
-                    routing = {
-                      ok = {
-                        mode = "redirect",
-                        module = "initiative",
-                        view = "show",
-                        id = initiative.id
+              if initiator and not initiator.accepted then
+                ui.container {
+                  attr = { class = "row spaceline spaceline-bottom" },
+                  content = function()
+                    ui.link {
+                      attr = { class = "btn btn-primary large_btn btn-large" },
+                      text = _ "Cancel refuse of invitation",
+                      module = "initiative",
+                      action = "remove_initiator",
+                      params = {
+                        initiative_id = initiative.id,
+                        member_id = app.session.member.id
+                      },
+                      routing = {
+                        ok = {
+                          mode = "redirect",
+                          module = "initiative",
+                          view = "show",
+                          id = initiative.id
+                        }
                       }
                     }
-                  }
-                end
-              }
-            end
-
-            ui.container {
-              attr = { class = "row spaceline spaceline-bottom" },
-              content = function()
-                if (initiative.discussion_url and #initiative.discussion_url > 0) then
-                  if initiative.discussion_url:find("^https?://") then
-                    if initiative.discussion_url and #initiative.discussion_url > 0 then
-                      ui.link {
-                        attr = {
-                          class = "btn btn-primary large_btn",
-                          target = "_blank",
-                          title = _ "Discussion with initiators"
-                        },
-                        text = _ "Discuss with initiators",
-                        external = initiative.discussion_url
-                      }
-                      slot.put("&nbsp;&nbsp;&nbsp;")
-                    end
-                  else
-                    slot.put(encode.html(initiative.discussion_url))
                   end
-                end
-
-                if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
-                  ui.link {
-                    attr = { class = "btn btn-primary large_btn" },
-                    text = _ "change discussion URL",
-                    module = "initiative",
-                    view = "edit",
-                    id = initiative.id
-                  }
-                end
+                }
               end
-            }
-            if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
+
               ui.container {
                 attr = { class = "row spaceline spaceline-bottom" },
                 content = function()
-                  ui.link {
-                    attr = { class = "btn btn-primary large_btn" },
-                    content = _ "Revoke initiative",
-                    module = "initiative",
-                    view = "revoke",
-                    id = initiative.id,
-                    image = { attr = { class = "col-md-3 thumb img-responsive" }, static = "png/cross.png" },
-                    content = _ "Revoke initiative"
-                  }
+                  if (initiative.discussion_url and #initiative.discussion_url > 0) then
+                    if initiative.discussion_url:find("^https?://") then
+                      if initiative.discussion_url and #initiative.discussion_url > 0 then
+                        ui.link {
+                          attr = {
+                            class = "btn btn-primary large_btn",
+                            target = "_blank",
+                            title = _ "Discussion with initiators"
+                          },
+                          text = _ "Discuss with initiators",
+                          external = initiative.discussion_url
+                        }
+                        slot.put("&nbsp;&nbsp;&nbsp;")
+                      end
+                    else
+                      slot.put(encode.html(initiative.discussion_url))
+                    end
+                  end
+
+                  if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
+                    ui.link {
+                      attr = { class = "btn btn-primary large_btn" },
+                      text = _ "change discussion URL",
+                      module = "initiative",
+                      view = "edit",
+                      id = initiative.id
+                    }
+                  end
                 end
               }
+              if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
+                ui.container {
+                  attr = { class = "row spaceline spaceline-bottom" },
+                  content = function()
+                    ui.link {
+                      attr = { class = "btn btn-primary large_btn" },
+                      content = _ "Revoke initiative",
+                      module = "initiative",
+                      view = "revoke",
+                      id = initiative.id,
+                      image = { attr = { class = "col-md-3 thumb img-responsive" }, static = "png/cross.png" },
+                      content = _ "Revoke initiative"
+                    }
+                  end
+                }
+              end
             end
-          end
-        }
-      end
-    }
+          }
+        end
+      }
+    end
   else
     local direct_voter = issue.member_info.direct_voted
     local voteable = issue.state == 'voting' and

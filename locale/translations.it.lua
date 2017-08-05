@@ -119,7 +119,7 @@ return {
     ["Back to timeline"] = "Ritorna alla cronologia";
     ["Ballot of '#{member_name}' for issue ##{issue_id}"] = "Voto di '#{member_name}' per il problema ##{issue_id}";
     ["Become a member"] = "Partecipa";
-    ["Being interested"] = "Ti interessa";
+    ["Being interested"] = "Essere interessato";
     ["Bibliography"] = "Bibliografia";
     ["Birthday"] = "Data di nascita";
     ["Birthplace"] = "Luogo di nascita";
@@ -478,6 +478,7 @@ return {
     ["List all members"] = "Tutti gli iscritti";
     ["List all revisions (#{count})"] = "Elenco revisioni (#{count})";
     ["List auditors"] = "Certificatori";
+    ["List my members"] = "Registrati da me";
     ["List of issues with updates you might want to read "] = "Problemi con novità che potrebbero interessarti ";
     ["Lock member?"] = "Blocco utente?";
     ["Locked?"] = "Bloccato?";
@@ -782,7 +783,7 @@ return {
     ["Show preview"] = "Mostra anteprima";
     ["So I'm"] = "Quindi sono";
     ["Software"] = "Software";
-    ["Solution to the issue P#{id}"] = "Soluzione al problema P#{id}";
+    ["Solution to the issue P#{id}:"] = "Soluzione al problema P#{id}:";
     ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "Spiacente, questo iscritto non ha un indirizzo eMail confermato. Contattare l'amministratore per il supporto.";
     ["Sorry, but you are currently not invited"] = "Spiacente, non sei attualmente invitato come autore";
     ["Sorry, you have reached your personal flood limit. Please be slower..."] = "Spiacente, è stato raggiunto il limite personale di attività. Rallentare per favore...";
@@ -979,13 +980,14 @@ return {
     ["You are in the Round Tables"] = "Ti trovi nei Tavoli tematici";
     ["You are initiator of this initiative"] = "Sei autore di questa proposta";
     ["You are interested"] = "Sei interessato";
-    ["You are interested in this issue"] = "Sei interessato alla questione";
+    ["You are interested in this issue"] = "Sei interessato al problema";
     ["You are invited to #{count} initiative(s)"] = "Sei invitato come autore per #{count} proposta(e)";
     ["You are invited to LiquidFeedback. To register please click the following link:"] = "Sei invitato su LiquidFeedback. Per registrarti clicca sul seguente link:";
     ["You are invited to Parlamento Elettronico Online. To register please click the following link:\n\n"] = "Sei stato invitato/a a entrare in Parlamento Elettronico Online. Per registrarti clicca sul seguente indirizzo:\n\n";
     ["You are invited to become initiator of this initiative."] = "Sei stato invitato a diventare relatore di questa soluzione.";
     ["You are member"] = "Sei iscritto";
     ["You are not able to access restricted areas yet: usually this means that you forgot to confirm your email address in your personal page. If you already confirmed your email, please contact your auditor."] = "Non sei ancora abilitato all'accesso alle aree ristrette: questo di solito è dovuto al fatto che non hai ancora confermato il tuo indirizzo email nella tua pagina personale. Se lo hai già confermato e non riesci ancora ad accedere alle aree ristrette contatta il tuo certificatore.";
+    ["You are not interested in this issue"] = "Non sei interessato a questo problema";
     ["You are not participating in any of the #{count} areas in this unit"] = "Non stai partecipando a nessuna delle #{count} aree di questa divisione";    
     ["You are not participating in the only area of the unit"] = "Non stai partecipando all'unica area di questa divisione";
     ["You are now in the Public Affairs."] = "Ti trovi nell'assemblea dedicata alle politiche pubbliche.";

@@ -74,7 +74,7 @@ if app.session.member and not issue.closed then
           level = 2,
           attr = { class = "col-md-6 col-md-offset-1 spaceline spaceline-bottom" },
           content = function()            
-            slot.put( "<i>", _"Being interest", "</i> ", " ", _"in the issue doesn't mean", " <i>", _ "voting yes", "</i>: ", _ "it just means that the issue is", " <strong><i>", "worth", "</i></strong> ", _ "being discussed", ".")
+            slot.put( "<i>", _"Being interested", "</i> ", " ", _"in the issue doesn't mean", " <i>", _ "voting yes", "</i>: ", _ "it just means that the issue is", " <strong><i>", _"worth", "</i></strong> ", _ "being discussed", ".")
           end
         }
       elseif issue.state == 'voting' then
