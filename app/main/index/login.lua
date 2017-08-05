@@ -1,0 +1,122 @@
+ui.tag {
+  tag = "noscript",
+  content = function()
+    slot.put(_ "JavaScript is disabled or not available.")
+  end
+}
+
+execute.view { module = "index", view = "_lang_chooser" }
+
+ui.title(_ "Login")
+app.html_title.title = _ "Login"
+
+if config.motd_public then
+  local help_text = config.motd_public
+  ui.container {
+    attr = { class = "wiki motd" },
+    content = function()
+      slot.put(format.wiki_text(help_text))
+    end
+  }
+end
+
+if app.session:has_access("anonymous") then
+  ui.tag {
+    tag = 'p',
+    content = _ 'You need to be logged in, to use all features of this system.'
+  }
+else
+  ui.tag { tag = "p", content = _ "Closed user group, please login to participate." }
+end
+
+ui.form {
+  attr = { id = "login_div", class = "login" },
+  module = 'index',
+  action = 'login',
+  routing = {
+    ok = {
+      mode = 'redirect',
+      module = param.get("redirect_module") or "index",
+      view = param.get("redirect_view") or "index",
+      id = param.get("redirect_id"),
+      params = param.get("redirect_params")
+    },
+    error = {
+      mode = 'forward',
+      module = 'index',
+      view = 'login'
+    }
+  },
+  content = function()
+    ui.tag {
+      tag = "fieldset",
+      content = function()
+        ui.container {
+          attr = { class = "row" },
+          content = function()
+            ui.tag { tag = "legend", attr = { class = "col-md-12 text-center" }, content = _ "Insert user name and password to access:" }
+          end
+        }
+
+        ui.container {
+          attr = { class = "row spaceline" },
+          content = function()
+            ui.tag { tag = "label", attr = { class = "col-md-4" }, content = _ 'login name' }
+            ui.tag {
+              tag = "input",
+              attr = { id = "username_field", type = "text", placeholder = _ 'login name', class = "col-md-8 input-large", name = "login" },
+              content = ''
+            }
+          end
+        }
+
+        ui.container {
+          attr = { class = "row spaceline" },
+          content = function()
+            ui.tag { tag = "label", attr = { class = "col-md-4" }, content = _ 'Password' }
+            ui.script { script = 'document.getElementById("username_field").focus();' }
+            ui.tag { tag = "input", attr = { id = "password_field", type = "password", placeholder = _ 'Password', class = "col-md-8 input-large", name = "password" }, content = '' }
+          end
+        }
+
+        if config.require_2factor then
+          ui.container {
+            attr = { class = "row spaceline" },
+            content = function()
+              ui.tag { tag = "label", attr = { class = "col-md-4" }, content = _ 'OTP' }
+              ui.script { script = 'document.getElementById("username_field").focus();' }
+              ui.tag { tag = "input", attr = { id = "otp_field", type = "otp", placeholder = _ 'OTP', class = "col-md-8 input-large", name = "otp" }, content = '' }
+            end
+          }
+          ui.script { static = "js/auth.js" }
+          ui.tag {
+            tag = "a",
+            attr = { href = "javascript:void(0)", onclick="checkOtpToken();", class = "btn btn-primary btn-large large_btn spaceline fixclick" },
+            content = function()
+              ui.heading { level = 3, attr = { class = "inline-block" }, content = _ "Login" }
+            end
+          }
+        else
+          ui.container {
+            attr = { class = "row text-center  spaceline" },
+            content = function()
+              ui.container {
+                attr = { class = "col-md-6 col-md-offset-3" },
+                content = function()
+                  ui.tag {
+                    tag = "button",
+                    attr = { type = "submit", class = "btn btn-primary btn-large spaceline fixclick" },
+                    content = function()
+                      ui.heading { level = 3, attr = { class = "inline-block" }, content = _ "Login" }
+                    end
+                  }
+
+                end
+              }
+            end
+          }
+        end
+      end
+    }
+  end
+}
