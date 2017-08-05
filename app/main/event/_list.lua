@@ -41,8 +41,6 @@ filters.opened = true
 filters.selector = event_selector
 
 filters.content = function()
-
-
   local last_event_id
 
   local events = event_selector:exec()

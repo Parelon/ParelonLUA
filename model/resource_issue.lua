@@ -25,3 +25,7 @@ end
 function ResourceIssue:count_by_type(issue_id, resource_type)
     return self:new_selector():add_where{ "issue_id = ? AND type = ?", issue_id, resource_type }:count()
 end
+
+function ResourceIssue:get_video_by_issue_id(issue_id)
+  return self:new_selector():add_where { "issue_id = ? AND type LIKE 'video'", issue_id }:optional_object_mode():exec()
+end

@@ -1,5 +1,3 @@
--- TODO: rename in show.lua
-
 slot.set_layout("custom")
 
 local create = param.get("create", atom.boolean) or false

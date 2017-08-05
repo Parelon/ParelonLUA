@@ -19,14 +19,19 @@ ui.title(function()
               module = "admin",
               view = "unit_list",
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
-        ui.tag {
-          tag = "strong",
-          attr = { class = "col-md-9 text-center" },
-          content = _("Area list of '#{unit_name}'", { unit_name = unit.name })
+        ui.heading {
+          level = 1,
+          attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+          content = function()
+            ui.tag {
+              tag = "strong",
+              content = _("Area list of '#{unit_name}'", { unit_name = unit.name })
+            }
+          end
         }
       end
     }

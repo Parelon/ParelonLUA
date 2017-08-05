@@ -32,19 +32,24 @@ else
                   module = "admin",
                   view = "index",
                   image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-                  content = _ "Back to previous page"
+                  content = _ "Back"
                 }
               end
             }
-            ui.tag {
-              tag = "strong",
-              attr = { class = "col-md-9 text-center" },
-              content = _ "Download database dumps"
+            ui.heading {
+              level = 1,
+              attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+              content = function()
+                ui.tag {
+                  tag = "strong",
+                  content = _ "Download database dumps"
+                }
+              end
             }
           end
         }
       end)
-    
+
     ui.list {
       records = file_list,
       columns = {
@@ -66,7 +71,7 @@ else
       }
     }
   else
-    slot.put_into("error", "There are not database dumps available.")
+    slot.put_into("error", _ "There are not database dumps available.")
     execute.view {
       module = "admin",
       view = "index"

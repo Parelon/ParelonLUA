@@ -64,6 +64,7 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "issueTitleNext",
                             class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#issue_abstract').collapse('show');"
@@ -94,16 +95,9 @@ ui.container {
                         ui.container {
                           attr = { class = "col-md-12 text-left" },
                           content = function()
-                            ui.heading {
-                              level = 3,
-                              content = "Inserire il titolo del problema"
-                            }
-                          end
-                        }
-                        ui.container {
-                          attr = { class = "col-md-12 text-left" },
-                          content = function()
                             ui.field.text {
+                              label = _"Give your problem a title" .. ":",
+--                              label_attr = { class = "h3" },
                               name = "issue_title",
                               value = issue_title or ""
                             }
@@ -121,3 +115,6 @@ ui.container {
     }
   end
 }
+
+ui.script { script = "$('#issue_title').on('hide.bs.collapse', function() { $('#issueTitleNext').hide();});" }
+ui.script { script = "$('#issue_title').on('show.bs.collapse', function() { $('#issueTitleNext').show();});" }

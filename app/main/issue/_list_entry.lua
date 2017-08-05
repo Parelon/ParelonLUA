@@ -51,13 +51,13 @@ ui.container {
             ui.container {
               attr = { class = "col-md-2 text-right" },
               content = function()
-                ui.heading {level = 5, content = "Questione o Problema N° " .. issue.id .. " : " }
+                ui.heading {level = 5, content = _("Issue P#{id}:", {id = issue.id}) }
               end
             }
             ui.container {
               attr = { class = "col-md-8 text-center" },
               content = function()
-                ui.heading {level = 1, content = (issue.title and issue.title or _ "No title for this issue") }
+                ui.heading {level = 1, content = (issue.title and issue.title or _ "No title given") }
               end
             }
           end
@@ -93,7 +93,7 @@ ui.container {
                 rows = "2",
                 maxlength = "140"
               },
-              content = (issue.brief_description or _"Issue without abstract")
+              content = (issue.brief_description or _"No abstract given")
             }            
           end
         }
@@ -106,7 +106,7 @@ ui.container {
         ui.container {
           attr = { class = "col-md-12" },
           content = function()
-            local content = #issue.initiatives .. _ " INITIATIVES TO RESOLVE THE ISSUE"
+            local content = _("#{count} solutions proposed", {count = #issue.initiatives})
             --end
             ui.heading { level = 3, attr = { class = "label label-warning-tbox" }, content = content }
           end
@@ -175,5 +175,3 @@ ui.container {
     slot.put("<hr/>")    
   end
 }
-
-

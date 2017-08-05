@@ -40,7 +40,7 @@ ui.container {
               attr = { class = "draft_updated_info" },
               content = function()
                 slot.put(_ "The draft of this initiative has been updated!")
-                slot.put(" ")
+                slot.put("&nbsp;")
                 ui.link {
                   content = _ "Show diff",
                   module = "draft",
@@ -51,7 +51,7 @@ ui.container {
                   }
                 }
                 if not initiative.revoked then
-                  slot.put(" ")
+                  slot.put("&nbsp;")
                   ui.link {
                     text = _ "Refresh support to current draft",
                     module = "initiative",
@@ -74,17 +74,27 @@ ui.container {
 
         if not show_as_head then
           local drafts_count = initiative:get_reference_selector("drafts"):count()
-
-          execute.view {
-            module = "draft",
-            view = "_show",
-            params = {
-              draft = initiative.current_draft
-            }
+          ui.container {
+            attr = { class = "row spaceline spaceline-bottom" },
+            content = function()
+              ui.container {
+                attr = { class = "col-md-12" },
+                content = function()
+                  execute.view {
+                    module = "draft",
+                    view = "_show",
+                    params = {
+                      draft = initiative.current_draft
+                    }
+                  }
+                end
+              }
+            end
           }
+          
           if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
             ui.container {
-              attr = { class = "row" },
+              attr = { class = "row spaceline spaceline-bottom" },
               content = function()
                 ui.link {
                   attr = { class = "col-md-offset-7 btn btn-primary col-md-2 text-center" },

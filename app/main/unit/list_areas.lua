@@ -29,14 +29,14 @@ ui.title(
 execute.view { module = "unit", view = "_list_areas_partnership_filters", id = id, params = { filter = filter, create = create } }
 
 execute.view { module = "unit", view = "_list_areas_unit_filters", id = id, params = { create = create, filter = filter, unit_selector = unit_selector } }
-        
-    ui.container {
-      attr = { class = "well" },
-      content = function()       
-                execute.view {
-                  module = "area",
-                  view = "_list",
-                  params = { areas_selector = areas_selector, member = app.session.member, create = create }
-                }
-      end
+
+ui.container {
+  attr = { class = "well" },
+  content = function()       
+    execute.view {
+      module = "area",
+      view = "_list",
+      params = { areas_selector = areas_selector, member = app.session.member, create = create }
     }
+  end
+}

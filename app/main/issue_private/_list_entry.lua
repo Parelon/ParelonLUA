@@ -38,19 +38,35 @@ ui.container {
   attr = { class = "well-blue" },
   content = function()
     ui.container {
-      attr = { class = "row text-center" },
+      attr = { class = "row" },
       content = function()
         ui.container {
-          attr = { class = "col-md-10 col-md-offset-1 label label-warning" },
+          attr = { class = "label label-warning", style = "width:100%;" },
           content = function()
-            ui.heading {level = 3, content = "Questione o Problema N° " .. issue.id .. " : " }
-            ui.heading {level = 2, content = (issue.title and issue.title or _ "No title for this issue") }
+            ui.container {
+              attr = { class = "col-md-1" },
+              content = function()
+              end
+            }        
+            ui.container {
+              attr = { class = "col-md-2 text-right" },
+              content = function()
+                ui.heading {level = 5, content = "Questione o Problema N° " .. issue.id .. " : " }
+              end
+            }
+            ui.container {
+              attr = { class = "col-md-8 text-center" },
+              content = function()
+                ui.heading {level = 1, content = (issue.title and issue.title or _ "No title for this issue") }
+              end
+            }
           end
         }
       end
     }
+
     ui.container {
-      attr = { class = "row well-inside spaceline spaceline-bottom" },
+      attr = { class = "row well-inside" },
       content = function()
         local image = issue.state
         if issue.state == "finished_without_winner" or issue.state == "finished_with_winner" then
@@ -66,25 +82,26 @@ ui.container {
         }
         ui.container {
           attr = { class = "col-md-10 col-sm-9 col-xs-8 spaceline" },
-          content = function()    
-            ui.heading {
-              attr = { class = "text-justify", style = "font-style: italic" },
-              level = 5,
-              content = function()
-                if issue.brief_description == "" then
-                  slot.put(_ "Issue without abstract")
-                else
-                  slot.put(issue.brief_description)
-                end
-              end          
-            }
+          content = function()
+            ui.tag 
+            {
+              tag="textarea",
+              attr = {
+                class = "h5 text-justify paper",
+                disabled = "true",
+                style = "font-style: italic; width: 96%; border: unset; resize: unset;",
+                rows = "2",
+                maxlength = "140"
+              },
+              content = (issue.brief_description or _"Issue without abstract")
+            }            
           end
         }
       end
     }
 
     ui.container {
-      attr = { class = "row" },
+      attr = { class = "row spaceline" },
       content = function()
         ui.container {
           attr = { class = "col-md-12" },
@@ -98,7 +115,7 @@ ui.container {
           attr = { class = "row spaceline-bottom" },
           content = function()
             ui.container {
-              attr = { class = "col-md-12 well-inside paper" },
+              attr = { class = "col-md-12 well-inside paper", style = "max-height:500px; overflow:auto;" },
               content = function()
                 local initiatives_selector = issue:get_reference_selector("initiatives")
                 local highlight_string = param.get("highlight_string")
@@ -111,12 +128,11 @@ ui.container {
                   id = issue.id,
                   params = {
                     initiatives_selector = initiatives_selector,
-                    highlight_initiative = for_initiative,
-                    highlight_string = highlight_string,
-                    no_sort = true,
-                    limit = (for_listing or for_initiative) and 5 or nil,
-                    hide_more_initiatives = false,
-                    limit = 10,
+--                    highlight_initiative = for_initiative,
+--                    highlight_string = highlight_string,
+--                    no_sort = true,
+--                    limit = (for_listing or for_initiative) and 5 or nil,
+--                    hide_more_initiatives = true,
                     for_member = for_member,
                     for_details = false -- must be FALSE
                   }
@@ -126,7 +142,7 @@ ui.container {
           end
         }
         ui.container {
-          attr = { class = "row spaceline-bottom" },
+          attr = { class = "row" },
           content = function()
             ui.link {
               attr = { id = "issue_see_det_" .. issue.id, class = "col-md-12 text-center" },
@@ -154,9 +170,9 @@ ui.container {
   end
 }
 ui.container {
-  attr = { class = "row spaceline2" },
+  attr = { class = "row" },
   content = function()
-    ui.tag { tag = "hr", attr = { class = "" } }
+    slot.put("<hr/>")    
   end
 }
 

@@ -14,38 +14,38 @@ end
 ui.container {
   attr = { class = "well" },
   content = function()
+    ui.container {
+      attr = { class = "row text-center" },
+      content = function()
         ui.container {
-          attr = { class = "row text-center" },
-          content = function()
-            ui.container {
-              attr = { class = "col-md-6 col-sm-6 col-xs-12" },
-              content = function()                
-                ui.link {
-                  attr = { class = btn1 },
-                  module = "unit",
-                  view = "list_areas",
-                  params = { create = create },
-                  content = function()
-                    ui.heading { level = 3, content = _ "SHOW ALL AREAS" }
-                  end
-                }
-              end
-            }
-            ui.container {
-              attr = { class = "col-md-6 col-md-6 col-sm-6 col-xs-12" },
+          attr = { class = "col-md-6 col-sm-6 col-xs-12" },
+          content = function()                
+            ui.link {
+              attr = { class = btn1 },
+              module = "unit",
+              view = "list_areas",
+              params = { create = create },
               content = function()
-                ui.link {
-                  attr = { class = btn2 },
-                  module = "unit",
-                  view = "list_areas",
-                  params = { filter = "my_areas", create = create },
-                  content = function()
-                    ui.heading { level = 3, content = _ "MY FAVOURITE AREAS" }
-                  end
-                }
+                ui.heading { level = 3, content = _ "Show all areas" }
               end
             }
           end
         }
+        ui.container {
+          attr = { class = "col-md-6 col-md-6 col-sm-6 col-xs-12" },
+          content = function()
+            ui.link {
+              attr = { class = btn2 },
+              module = "unit",
+              view = "list_areas",
+              params = { filter = "my_areas", create = create },
+              content = function()
+                ui.heading { level = 3, content = _ "Show my favourite areas" }
+              end
+            }
+          end
+        }
+      end
+    }
   end
 }

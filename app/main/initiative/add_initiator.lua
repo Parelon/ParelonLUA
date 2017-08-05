@@ -15,7 +15,7 @@ ui.title(function()
               view = "show",
               id = initiative.id,
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }

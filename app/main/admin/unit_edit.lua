@@ -16,21 +16,31 @@ ui.title(function()
               module = "admin",
               view = "unit_list",
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
         if unit then
-          ui.tag {
-            tag = "strong",
-            attr = { class = "col-md-9 text-center" },
-            content = _("Unit: '#{name}'", { name = unit.name })
+          ui.heading {
+            level = 1,
+            attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+            content = function()
+              ui.tag {
+                tag = "strong",
+                content = _("Unit: '#{name}'", { name = unit.name })
+              }
+            end
           }
         else
-          ui.tag {
-            tag = "strong",
-            attr = { class = "col-md-9 text-center" },
-            content = _ "Add new unit"
+          ui.heading {
+            level = 1,
+            attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+            content = function()
+              ui.tag {
+                tag = "strong",
+                content = _ "Add new unit"
+              }
+            end
           }
         end
       end
@@ -77,7 +87,7 @@ ui.form {
 --        slot.put_into("data", unit.unit_avatar)
 --      end
 --    }
-    
+
     ui.field.boolean { label = _ "Active?", name = "active" }
     ui.field.boolean { label = _ "Public?", name = "public" }
 

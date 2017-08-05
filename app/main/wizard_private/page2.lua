@@ -36,7 +36,7 @@ trace.debug("archivecloud: " .. (archivecloud and sociallink or "none"))
 ui.title(
   function()
     execute.view {
-      module = "wizard_private",
+      module = "wizard",
       view = "_page2_title",
       params = { area = area }
     }
@@ -75,31 +75,31 @@ ui.form {
       },
       content = function()
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page2_issue_title",
           params = { issue_title = issue_title }
         }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page2_issue_abstract",
           params = { issue_brief_description = issue_brief_description }
         }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page2_issue_description",
           params = { problem_description = problem_description }
         }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page2_issue_aim",
           params = { aim_description = aim_description }
         }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page2_issue_keywords",
           params = { issue_keywords = issue_keywords }
         }

@@ -37,7 +37,7 @@ ui.container {
                 ui.heading {
                   level = 5,
                   content = function()
-                    ui.tag { attr = { class = "pull-right" }, tag = "small", content = "Versione 1.0" }
+                    ui.tag { attr = { class = "pull-right" }, tag = "small", content = _"Version" .. " 1.0" }
                   end
                 }
               end
@@ -86,7 +86,7 @@ ui.container {
                     ui.tag {
                       attr = { class = "col-md-12" },
                       content = function()
-                        ui.tag { tag = "p", content = _ "Possiedi gia' un codice di invito? Clicca qui:" }
+                        ui.tag { tag = "p", content = _ "If you have and invitation code click here:" }
                       end
                     }
                   end
@@ -102,7 +102,7 @@ ui.container {
                           module = "index",
                           view = "register",
                           content = function()
-                            ui.heading { level = 3, content = "Registrati" }
+                            ui.heading { level = 3, content = _"Register" }
                           end
                         }
                       end
@@ -126,7 +126,7 @@ ui.container {
                     ui.tag {
                       attr = { class = "col-md-12" },
                       content = function()
-                        ui.tag { tag = "p", content = _ "Hai smarrito la password? Clicca qui:" }
+                        ui.tag { tag = "p", content = _ "If you don't remember your password click here:" }
                       end
                     }
                   end
@@ -142,7 +142,7 @@ ui.container {
                           module = 'index',
                           view = 'reset_password',
                           content = function()
-                            ui.heading {level = 3, content = "Ripristina" }
+                            ui.heading {level = 3, content = _ "Lost password" }
                           end
                         }
                       end

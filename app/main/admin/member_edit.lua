@@ -1,5 +1,8 @@
 slot.set_layout("custom")
-
+trace.enter_action{
+  module = "admin",
+  action = "member_update"
+}
 local id = param.get_id()
 
 local member = Member:by_id(id)
@@ -16,21 +19,31 @@ ui.title(function()
               module = "admin",
               view = "member_list",
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
         if member then
-          ui.tag {
-            tag = "strong",
-            attr = { class = "col-md-9 text-center" },
-            content = _("Member: '#{identification}' (#{name})", { identification = member.identification, name = member.name })
+          ui.heading {
+            level = 1,
+            attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+            content = function()
+              ui.tag {
+                tag = "strong",
+                content = _("Member: '#{identification}' (#{name})", { identification = member.identification, name = member.name })
+              }
+            end
           }
         else
-          ui.tag {
-            tag = "strong",
-            attr = { class = "col-md-9 text-center" },
-            content = _ "Register new member"
+          ui.heading {
+            level = 1,
+            attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+            content = function()
+              ui.tag {
+                tag = "strong",
+                content = _ "Register new member"
+              }
+            end
           }
         end
       end

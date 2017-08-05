@@ -1,3 +1,5 @@
+error("disabled")
+
 local initiative = param.get("initiative", "table")
 local initiator = param.get("initiator", "table")
 local initiators_members_selector = param.get("initiators_members_selector", "table")

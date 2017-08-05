@@ -2,14 +2,14 @@ local initiative = param.get("initiative", "table")
 local initiator = param.get("initiator", "table")
 
 local title_class = ""
-local title_size = "col-md-10"
+local title_size = "col-md-10 col-md-offset-1"
 
 if initiator and initiator.accepted == nil and not initiative.issue.half_frozen and not initiative.issue.closed then
   ui.container{
     attr = { class = "initiator_invite_info" },
     content = function()
       slot.put(_"You are invited to become initiator of this initiative.")
-      slot.put(" ")
+      slot.put("&nbsp;")
       ui.link{
         attr = { class = "btn btn-primary btn_xlarge h3 text-center" },
         image  = { static = "icons/16/tick.png" },
@@ -88,7 +88,7 @@ ui.container {
           content = function()
             ui.heading {
               level = 1,
-              content = (initiative.name or _ "No title for the initiative!")
+              content = (initiative.name or _ "No title for the initiative")
             }
           end
         }
@@ -110,7 +110,7 @@ ui.container {
             ui.container {
               attr = { class = "row" },
               content = function()
-                ui.image { attr = { class = "icon-medium  spaceline spaceline-bottom" }, static = "png/tutor.png" }
+                ui.image { attr = { class = "icon-medium spaceline spaceline-bottom" }, static = "png/tutor.png" }
               end
             }
           end

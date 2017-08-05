@@ -14,11 +14,11 @@ ui.container {
     ui.container {
       attr = { class = "col-md-2 label" },
       content = function()
---        if create then
-        ui.image { attr = { class = "icon-large" }, static = "png/documentation.png" }
---        else
---          ui.image { static = "png/" .. area.unit.name .. ".png" }
---        end
+        if create then
+          ui.image { attr = { class = "icon-large" }, static = "png/documentation.png" }
+        else
+          ui.image { static = "png/" .. area.unit.name .. ".png" }
+        end
         ui.heading { level = 2, content = area.unit.name }
       end
     }

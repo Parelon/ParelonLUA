@@ -11,59 +11,98 @@ ui.container {
     }
   end
 }
-
 ui.container {
-  attr = { class = "row well" },
-  content = function() 
+  attr = { class = "well" },
+  content = function()
     ui.container {
-      attr = { class = "text-center spaceline spaceline-bottom" },
+      attr = { class = "row" },
       content = function()
-        if #issue.initiatives == 1 then
-          content = _ "initiative"
-        else
-          content = _ "initiatives"
-        end
-
-        ui.tag {
+        ui.container {
+          attr = { class = "col-md-12 text-center" },
           content = function()
-            if issue.state == 'admission' then
-              slot.put(_("Vi sono attualmente #{count} proposte per risolvere la questione sollevata.<br />Leggi le proposte, decidi a quale dare il tuo sostegno o presenta una proposta alternativa <br /> Almeno una proposta tra quelle presentate deve raggiungere il quorum di sostenitori entro #{days} affinche' la questione venga ammessa alla fase successiva.", { count = #issue.initiatives, days = format.interval_text(issue.state_time_left) }))
+            if #issue.initiatives > 1 then
+              ui.tag {
+                tag = "p",
+                content = _("#{count} solutions have been proposed to solve this problem.", {count = #issue.initiatives})
+              }
+              ui.tag {
+                tag = "p",
+                content = _"Read the solutions, support the ones you like or propose a better solution."
+              }
             else
-              slot.put(_("Vi sono attualmente #{count} proposte per risolvere la questione sollevata.<br />Leggi le proposte, decidi a quale dare il tuo sostegno o presenta una proposta alternativa.", { count = #issue.initiatives }))
+              ui.tag {
+                tag = "p",
+                content = _("1 solution has been proposed to solve this problem.", {count = #issue.initiatives})
+              }
+              ui.tag {
+                tag = "p",
+                content = _"Read the solution, support it or propose a better solution."
+              }
             end
+--        if issue.state == 'admission' then
+--          ui.tag {
+--            tag = "p",
+--            content = _("Almeno una proposta tra quelle presentate deve raggiungere il quorum di sostenitori entro #{days} affinche' la questione venga ammessa alla fase successiva.", {days = format.interval_text(issue.state_time_left)})          
+--          }
+--        end
           end
         }
       end
     }
 
     ui.container {
-      attr = { class = "row spaceline" },
+      attr = { class = "row" },
       content = function()
+        ui.container {
+          attr = { class = "col-md-12" },
+          content = function()
+            slot.put("<hr/>")
+          end
+        }
+      end
+    }
+
+    ui.container {
+      attr = { class = "row" },
+      content = function()
+        ui.container {
+          attr = { class = "col-md-1 h3 spaceline spaceline-bottom" },
+          content = _"Order by"
+        }
+
         local btna, btnb = "", ""
-        if init_ord == "supporters" then btna = " active"
+        if init_ord == "supporters" then
+          btna = "active"
         end
-        if init_ord == "event" then btnb = " active"
+        if init_ord == "event" then
+          btnb = "active"
         end
 
-        ui.link {
-          attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" .. btna },
-          module = "issue",
-          id = issue.id,
-          view = "show",
-          params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "supporters" },
+        ui.container {
+          attr = { class = "col-md-3 col-xs-12 col-sm-3 text-center col-md-offset-1" },
           content = function()
-            ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick " }, content = _ "ORDER BY NUMBER OF SUPPORTERS" }
+            ui.link {
+              attr = { class = "h3 btn btn-primary btn-large fixclick " .. btna },
+              module = "issue",
+              id = issue.id,
+              view = "show",
+              params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "supporters" },
+              content = _ "By popularity"
+            }
           end
         }
 
-        ui.link {
-          attr = { class = "col-md-6 col-xs-12 col-sm-6 text-center" .. btnb },
-          module = "issue",
-          id = issue.id,
-          view = "show",
-          params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "event" },
+        ui.container {
+          attr = { class = "col-md-3 col-xs-12 col-sm-3 col-md-offset-2 text-center" },
           content = function()
-            ui.heading { level = 3, attr = { class = "btn btn-primary btn-large fixclick" }, content = _ "ORDER BY LAST EVENT DATE" }
+            ui.link {
+              attr = { class = "h3 btn btn-primary btn-large fixclick " .. btnb },
+              module = "issue",
+              id = issue.id,
+              view = "show",
+              params = { state = state, orderby = orderby, desc = desc, interest = interest, scope = scope, view = view, ftl_btns = ftl_btns, init_ord = "event" },
+              content = _ "By most recent event"
+            }
           end
         }
       end
@@ -121,7 +160,7 @@ ui.container {
                     end
                   }
                   slot.put("&nbsp;")
-                  ui.heading { level = 4, attr = { class = "col-md-10 col-xs-10 col-sm-10 text-center" }, content = _ "Propose your solution" }
+                  ui.heading { level = 4, attr = { class = "col-md-10 col-xs-10 col-sm-10 text-center" }, content = _ "Propose a solution" }
                 end
               }
             end

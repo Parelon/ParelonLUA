@@ -29,7 +29,7 @@ ui.title(function()
               view = "show",
               id = id,
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
@@ -39,7 +39,7 @@ ui.title(function()
           content = function()
             ui.heading {
               level = 1,
-              content = _ "Edit the archive link for this issue"
+              content = _ "Change resources URL"
             }
           end
         }

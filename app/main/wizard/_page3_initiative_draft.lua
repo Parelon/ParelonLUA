@@ -24,7 +24,9 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "initiativeDraftBack",
                             class = "btn btn-primary btn-wizard hidden-xs",
+                            style = "display: none;",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_abstract').collapse('show');"
                           },
@@ -46,24 +48,24 @@ ui.container {
                             onclick = "collapseAll(); $('#initiative_draft').collapse('show')"
                           },
                           content = function()
-                              ui.container {
-                                attr = { class = "row" },
-                                content = function()
-                                  ui.container {
-                                    attr = { class = "col-md-10 col-sm-9 col-xs-7" },
-                                    content = function() 
-                                      ui.image { static = "png/arrow-down-icon.png" }
-                                      slot.put(_ "Draft")
-                                     end
-                                  }
-                                  ui.container {
-                                    attr = { class = "col-md-2 col-sm-3 text-right col-xs-5" },
-                                    content = function() 
-                                      ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
-                                    end
-                                  }
-                                end
-                              }
+                            ui.container {
+                              attr = { class = "row" },
+                              content = function()
+                                ui.container {
+                                  attr = { class = "col-md-10 col-sm-9 col-xs-7" },
+                                  content = function() 
+                                    ui.image { static = "png/arrow-down-icon.png" }
+                                    slot.put(_ "Draft")
+                                  end
+                                }
+                                ui.container {
+                                  attr = { class = "col-md-2 col-sm-3 text-right col-xs-5" },
+                                  content = function() 
+                                    ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
+                                  end
+                                }
+                              end
+                            }
                           end
                         }
                       end
@@ -75,7 +77,9 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "initiativeDraftNext",
                             class = "btn btn-primary btn-wizard hidden-xs",
+                            style = "display: none;",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_keywords').collapse('show');"
                           },
@@ -103,22 +107,16 @@ ui.container {
                       attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "col-md-10 text-left" },
-                          content = function()
-                            ui.tag { tag = "p", content = "Gli articoli i commi ed i riferimenti normativi della Tua proposta di soluzione al problema o questione sollevata" }
-                          end
-                        }
-
-                        ui.container {
                           attr = { class = "col-md-12 issue_desc" },
                           content = function()
-                            ui.tag {
-                              tag = "textarea",
+                            ui.field.text {
+                              multiline = true,
+                              name = "draft",                              
                               attr = {
-                                name = "draft",
                                 rows = "10",
                                 style = "resize:none;"
-                                },
+                              },
+                              label = _ "Explain in details your solution" .. ":",
                               content = param.get("draft", atom.string) or ""
                             }
                           end
@@ -135,3 +133,6 @@ ui.container {
     }
   end
 }
+
+ui.script { script = "$('#initiative_draft').on('hide.bs.collapse', function() { $('#initiativeDraftBack').hide(); $('#initiativeDraftNext').hide(); });" }
+ui.script { script = "$('#initiative_draft').on('show.bs.collapse', function(){ $('#initiativeDraftBack').show(); $('#initiativeDraftNext').show(); });" }

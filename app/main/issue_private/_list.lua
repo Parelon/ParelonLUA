@@ -34,7 +34,7 @@ local filters = execute.load_chunk {
 
 filters.content = function()
   ui.paginate {
-    per_page = tonumber(param.get("per_page") or 25),
+    per_page = tonumber(param.get("per_page") or 5),
     selector = issues_selector,
     content = function()
       local highlight_string = param.get("highlight_string", "string")
@@ -42,7 +42,7 @@ filters.content = function()
       issues:load_everything_for_member_id(for_member and for_member.id or nil)
           for i, issue in ipairs(issues) do
             execute.view {
-              module = "issue_private",
+              module = "issue",
               view = "_list_entry",
               params = {
                 issue = issue,

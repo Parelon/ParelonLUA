@@ -37,17 +37,10 @@ trace.debug("proposer2: " .. tostring(proposer2))
 trace.debug("proposer3: " .. tostring(proposer3))
 trace.debug("resource: " .. (resource and resource or "none"))
 
-local area_policies = AllowedPolicy:get_policy_by_area_id(area.id)
-local policies = {}
-
-for i, policy in ipairs(area_policies) do  
-  policies[i] = { id = policy.policy_id, name = Policy:by_id(policy.policy_id).name }
-end
-
 ui.title(
   function()
     execute.view {
-      module = "wizard_private",
+      module = "wizard",
       view = "_page1_title",
       params = { area = area }
     }
@@ -57,12 +50,12 @@ ui.title(
 ui.form {
   method = "post",
   attr = { id = "page1" },
-  module = 'wizard_private',
+  module = 'wizard',
   view = 'page2',
   params = {
-    issue_id = issue_id,
+--    issue_id = issue_id,
     area_id = area.id,
-    policy_id = policy_id,
+--    policy_id = policy_id,
     issue_title = issue_title,
     issue_brief_description = issue_brief_description,
     issue_keywords = issue_keywords,
@@ -72,39 +65,18 @@ ui.form {
     initiative_brief_description = initiative_brief_description,
     draft = draft,
     technical_areas = technical_areas,
-    proposer1 = proposer1,
-    proposer2 = proposer2,
-    proposer3 = proposer3,
-    resource = resource,
-    archivecloud = archivecloud,
-    sociallink = sociallink
+--    proposer1 = proposer1,
+--    proposer2 = proposer2,
+--    proposer3 = proposer3,
+--    resource = resource,
+--    archivecloud = archivecloud,
+--    sociallink = sociallink
   },
   content = function()
-    ui.container {
-      attr = { class = "well" },
-      content = function()
-        ui.container {
-          attr = { class = "row well-inside" },
-          content = function()
-            --valore selezionato
-            ui.field.hidden {
-              html_name = "policy_id",
-              attr = { id = "policy_id" },
-              value = param.get("policy_id", atom.integer) or 0
-            }
-            ui.heading { level = 2, attr = { class = "uppercase text-center spaceline" }, content = _ "How much time does your proposal need to be examined?" }
-            --radio-button group
-            ui.field.parelon_group_radio {
-              id = "policy_id",
-              out_id = "policy_id",
-              elements = policies,
-              selected = policy_id,
-              attr = { class = "parelon-checkbox spaceline" },
-              label_attr = { class = "parelon-label spaceline" }
-            }
-          end
-        }
-      end
+    execute.view {
+      module = "wizard",
+      view = "_page1_policy",
+      params = { area = area, policy_id = param.get("policy_id", atom.integer) }
     }
   end
 }

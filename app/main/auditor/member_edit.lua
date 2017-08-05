@@ -71,37 +71,47 @@ else
 end
 
 ui.form {
-  attr = { class = "vertical well" },
+  attr = { class = "vertical" },
   module = "auditor",
   action = "member_update",
+  id = member and member.id,
   record = member,
-  readonly = not app.session.member.admin and not app.session.member.auditor,
-  id = id,
+  readonly = not app.session.member.admin,
   routing = {
-    default = {
+    ok = {
       mode = "redirect",
-      modules = "auditor",
+      module = "auditor",
       view = "index"
+    },
+    error = {
+      mode = "redirect",
+      module = "auditor",
+      view = "member_edit",
+      id = member and member.id
     }
   },
   content = function()
-    ui.field.text { label = _ "Identification", name = "identification", attr = { placeholder = _"Full name" } }
-    ui.field.text { label = _ "Notification email", name = "notify_email", attr = { placeholder = _"example@example.org" } }
-    ui.field.text { label = _ "NIN", name = "nin", attr = { placeholder = _"XXXXXX00X00X000X" } }
-    if id ~= 0 then
+    ui.field.text { label = _ "Identification", name = "identification" }
+    ui.field.text { label = _ "Notification email", name = "notify_email" }
+    ui.field.text { label = _ "NIN", name = "nin" }
+    if member and member.activated then
       ui.field.text { label = _ "Screen name", name = "name" }
       ui.field.text { label = _ "Login name", name = "login" }
     end
-
-    if app.session.member.admin then
-      ui.field.boolean { label = _ "Admin?", name = "admin" }
-      ui.field.boolean { label = _ "Auditor?", name = "auditor" }
-    end
-    ui.field.boolean { label = _ "LQFB Access?", name = "lqfb_access", value = true } 
---      ui.field.boolean { label = _ "Elected?", name = "elected" }
+    ui.field.boolean { label = _ "Admin?", name = "admin" }
+    ui.field.boolean { label = _ "LQFB Access?", name = "lqfb_access" }
+    ui.field.boolean { label = _ "Auditor?", name = "auditor" }
+--[[    ui.field.boolean { label = _ "Elected?", name = "elected" }]]
 
     slot.put("<br />")
 
+    --[[for i, unit in ipairs(units) do
+            ui.field.boolean {
+                name = "unit_" .. unit.id,
+                label = unit.name,
+                value = unit.voting_right
+            }
+        end]]
     ui.list {
       records = units,
       columns = {
@@ -124,7 +134,8 @@ ui.form {
           content = function(unit)
             ui.field.boolean {
               name = "unit_" .. unit.id,
-              value = member and member:has_voting_right_for_unit_id(unit.id) or app.session.member:has_voting_right_for_unit_id(unit.id)
+              --label = unit.name,
+              value = member and member:has_voting_right_for_unit_id(unit.id) or false
             }
           end
         }
@@ -133,7 +144,7 @@ ui.form {
     slot.put("<br /><br />")
 
     if not member or not member.activated then
-      ui.field.boolean { label = _ "Send invite?", name = "invite_member", value = true }
+      ui.field.boolean { label = _ "Send invite?", name = "invite_member" }
     end
 
     if member and member.activated then

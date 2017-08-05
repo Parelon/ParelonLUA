@@ -21,13 +21,15 @@ ui.container {
                   attr = { class = "row" },
                   content = function()
                     ui.container {
-                      attr = { class = "col-md-2 col-sm-3  text-center hidden-xs" },
+                      attr = { class = "col-md-2 col-sm-3 text-center hidden-xs" },
                       content = function()
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "issueKeywordsBack",
                             class = "btn btn-primary btn-wizard",
                             target = "_blank",
+                            style = "display: none;",
                             onclick = "collapseAll(); $('#issue_aim').collapse('show');"
                           },
                           content = _"Back"
@@ -53,21 +55,25 @@ ui.container {
                           end
                         }
                       end
-                    }                    
---                    ui.container {
---                      attr = { class = "col-md-2 text-center" },
---                      content = function()
---                        ui.tag {
---                          tag = "a",
---                          attr = {
---                            class = "btn btn-primary btn-large",
---                            target = "_blank",
---                            onclick = "collapseAll(); $('#issue_keywords').collapse('show');"
---                          },
---                          content = _"Save"
---                        }
---                      end
---                    }
+                    }
+                    if param.get("concat", atom.boolean) then
+                      ui.container {
+                        attr = { class = "col-md-2 text-center" },
+                        content = function()
+                          ui.tag {
+                            tag = "a",
+                            attr = {
+                              id = "issueKeywordsNext",
+                              style = "display: none",
+                              class = "btn btn-primary btn-large",
+                              target = "_blank",
+                              onclick = "collapseAll(); $('#initiative_title').collapse('show');"
+                            },
+                            content = _"Next"
+                          }
+                        end
+                      }
+                    end
                   end
                 }
               end
@@ -89,24 +95,19 @@ ui.container {
                       attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "col-md-12 text-left" },
-                          content = function()
-                            ui.tag { tag = "p", content = _ "Usa delle parole chiave per descrivere il tuo problema" }
-                          end
-                        }
-                        ui.container {
                           attr = { class = "col-md-12" },
                           content = function()
-                            ui.tag {
-                              tag = "textarea",
+                            ui.field.text {
+                              name = "issue_keywords",
+                              label = _ "Give some keywords that describe this issue" .. ":",
                               attr = {
-                                id = "text",
-                                name = "issue_keywords",
+                                id = "issueKeywords",
                                 class = "tagsinput",
                                 style = "resize:none;",
-                                placeholder = _ "Add a keyword"
+                                placeholder = _ "Add a keyword",
+                                rows = "1"
                               },
-                              content = issue_keywords or ""
+                              value = issue_keywords or ""
                             }
                           end
                         }
@@ -123,4 +124,6 @@ ui.container {
   end
 }
 ui.script { static = "js/jquery.tagsinput.js" }
-ui.script { script = "$('#text').tagsInput({'height':'100%','width':'100%','maxChars' : 20});" }
+ui.script { script = "$('#issueKeywords').tagsInput({'height':'100%','width':'100%','maxChars' : 20});" }
+ui.script { script = "$('#issue_keywords').on('hide.bs.collapse', function() { $('#issueKeywordsBack').hide(); $('#issueKeywordsNext').hide(); });" }
+ui.script { script = "$('#issue_keywords').on('show.bs.collapse', function(){ $('#issueKeywordsBack').show(); $('#issueKeywordsNext').show(); });" }

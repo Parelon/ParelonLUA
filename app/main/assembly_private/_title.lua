@@ -9,7 +9,7 @@ ui.container {
           module = "index",
           view = "index",
           image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-          content = _ "Back to previous page"
+          content = _ "Back"
         }
       end
     }
@@ -19,11 +19,11 @@ ui.container {
         ui.heading {attr = { class = "spaceline" },
           level = 1,
           content = function()
-            slot.put(_("Welcome <strong>#{realname}.</strong>", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }))
+            slot.put(_("Welcome <strong>#{realname}</strong>.", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }))
           end
         }
 
-        ui.heading {level = 6, content = _("Ti trovi ora nell' Assemblea pubblica", { realname = (app.session.member.realname and app.session.member.realname or app.session.member.login) }) }
+        ui.heading {level = 6, content = _ "You are in the Round Tables" }
       end
     }
     --[[ mobile button-back ]]

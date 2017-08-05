@@ -24,14 +24,19 @@ ui.title(function()
               id = param.get("unit_id"),
               params = { unit_name = param.get("name"), unit_id = param.get("unit_id") },
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
-        ui.tag {
-          tag = "strong",
-          attr = { class = "col-md-9 text-center" },
-          content = _("Unit '#{name}'", { name = param.get("unit_name") })
+        ui.heading {
+          level = 1,
+          attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+          content = function()
+            ui.tag {
+              tag = "strong",
+              content = _("Unit '#{name}'", { name = param.get("unit_name") })
+            }
+          end
         }
       end
     }

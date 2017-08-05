@@ -20,7 +20,7 @@ local archivecloud = param.get("archivecloud", atom.string)
 ui.title(
   function()
     execute.view {
-      module = "wizard_private",
+      module = "wizard",
       view = "_page3_title",
       params = { area = area }
     }
@@ -60,19 +60,19 @@ ui.form {
       content = function()
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page3_initiative_title",
           params = { initiative_title = initiative_title}
         }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page3_initiative_abstract",
           params = { initiative_brief_description = initiative_brief_description }
         }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page3_initiative_draft",
           params = { draft = draft }
         }
@@ -84,7 +84,7 @@ ui.form {
 --    }
 
         execute.view {
-          module = "wizard_private",
+          module = "wizard",
           view = "_page3_initiative_keywords",
           params = { technical_areas = technical_areas }
         }

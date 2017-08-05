@@ -33,7 +33,7 @@ ui.title(
                 ui.container {
                   attr = { class = "col-md-7 text-right spaceline" },
                   content = function()
-                    ui.heading { level = 3, content = _"The first time? click here:"}
+                    ui.heading { level = 3, content = _"First time? Click here:"}
                   end
                 }
                 ui.container {
@@ -69,9 +69,7 @@ ui.title(
         ui.heading {
           level = 2,
           attr = { class = "col-md-8 text-right spaceline" },
-          content = function()
-            slot.put(_ "You are an auditor. This means that you can manage members in the Auditor Panel")
-          end
+          content = _ "You are an auditor. This means that you can manage members in the Auditor Panel"
         }
         ui.container {
           attr = { class = "col-md-3 col-md-offset-1" },
@@ -132,7 +130,7 @@ ui.container {
           module = "assembly",
           view = "index",
           content = function()
-            ui.heading { level = 3, content = _ "Assemblea Pubblica" }
+            ui.heading { level = 3, content = _ "Public Assembly" }
           end
         }
       end
@@ -154,7 +152,7 @@ ui.container {
           module = "assembly_private",
           view = "index",
           content = function()
-            ui.heading { level = 3, content = _ "Tavoli di lavoro" }
+            ui.heading { level = 3, content = _ "Round tables" }
           end
         }
       end

@@ -33,7 +33,7 @@ ui.form {
   module = 'wizard',
   view = 'page_summary',
   params = {
-    issue_id = issue_id,
+--    issue_id = issue_id,
     area_id = area.id,
     policy_id = policy_id,
     issue_title = issue_title,
@@ -41,14 +41,14 @@ ui.form {
     issue_keywords = issue_keywords,
     problem_description = problem_description,
     aim_description = aim_description,
-    initiative_title = initiative_title,
-    initiative_brief_description = initiative_brief_description,
-    draft = draft,
-    technical_areas = technical_areas,
-    resource = resource,
-    sociallink = sociallink,
-    archivecloud = archivecloud
-  },         
+--    initiative_title = initiative_title,
+--    initiative_brief_description = initiative_brief_description,
+--    draft = draft,
+--    technical_areas = technical_areas,
+--    resource = resource,
+--    sociallink = sociallink,
+--    archivecloud = archivecloud
+  },
   content = function()
     ui.container {
       attr = {

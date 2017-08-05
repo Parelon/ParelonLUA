@@ -5,9 +5,9 @@ if app.session.member and not issue.closed then
     attr = { class = "row text-center" },
     content = function()
       ui.container {
-        attr = { class = "col-md-8 col-md-offset-1 label label-warning-tbox spaceline" },
+        attr = { class = "col-md-8 col-md-offset-1 label label-warning-tbox spaceline text-left" },
         content = function()
-          ui.tag { tag = "h3", content = _ "SUPPORT THE ISSUE" }
+          ui.heading { level = 3, content = _ "Interest in the issue" }
         end
       }
     end
@@ -48,8 +48,6 @@ if app.session.member and not issue.closed then
           ui.container {
             attr = { class = "col-md-5 spaceline"  },
             content = function()
---                  ui.image { attr = { style = "height: 50px" }, static = "png/thumb_down.png" }
-
               slot.put("&nbsp;&nbsp;&nbsp;", _ "You are not interested in this issue", "&nbsp;&nbsp;&nbsp;")
 
               ui.link {
@@ -74,35 +72,11 @@ if app.session.member and not issue.closed then
 
         ui.heading {
           level = 2,
-          attr = { class = "col-md-7 spaceline spaceline-bottom" },
-          content = function() 
-            slot.put( _ "<i>Interessarsi</i> alla questione non vuol dire <i>votare sì</i>: vuol dire solo ritenere che il problema sollevato <strong><i>merita</i></strong> di essere discusso.")
+          attr = { class = "col-md-6 col-md-offset-1 spaceline spaceline-bottom" },
+          content = function()            
+            slot.put( "<i>", _"Being interest", "</i> ", " ", _"in the issue doesn't mean", " <i>", _ "voting yes", "</i>: ", _ "it just means that the issue is", " <strong><i>", "worth", "</i></strong> ", _ "being discussed", ".")
           end
         }
---            ui.container {
---              attr = { class = "col-md-3 col-md-offset-3 text-right hidden-xs hidden-sm " },
---              content = function()
---                ui.field.popover {
---                  attr = {
---                    dataplacement = "bottom",
---                    datahtml = "true";
---                    datatitle = _ "Box di aiuto per la pagina",
---                    datacontent = _("Puoi sostenere oppure ritirare il sostegno alla questione.<br /><i>Sostenere</i> la questione non vuol dire <i>votare sì</i>: vuol dire solo ritenere che il problema sollevato <i>merita</i> di essere discusso."),
---                    datahtml = "true",
---                    class = "text-center"
---                  },
---                  content = function()
-        --                    ui.container {
-        --                      attr = { class = "row" },
-        --                      content = function()
-        --                        ui.image { attr = { class = "icon-medium" },static = "png/tutor.png" }
-        ----								    ui.heading{level=3 , content= _"What you want to do?"}
-        --                      end
-        --                    }
-        --                  end
-        --                }
-        --              end
-        --            }
       elseif issue.state == 'voting' then
         ui.container {
           attr = { class = "row" },
@@ -141,7 +115,7 @@ if app.session.member and not issue.closed then
                           view = "list",
                           id = issue.id,
                           params = { issue_id = issue.id },
-                          content = function()                                                                    
+                          content = function()
                             ui.heading { level = 2, attr = { class = "spaceline btn btn-large btn-primary" }, content = _ "Vote now" }
                           end
                         }
@@ -156,9 +130,6 @@ if app.session.member and not issue.closed then
       else
         ui.heading { level = 3, content = _ "This issue is closed." }
       end
-
---        end
---      }
     end
   }
 end

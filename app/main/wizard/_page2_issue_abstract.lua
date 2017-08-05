@@ -6,11 +6,11 @@ ui.container {
     ui.container {
       attr = { class = "col-md-12" },
       content = function()
-        
+
         ui.container {
           attr = { class = "panel panel-default"},
           content = function()
-              
+
             ui.container {
               attr = {
                 class = "row",
@@ -27,6 +27,8 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "issueAbstractBack",
+                            style = "display: none;",
                             class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#issue_title').collapse('show');"
@@ -49,35 +51,37 @@ ui.container {
                             onclick = "collapseAll(); $('#issue_abstract').collapse('show')"
                           },
                           content = function()
-                              ui.container {
-                                attr = { class = "row" },
-                                content = function()
-                                  ui.container {
-                                    attr = { class = "col-md-10  col-xs-6" },
-                                    content = function() 
-                                      ui.image { static = "png/arrow-down-icon.png" }
-                                      slot.put(_ "Abstract")
-                                     end
-                                  }
-                                  ui.container {
-                                    attr = { class = "col-md-2 text-right col-xs-6" },
-                                    content = function() 
-                                      ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
-                                    end
-                                  }
-                                end
-                              }
-                            end
-                          }
-                        end
-                      }
-                    
+                            ui.container {
+                              attr = { class = "row" },
+                              content = function()
+                                ui.container {
+                                  attr = { class = "col-md-10  col-xs-6" },
+                                  content = function() 
+                                    ui.image { static = "png/arrow-down-icon.png" }
+                                    slot.put(_ "Abstract")
+                                  end
+                                }
+                                ui.container {
+                                  attr = { class = "col-md-2 text-right col-xs-6" },
+                                  content = function() 
+                                    ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
+                                  end
+                                }
+                              end
+                            }
+                          end
+                        }
+                      end
+                    }
+
                     ui.container {
                       attr = { class = "col-md-2  col-sm-3 text-center hidden-xs" },
                       content = function()
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "issueAbstractNext",
+                            style = "display: none;",
                             class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#issue_description').collapse('show');"
@@ -90,7 +94,7 @@ ui.container {
                 }
               end
             }
-            
+
             ui.container {
               attr = {
                 id = "issue_abstract",
@@ -105,24 +109,25 @@ ui.container {
                       attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "col-md-12 text-left" },
-                          content = function()
-                            ui.tag { span = "p", content = "Inserisci una brevissima descrizione di massimo 140 caratteri: " }
-                            ui.tag { span = "p", attr = { id = "count" }, content = "140" }
-                            ui.tag { span = "p", content = " rimasti" }
-                          end
-                        }
-                        ui.container {
                           attr = { class = "col-md-12 issue_desc" },
                           content = function()
-                            ui.tag {
-                              tag = "textarea",
+                            ui.field.text {
+                              label = function()
+                                ui.tag {
+                                  tag = "span",
+                                  content = (_"Give a very short description of 140 characters maximum" .. ": ")
+                                }
+                                ui.tag { tag = "span", attr = { id = "issueCount" }, content = "140" }
+                                ui.tag { tag = "span", content = (slot.put(" ", _ "left")) }
+                              end,                              
+                              multiline = true,
                               attr = {
-                                name = "issue_brief_description",	
+                                id = "issueAbstract",
                                 style = "resize: none",
                                 maxlength = "140",
-                                onkeyup = "var length = $('#issue_abstract').val().length; var count = 140-length; $('#count').text(count)"
+                                onkeyup = "var length = $('#issueAbstract').val().length; var count = 140-length; $('#issueCount').text(count);"
                               },
+                              name = "issue_brief_description",	
                               content = issue_brief_description or ""
                             }
                           end
@@ -139,3 +144,6 @@ ui.container {
     }
   end
 }
+
+ui.script { script = "$('#issue_abstract').on('hide.bs.collapse', function() { $('#issueAbstractBack').hide(); $('#issueAbstractNext').hide(); });" }
+ui.script { script = "$('#issue_abstract').on('show.bs.collapse', function(){ $('#issueAbstractBack').show(); $('#issueAbstractNext').show(); });" }

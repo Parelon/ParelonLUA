@@ -110,7 +110,7 @@ ui.container {
                         level = 1,
                         attr = { class = class },
                         content = function()
-                          local name = (initiative.title or _"Initiative without title")
+                          local name = (initiative.title or _"No title given")
                           local class = ""
                           if initiative.name_highlighted then
                             name = encode.highlight(initiative.name_highlighted)
@@ -138,7 +138,7 @@ ui.container {
                               rows = "4",
                               maxlength = "300"
                             },
-                            content = (initiative.brief_description or _"Initiative without abstract")
+                            content = (initiative.brief_description or _"No abstract given")
                           }
                         end
                       }
@@ -161,7 +161,7 @@ ui.container {
                         level = 3,
                         attr = { class = class },
                         content = function()                         
-                          local name = (initiative.title or _"Initiative without title")
+                          local name = (initiative.title or _"No title given")
                           local class = ""
                           if initiative.name_highlighted then
                             name = encode.highlight(initiative.name_highlighted)
@@ -191,7 +191,7 @@ ui.container {
                             },
                             content = function()
                               if initiative.brief_description == "" then
-                                slot.put(_"Initiative without abstract")
+                                slot.put(_"No abstract given")
                               else
                                 slot.put(initiative.brief_description)
                               end

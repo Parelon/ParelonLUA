@@ -16,7 +16,7 @@ ui.container {
                 view = "list_areas",
                 id = area.unit.id,
                 image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-                content = _ "Back to previous page"
+                content = _ "Back"
               }
             end
           }

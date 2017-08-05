@@ -17,7 +17,7 @@ ui.container {
               level = 3,
               content = function()
                 ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
-                slot.put(_ "Back Phase")
+                slot.put(_ "Back")
               end
             }
           end
@@ -25,38 +25,41 @@ ui.container {
       end
     }
     ui.container {
-      attr = { class = "col-md-6 col-sm-4 col-xs-12" },
+      attr = { class = "col-md-6 col-sm-4 col-xs-12 text-center" },
       content = function()
         ui.container {
-          attr = { class = "row" },
+          attr = { class = "well-inside" },
           content = function()
             ui.container {
-              attr = { class = "col-md-12 text-center" },
+              attr = { class = "row spaceline" },
               content = function()
-                ui.heading { level = 1, attr = { class = "uppercase label label-warning" }, content = _ "STEP 1: Imposta tempi di discussione" }
                 ui.container {
-                  attr = { class = "col-md-12 text-center well-inside" },
-                  content = function()
-                    ui.heading {
-                      level = 2,
-                      attr = { class = "spaceline" },
-                      content = function()
-                        slot.put(_ "Unit" .. ": " .. "<strong>" .. area.unit.name .. "</strong>")
-                      end
-                    }
-                    ui.heading {
-                      attr = { class = "spaceline-bottom" },
-                      level = 2,
-                      content = function()
-                        slot.put(_ "Area" .. ": " .. "<strong>" .. area.name .. "</strong>")
-                      end
-                    }
-                  end
+                  attr = { class = "col-md-2 h4 text-left" },
+                  content = _"Unit" ..":"
+                }
+                ui.container {
+                  attr = { class = "col-md-8 h2"},
+                  content = function() slot.put("<strong>" .. area.unit.name .. "</strong>") end
+                }
+              end
+            }
+
+            ui.container {
+              attr = { class = "row" },
+              content = function()
+                ui.container {
+                  attr = { class = "col-md-2 h4 text-left" },
+                  content = _"Area" ..":"
+                }
+                ui.container {
+                  attr = { class = "col-md-8 h2"},
+                  content = function() slot.put("<strong>" .. area.name .. "</strong>") end
                 }
               end
             }
           end
         }
+        ui.heading { level = 1, attr = { class = "uppercase label label-warning spaceline" }, content = _ "STEP 1: Discussion policy" }
       end
     }
     ui.container {
@@ -64,12 +67,12 @@ ui.container {
       content = function()
         ui.tag {
           tag = "a",
-          attr = { id = "btnNext", class = "btn btn-primary btn-back spaceline", onClick = "getElementById(\"page1\").submit();" },
+          attr = { id = "btnNext", class = "btn btn-primary btn-back spaceline", onClick = "$('#page1').submit();" },
           content = function()
             ui.heading {
               level = 3,
               content = function()
-                slot.put(_ "Next Phase")
+                slot.put(_ "Next")
                 ui.image { attr = { class = "arrow_medium" }, static = "svg/arrow-right.svg" }
               end
             }

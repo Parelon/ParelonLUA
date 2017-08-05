@@ -47,7 +47,7 @@ ui.container {
                       params = { create = create, state = "admission", orderby = orderby, interest = interest, desc = desc },
                       id = area.id,
                       content = function()
-                        ui.heading { level = 3, attr = { class = "fittext" }, content = _ "INITIATIVES LOOKING FOR SUPPORTERS" }
+                        ui.heading { level = 3, attr = { class = "fittext" }, content = _ "New issues" }
                       end
                     }
                   end
@@ -63,7 +63,7 @@ ui.container {
                       params = { create = create, state = "development", orderby = orderby, interest = interest, desc = desc },
                       id = area.id,
                       content = function()
-                        ui.heading { level = 3, attr = { class = "fittext" }, content = _ "INITIATIVES NOW IN DISCUSSION" }
+                        ui.heading { level = 3, attr = { class = "fittext" }, content = _ "Issues in discussion" }
                       end
                     }
                   end
@@ -79,7 +79,7 @@ ui.container {
                       params = { create = create, state = "closed", orderby = orderby, interest = interest, desc = desc },
                       id = area.id,
                       content = function()
-                        ui.heading { level = 3, attr = { class = "fittext" }, content = _ "COMPLETE" }
+                        ui.heading { level = 3, attr = { class = "fittext" }, content = _ "Closed issues" }
                       end
                     }
                   end

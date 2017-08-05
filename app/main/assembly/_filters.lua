@@ -17,7 +17,7 @@ ui.container {
                       attr = { class = "col-md-12 well-inside paper" },
                       content = function()
                         ui.heading { level = 2, content = _ "What you want to do?" }
-                        ui.heading { level = 6, content = _ "Puoi leggere, valutare ed integrare le proposte redatte dai cittadini, presentare una tua proposta, votare quelle attualmente in discussione:" }
+                        ui.heading { level = 6, content = _ "You can read proposals presented by other members or propose one issue of your own:" }
                       end
                     }
                   end
@@ -34,7 +34,7 @@ ui.container {
                           view = "list_areas",
                           params = { filter = "my_areas" },
                           content = function()
-                            ui.heading { level = 3, content = _ "Homepage read new issues" }
+                            ui.heading { level = 3, content = _ "Read issues" }
                           end
                         }
                       end
@@ -48,7 +48,7 @@ ui.container {
                           view = "list_areas",
                           params = { create = true, filter = "my_areas" },
                           content = function()
-                            ui.heading { level = 3, content = _ "Homepage write new issue" }
+                            ui.heading { level = 3, content = _ "Write new issue" }
                           end
                         }
                       end

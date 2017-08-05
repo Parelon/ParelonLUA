@@ -49,21 +49,21 @@ ui.form {
   module = 'wizard',
   view = 'page3',
   params = {
-    issue_id = issue_id,
+--    issue_id = issue_id,
     area_id = area.id,
     policy_id = policy_id,
-    issue_title = issue_title,
-    issue_brief_description = issue_brief_description,
-    issue_keywords = issue_keywords,
-    problem_description = problem_description,
-    aim_description = aim_description,
+--    issue_title = issue_title,
+--    issue_brief_description = issue_brief_description,
+--    issue_keywords = issue_keywords,
+--    problem_description = problem_description,
+--    aim_description = aim_description,
     initiative_title = initiative_title,
     initiative_brief_description = initiative_brief_description,
     draft = draft,
     technical_areas = technical_areas,
-    resource = resource,
-    archivecloud = archivecloud,
-    sociallink = sociallink
+--    resource = resource,
+--    archivecloud = archivecloud,
+--    sociallink = sociallink
   },
   content = function()
         ui.container {

@@ -38,7 +38,7 @@ ui.container {
           view = return_view,
           params = param.get_all_cgi(),
           image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-          content = _ "Back to previous page"
+          content = _ "Back"
         }
       end
     }
@@ -49,7 +49,7 @@ ui.container {
         ui.container {
           attr = { class = "well-inside" },
           content = function()
-            ui.heading { level = 1, attr = { class = "fittext1 uppercase spaceline spaceline-bottom" }, content = _ "Details for initiative I" .. initiative.id }
+            ui.heading { level = 1, attr = { class = "fittext1 uppercase spaceline spaceline-bottom" }, content = _ ("Details for initiative S#{id}", {id=initiative.id}) }
           end
         }
       end
@@ -76,18 +76,27 @@ ui.container {
 ui.container {
   attr = { class = "row"},
   content = function()
-    ui.container { 
-      attr = {  id = "social_box", class = "col-md-4 col-xs-12 col-sm-12 spaceline3" }, 
-      content = function() 
-        slot.put('<div data-url="' .. url .. '" class="addthis_sharing_toolbox"></div>')
-      end 
-    }
+--    ui.container { 
+--      attr = {  id = "social_box", class = "col-md-4 col-xs-12 col-sm-12 spaceline3" }, 
+--      content = function() 
+--        slot.put('<div data-url="' .. url .. '" class="addthis_sharing_toolbox"></div>')
+--      end 
+--    }
 
     ui.container {
       attr = { class = "col-md-6 col-md-offset-1 col-xs-12 col-sm-12" },
       content = function()
-        ui.heading { level = 6, attr = { class = "" }, content = _ "Issue link (copy the link and share to the web):" }
-        slot.put("<input id='issue_url_box' type='text' value=" .. url .. ">")
+        ui.heading { level = 6, content = _ "Initiative link (copy the link and share to the web):" }
+        ui.tag {
+          tag = "input",
+          attr = {
+            id = "issue_url_box",
+            type = "text",
+            readonly = "true",
+            value = url
+          },
+          content = nil
+        }
       end
     }           
   end

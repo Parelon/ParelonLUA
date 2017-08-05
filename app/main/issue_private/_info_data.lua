@@ -52,7 +52,7 @@ ui.container {
 
 if app.session.member then
   if issue.member_id ~= 0 then
-    execute.view { module = "member", view = "_info_data", id = issue.member_id, params = { module = "issue", view = "show", content_id = issue.id } }
+    execute.view { module = "member", view = "_info_data", id = issue.member_id, params = { module = "issue_private", view = "show", content_id = issue.id } }
   else
     ui.heading { level = 6, content = _ "No author for this issue" }
   end                                

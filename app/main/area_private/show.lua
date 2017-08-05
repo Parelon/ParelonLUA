@@ -13,11 +13,11 @@ local member = app.session.member
 --local ftl_btns = param.get("ftl_btns", atom.boolean) or false
 
 app.html_title.title = area.name
-app.html_title.subtitle = _("Area")
+app.html_title.subtitle = _"Area"
 
 ui.title(function()
     execute.view {
-      module = "area_private",
+      module = "area",
       view = "_show_title",
       params = { area = area }
     }
@@ -25,7 +25,7 @@ ui.title(function()
 )
 
 execute.view {
-  module = "area_private",
+  module = "area",
   view = "_show_state_filters",
   params = { area = area, create = create, state = state }
 }
@@ -34,7 +34,7 @@ execute.view {
 local selector = area:get_reference_selector("issues")
 
 execute.chunk {
-  module = "issue_private",
+  module = "issue",
   chunk = "_filters_ext",
   params = {
     state = state,
@@ -104,7 +104,7 @@ end
 
 if state == "development" then
   execute.chunk {
-    module = "issue_private",
+    module = "issue",
     chunk = "_filters_btn2_bs",
     id = area.id,
     params = {
@@ -119,17 +119,16 @@ if state == "development" then
 end]]
 
 execute.view {
-  module = "area_private",
+  module = "area",
   view = "_show_order_filters",
   params = { area = area, state = state, orderby = orderby, desc = desc }
 }
-
 
 ui.container {
   attr = { id = "issues_box", class = "row spaceline" },
   content = function()
     execute.view {
-      module = "issue_private",
+      module = "issue",
       view = "_list",
       params = {
         state = state,

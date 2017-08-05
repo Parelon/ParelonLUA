@@ -12,12 +12,12 @@ ui.container {
   end
 }
 ui.container {
-  attr = { class = "row" },
+  attr = { class = "row well-inside paper" },
   content = function()
     ui.container {
-      attr = { class = "col-md-12 well-inside paper" },
+      attr = { class = "col-md-12 spaceline" },
       content = function()
-        ui.tag { tag = "p", attr = { class = "issue_brief_description initiative_list_box" }, content = issue.problem_description or _ "No description available" }
+        ui.tag { tag = "p", attr = { class = "issue_brief_description initiative_list_box" }, content = issue.problem_description or _ "No description given" }
       end
     }
   end

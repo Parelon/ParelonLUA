@@ -9,7 +9,7 @@ if members_selector:count() > 0 then
       attr = { class = "row spaceline" },
       content = function()
         ui.container {
-          attr = { class = "col-md-3" },
+          attr = { class = "col-md-6" },
           content = function()
             ui.heading {
               level = 3,

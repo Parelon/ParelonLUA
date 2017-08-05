@@ -36,7 +36,7 @@ ui.container {
                 ui.container {
                   attr = { class = "label label-warning-tbox" },
                   content = function()
-                    ui.heading { level = 1, attr = { class = "uppercase" }, content = function() slot.put(_ "Documentazione") end }
+                    ui.heading { level = 1, attr = { class = "uppercase" }, content = _ "Bibliography" }
                   end
                 }
               end
@@ -52,20 +52,20 @@ ui.container {
                 if #resourcesarch > 0 then
                   for i,resource in ipairs(resourcesarch) do
                     ui.container {
-                      attr = { class = "row" },
+                      attr = { class = "row spaceline spaceline-bottom" },
                       content = function()
                         ui.image {attr = { class = "col-md-1 icon-small" }, static = "png/Logo_of_Google_Drive.png" }
                         ui.link {
                           attr = { class = "uppercase h2 col-md-11", target = "_blank" },
                           external = resource.url,
-                          text = _("Archivio Pubblico ") .. resource.id
+                          text = _"Public repository" .. "&nbsp;" .. resource.id
                         }
                       end
                     }
                   end
                 else
                   ui.container {
-                    attr = { class = "row" },
+                    attr = { class = "row spaceline spaceline-bottom" },
                     content = function()
                       ui.image {attr = { class = "col-md-1 icon-small" }, static = "png/Logo_of_Google_Drive.png" }
                       ui.heading { level = 2, attr = { class = "col-md-11" }, content = _ "Nothing" }
@@ -82,14 +82,14 @@ ui.container {
                         ui.link {
                           attr = { class = "uppercase h2 col-md-11", target = "_blank" },
                           external = resource.url,
-                          text = _("Open Data " ) .. resource.id
+                          text = _"Open Data repository" .. "&nbsp;"  .. resource.id
                         }
                       end
                     }
                   end
                 else
                   ui.container {
-                    attr = { class = "row" },
+                    attr = { class = "row spaceline spaceline-bottom" },
                     content = function()
                       ui.image {attr = { class = "icon-small col-md-1" }, static = "png/open-data.png" }
                       ui.heading { level = 2, attr = { class = "col-md-11" }, content = _ "Nothing" }
@@ -106,14 +106,14 @@ ui.container {
                         ui.link {
                           attr = { class = "uppercase h2", target = "_blank" },
                           external = resource.url,
-                          text = _("Playlist video pubblica ") .. resource.id
+                          text = _"YouTube playlist" .. "&nbsp;" .. resource.id
                         }
                       end
                     }
                   end
                 else
                   ui.container {
-                    attr = { class = "row" },
+                    attr = { class = "row spaceline spaceline-bottom" },
                     content = function()
                       ui.image {attr = { class = "icon-small col-md-1" }, static = "png/YouTube-Logo.png" }
                       ui.heading { level = 2, attr = { class = "col-md-11" }, content = _ "Nothing" }
@@ -130,14 +130,14 @@ ui.container {
                         ui.link {
                           attr = { class = "uppercase h2", target = "_blank" },
                           external = resource.url,
-                          text = _("Forum, gruppi social o altri luoghi di discussione ") .. resource.id
+                          text = _"Discussion page" .. "&nbsp;" .. resource.id
                         }
                       end
                     }
                   end
                 else
                   ui.container {
-                    attr = { class = "row" },
+                    attr = { class = "row spaceline spaceline-bottom" },
                     content = function()
                       ui.image {attr = { class = "icon-small col-md-1" }, static = "png/icon_forum.png" }
                       ui.heading { level = 2, attr = { class = "col-md-11" }, content = _ "Nothing" }

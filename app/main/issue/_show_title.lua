@@ -9,7 +9,7 @@ ui.container {
       content = function()
         ui.heading {
           level = 1,
-          content = (issue.title or _ "No title for the issue!")
+          content = (issue.title or _ "No title for the issue")
         }
       end
     }

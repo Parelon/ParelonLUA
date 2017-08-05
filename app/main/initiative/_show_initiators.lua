@@ -22,36 +22,18 @@ ui.container {
     if #initiators > 0 then
       if #initiators > 1 then
         for i, initiator in ipairs(initiators) do
-          slot.put(" ")
           if app.session:has_access("all_pseudonymous") then
-            ui.link {
-              content = function()
-                execute.view {
-                  module = "member_image",
-                  view = "_show",
-                  params = {
-                    member = initiator,
-                    image_type = "avatar",
-                    show_dummy = true,
-                    class = "micro_avatar",
-                    popup_text = text
-                  }
-                }
-              end,
+            execute.view {
               module = "member",
-              view = "show",
-              id = initiator.id
+              view = "_show_thumb",
+              params = {
+                member = initiator,
+                initiative = initiative,
+                issue = initiative.issue,
+                initiator = initiator
+              }
             }
-            slot.put(" ")
-          end
-          ui.link {
-            text = initiator.name,
-            module = "member",
-            view = "show",
-            id = initiator.id
-          }
-          if not initiator.accepted then
-            ui.tag { attr = { title = _ "Not accepted yet" }, content = "?" }
+            
           end
         end
       else

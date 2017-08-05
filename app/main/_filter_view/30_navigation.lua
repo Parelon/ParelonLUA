@@ -38,9 +38,9 @@ slot.select('navbar', function()
                               class = "micro_avatar",
                             }
                           }
-                          slot.put(" Il tuo profilo")
+                          slot.put("&nbsp;", _ "Menu")
                         else
-                          slot.put("&nbsp;" .. _ "Login")
+                          slot.put("&nbsp;", _ "Login")
                         end
                       end
                     }
@@ -115,6 +115,31 @@ slot.select('navbar', function()
                           ui.tag {
                             tag = "li",
                             content = function()
+                              slot.put("<hr>")
+                            end
+                          }
+
+                          ui.tag {
+                            tag = "li",
+                            content = function()
+                              ui.link {
+                                text = _ "Show members",
+                                module = "member",
+                                view = "list"
+                              }
+                            end
+                          }
+
+                          ui.tag {
+                            tag = "li",
+                            content = function()
+                              slot.put("<hr>")
+                            end
+                          }
+
+                          ui.tag {
+                            tag = "li",
+                            content = function()
 
                               ui.link {
                                 text = _ "Logout",
@@ -135,7 +160,6 @@ slot.select('navbar', function()
                           ui.tag {
                             tag = "li",
                             content = function()
-
                               ui.link {
                                 text = _ "Login",
                                 attr = { style = "font-weight: bold;" },
@@ -157,23 +181,16 @@ slot.select('navbar', function()
                             end
                           }
                         end
-
+                        
                         ui.tag {
                           tag = "li",
                           content = function()
-
-                            ui.link {
-                              text = _ "Show members",
-                              module = "member",
-                              view = "list"
-                            }
+                            slot.put("<hr>")
                           end
                         }
 
                         for i, lang in ipairs(config.enabled_languages) do
-
                           local langcode
-
                           locale.do_with({ lang = lang }, function()
                               langcode = _("[Name of Language]")
                             end)
@@ -205,7 +222,7 @@ slot.select('navbar', function()
                 }
               end
             }
-            end
+          end
         }
       end
     }

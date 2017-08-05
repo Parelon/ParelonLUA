@@ -4,7 +4,7 @@ local url = request.get_absolute_baseurl() .. "issue/show/" .. tostring(issue.id
 local titleWidth = "7"
 local return_view = "show"
 local return_module = "area"
-local return_btn_txt = _ "Back to previous page"
+local return_btn_txt = _ "Back"
 if not app.session.member then
   titleWidth = "11"
 end
@@ -17,8 +17,8 @@ elseif view == "area" then
   return_module = "area"
   return_view = "show"
   return_btn_txt = _ "Back to issue listing"
-elseif view == "area" then
-  return_module = "area"
+elseif view == "area_private" then
+  return_module = "area_private"
   return_view = "show"
   return_btn_txt = _ "Back to issue listing"
 end
@@ -47,7 +47,7 @@ ui.container {
       content = function()
         ui.container {
           content = function()
-            ui.heading { attr = { class = "spaceline spaceline-bottom fittext1 uppercase "},level = 1,  content = _ "Details for issue Q" .. issue.id }
+            ui.heading { attr = { class = "spaceline spaceline-bottom fittext1 uppercase "},level = 1,  content = _( "Details for issue P#{id}", {id = issue.id} )}
           end
         }
       end
@@ -62,7 +62,6 @@ ui.container {
             datahtml = "true";
             datatitle = _ "Box di aiuto per la pagina",
             datacontent = _ "Ti trovi nei dettagli della QUESTIONE, con le informazioni integrali. Al box SOLUZIONI PROPOSTE puoi leggere la, o le PROPOSTE presentate per risolvere la QUESTIONE, o presentrare una tua PROPOSTA alternativa.<div class='spaceline'> <iframe width='560' height='315' src='https://www.youtube.com/embed/DPWS4mtPbnM' frameborder='0' allowfullscreen></iframe></div>",
-            datahtml = "true",
             class = "text-center"
           },
           content = function()
@@ -76,12 +75,12 @@ ui.container {
 ui.container {
   attr = {class = "row spaceline"},
   content = function()
-    ui.container { 
-      attr = { id = "social_box",  class = "col-md-4 col-xs-12 col-sm-12 text-center spaceline" }, 
-      content = function() 
-        slot.put('<div data-url="' .. url .. '" class="addthis_sharing_toolbox"></div>')
-      end 
-    }
+--    ui.container { 
+--      attr = { id = "social_box",  class = "col-md-4 col-xs-12 col-sm-12 text-center spaceline" }, 
+--      content = function() 
+--        slot.put('<div data-url="' .. url .. '" class="addthis_sharing_toolbox"></div>')
+--      end 
+--    }
 
     ui.container {
       attr = { class = "col-md-8 col-sm-12  col-xs-12" },

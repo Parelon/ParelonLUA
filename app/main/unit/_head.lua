@@ -80,7 +80,6 @@ if show_content then
           ui.tag { 
             attr = { class = "btn btn-primary large_btn margin_line text-center spaceline-bottom" },
             content = _ "Member has voting privileges for this unit" }
-
         end
       end
     end

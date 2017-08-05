@@ -2,10 +2,7 @@ local filter = param.get("filter", atom.string)
 local create = param.get("create", atom.boolean) or false
 local id = param.get_id() or 0
 
-local units = app.session.member
-  :get_reference_selector("units")
-  :add_where("NOT unit.public")
-  :exec()
+local units = app.session.member:get_reference_selector("units"):add_where("NOT unit.public"):exec()
 
 ui.container {
   attr = { class = "well" },
@@ -18,6 +15,7 @@ ui.container {
           attr = { class = "col-md-2 col-sm-2 col-xs-12 spaceline" },
           content = _"I want to see areas in: "
         }
+
         local class = "col-md-3 col-sm-2 col-xs-12 btn btn-primary btn-large text-center spaceline"
 
         if id == 0 then

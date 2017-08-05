@@ -9,7 +9,7 @@ ui.container {
         ui.container {
           attr = { class = "panel panel-default"},
           content = function()
-            
+
             ui.container {
               attr = {
                 class = "row",
@@ -26,6 +26,8 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "issueDescriptionBack",
+                            style = "display: none;",
                             class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#issue_abstract').collapse('show');"
@@ -48,24 +50,24 @@ ui.container {
                             onclick = "collapseAll(); $('#issue_description').collapse('show')"
                           },
                           content = function()
-                              ui.container {
-                                attr = { class = "row" },
-                                content = function()
-                                  ui.container {
-                                    attr = { class = "col-md-10 col-xs-7" },
-                                    content = function() 
-                                      ui.image { static = "png/arrow-down-icon.png" }
-                                      slot.put(_ "description")
-                                     end
-                                  }
-                                  ui.container {
-                                    attr = { class = "col-md-2 col-sm-3 text-right col-xs-5" },
-                                    content = function() 
-                                      ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
-                                    end
-                                  }
-                                end
-                              }
+                            ui.container {
+                              attr = { class = "row" },
+                              content = function()
+                                ui.container {
+                                  attr = { class = "col-md-10 col-xs-7" },
+                                  content = function() 
+                                    ui.image { static = "png/arrow-down-icon.png" }
+                                    slot.put(_ "description")
+                                  end
+                                }
+                                ui.container {
+                                  attr = { class = "col-md-2 col-sm-3 text-right col-xs-5" },
+                                  content = function() 
+                                    ui.image { attr = { class = "icon-medium" },static = "svg/arrow-right.svg" }
+                                  end
+                                }
+                              end
+                            }
                           end
                         }
                       end
@@ -76,6 +78,8 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "issueDescriptionNext",
+                            style = "display: none;",
                             class = "btn btn-primary btn-wizard",
                             target = "_blank",
                             onclick = "collapseAll(); $('#issue_aim').collapse('show');"
@@ -88,7 +92,7 @@ ui.container {
                 }
               end
             }
-            
+
             ui.container {
               attr = {
                 id = "issue_description",
@@ -105,21 +109,17 @@ ui.container {
                       attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "col-md-12 text-left" },
-                          content = function()
-                            ui.tag { tag = "p", content = _ "Descrivi il problema a cui vuoi dare soluzione" }
-                          end
-                        }
-                        ui.container {
                           attr = { class = "col-md-12 issue_desc" },
                           content = function()
-                            ui.tag {
-                              tag = "textarea",
+                            ui.field.text {
+                              multiline = true,
+                              label = _ "Describe the issue you want to solve" .. ":",
+                              name = "problem_description",
                               attr = {
-                                name = "problem_description",
-                                style = "height:250px; resize:none;"
+                                style = "resize:none;",
+                                rows = "5"
                               },
-                              content = problem_description or ""
+                              value = problem_description or ""
                             }
                           end
                         }
@@ -135,3 +135,6 @@ ui.container {
     }
   end
 }
+
+ui.script { script = "$('#issue_description').on('hide.bs.collapse', function() { $('#issueDescriptionBack').hide(); $('#issueDescriptionNext').hide(); });" }
+ui.script { script = "$('#issue_description').on('show.bs.collapse', function(){ $('#issueDescriptionBack').show(); $('#issueDescriptionNext').show(); });" }

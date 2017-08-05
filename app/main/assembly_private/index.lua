@@ -9,7 +9,7 @@ ui.title(function()
 )
 
 execute.view {
-  module = "assembly_private",
+  module = "assembly",
   view = "_filters"
 }
 

@@ -1,5 +1,10 @@
 local id = param.get_id()
 
+trace.enter_action{
+  module = "admin",
+  action = "member_update"
+}
+
 local member = Member:by_id(id) or Member:new()
 
 param.update(member, "identification", "notify_email", "admin")

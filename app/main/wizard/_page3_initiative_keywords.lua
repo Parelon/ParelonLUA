@@ -23,7 +23,9 @@ ui.container {
                         ui.tag {
                           tag = "a",
                           attr = {
+                            id = "initiativeKeywordsBack",
                             class = "btn btn-primary btn-wizard hidden-xs",
+                            style = "display: none;",
                             target = "_blank",
                             onclick = "collapseAll(); $('#initiative_draft').collapse('show');"
                           },
@@ -58,6 +60,7 @@ ui.container {
 --                        ui.tag {
 --                          tag = "a",
 --                          attr = {
+--                            id = "initiativeKeywordsNext",
 --                            class = "btn btn-primary btn-large",
 --                            target = "_blank",
 --                            onclick = "collapseAll(); $('#initiative_keywords').collapse('show');"
@@ -87,19 +90,14 @@ ui.container {
                       attr = { class = "row" },
                       content = function()
                         ui.container {
-                          attr = { class = "col-md-10" },
-                          content = function()
-                            ui.tag { tag = "p", content = _"Suggerisci competenze in materia tecnica, sociale, finanziaria, impatto ambientale e pianificazione delle risorse, per es: Psicologo, Commercialista, economista, muratore. " }
-                          end
-                        }
-                        ui.container {
                           attr = { class = "col-md-12" },
                           content = function()
-                            ui.tag {
-                              tag = "textarea",
+                            ui.field.text {
+                              multiline = true,
+                              label = _"Give some keywords that describe area of expertise needed to evalueate this solution" .. ":",
+                              name = "technical_areas",
                               attr = {
-                                id = "technical_areas",
-                                name = "technical_areas",
+                                id = "initiativeKeywords",
                                 class = "tagsinput",
                                 style = "resize:none;",
                                 placeholder = _ "Add a keyword"
@@ -122,4 +120,6 @@ ui.container {
 }
 
 ui.script { static = "js/jquery.tagsinput.js" }
-ui.script { script = "$('#technical_areas').tagsInput({'maxChars' : 20});" }
+ui.script { script = "$('#initiativeKeywords').tagsInput({'maxChars' : 20});" }
+ui.script { script = "$('#initiative_keywords').on('hide.bs.collapse', function() { $('#initiativeKeywordsBack').hide(); $('#initiativeKeywordsNext').hide(); });" }
+ui.script { script = "$('#initiative_keywords').on('show.bs.collapse', function(){ $('#initiativeKeywordsBack').show(); $('#initiativeKeywordsNext').show(); });" }

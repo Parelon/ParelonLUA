@@ -46,11 +46,6 @@ if elected ~= nil then
     member.elected = elected
 end
 
-local auditor = param.get("auditor", atom.boolean)
-if auditor ~= nil then
-    member.auditor = auditor
-end
-
 member.creator_id = app.session.member.id
 
 local lqfb_access = param.get("lqfb_access", atom.boolean)

@@ -69,8 +69,6 @@ if param.get("area_id", atom.integer) then
   scope = "area"
 end
 
-
-
 local delegation
 local issue
 
@@ -138,7 +136,6 @@ ui.actions(function()
       }
     end
   end)
-
 
 ui.form {
   attr = { class = "vertical", id = "delegationForm" },

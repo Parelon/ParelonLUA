@@ -9,14 +9,19 @@ ui.container {
           module = "index",
           view = "index",
           image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-          content = _ "Back to previous page"
+          content = _ "Back"
         }
       end
     }
-    ui.tag {
-      tag = "strong",
-      attr = { class = "col-md-9 text-center" },
-      content = _ "Admin menu"
+    ui.heading {
+      level = 1,
+      attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+      content = function()
+        ui.tag {
+          tag = "strong",
+          content = _ "Admin menu"
+        }
+      end
     }
   end
 }

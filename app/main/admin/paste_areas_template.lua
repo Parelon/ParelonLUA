@@ -33,14 +33,19 @@ ui.title(function()
               id = param.get("unit_id"),
               params = { unit_name = param.get("name"), unit_id = param.get("unit_id") },
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
-        ui.tag {
-          tag = "strong",
-          attr = { class = "col-md-9 text-center" },
-          content = _("Unit '#{name}'", { name = param.get("unit_name") })
+        ui.heading {
+          level = 1,
+          attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+          content = function()
+            ui.tag {
+              tag = "strong",
+              content = _ ("Unit '#{name}'", { name = param.get("unit_name") })
+            }
+          end
         }
       end
     }
@@ -65,8 +70,6 @@ ui.form {
     }
   },
   content = function()
-
-
     ui.field.select {
       attr = { id = "template_field_paste", onchange = "namePasteTemplateChange(event)" },
       label = _ 'Template Name to paste',
@@ -119,14 +122,9 @@ ui.form {
     slot.put('<br>')
   end
 }
-
-
-
-
 -- javascript context
 
 slot.put("<script>")
-
 slot.put("var _arrayNameTemplate=new Array();")
 for i, template in ipairs(_listTemplate) do
   slot.put("_arrayNameTemplate.push(" .. encode.json(_listTemplate[i]) .. ");")

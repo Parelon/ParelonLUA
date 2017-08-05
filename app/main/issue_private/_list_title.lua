@@ -5,12 +5,12 @@ ui.container {
       attr = { class = "col-md-3" },
       content = function()
         ui.link {
-            attr = { class = "btn btn-primary fixclick btn-back h2" },
-            module = "index",
-            view = "index",
-            image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-            content = _ "Back"
-          }
+          attr = { class = "btn btn-primary fixclick btn-back h2" },
+          module = "index",
+          view = "index",
+          image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
+          content = _ "Back"
+        }
       end
     }
     ui.container {

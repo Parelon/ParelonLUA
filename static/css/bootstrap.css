@@ -3135,7 +3135,6 @@ to{background-position:0 0;}
   border-radius: 4px;
   padding: 3px;
   width: 109px;
-  height: 66px;
 }
 .bargraph50 {
     width: 56px;
@@ -3143,7 +3142,6 @@ to{background-position:0 0;}
 
 .bargraph {
     float: left;
-    height: 66px;
 }
 
 .bargraph .quorum {

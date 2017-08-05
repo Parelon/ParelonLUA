@@ -15,7 +15,7 @@ ui.title(
               module = "index",
               view = "index",
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
@@ -130,111 +130,105 @@ local members = members_selector:exec()
 ui.container {
   attr = { class = "row"},
   content = function()
---    ui.container {
---      attr = { class = "col-md-12 text-center" },
---      content = function()
-    if #members == 0 then
-      ui.heading { level = 5, content = _ "There are no users certified by you" }
-    else
---          ui.container {
---            attr = { class = "inline-block" },
---            content = function()
-      ui.paginate {
-        attr = { class = "col-md-12 text-center" },
-        selector = members_selector,
-        per_page = 30,
-        content = function()
-          ui.list {
-            records = members,
-            columns = {
-              {
-                field_attr = { style = "padding-left: 5px; padding-right: 5px; border-bottom: 1px solid black;", class = "text-center" },
-                label = _ "Id",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                name = "id" 
-              },
-              {
-                field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center" },
-                label = _ "Name",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                name = "name"
-              },
-              {
-                field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center" },
-                label = _ "NIN",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                name = "nin"
-              },
-              {
-                field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center" },
-                label = _ "State",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                content = function(record)
-                  if not record.activated then
-                    ui.field.text { value = _"not activated" }
-                  elseif not record.active then
-                    ui.field.text { value = _"inactive" }
-                  else
-                    ui.field.text { value = _"active" }
-                  end
-                end
-              },
-              {
-                field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center"},
-                label = _ "Flags",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                content = function(record)
-                  local flags = ""
-                  if record.admin then
-                    flags = _ "admin"
-                  end
-                  if record.auditor then
-                    if flags == "" then
-                      flags = _ "auditor"
-                    else
-                      flags = flags .. ", " .. _ "auditor"
+    ui.container {
+      attr = { class = "text-center" },
+      content = function()
+        if #members == 0 then
+          ui.heading { level = 5, content = _ "There are no users certified by you" }
+        else
+          ui.paginate {
+            selector = members_selector,
+            per_page = 30,
+            content = function()
+              ui.list {
+                records = members,
+                columns = {
+                  {
+                    field_attr = { style = "padding-left: 5px; padding-right: 5px; border-bottom: 1px solid black;", class = "text-center col-md-1" },
+                    label = _ "Id",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-1" },
+                    name = "id" 
+                  },
+                  {
+                    field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-4" },
+                    label = _ "Name",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-4" },
+                    name = "name"
+                  },
+                  {
+                    field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-3" },
+                    label = _ "NIN",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-3" },
+                    name = "nin"
+                  },
+                  {
+                    field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-1" },
+                    label = _ "State",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-1" },
+                    content = function(record)
+                      if not record.activated then
+                        ui.field.text { value = _"not activated" }
+                      elseif not record.active then
+                        ui.field.text { value = _"inactive" }
+                      else
+                        ui.field.text { value = _"active" }
+                      end
                     end
-                  end
-                  ui.field.text { value = flags }
-                end
-              },
-              {
-                field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center" },
-                label = _ "Locked?",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                content = function(record)
-                  if record.locked then
-                    ui.field.text { value = _"Yes" }
-                  else
-                    ui.field.text { value = _"No" }
-                  end
-                end
-              },
-              {
-                field_attr = { style = "padding-left: 5px;padding-right: 5px; border-bottom: 1px solid black;", class = "text-center" },
-                label = _ "Actions",
-                label_attr = { style = "border-bottom: 2px solid black;", class = "text-center" },
-                content = function(record)
-                  if app.session.member.admin or (app.session.member.auditor and not record.admin and not record.auditor) then
-                    ui.link {
-                      attr = { class = "btn btn-primary btn-mini btn_mini_margin action admin_only" },
-                      text = _ "Edit",
-                      module = "auditor",
-                      view = "member_edit",
-                      id = record.id
-                    }
-                  end
-                end
+                  },
+                  {
+                    field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-1"},
+                    label = _ "Flags",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-1" },
+                    content = function(record)
+                      local flags = ""
+                      if record.admin then
+                        flags = _ "admin"
+                      end
+                      if record.auditor then
+                        if flags == "" then
+                          flags = _ "auditor"
+                        else
+                          flags = flags .. ", " .. _ "auditor"
+                        end
+                      end
+                      ui.field.text { value = flags }
+                    end
+                  },
+                  {
+                    field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-1" },
+                    label = _ "Locked?",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-1" },
+                    content = function(record)
+                      if record.locked then
+                        ui.field.text { value = _"Yes" }
+                      else
+                        ui.field.text { value = _"No" }
+                      end
+                    end
+                  },
+                  {
+                    field_attr = { style = "padding-left: 5px;padding-right: 5px; border-bottom: 1px solid black;", class = "text-center col-md-1" },
+                    label = _ "Actions",
+                    label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-1" },
+                    content = function(record)
+                      if app.session.member.admin or (app.session.member.auditor and not record.admin and not record.auditor) then
+                        ui.link {
+                          attr = { class = "btn btn-primary btn-mini btn_mini_margin action admin_only" },
+                          text = _ "Edit",
+                          module = "auditor",
+                          view = "member_edit",
+                          id = record.id
+                        }
+                      end
+                    end
+                  }
+                }
               }
-            }
+            end
           }
         end
-      }
---            end
---          }
-    end
---      end
---    }
+      end
+    }
   end
 }
 

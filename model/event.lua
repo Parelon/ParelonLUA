@@ -84,7 +84,7 @@ function Event.object:send_notification()
         elseif self.suggestion_id then
           url = request.get_absolute_baseurl() .. "suggestion/show/" .. self.suggestion_id .. ".html"
         else
-          url = request.get_absolute_baseurl() .. "issue/show_ext_bs/" .. self.issue_id .. ".html"
+          url = request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html"
         end
         
         body = body .. _("[event mail]       URL: #{url}", { url = url }) .. "\n\n"
@@ -114,10 +114,6 @@ function Event.object:send_notification()
           local suggestion = Suggestion:by_id(self.suggestion_id)
           body = body .. _("#{name}\n\n", { name = suggestion.name })
         end
-	
---[[	ui.script{ "js/post_event_fb.js" }
-	ui.script{ "post_update('Aggiornamento da Parelon','Aggiornamento da Parelon','https://test.parelon.com/lf/static/logo.png','Prova descrizione','https://test.parelon.com','Prova caption'"}
-]]
 
         local success = net.send_mail{
           envelope_from = config.mail_envelope_from,

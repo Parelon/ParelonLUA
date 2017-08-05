@@ -1,13 +1,12 @@
 local id = param.get_id()
 local video
+
 local caller = param.get("caller", atom.string)
 if caller == "issue" then
   video = ResourceIssue:get_video_by_issue_id(id)
 else
   video = Resource:get_video_by_initiative_id(id)
 end
-
-trace.debug(caller or "no caller")
 
 ui.title(function()
     ui.container {
@@ -22,7 +21,7 @@ ui.title(function()
               view = "show",
               id = id,
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }

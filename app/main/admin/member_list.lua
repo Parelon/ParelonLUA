@@ -14,14 +14,19 @@ ui.title(function()
               module = "admin",
               view = "index",
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
-              content = _ "Back to previous page"
+              content = _ "Back"
             }
           end
         }
-        ui.tag {
-          tag = "strong",
-          attr = { class = "col-md-9 text-center" },
-          content = _ "Member list" .. ": " .. tostring((db:query("SELECT total_count FROM member_count")[1]).total_count)
+        ui.heading {
+          level = 1,
+          attr = { class = "col-md-9 text-center spaceline spaceline-bottom" },
+          content = function()
+            ui.tag {
+              tag = "strong",
+              content = _ "Members" .. ": " .. tostring((db:query("SELECT total_count FROM member_count")[1]).total_count)
+            }
+          end
         }
       end
     }

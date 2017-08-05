@@ -36,9 +36,9 @@ if list == 'voted' or list == 'proposals' then
               ui.image { static = "png/arrow-down-icon.png" }
 
               if list == "voted" then
-                ui.link {content = _ " LE TUE VOTAZIONI"}
+                ui.link { content = function() slot.put("&nbsp;", _ "See how you voted") end }
               else
-                ui.link {content = _ " LE TUE PROPOSTE"}
+                ui.link { content = function() slot.put("&nbsp;", _ "See your proposals") end }
               end
 
             end

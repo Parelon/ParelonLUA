@@ -9,7 +9,7 @@ ui.container {
           attr = { class = "btn btn-primary btn-back text-center" },
           module = "assembly",
           view = "index",
-          content = _ "Back to previous page",
+          content = _ "Back",
           image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" }
         }
       end
@@ -20,8 +20,7 @@ ui.container {
         ui.container {
           attr = { class = "well-inside text-center" },
           content = function()
-                ui.heading { attr = { class = "spaceline" }, level = 1, content = _("#{realname}", { realname = member.realname and member.realname or member.login }) }
-                ui.heading { attr = { class = "spaceline-bottom" }, level = 2, content = _ "CHOOSE THE THEMATIC AREA" }
+                ui.heading { attr = { class = "spaceline-bottom spaceline" }, level = 2, content = _ "Choose the thematic area" }
           end
         }
       end
