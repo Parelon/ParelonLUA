@@ -138,7 +138,7 @@ ui.container {
         scope = scope,
         ftl_btns = ftl_btns,
         issues_selector = selector,
-        view = "area",
+        view = "area_private",
         member = member
       }
     }

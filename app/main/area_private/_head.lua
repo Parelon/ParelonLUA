@@ -71,7 +71,7 @@ ui.container {
                     end
                   elseif app.session.member_id == member.id and member:has_voting_right_for_unit_id(area.unit_id) and not create then
                     ui.link {
-                      attr = { class = "btn btn-primary btn_large margin_line text-center" },
+                      attr = { class = "btn btn-primary btn-large margin_line text-center" },
                       text = _ "Participate in this area",
                       module = "membership",
                       action = "update",
@@ -90,7 +90,7 @@ ui.container {
                 end
               }
               ui.container {
-                attr = { class = "col-md-6" },
+                attr = { class = "col-md-5 col-sm-4" },
                 content = function()
                   if app.session.member_id == member.id and app.session.member:has_voting_right_for_unit_id(area.unit_id) and not create then
                     if area.delegation_info.own_delegation_scope ~= "area" then
@@ -99,7 +99,7 @@ ui.container {
                         module = "delegation",
                         view = "show",
                         params = { area_id = area.id },
-                        attr = { class = "btn btn-primary btn_large margin_line text-center" }
+                        attr = { class = "btn btn-primary btn-large margin_line text-center" }
                       }
                     else
                       ui.link {
@@ -107,7 +107,7 @@ ui.container {
                         module = "delegation",
                         view = "show",
                         params = { area_id = area.id },
-                        attr = { class = "btn btn-primary btn_large margin_line text-center" }
+                        attr = { class = "btn btn-primary btn-large margin_line text-center" }
                       }
                     end
                     execute.view{ module = "delegation", view = "_info", params = { area = area, member = member } }

@@ -10,10 +10,10 @@ function ui.tabs(tabs)
                 attr = { class = "row" },
                 content = function()
                     ui.container {
-                        attr = { class = "col-md-12 well text-center spaceline spaceline-bottom" },
+                        attr = { class = "col-md-12 text-center spaceline spaceline-bottom" },
                         content = function()                          
                               ui.container {
-                                  attr = { class = "col-md-11" },
+                                  attr = { class = "well-inside " },
                                   content = function()
                                       for i, tab in ipairs(tabs) do
                                           local params = param.get_all_cgi()
@@ -25,7 +25,7 @@ function ui.tabs(tabs)
                                           params["tab"] = i > 1 and tab.name or nil
                                           ui.link {
                                               attr = {
-                                                  class = "btn btn-primary large_btn margin_line spaceline spaceline-bottom", (tab.name == current_tab and "selected" .. (tab.class and (" " .. tab.class) or "") or
+                                                  class = "btn btn-primary btn-prof margin_line spaceline spaceline-bottom", (tab.name == current_tab and "selected" .. (tab.class and (" " .. tab.class) or "") or
                                                           not current_tab and i == 1 and "selected" .. (tab.class and (" " .. tab.class) or "") or
                                                           "" .. (tab.class and (" " .. tab.class) or ""))
                                               },
