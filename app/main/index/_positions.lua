@@ -35,7 +35,7 @@ if config.use_positions then
                               level = 4,
                               content = function()
                                 slot.put(_("Welcome <strong>#{realname}</strong>.", { realname = (member.realname ~= "" and member.realname or member.login) }))
-                                ui.tag { tag = "col-md-", attr = { id = "current_location" }, content = "posizione corrente" }
+                                ui.tag { tag = "span", attr = { id = "current_location" }, content = "posizione corrente" }
                                 ui.script { script = 'getLocation("current_location", " ' .. _ "You're connected from" .. '");' }
                             end
                             }                          end
@@ -97,7 +97,7 @@ if config.use_positions then
                           attr = { class  = "col-md-12 text-left" },
                           content = function()
                             ui.tag {
-                              tag = "col-md-",
+                              tag = "span",
                               attr = { class = "col-md-12", id = "last_location"},
                               content =
                               _("Your last login was on #{last_login_date} at #{last_login_time}", {
@@ -131,7 +131,7 @@ if config.use_positions then
                   end
                 }
 
-                ui.container{ attr = { class  = "col-md-3 text-right" }, content = function()
+                ui.container{ attr = { class  = "span3 text-right" }, content = function()
                     ui.anchor{
                       attr = {
                         href = "#",
@@ -149,12 +149,12 @@ if config.use_positions then
       end }
   else
 
-    ui.container{attr = {class = "row spaceline" },content = function()
-        ui.container{ attr = { class  = "col-md-12 alert location_data2 text-center" }, content = function()
-            ui.container{attr = {class = "row" },content = function()
-                ui.container{ attr = { class  = "col-md-9 text-center" }, content = function()
-                    ui.container{attr = {class = "row" },content = function()
-                        ui.container{ attr = { class  = "col-md-12 text-left" }, content = function()
+    ui.container{attr = {class = "row-fluid spaceline" },content = function()
+        ui.container{ attr = { class  = "span12 alert location_data2 text-center" }, content = function()
+            ui.container{attr = {class = "row-fluid" },content = function()
+                ui.container{ attr = { class  = "span9 text-center" }, content = function()
+                    ui.container{attr = {class = "row-fluid" },content = function()
+                        ui.container{ attr = { class  = "span12 text-left" }, content = function()
                             ui.heading{level=4,content=function()
                                 if lastLogin and lastLogin.login_time then
                                   ui.tag{ content= _("This is your first connection") }
@@ -164,8 +164,8 @@ if config.use_positions then
 
                       end }
 
-                    ui.container{attr = {class = "row" },content = function()
-                        ui.container{ attr = { class  = "col-md-12 text-right" }, content = function()
+                    ui.container{attr = {class = "row-fluid" },content = function()
+                        ui.container{ attr = { class  = "span12 text-right" }, content = function()
                             ui.heading{level=6,content=function()
                                 slot.put(_"You didn't logged in from this location? Report it immediatly:")
                                 ui.image{ attr = { class="arrow_small"}, static="svg/arrow-right.svg"}
@@ -175,7 +175,7 @@ if config.use_positions then
 
                   end }
 
-                ui.container{ attr = { class  = "col-md-3 text-right" }, content = function()
+                ui.container{ attr = { class  = "span3 text-right" }, content = function()
                     ui.anchor{
                       attr = {
                         href = "#",

@@ -47,13 +47,22 @@ if not issue.closed and not initiative.revoked then
     ui.container {
       attr = { class = "row text-center well-inside" },
       content = function()
---                ui.heading {
---                  level = 1,
---                  attr = { class = "col-md-3 spaceline spaceline-bottom" },
---                  content = _"Actions: "
---              }
+        ui.container {
+          attr = { class = "col-md-12" },
+          content = function()
+            ui.container {
+              attr = { class = "row" },
+              content = function()
+                ui.heading {
+                  level = 1,
+                  attr = { class = "col-md-3 spaceline3 spaceline-bottom" },
+                  content = _"Actions" .. ":"
+                }
+                ui.container {
+                  attr = { class = "vertical col-md-9 text-right" },
+                  content = function()
                     ui.container {
-                      attr = { class = "col-md-4 col-md-offset-2 col-sm-6 spaceline spaceline-bottom" },
+                      attr = { class = "spaceline-bottom" },
                       content = function()
                         execute.view {
                           module = "supporter",
@@ -63,26 +72,36 @@ if not issue.closed and not initiative.revoked then
                       end
                     }
                     ui.container {
-
-                      attr = { class = "col-md-4 col-sm-6 spaceline2" },
+                      attr = { class = "row spaceline spaceline-bottom" },
                       content = function()
+                        ui.container {
+                          attr = { class = "col-md-12" },
+                          content = function()
                             ui.link {
-                              attr = { target="_blank", class = "btn btn-primary btn-large fixclick" },
+                              attr = { target="_blank", class = "btn btn-primary btn-large btn_size_fix fixclick text-center" },
                               module = "suggestion",
                               view = "new",
                               params = { initiative_id = initiative.id },
                               text = _ "New suggestion"
                             }
-                     end
-                  }
+                          end
+                        }
+                      end
+                    }
+                  end
+                }
+              end
+            }
+          end
+        }
       end
     }
 
     ui.container {
-      attr = { class = "row spaceline spaceline-bottom well-inside" },
+      attr = { class = "row spaceline spaceline-bottom well" },
       content = function()
         ui.container {
-          attr = { class = "col-md-4 paceline spaceline-bottom" },
+          attr = { class = "col-md-4" },
           content = function()
             ui.heading {
               level = 3,
@@ -92,7 +111,7 @@ if not issue.closed and not initiative.revoked then
           end
         }
         ui.container {
-          attr = { class = "col-md-8 text-right spaceline spaceline-bottom" },
+          attr = { class = "vertical col-md-8 text-right" },
           content = function()
             ui.container {
               attr = { class = "row spaceline spaceline-bottom" },

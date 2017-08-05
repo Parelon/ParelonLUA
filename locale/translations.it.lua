@@ -606,8 +606,7 @@ return {
     ["Only for issues reaching the frozen phase"] = "Solo questioni che hanno raggiunto la fase di verifica";
     ["Only for issues reaching the voting phase"] = "Solo questioni che hanno raggiunto la fase di voto";
     ["Open"] = "Aperto";
-
-    ["Write"] = "Scrivi"; 
+    ["Open Data repository"] = "Repository Open Data";
     ["Open initiatives you are supporting which has been updated their draft:"] = "Iniziative da te supportate che hanno aggiornato la bozza:";
     ["Open issues"] = "Problemi aperti";
     ["Open phase"] = "Aperto";
@@ -625,7 +624,7 @@ return {
     ["Outgoing delegations"] = "Deleghe attive";
     ["Parent unit"] = "Unità superiore";
     ["Participants"] = "Partecipanti";
-    ["Participate in this area"] = "Partecipa";
+    ["Participate in this area"] = "Aggiungi alle aree preferite";
     ["Paste areas from template"] = "Incolla Aree da Template";
     ["Paste Template"] = "Incolla Template";
     ["Password"] = false;
@@ -638,7 +637,6 @@ return {
     ["Phases"] = "Fasi";
     ["Phone"] = "Telefono";
     ["Photo"] = "Foto";
-    ["Read all"] = "Leggi tutto";
     ["Please choose a login name. This name will not be shown to others and is used only by you to login into the system. The login name is case sensitive."] = "Scegliere un nome di login. Questo nome non verrà mostrato ad altri e viene utilizzato solo per effettuare il login nel sistema. Attenzione ai caratteri maiuscoli e minuscoli.";
     ["Please choose a member"] = "Selezionare un utente";
     ["Please choose a name, i.e. your real name or your nick name. This name will be shown to others to identify you."] = "Scegliere un nome, ad esempio il tuo vero nome o il tuo nick name. Questo nome verrà mostrato agli altri per identificarti.";

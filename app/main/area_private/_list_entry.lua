@@ -12,7 +12,10 @@ ui.container {
       attr = { class = "row spaceline-bottom" },
       content = function()
         slot.put("<hr/>")
-        if not create then
+        if not create then      
+          ui.container {
+            attr = { class = "col-md-offset-5 col-md-2" },
+            content = function()
               ui.link {
                 attr = { class = "btn btn-primary btn-large" },
                 module = "area_private",
@@ -20,6 +23,8 @@ ui.container {
                 id = area.id,
                 content = _"Read all"
               }
+            end
+          }
 --          ui.container {
 --            attr = { class = "col-md-offset-2 col-md-2" },
 --            content = function()
@@ -30,6 +35,9 @@ ui.container {
 --            end
 --          }
         else
+          ui.container {
+            attr = { class = "col-md-offset-5 col-md-2" },
+            content = function()
               ui.link {
                 attr = { class = "btn btn-primary btn-large" },
                 module = "wizard_private",
@@ -37,6 +45,8 @@ ui.container {
                 params = { area_id = area.id },
                 content = _"Write"
               }
+            end
+          }
         end
       end
     }
@@ -51,7 +61,7 @@ ui.container {
 --      content = function()
 --        ui.link {
 --          attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-
+--          module = "area",
 --          view = "show",
 --          id = area.id,
 --          params = { state = "admission" },
@@ -59,7 +69,7 @@ ui.container {
 --        }
 --        ui.link {
 --          attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-
+--          module = "area",
 --          view = "show",
 --          id = area.id,
 --          params = { state = "discussion" },
@@ -67,7 +77,7 @@ ui.container {
 --        }
 --        ui.link {
 --          attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-
+--          module = "area",
 --          view = "show",
 --          id = area.id,
 --          params = { state = "verification" },
@@ -75,7 +85,7 @@ ui.container {
 --        }
 --        ui.link {
 --          attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-
+--          module = "area",
 --          view = "show",
 --          id = area.id,
 --          params = { state = "voting" },
@@ -83,7 +93,7 @@ ui.container {
 --        }
 --        ui.link {
 --          attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
-
+--          module = "area",
 --          view = "show",
 --          id = area.id,
 --          params = { state = "finished" },
@@ -91,6 +101,7 @@ ui.container {
 --        }
 --        ui.link {
 --          attr = { class = "btn btn-primary btn-large btn_margin fixclick spaceline" },
+--          module = "area",
 --          view = "show",
 --          id = area.id,
 --          params = { state = "canceled" },

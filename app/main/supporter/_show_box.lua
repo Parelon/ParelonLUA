@@ -26,7 +26,13 @@ local routing = {
 
 if not initiative.issue.fully_frozen and not initiative.issue.closed then
   if supporter then
+    ui.container {
+      attr = { class = "row spaceline text-right" },
+      content = function()
         if not supporter:has_critical_opinion() then
+          ui.container {
+            attr = { class = "col-md-9" },
+            content = function()
               ui.image {
                 attr = { style = "height: 70px" },
                 static = "png/thumb_up.png"
@@ -36,7 +42,12 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
               else
                 slot.put("&nbsp;&nbsp;&nbsp;", _ "You are supporter", "&nbsp;&nbsp;&nbsp;")
               end
+            end
+          }
         else
+          ui.container {
+            attr = { class = "col-md-9 potential_supporter" },
+            content = function()
               ui.image {
                 static = "thumb_up.png"
               }
@@ -45,9 +56,11 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
               else
                 slot.put("&nbsp;&nbsp;&nbsp;",_ "You are potential supporter", "&nbsp;&nbsp;&nbsp;")
               end
+            end
+          }
         end
         ui.link {
-          attr = { class = "label label-inverse fixclick text-center" },
+          attr = { class = "col-md-3 label label-inverse fixclick text-center" },
           text = _ "Withdraw",
           module = "initiative",
           action = "remove_support",
@@ -55,6 +68,8 @@ if not initiative.issue.fully_frozen and not initiative.issue.closed then
           routing = routing,
           partial = partial
         }
+      end
+    }
     --slot.put(") ")
   elseif not initiative.revoked and app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id) then
     ui.container {
