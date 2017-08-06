@@ -86,7 +86,7 @@ ui.container {
                     ui.tag {
                       attr = { class = "col-md-12" },
                       content = function()
-                        ui.tag { tag = "p", content = _ "If you have and invitation code click here:" }
+                        ui.tag { tag = "p", content = _ "If you have an invitation code click here" .. ":" }
                       end
                     }
                   end
@@ -126,7 +126,7 @@ ui.container {
                     ui.tag {
                       attr = { class = "col-md-12" },
                       content = function()
-                        ui.tag { tag = "p", content = _ "If you don't remember your password click here:" }
+                        ui.tag { tag = "p", content = _ "If you don't remember your password click here" .. ":" }
                       end
                     }
                   end
