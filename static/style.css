@@ -163,9 +163,6 @@ form.unit_selector {
     color: #f90;
 }
 
-*
-
-/
 .slot_title {
     font-size: 115%;
     font-weight: bold;
@@ -443,8 +440,8 @@ a.delegation_info:hover, a.delegation_info:focus {
 
 
 
-.active {
-  /*background-color: #444;*/
+.page-active {
+  background-color: #444;
   color: #fff;
 }
 
