@@ -40,7 +40,7 @@ ui.container {
                   attr = { class = "spaceline-bottom" },
                   content = function()
                     if id ~= 0 then
-                      slot.put(_("Edit member: #{firstname} #{lastname}", { firstname = member.firstname, lastname = member.lastname }))
+                      slot.put(_("Edit member: #{name}", { name = member.name and member.name or member.identification }))
                       slot.put(" (Id:" .. member.id .. ")")
                     else
                       slot.put(_ "Register new member")

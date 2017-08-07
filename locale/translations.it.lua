@@ -1079,6 +1079,10 @@ return {
     ["implemented"] = "implementato";
     ["in the issue doesn't mean"] = "al problema non vuol dire";
     ["inactive"] = "inattivo";
+    [" initiatives to resolve the issue"] = " soluzioni proposte per risolvere questo problema";
+    [" initiative to resolve the issue"] = " soluzione proposta per risolvere questo problema";
+    ["invitation expires on #{date}"] = "l'invito scade il #{date}";
+    ["invitation expired: new code needed"] = "invito scaduto: serve nuovo codice";
     ["it just means that the issue is"] = "vuol dire solo che il problema";
     ["last 24 hours"] = "ultime 24 ore";
     ["left"] = "restanti";
@@ -1124,7 +1128,4 @@ return {
     ["< new >"] = "<nuovo>";
     ["< select template >"] = "seleziona template...";
     ["<strong>#{count_supporters}</strong> people support the request to summon a technical committee. <strong>#{count_remaining}</strong> people still needed.<br>The committee will be summoned only if the initiative will gather enough supporters."] = " <strong>#{count_supporters}</strong>  persone hanno fatto richiesta di una commissione tecnica<br /> E' richiesto l' appoggio di<strong>#{count_remaining}</strong> persone per raggiungere il quorum. <br />Anche se si raggiunge il quorum, la commissione verrà istituita solo se almeno una proposta supererà la prima votazione ";
-    [" initiatives to resolve the issue"] = " soluzioni proposte per risolvere questo problema";
-    [" initiative to resolve the issue"] = " soluzione proposta per risolvere questo problema";
-    
 }

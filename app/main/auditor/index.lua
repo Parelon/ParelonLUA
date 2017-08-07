@@ -153,7 +153,27 @@ ui.container {
                     field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-4" },
                     label = _ "Name",
                     label_attr = { style = "border-bottom: 2px solid black;", class = "text-center col-md-4" },
-                    name = "name"
+--                    name = "name",
+                    content = function(record)
+                      slot.put(record.identification)
+                      if record.activated == nil then
+                        slot.put("&nbsp;&nbsp;")
+                        local result = Member:new_selector():add_where{"id = ?", record.id}:add_where("invite_code_expiry > now()"):optional_object_mode():exec();
+                        if result ~= nil then
+                          ui.heading {
+                            level = 5,
+                            attr = { class = "label label-success" },
+                            content = _("invitation expires on #{date}", {date = format.date(record.invite_code_expiry)})
+                          }
+                        else
+                          ui.heading {
+                            level = 5,
+                            attr = { class = "label label-warning" },
+                            content = _"invitation expired: new code needed"
+                          }
+                        end
+                      end
+                    end
                   },
                   {
                     field_attr = { style = "padding-left: 5px;padding-right: 5px;border-bottom: 1px solid black;", class = "text-center col-md-3" },

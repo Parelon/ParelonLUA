@@ -46,7 +46,9 @@ if elected ~= nil then
     member.elected = elected
 end
 
-member.creator_id = app.session.member.id
+if member.id == 0 or member.id == nil then
+  member.creator_id = app.session.member.id
+end
 
 local lqfb_access = param.get("lqfb_access", atom.boolean)
 if lqfb_access ~= nil then
