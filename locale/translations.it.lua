@@ -1014,7 +1014,7 @@ return {
     ["You have not voted #{count} issue(s) you were interested in"] = "Non hai ancora votato #{count} questione(i) di tuo interesse";
     ["You have to mark 'Are you sure' to revoke!"] = "Devi spuntare 'Sei sicuro' per revocare!";
     ["You have voting privileges for this unit"] = "Hai diritto di voto in questa unità";
-    ["You must be an initiatior to update the video url."] = "Devi essere un autore della proposta per poter modificare il video.";
+    ["You must be an initiator to update the video url."] = "Devi essere un autore della proposta per poter modificare il video.";
     ["You need to be logged in, to use all features of this system."] = "Eseguire l'accesso per utilizzare tutte le funzioni di questo sistema.";
     ["You were interested"] = "Eri interessato";
     ["You were potential supporter"] = "Eri un potenziale sostenitore";

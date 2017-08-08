@@ -3,6 +3,7 @@ slot.set_layout("custom")
 local id = param.get_id()
 local resources
 local caller = param.get("caller", atom.string)
+local link = ""
 
 if caller == "issue" then
   resources = ResourceIssue:by_issue_id(id)
@@ -12,7 +13,7 @@ end
 
 if #resources > 0 then
   for i,resource in ipairs(resources) do
-    link = link .. "\n"
+    link = link .. resource.url .. "\n" 
   end
 end
 

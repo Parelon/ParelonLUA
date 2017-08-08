@@ -1,3 +1,5 @@
+slot.set_layout("custom")
+
 local id = param.get_id()
 local video
 

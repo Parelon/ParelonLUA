@@ -21,10 +21,11 @@ ui.container {
         ui.container {
           attr = { class = "col-md-12 col-sm-12 col-xs-12 text-center" },
           content = function()
-            local resource = ResourceIssue:by_issue_id_and_type(issue.id, 'video')
-            if resourcer and resource.url ~= "" then
-              if string.find(resource.url, "https://www.youtube.com/watch") then
-                local code = resource.url:sub(resource[1].url:find("=") + 1)
+            local resource = ResourceIssue:by_issue_id_and_type(issue.id, 'video') or nil
+            if resource then
+              local presentation = resource[1]
+              if string.find(presentation.url, "https://www.youtube.com/watch") then
+                local code = presentation.url:sub(presentation.url:find("=") + 1)
                 slot.put('<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/' .. code .. '\" frameborder=\"0\" allowfullscreen></iframe>')
               else
                 ui.image {attr = { class = "img-responsive" }, static = "png/video-player.png" }

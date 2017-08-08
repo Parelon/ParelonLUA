@@ -32,17 +32,18 @@ if caller == "initiative" then
   end
 else
   local issue = Issue:by_id(id)
-  if issue.member == app.session.member and not issue.half_frozen and not issue.closed then
+  if issue.member_id == app.session.member_id and not issue.half_frozen and not issue.closed then
     if video_url == "" then
-      local video = ResourceIssue:get_video_by_initiative_id(id)
-      if video ~= nil then
+      local video = ResourceIssue:get_video_by_issue_id(id)
+      if video then
         video:destroy()
       end
+      slot.put_into("notice", _"Video url removed")
+      return true
     elseif string.find(video_url, "https://www.youtube.com/watch") then
-      local resource = ResourceIssue:get_video_by_initiative_id(id)
-      if resource == nil then
-        resource = Resource:new()
-        resource.initiative_id = id
+      local resource = ResourceIssue:get_video_by_issue_id(id) or ResourceIssue:new()
+      if resource.id == nil then
+        resource.issue_id = issue.id
         resource.type = "video"
       end
       resource.url = video_url
