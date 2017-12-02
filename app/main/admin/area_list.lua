@@ -55,7 +55,7 @@ ui.actions(function()
             text = _ "Create new area",
             module = "admin",
             view = "area_show",
-            id = unit_id,
+            params = { unit_id = unit_id },
             attr = { class = "col-md-offset-2 col-md-2 btn btn-primary text-center" }
           }
 

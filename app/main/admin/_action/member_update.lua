@@ -76,16 +76,18 @@ end
 local units = Unit:new_selector():add_field("privilege.member_id NOTNULL", "privilege_exists"):add_field("privilege.voting_right", "voting_right"):left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", member.id }):exec()
 
 for i, unit in ipairs(units) do
-    local value = param.get("unit_" .. unit.id, atom.boolean)
-    if value and not unit.privilege_exists then
+    if not unit.privilege_exists then
         privilege = Privilege:new()
         privilege.unit_id = unit.id
         privilege.member_id = member.id
-        privilege.voting_right = true
+        privilege.voting_right = param.get("vote_unit_" .. unit.id, atom.boolean) or false
+        privilege.polling_right = param.get("poll_unit_" .. unit.id, atom.boolean) or false
         privilege:save()
-    elseif not value and unit.privilege_exists then
+    elseif unit.privilege_exists then
         local privilege = Privilege:by_pk(unit.id, member.id)
-        privilege:destroy()
+        privilege.voting_right = param.get("vote_unit_" .. unit.id, atom.boolean) or false
+        privilege.polling_right = param.get("poll_unit_" .. unit.id, atom.boolean) or false
+        privilege:save()
     end
 end
 

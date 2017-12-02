@@ -105,6 +105,9 @@ ui.form {
       records = units,
       columns = {
         {
+          label = _"Unit",
+          label_attr = { class = "text-center" },
+          field_attr = { class = "text-center" },
           content = function(unit)
             for i = 1, unit.depth - 1 do
               slot.put("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
@@ -120,11 +123,24 @@ ui.form {
           end
         },
         {
+          label = _"Voting rights",
+          label_attr = { class = "text-center" },
+          field_attr = { class = "text-center" },
           content = function(unit)
             ui.field.boolean {
-              name = "unit_" .. unit.id,
-              --label = unit.name,
+              name = "vote_unit_" .. unit.id,
               value = member and member:has_voting_right_for_unit_id(unit.id) or false
+            }
+          end
+        },
+        {
+          label = _"Polling rights",
+          label_attr = { class = "text-center" },
+          field_attr = { class = "text-center" },
+          content = function(unit)
+            ui.field.boolean {
+              name = "poll_unit_" .. unit.id,
+              value = member and member:has_polling_right_for_unit_id(unit.id) or false
             }
           end
         }

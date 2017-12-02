@@ -1,4 +1,5 @@
 local issue_brief_description = param.get("issue_brief_description", atom.string)
+trace.debug("issue abstract: " .. issue_brief_description)
 
 ui.container {
   attr = { class = "row" },
@@ -128,7 +129,7 @@ ui.container {
                                 onkeyup = "var length = $('#issueAbstract').val().length; var count = 140-length; $('#issueCount').text(count);"
                               },
                               name = "issue_brief_description",	
-                              content = issue_brief_description or ""
+                              value = issue_brief_description or ""
                             }
                           end
                         }

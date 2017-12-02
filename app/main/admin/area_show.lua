@@ -1,8 +1,8 @@
 slot.set_layout("custom")
 
 local id = param.get_id()
-
 local area = Area:by_id(id) or Area:new()
+local unit = area.unit
 
 ui.title(function()
     ui.container {
@@ -15,7 +15,7 @@ ui.title(function()
               attr = { class = "btn btn-primary btn-large large_btn fixclick btn-back" },
               module = "admin",
               view = "area_list",
-              id = area.unit_id,
+              id = unit.id,
               image = { attr = { class = "arrow_medium" }, static = "svg/arrow-left.svg" },
               content = _ "Back"
             }
@@ -45,7 +45,7 @@ ui.form {
       mode = "redirect",
       module = "admin",
       view = "area_list",
-      params = { unit_id = area.unit_id }
+      id = unit.id
     }
   },
   id = id,
@@ -61,8 +61,8 @@ ui.form {
       def_policy[#def_policy + 1] = record
     end
 
-    ui.field.hidden { name = "unit_id", value = area.unit_id }
-    ui.field.text { label = _ "Unit", value = area.unit.name, readonly = true }
+    ui.field.hidden { name = "unit_id", value = unit.id }
+    ui.field.text { label = _ "Unit", value = unit.name, readonly = true }
     ui.field.text { label = _ "Name", name = "name" }
     ui.field.text { label = _ "Description", name = "description", multiline = true }
     ui.field.select {

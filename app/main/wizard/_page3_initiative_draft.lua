@@ -117,7 +117,7 @@ ui.container {
                                 style = "resize:none;"
                               },
                               label = _ "Explain in details your solution" .. ":",
-                              content = param.get("draft", atom.string) or ""
+                              value = param.get("draft", atom.string) or ""
                             }
                           end
                         }

@@ -23,8 +23,8 @@ ui.container {
           content = function()
             local resource = ResourceIssue:by_issue_id_and_type(issue.id, 'video') or nil
             if resource then
-              local presentation = resource[1]
-              if string.find(presentation.url, "https://www.youtube.com/watch") then
+              local presentation = resource[1] or nil
+              if presentation and string.find(presentation.url, "https://www.youtube.com/watch") then
                 local code = presentation.url:sub(presentation.url:find("=") + 1)
                 slot.put('<iframe width=\"100%\" height=\"400\" src=\"https://www.youtube.com/embed/' .. code .. '\" frameborder=\"0\" allowfullscreen></iframe>')
               else

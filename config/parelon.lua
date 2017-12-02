@@ -202,7 +202,13 @@ config.free_timing = {
         return {
             { name = "End of 2013", id = '2013-12-31' },
             { name = "End of 2014", id = '2014-12-31' },
-            { name = "End of 2015", id = '2015-12-31' }
+            { name = "End of 2015", id = '2015-12-31' },
+            { name = "End of 2016", id = '2016-12-31' },
+            { name = "End of 2017", id = '2017-12-31' },
+            { name = "End of 2018", id = '2018-12-31' },
+            { name = "End of 2019", id = '2019-12-31' },
+            { name = "End of 2020", id = '2020-12-31' },
+            { name = "End of 2021", id = '2021-12-31' }
         }
     end
 }

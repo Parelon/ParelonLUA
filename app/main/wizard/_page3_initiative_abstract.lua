@@ -125,7 +125,7 @@ ui.container {
                                 ui.tag { tag = "span", attr = { id = "initiativeCount" }, content = "300" }
                                 ui.tag { tag = "span", content = " " .. _"left" }
                               end,
-                              content = param.get("initiative_brief_description", atom.string) or ""
+                              value = param.get("initiative_brief_description", atom.string) or ""
                             }
                           end
                         }

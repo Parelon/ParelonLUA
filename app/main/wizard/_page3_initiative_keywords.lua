@@ -102,7 +102,7 @@ ui.container {
                                 style = "resize:none;",
                                 placeholder = _ "Add a keyword"
                               },
-                              content = param.get("technical_areas", atom.string) or ""
+                              value = param.get("technical_areas", atom.string) or ""
                             }
                           end
                         }
